@@ -49,6 +49,9 @@ Wtyczka gstreamer.
 %prep
 %setup -q -n %{name}-%{version}
 
+%{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
+	amarok/src/amarok.desktop \
+
 %build
 cp -f %{_datadir}/automake/config.sub admin
 
