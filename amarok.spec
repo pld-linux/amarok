@@ -2,12 +2,13 @@
 # Conditional builds:
 %bcond_without	gstreamer	# disable gstreamer
 %bcond_without	xmms 		# disable xmms wrapping
+%bcond_without	xine		# disable xine engine
 #
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.1.1
-Release:	0.1	
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -20,11 +21,15 @@ Buildrequires:	automake
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
-BuildRequires:	sqlite3-devel
+BuildRequires:	sqlite-devel >= 2.8
 BuildRequires:	taglib-devel >= 1.3
 BuildRequires:	unsermake >= 040511
-BuildRequires:	xine-lib-devel
+%{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.0-0.rc5.0}
 %{?with_xmms:Buildrequires:	xmms-devel}
+Buildrequires:	libmusicbrainz-devel
+Buildrequires:	libvisual-devel >= 0.1.6-1
+Buildrequires:	pcre-devel
+#BuildRequires:	kdebindings-kjsembed-devel 
 Requires:	kdebase-core >= 9:3.1.93
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -46,6 +51,18 @@ Plugin gstreamer.
 %description gstreamer -l pl
 Wtyczka gstreamer.
 
+%package xine
+Summary:	Plugin xine
+Summary(pl):	Wtyczka xine
+Group:		X11/Applications/Multimedia
+Requires:       %{name} = %{version}-%{release}
+
+%description xine
+Plugin xine.
+
+%description xine -l pl
+Wtyczka xine.
+
 %prep
 %setup -q -n %{name}-%{version}
 
@@ -61,6 +78,8 @@ export UNSERMAKE=%{_datadir}/unsermake/unsermake
 
 %configure \
 	--disable-rpath \
+	%{!?with_xine:--without-xine} \
+	%{!?with_gstreamer:--without-gstreamer} \
 	--with-qt-libraries=%{_libdir}
 
 %{__make}
@@ -84,21 +103,25 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarok
 %{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper2}
 %attr(755,root,root) %{_bindir}/amarokapp
+%attr(755,root,root) %{_bindir}/amarok_libvisual
 %attr(755,root,root) %{_bindir}/release_amarok
 %{_libdir}/kde3/libamarok_artsengine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_artsengine_plugin.so
+%{_libdir}/kde3/libamarok_void-engine_plugin.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
 %{_libdir}/libamarokarts.la
 %attr(755,root,root) %{_libdir}/libamarokarts.so
 %{_libdir}/mcop/Amarok
 %{_libdir}/mcop/amarokarts.mcopclass
 %{_libdir}/mcop/amarokarts.mcoptype
 %{_datadir}/apps/amarok
+%{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
 %{_datadir}/config.kcfg/amarok.kcfg
-%{_datadir}/config.kcfg/gstconfig.kcfg
 %{_datadir}/services/amarok_artsengine_plugin.desktop
+%{_datadir}/services/amarok_void-engine_plugin.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
-%{_iconsdir}/[!l]*/*/apps/amarok.png
+%{_iconsdir}/*/*/apps/amarok.png
 %{_iconsdir}/crystalsvg/*/*/player_playlist_2.png
 %{_datadir}/config/*
 
@@ -107,5 +130,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/kde3/libamarok_gstengine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_gstengine_plugin.so
+%{_datadir}/config.kcfg/gstconfig.kcfg
 %{_datadir}/services/amarok_gstengine_plugin.desktop
+%endif
+
+%if %{with xine}
+%files xine
+%defattr(644,root,root,755)
+%{_libdir}/kde3/libamarok_xine-engine.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
+%{_datadir}/services/amarok_xine-engine.desktop
+%{_datadir}/services/amarok_xineengine_plugin.desktop
 %endif
