@@ -7,7 +7,7 @@
 %bcond_with	mysql		# enable mysql support
 #
 
-%define		_beta	beta2
+%define		_beta	beta3
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
@@ -16,12 +16,12 @@ Release:	0.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-1.2-%{_beta}.tar.bz2
-# Source0-md5:	8535db7a873f0ee2e697b98135e4b60d
+# Source0-md5:	e6379b144cdec4eca0556619a03f294c
 URL:		http://amarok.kde.org/
 Buildrequires:	alsa-lib-devel
 Buildrequires:	arts-qt-devel
 Buildrequires:	automake
-%{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.8.1}
+%{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.1}
 BuildRequires:	kdebase-devel
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 Buildrequires:	libmusicbrainz-devel
@@ -30,11 +30,11 @@ Buildrequires:	pcre-devel
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel
-BuildRequires:	taglib-devel >= 1.3
+BuildRequires:	taglib-devel >= 1.3.1
 BuildRequires:	unsermake >= 040511
-%{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.0-0.rc5.0}
-%{?with_xmms:BuildRequires:	xmms-devel}
-%{?with_mysql:BuildRequires:	mysql-devel}
+%{?with_xine:BuildRequires:		xine-lib-devel >= 2:1.0-0.rc5.0}
+%{?with_xmms:BuildRequires:		xmms-devel}
+%{?with_mysql:BuildRequires:		mysql-devel}
 #BuildRequires:	kdebindings-kjsembed-devel 
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
@@ -135,7 +135,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarok_libvisual
 %attr(755,root,root) %{_bindir}/release_amarok
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
+%{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
+%attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
 %{_datadir}/apps/amarok
 %{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
 %{_datadir}/config.kcfg/amarok.kcfg
