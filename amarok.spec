@@ -1,6 +1,4 @@
 # TODO:
-# - package documentation
-# - package locale files
 # - add gstreamer subpackage with libamarok_gstengine_plugin
 # Conditional builds:
 %bcond_without	xmms # disable xmms wrapping
@@ -57,13 +55,12 @@ rm -rf $RPM_BUILD_ROOT
 	kde_htmldir=%{_kdedocdir} \
 	kde_libs_htmldir=%{_kdedocdir}
 
-#find_lang %{name} --with-kde
+%find_lang amarok --all-name --with-kde 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files 
-#-f %{name}.lang
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/amarok
 %{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper}
