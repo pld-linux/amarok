@@ -23,7 +23,7 @@ Buildrequires:	automake
 %{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.8.1}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 Buildrequires:	libmusicbrainz-devel
-Buildrequires:	libvisual-devel >= 0.1.6-1
+Buildrequires:	libvisual-devel >= 0.2.0
 BuildRequires:	mysql-devel
 Buildrequires:	pcre-devel
 BuildRequires:	rpmbuild(macros) >= 1.129
@@ -128,7 +128,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarok
 %{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper2}
 %attr(755,root,root) %{_bindir}/amarokapp
-#%attr(755,root,root) %{_bindir}/amarok_libvisual
+%attr(755,root,root) %{_bindir}/amarok_libvisual
 %attr(755,root,root) %{_bindir}/release_amarok
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
