@@ -1,18 +1,13 @@
 
-%define		_snap	031119
-
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	0.7.0.%{_snap}
-Release:	1
+Version:	0.8.3
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-# releases:
-#Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-# From kdenonbeta kde cvs module
-Source0:	http://ep09.pld-linux.org/~adgor/kde/%{name}-%{_snap}.tar.bz2
-# Source0-md5:	0346b67a96d44668483eecc6bc89bac1
+Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
+# Source0-md5:	bdd9532e983ca85711e93929c008a5ba
 URL:		http://amarok.sf.net/
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	rpmbuild(macros) >= 1.129	
@@ -28,11 +23,9 @@ A KDE audio player.
 Odtwarzacz audio dla KDE.
 
 %prep
-%setup -q -n %{name}-%{_snap}
+%setup -q
 
 %build
-%{__make} -f admin/Makefile.common cvs 
-
 %configure \
 	--disable-rpath \
 	--enable-final
