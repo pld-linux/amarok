@@ -1,19 +1,19 @@
-
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	0.8.3
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 # Source0-md5:	bdd9532e983ca85711e93929c008a5ba
 URL:		http://amarok.sf.net/
 Buildrequires:	arts-qt-devel
+Buildrequires:	automake
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
-BuildRequires:	rpmbuild(macros) >= 1.129	
+BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
-BuildRequires:	taglib-devel >= 0.95	
+BuildRequires:	taglib-devel >= 0.95
 BuildRequires:	xine-lib-devel
 Requires:	kdebase-core >= 9:3.1.93
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -28,7 +28,9 @@ Odtwarzacz audio dla KDE.
 %setup -q
 
 %build
+cp -f /usr/share/automake/config.sub admin
 %configure \
+	--with-qt-libraries=%{_libdir} \
 	--disable-rpath \
 	--enable-final
 
@@ -43,7 +45,7 @@ rm -rf $RPM_BUILD_ROOT
 	kde_htmldir=%{_kdedocdir}
 install -d $RPM_BUILD_ROOT%{_desktopdir}/kde
 
-mv $RPM_BUILD_ROOT{%{_applnkdir}/Multimedia/amarok.desktop,%{_desktopdir}/kde}	
+mv $RPM_BUILD_ROOT{%{_applnkdir}/Multimedia/amarok.desktop,%{_desktopdir}/kde}
 
 # Grrr...
 sed -i 's/Categories=Audio/Categories=AudioVideo/' \
