@@ -31,7 +31,7 @@ BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel
 BuildRequires:	taglib-devel >= 1.3.1
-BuildRequires:	unsermake >= 040511
+#BuildRequires:	unsermake >= 040511
 %{?with_xine:BuildRequires:		xine-lib-devel >= 2:1.0-0.rc5.0}
 %{?with_xmms:BuildRequires:		xmms-devel}
 %{?with_mysql:BuildRequires:		mysql-devel}
@@ -95,7 +95,7 @@ Wtyczka xine.
 %build
 cp -f %{_datadir}/automake/config.sub admin
 
-export UNSERMAKE=%{_datadir}/unsermake/unsermake
+#export UNSERMAKE=%{_datadir}/unsermake/unsermake
 
 %{__make} -f admin/Makefile.common cvs
 
