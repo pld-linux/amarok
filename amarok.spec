@@ -8,9 +8,12 @@ Version:	0.7.0.%{_snap}
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
+# releases:
+#Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 # From kdenonbeta kde cvs module
 Source0:	http://www.kernel.pl/~adgor/kde/%{name}-%{_snap}.tar.bz2
 # Source0-md5:	0346b67a96d44668483eecc6bc89bac1
+URL:		http://amarok.sf.net/
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	rpmbuild(macros) >= 1.129	
 BuildRequires:	sed >= 4.0
@@ -28,7 +31,6 @@ Odtwarzacz audio dla KDE.
 %setup -q -n %{name}-%{_snap}
 
 %build
-
 %{__make} -f admin/Makefile.common cvs 
 
 %configure \
