@@ -17,17 +17,17 @@ Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 # Source0-md5:	90a8cce693a31e4d6ff552508c31aed3
 URL:		http://amarok.kde.org/
-Buildrequires:	SDL-devel
-Buildrequires:	alsa-lib-devel
-Buildrequires:	arts-qt-devel
-Buildrequires:	automake
+BuildRequires:	SDL-devel
+BuildRequires:	alsa-lib-devel
+BuildRequires:	arts-qt-devel
+BuildRequires:	automake
 %{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.1}
 BuildRequires:	kdebase-devel
 BuildRequires:	kdemultimedia-akode
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
-Buildrequires:	libmusicbrainz-devel
-Buildrequires:	libvisual-devel >= 0.2.0
-Buildrequires:	pcre-devel
+BuildRequires:	libmusicbrainz-devel
+BuildRequires:	libvisual-devel >= 0.2.0
+BuildRequires:	pcre-devel
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel
