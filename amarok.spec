@@ -1,21 +1,15 @@
 
 %bcond_without	xmms # disable xmms wrapping
 
-%define		_ver		1.0
-%define		_snap		040612
-%define		_packager	djurban
-
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	%{_ver}
-Release:	0.%{_snap}.1
+Version:	1.0
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-# adgor I've changed the dir!
-Source0:	http://ep09.pld-linux.org/~%{_packager}/kde/snap/%{name}-%{_snap}.tar.bz2
-# Source0-md5:	01758b643901bf6e99f67bbbfa88c002
-#Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
+Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
+# Source0-md5:	c52d89bde4c51b17ca7cce767b4515f3
 URL:		http://amarok.sf.net/
 Buildrequires:	arts-qt-devel
 Buildrequires:	automake
@@ -36,7 +30,7 @@ A KDE audio player.
 Odtwarzacz audio dla KDE.
 
 %prep
-%setup -q -n %{name}
+%setup -q -n %{name}-%{version}
 
 %build
 cp -f /usr/share/automake/config.sub admin
