@@ -25,12 +25,13 @@ Buildrequires:	automake
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
-BuildRequires:	taglib-devel >= 0.95
+BuildRequires:	taglib-devel >= 1.1
 BuildRequires:	unsermake >= 040511
 %{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.0-0.rc5.0}
 %{?with_xmms:Buildrequires:	xmms-devel}
 Buildrequires:	libmusicbrainz-devel
 Buildrequires:	libvisual-devel >= 0.1.6
+Buildrequires:	pcre-devel
 Requires:	kdebase-core >= 9:3.1.93
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
