@@ -23,6 +23,7 @@ Buildrequires:	arts-qt-devel
 Buildrequires:	automake
 %{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.1}
 BuildRequires:	kdebase-devel
+BuildRequires:	kdemultimedia-akode
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 Buildrequires:	libmusicbrainz-devel
 Buildrequires:	libvisual-devel >= 0.2.0
