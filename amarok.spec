@@ -9,10 +9,12 @@ Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 # Source0-md5:	bdd9532e983ca85711e93929c008a5ba
 URL:		http://amarok.sf.net/
+Buildrequires:	arts-qt-devel
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	rpmbuild(macros) >= 1.129	
 BuildRequires:	sed >= 4.0
 BuildRequires:	taglib-devel >= 0.95	
+BuildRequires:	xine-lib-devel
 Requires:	kdebase-core >= 9:3.1.93
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -63,3 +65,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/amarok
 %{_desktopdir}/kde/amarok.desktop
 %{_iconsdir}/[!l]*/*/apps/amarok.png
+%{_datadir}/config/*
