@@ -5,16 +5,17 @@
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
 #
+
+%define		_beta	beta1
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.1.1
-Release:	3
+Version:	1.2.%{_beta}
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-# Source0-md5:	6c0cccd4c8b508a2e0c9b0f187a907cf
-Patch0:		%{name}-sqlite3.patch
+Source0:	http://dl.sourceforge.net/amarok/%{name}-1.2-%{_beta}.tar.bz2
+# Source0-md5:	4477bf2c90f3afe4ae343f07978e59a5
 URL:		http://amarok.kde.org/
 Buildrequires:	alsa-lib-devel
 Buildrequires:	arts-qt-devel
@@ -82,8 +83,7 @@ Plugin xine.
 Wtyczka xine.
 
 %prep
-%setup -q
-%patch0 -p1
+%setup -q -n %{name}-1.2-%{_beta}
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
