@@ -1,4 +1,6 @@
 #
+# TODO: separate arts plugin
+#
 # Conditional builds:
 %bcond_without	gstreamer	# disable gstreamer
 %bcond_without	xmms 		# disable xmms wrapping
@@ -80,7 +82,8 @@ export UNSERMAKE=%{_datadir}/unsermake/unsermake
 	--disable-rpath \
 	%{!?with_xine:--without-xine} \
 	%{!?with_gstreamer:--without-gstreamer} \
-	--with-qt-libraries=%{_libdir}
+	--with-qt-libraries=%{_libdir} \
+	--without-included-sqlite
 
 %{__make}
 
