@@ -13,6 +13,7 @@ Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 # Source0-md5:	c52d89bde4c51b17ca7cce767b4515f3
 URL:		http://amarok.sf.net/
+Buildrequires:	alsa-lib-devel
 Buildrequires:	arts-qt-devel
 Buildrequires:	automake
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
