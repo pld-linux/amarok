@@ -6,12 +6,12 @@
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.0.1
-Release:	2
+Version:	1.1.1
+Release:	0.1	
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-# Source0-md5:	3572e1bbbc76d3985af9a982f22a5da8
+# Source0-md5:	6c0cccd4c8b508a2e0c9b0f187a907cf
 URL:		http://amarok.kde.org/
 Buildrequires:	alsa-lib-devel
 Buildrequires:	arts-qt-devel
@@ -20,7 +20,8 @@ Buildrequires:	automake
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
-BuildRequires:	taglib-devel >= 0.95
+BuildRequires:	sqlite >= 3.0.0
+BuildRequires:	taglib-devel >= 1.3
 BuildRequires:	unsermake >= 040511
 BuildRequires:	xine-lib-devel
 %{?with_xmms:Buildrequires:	xmms-devel}
@@ -78,8 +79,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/amarok
-%{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper}
+%{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper2}
 %attr(755,root,root) %{_bindir}/amarokapp
+%attr(755,root,root) %{_bindir}/release_amarok
 %{_libdir}/kde3/libamarok_artsengine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_artsengine_plugin.so
 %{_libdir}/libamarokarts.la
@@ -89,10 +91,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/mcop/amarokarts.mcoptype
 %{_datadir}/apps/amarok
 %{_datadir}/config.kcfg/amarok.kcfg
+%{_datadir}/config.kcfg/gstconfig.kcfg
 %{_datadir}/services/amarok_artsengine_plugin.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
 %{_iconsdir}/[!l]*/*/apps/amarok.png
+%{_iconsdir}/crystalsvg/*/*/player_playlist_2.png
 %{_datadir}/config/*
 
 %if %{with gstreamer}
