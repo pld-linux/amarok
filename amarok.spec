@@ -6,7 +6,7 @@
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	xine		# disable xine engine
 #
-%define		_snap	040803
+%define		_snap	040827
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
@@ -16,7 +16,7 @@ License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 Source0:	%{name}-%{_snap}.tar.bz2
-# Source0-md5:	e3348f5f3ecfadbb98b6ddc28fc467aa
+# Source0-md5:	cdb260f6d26223cd0972cc2e988dc106
 URL:		http://amarok.sf.net/
 Buildrequires:	alsa-lib-devel
 Buildrequires:	arts-qt-devel
@@ -30,8 +30,9 @@ BuildRequires:	unsermake >= 040511
 %{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.0-0.rc5.0}
 %{?with_xmms:Buildrequires:	xmms-devel}
 Buildrequires:	libmusicbrainz-devel
-Buildrequires:	libvisual-devel >= 0.1.6
+Buildrequires:	libvisual-devel >= 0.1.6-0.040822.1
 Buildrequires:	pcre-devel
+BuildRequires:	kdebindings-kjsembed-devel 
 Requires:	kdebase-core >= 9:3.1.93
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -100,22 +101,25 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README 
 %attr(755,root,root) %{_bindir}/amarok
+%attr(755,root,root) %{_bindir}/amarok_libvisual
+# DONT PACKAGE release_amarok.
 %{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper}
 %attr(755,root,root) %{_bindir}/amarokapp
-#%{_libdir}/kde3/libamarok_artsengine_plugin.la
-#%attr(755,root,root) %{_libdir}/kde3/libamarok_artsengine_plugin.so
-#%{_libdir}/libamarokarts.la
-#%attr(755,root,root) %{_libdir}/libamarokarts.so
-#%{_libdir}/mcop/Amarok
-#%{_libdir}/mcop/amarokarts.mcopclass
-#%{_libdir}/mcop/amarokarts.mcoptype
+%{_libdir}/kde3/libamarok_artsengine_plugin.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_artsengine_plugin.so
+%{_libdir}/libamarokarts.la
+%attr(755,root,root) %{_libdir}/libamarokarts.so
+%{_libdir}/mcop/Amarok
+%{_libdir}/mcop/amarokarts.mcopclass
+%{_libdir}/mcop/amarokarts.mcoptype
 %{_datadir}/apps/amarok
 %{_datadir}/config.kcfg/amarok.kcfg
-#%{_datadir}/services/amarok_artsengine_plugin.desktop
+%{_datadir}/services/amarok_artsengine_plugin.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
 %{_desktopdir}/kde/amarok.desktop
 %{_iconsdir}/[!l]*/*/apps/amarok.png
+%{_iconsdir}/[!l]*/*/actions/player_playlist.*
 %{_datadir}/config/*
 
 %if %{with gstreamer}
