@@ -103,8 +103,7 @@ export UNSERMAKE=%{_datadir}/unsermake/unsermake
 	%{!?with_arts:--without-arts} \
 	%{!?with_xine:--without-xine} \
 	%{!?with_gstreamer:--without-gstreamer} \
-	%{?with_gstreamer:--with-mysql} \
-	--enable-mysql \
+	%{?with_mysql:--with-mysql} \
 	--with-qt-libraries=%{_libdir} \
 	--without-included-sqlite
 
