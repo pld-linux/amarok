@@ -1,7 +1,7 @@
 
 %define		_ver		1.0
 %define		_snap		040511
-%define		_packeger	adgor
+%define		_packager	adgor
 
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
@@ -20,6 +20,7 @@ BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	taglib-devel >= 0.95
+BuildRequires:	unsermake >= 040511
 BuildRequires:	xine-lib-devel
 Requires:	kdebase-core >= 9:3.1.93
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
