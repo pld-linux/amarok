@@ -181,5 +181,5 @@ echo "want to have a visualizations in amarok."
 %{_libdir}/kde3/libamarok_xine-engine.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
 %{_datadir}/services/amarok_xine-engine.desktop
-%{_datadir}/services/amarok_xineengine_plugin.desktop
+#%{_datadir}/services/amarok_xineengine_plugin.desktop
 %endif
