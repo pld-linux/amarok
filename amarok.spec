@@ -1,4 +1,8 @@
-
+# TODO:
+# - package documentation
+# - package locale files
+# - add gstreamer subpackage with libamarok_gstengine_plugin
+# Conditional builds:
 %bcond_without	xmms # disable xmms wrapping
 
 Summary:	A KDE audio player
