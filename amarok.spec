@@ -38,6 +38,7 @@ BuildRequires:	unsermake >= 040511
 #BuildRequires:	kdebindings-kjsembed-devel 
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
+Requires:	kdemultimedia-audiocd >= 9:3.1.93
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
