@@ -36,7 +36,7 @@ A KDE audio player.
 Odtwarzacz audio dla KDE.
 
 %prep
-%setup -q -n %{name}-%{_snap}
+%setup -q -n %{name}
 
 %build
 cp -f /usr/share/automake/config.sub admin
@@ -59,12 +59,13 @@ rm -rf $RPM_BUILD_ROOT
 	kde_htmldir=%{_kdedocdir} \
 	kde_libs_htmldir=%{_kdedocdir}
 
-%find_lang %{name} --with-kde
+#find_lang %{name} --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{name}.lang
+%files 
+#-f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/amarok
 %{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper}
