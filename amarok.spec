@@ -53,6 +53,18 @@ Plugin gstreamer.
 %description gstreamer -l pl
 Wtyczka gstreamer.
 
+%package xine
+Summary:	Plugin xine
+Summary(pl):	Wtyczka xine
+Group:		X11/Applications/Multimedia
+Requires:       %{name} = %{version}-%{release}
+
+%description xine
+Plugin xine.
+
+%description xine -l pl
+Wtyczka xine.
+
 %prep
 %setup -q -n %{name}
 
@@ -90,16 +102,16 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarok
 %{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper}
 %attr(755,root,root) %{_bindir}/amarokapp
-%{_libdir}/kde3/libamarok_artsengine_plugin.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_artsengine_plugin.so
-%{_libdir}/libamarokarts.la
-%attr(755,root,root) %{_libdir}/libamarokarts.so
-%{_libdir}/mcop/Amarok
-%{_libdir}/mcop/amarokarts.mcopclass
-%{_libdir}/mcop/amarokarts.mcoptype
+#%{_libdir}/kde3/libamarok_artsengine_plugin.la
+#%attr(755,root,root) %{_libdir}/kde3/libamarok_artsengine_plugin.so
+#%{_libdir}/libamarokarts.la
+#%attr(755,root,root) %{_libdir}/libamarokarts.so
+#%{_libdir}/mcop/Amarok
+#%{_libdir}/mcop/amarokarts.mcopclass
+#%{_libdir}/mcop/amarokarts.mcoptype
 %{_datadir}/apps/amarok
 %{_datadir}/config.kcfg/amarok.kcfg
-%{_datadir}/services/amarok_artsengine_plugin.desktop
+#%{_datadir}/services/amarok_artsengine_plugin.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
 %{_desktopdir}/kde/amarok.desktop
@@ -112,4 +124,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/kde3/libamarok_gstengine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_gstengine_plugin.so
 %{_datadir}/services/amarok_gstengine_plugin.desktop
+%{_datadir}/config.kcfg/gstconfig.kcfg
+%endif
+
+%if %{with xine}
+%files xine
+%defattr(644,root,root,755)
+%{_libdir}/kde3/libamarok_xine-engine.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
+%{_datadir}/services/amarok_xine-engine.desktop
 %endif
