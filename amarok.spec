@@ -4,36 +4,40 @@
 %bcond_without	gstreamer	# disable gstreamer
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
+%bcond_with	mysql		# enable mysql support
 #
+
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.1.1
-Release:	3
+Version:	1.2
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-# Source0-md5:	6c0cccd4c8b508a2e0c9b0f187a907cf
-Patch0:		%{name}-sqlite3.patch
+# Source0-md5:	8db7d8985152ff29e8fb7377ada74527
 URL:		http://amarok.kde.org/
-BuildRequires:	alsa-lib-devel
-BuildRequires:	arts-qt-devel
-BuildRequires:	automake
-%{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.8.1}
+Buildrequires:	alsa-lib-devel
+Buildrequires:	arts-qt-devel
+Buildrequires:	automake
+%{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.1}
+BuildRequires:	kdebase-devel
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
-BuildRequires:	libmusicbrainz-devel
-BuildRequires:	libvisual-devel >= 0.1.6-1
-BuildRequires:	pcre-devel
+Buildrequires:	libmusicbrainz-devel
+Buildrequires:	libvisual-devel >= 0.2.0
+Buildrequires:	pcre-devel
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel
-BuildRequires:	taglib-devel >= 1.3
-BuildRequires:	unsermake >= 040511
-%{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.0-0.rc5.0}
-%{?with_xmms:BuildRequires:	xmms-devel}
-#BuildRequires:	kdebindings-kjsembed-devel 
+BuildRequires:	taglib-devel >= 1.3.1
+#BuildRequires:	unsermake >= 040511
+%{?with_xine:BuildRequires:		xine-lib-devel >= 2:1.0-0.rc5.0}
+%{?with_xmms:BuildRequires:		xmms-devel}
+%{?with_mysql:BuildRequires:		mysql-devel}
+#BuildRequires:	kdebindings-kjsembed-devel
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
+Requires:	kdemultimedia-audiocd >= 9:3.1.93
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -83,7 +87,6 @@ Wtyczka xine.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
@@ -91,7 +94,7 @@ Wtyczka xine.
 %build
 cp -f %{_datadir}/automake/config.sub admin
 
-export UNSERMAKE=%{_datadir}/unsermake/unsermake
+#export UNSERMAKE=%{_datadir}/unsermake/unsermake
 
 %{__make} -f admin/Makefile.common cvs
 
@@ -100,6 +103,8 @@ export UNSERMAKE=%{_datadir}/unsermake/unsermake
 	%{!?with_arts:--without-arts} \
 	%{!?with_xine:--without-xine} \
 	%{!?with_gstreamer:--without-gstreamer} \
+	%{?with_mysql:--with-mysql} \
+	--disable-final \
 	--with-qt-libraries=%{_libdir} \
 	--without-included-sqlite
 
@@ -121,6 +126,10 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+echo "Remember to install libvisual-plugins-* packages if you"
+echo "want to have a visualizations in amarok."
+
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README TODO
@@ -129,17 +138,20 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarokapp
 %attr(755,root,root) %{_bindir}/amarok_libvisual
 %attr(755,root,root) %{_bindir}/release_amarok
+%{_libdir}/kde3/konqsidebar_universalamarok.la
+%attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
 %{_datadir}/apps/amarok
 %{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
+%{_datadir}/apps/konqsidebartng/add/amarok.desktop
+%{_datadir}/apps/profiles/amarok.profile.xml
+%{_datadir}/config/amarokrc
 %{_datadir}/config.kcfg/amarok.kcfg
 %{_datadir}/services/amarok_void-engine_plugin.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
-%{_iconsdir}/*/*/apps/amarok.png
-%{_iconsdir}/crystalsvg/*/*/player_playlist_2.png
-%{_datadir}/config/*
+%{_iconsdir}/*/*/apps/amarok.*
 
 %if %{with arts}
 %files arts
