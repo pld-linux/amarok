@@ -1,4 +1,4 @@
-
+%bcond_without	xmms # disable xmms wrapping
 %define		_ver		1.0
 %define		_snap		040511
 %define		_packager	adgor
@@ -22,6 +22,9 @@ BuildRequires:	sed >= 4.0
 BuildRequires:	taglib-devel >= 0.95
 BuildRequires:	unsermake >= 040511
 BuildRequires:	xine-lib-devel
+%if %{with xmms}
+BuildRequires:	xmms-devel
+%endif
 Requires:	kdebase-core >= 9:3.1.93
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -59,10 +62,13 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{name}.lang
+%files 
+# -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/amarok
+%if %{with xmms}
 %attr(755,root,root) %{_bindir}/amarok_xmmswrapper
+%endif
 %attr(755,root,root) %{_bindir}/amarokapp
 %{_libdir}/kde3/libamarok_artsengine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_artsengine_plugin.so
