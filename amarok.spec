@@ -6,7 +6,7 @@
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	xine		# disable xine engine
 #
-%define		_snap	040712
+%define		_snap	040803
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
@@ -16,12 +16,12 @@ License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 Source0:	%{name}-%{_snap}.tar.bz2
-# Source0-md5:	3572e1bbbc76d3985af9a982f22a5da8
+# Source0-md5:	e3348f5f3ecfadbb98b6ddc28fc467aa
 URL:		http://amarok.sf.net/
 Buildrequires:	alsa-lib-devel
 Buildrequires:	arts-qt-devel
 Buildrequires:	automake
-%{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.8.1}
+%{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.1}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
@@ -29,6 +29,8 @@ BuildRequires:	taglib-devel >= 0.95
 BuildRequires:	unsermake >= 040511
 %{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.0-0.rc5.0}
 %{?with_xmms:Buildrequires:	xmms-devel}
+Buildrequires:	libmusicbrainz-devel
+Buildrequires:	libvisual-devel >= 0.1.6
 Requires:	kdebase-core >= 9:3.1.93
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
