@@ -7,16 +7,15 @@
 %bcond_with	mysql		# enable mysql support
 #
 
-%define		_beta	beta4
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.2.%{_beta}
-Release:	0.1
+Version:	1.2
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-1.2-%{_beta}.tar.bz2
-# Source0-md5:	13e2256a2a19953289e52db66ef992b4
+Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
+# Source0-md5:	8db7d8985152ff29e8fb7377ada74527
 URL:		http://amarok.kde.org/
 Buildrequires:	alsa-lib-devel
 Buildrequires:	arts-qt-devel
@@ -87,7 +86,7 @@ Plugin xine.
 Wtyczka xine.
 
 %prep
-%setup -q -n %{name}-1.2-%{_beta}
+%setup -q
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
@@ -153,7 +152,6 @@ echo "want to have a visualizations in amarok."
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
-%{_iconsdir}/crystalsvg/*/*/player_playlist_2.png
 
 %if %{with arts}
 %files arts
