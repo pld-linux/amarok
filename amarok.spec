@@ -4,6 +4,7 @@
 %bcond_without	gstreamer	# disable gstreamer
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
+%bcond_with	mysql		# enable mysql support
 #
 
 %define		_beta	beta1
@@ -32,7 +33,8 @@ BuildRequires:	sqlite3-devel
 BuildRequires:	taglib-devel >= 1.3
 BuildRequires:	unsermake >= 040511
 %{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.0-0.rc5.0}
-%{?with_xmms:Buildrequires:	xmms-devel}
+%{?with_xmms:BuildRequires:	xmms-devel}
+%{?with_mysql:BuildRequires:	mysql-devel}
 #BuildRequires:	kdebindings-kjsembed-devel 
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
@@ -101,6 +103,8 @@ export UNSERMAKE=%{_datadir}/unsermake/unsermake
 	%{!?with_arts:--without-arts} \
 	%{!?with_xine:--without-xine} \
 	%{!?with_gstreamer:--without-gstreamer} \
+	%{?with_gstreamer:--with-mysql} \
+	--enable-mysql \
 	--with-qt-libraries=%{_libdir} \
 	--without-included-sqlite
 
