@@ -20,7 +20,7 @@ Buildrequires:	automake
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
-BuildRequires:	sqlite >= 3.0.0
+BuildRequires:	sqlite3-devel
 BuildRequires:	taglib-devel >= 1.3
 BuildRequires:	unsermake >= 040511
 BuildRequires:	xine-lib-devel
