@@ -37,7 +37,7 @@ Odtwarzacz audio dla KDE.
 Summary:	Plugin gstreamer
 Summary(pl):	Wtyczka gstreamer
 Group:		X11/Applications/Multimedia
-Requires:       %{name} = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description gstreamer
 Plugin gstreamer.
@@ -49,9 +49,9 @@ Wtyczka gstreamer.
 %setup -q -n %{name}-%{version}
 
 %build
-cp -f /usr/share/automake/config.sub admin
+cp -f %{_datadir}/automake/config.sub admin
 
-export UNSERMAKE=/usr/share/unsermake/unsermake
+export UNSERMAKE=%{_datadir}/unsermake/unsermake
 
 %{__make} -f admin/Makefile.common cvs
 
@@ -69,7 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 	kde_htmldir=%{_kdedocdir} \
 	kde_libs_htmldir=%{_kdedocdir}
 
-%find_lang amarok --all-name --with-kde 
+%find_lang amarok --all-name --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
