@@ -1,7 +1,7 @@
-# TODO:
-# - add gstreamer subpackage with libamarok_gstengine_plugin
+#
 # Conditional builds:
-%bcond_without	xmms # disable xmms wrapping
+%bcond_without	xmms 		# disable xmms wrapping
+%bcond_without	gstreamer	# disable gstreamer
 
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
@@ -16,13 +16,14 @@ URL:		http://amarok.sf.net/
 Buildrequires:	alsa-lib-devel
 Buildrequires:	arts-qt-devel
 Buildrequires:	automake
+%{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.8.1}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	taglib-devel >= 0.95
 BuildRequires:	unsermake >= 040511
 BuildRequires:	xine-lib-devel
-%{?with_xmms:BuildRequires:	xmms-devel}
+%{?with_xmms:Buildrequires:	xmms-devel}
 Requires:	kdebase-core >= 9:3.1.93
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -31,6 +32,18 @@ A KDE audio player.
 
 %description -l pl
 Odtwarzacz audio dla KDE.
+
+%package gstreamer
+Summary:	Plugin gstramer
+Summary(pl):	Wtyczka gstreamer
+Group:		X11/Applications/Multimedia
+Requires:       %{name} = %{version}-%{release}
+
+%description gstreamer
+Plugin gstramer.
+
+%description gstreamer -l pl
+Wtyczka gstreamer.
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -64,6 +77,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/amarok
+%doc AUTHORS ChangeLog README TODO
 %{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper}
 %attr(755,root,root) %{_bindir}/amarokapp
 %{_libdir}/kde3/libamarok_artsengine_plugin.la
@@ -80,3 +94,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde/amarok.desktop
 %{_iconsdir}/[!l]*/*/apps/amarok.png
 %{_datadir}/config/*
+
+%if %{with gstreamer}
+%files gstreamer
+%defattr(644,root,root,755)
+%{_libdir}/kde3/libamarok_gstengine_plugin.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_gstengine_plugin.so
+%{_datadir}/services/amarok_gstengine_plugin.desktop
+%endif
