@@ -139,19 +139,21 @@ echo "want to have a visualizations in amarok."
 %attr(755,root,root) %{_bindir}/amarokapp
 %attr(755,root,root) %{_bindir}/amarok_libvisual
 %attr(755,root,root) %{_bindir}/release_amarok
-%{_libdir}/kde3/libamarok_void-engine_plugin.la
 %{_libdir}/kde3/konqsidebar_universalamarok.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
+%{_libdir}/kde3/libamarok_void-engine_plugin.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
 %{_datadir}/apps/amarok
 %{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
+%{_datadir}/apps/konqsidebartng/add/amarok.desktop
+%{_datadir}/apps/profiles/amarok.profile.xml
+%{_datadir}/config/amarokrc
 %{_datadir}/config.kcfg/amarok.kcfg
 %{_datadir}/services/amarok_void-engine_plugin.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
-%{_iconsdir}/*/*/apps/amarok.png
+%{_iconsdir}/*/*/apps/amarok.*
 %{_iconsdir}/crystalsvg/*/*/player_playlist_2.png
-%{_datadir}/config/*
 
 %if %{with arts}
 %files arts
