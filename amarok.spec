@@ -12,7 +12,7 @@ License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 # Source0-md5:	3572e1bbbc76d3985af9a982f22a5da8
-URL:		http://amarok.kde.org
+URL:		http://amarok.kde.org/
 Buildrequires:	alsa-lib-devel
 Buildrequires:	arts-qt-devel
 Buildrequires:	automake
