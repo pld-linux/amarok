@@ -1,16 +1,21 @@
+# TODO!
+# * After kdebindings 3.3 is done add support for kjsembed
 #
 # Conditional builds:
 %bcond_without	gstreamer	# disable gstreamer
 %bcond_without	xmms 		# disable xmms wrapping
+%bcond_without	xine		# disable xine engine
 #
+%define		_snap	040712
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.0.1
-Release:	1
+Version:	1.1
+Release:	0.%{_snap}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
+#Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
+Source0:	%{name}-%{_snap}.tar.bz2
 # Source0-md5:	3572e1bbbc76d3985af9a982f22a5da8
 URL:		http://amarok.sf.net/
 Buildrequires:	alsa-lib-devel
@@ -22,7 +27,7 @@ BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	taglib-devel >= 0.95
 BuildRequires:	unsermake >= 040511
-BuildRequires:	xine-lib-devel
+%{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.0-0.rc5.0}
 %{?with_xmms:Buildrequires:	xmms-devel}
 Requires:	kdebase-core >= 9:3.1.93
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -46,7 +51,7 @@ Plugin gstreamer.
 Wtyczka gstreamer.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}
 
 %build
 cp -f /usr/share/automake/config.sub admin
@@ -57,6 +62,7 @@ export UNSERMAKE=/usr/share/unsermake/unsermake
 
 %configure \
 	--disable-rpath \
+	%{!?with_xine:--without-xine} \
 	--with-qt-libraries=%{_libdir}
 
 %{__make}
@@ -69,14 +75,15 @@ rm -rf $RPM_BUILD_ROOT
 	kde_htmldir=%{_kdedocdir} \
 	kde_libs_htmldir=%{_kdedocdir}
 
-%find_lang amarok --all-name --with-kde 
+##find_lang amarok --all-name --with-kde 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{name}.lang
+%files 
+##f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README TODO
+%doc AUTHORS ChangeLog README 
 %attr(755,root,root) %{_bindir}/amarok
 %{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper}
 %attr(755,root,root) %{_bindir}/amarokapp
@@ -91,6 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/config.kcfg/amarok.kcfg
 %{_datadir}/services/amarok_artsengine_plugin.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
+%{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
 %{_desktopdir}/kde/amarok.desktop
 %{_iconsdir}/[!l]*/*/apps/amarok.png
 %{_datadir}/config/*
