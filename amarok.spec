@@ -21,6 +21,9 @@ Buildrequires:	arts-qt-devel
 Buildrequires:	automake
 %{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.8.1}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
+Buildrequires:	libmusicbrainz-devel
+Buildrequires:	libvisual-devel >= 0.1.6-1
+Buildrequires:	pcre-devel
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel
@@ -28,9 +31,6 @@ BuildRequires:	taglib-devel >= 1.3
 BuildRequires:	unsermake >= 040511
 %{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.0-0.rc5.0}
 %{?with_xmms:Buildrequires:	xmms-devel}
-Buildrequires:	libmusicbrainz-devel
-Buildrequires:	libvisual-devel >= 0.1.6-1
-Buildrequires:	pcre-devel
 #BuildRequires:	kdebindings-kjsembed-devel 
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
@@ -72,7 +72,7 @@ Wtyczka gstreamer.
 Summary:	Plugin xine
 Summary(pl):	Wtyczka xine
 Group:		X11/Applications/Multimedia
-Requires:       %{name} = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
 
 %description xine
@@ -82,7 +82,7 @@ Plugin xine.
 Wtyczka xine.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 %patch0 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
