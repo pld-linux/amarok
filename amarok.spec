@@ -24,6 +24,7 @@ Buildrequires:	automake
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 Buildrequires:	libmusicbrainz-devel
 Buildrequires:	libvisual-devel >= 0.1.6-1
+BuildRequires:	mysql-devel
 Buildrequires:	pcre-devel
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
