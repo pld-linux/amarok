@@ -22,6 +22,7 @@ Buildrequires:	alsa-lib-devel
 Buildrequires:	arts-qt-devel
 Buildrequires:	automake
 %{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.8.1}
+BuildRequires:	kdebase-devel
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 Buildrequires:	libmusicbrainz-devel
 Buildrequires:	libvisual-devel >= 0.2.0
@@ -103,6 +104,7 @@ export UNSERMAKE=%{_datadir}/unsermake/unsermake
 	%{!?with_xine:--without-xine} \
 	%{!?with_gstreamer:--without-gstreamer} \
 	%{?with_mysql:--with-mysql} \
+	--disable-final \
 	--with-qt-libraries=%{_libdir} \
 	--without-included-sqlite
 
