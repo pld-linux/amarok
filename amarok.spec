@@ -1,8 +1,8 @@
 #
 # Conditional builds:
-%bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	gstreamer	# disable gstreamer
-
+%bcond_without	xmms 		# disable xmms wrapping
+#
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
@@ -34,13 +34,13 @@ A KDE audio player.
 Odtwarzacz audio dla KDE.
 
 %package gstreamer
-Summary:	Plugin gstramer
+Summary:	Plugin gstreamer
 Summary(pl):	Wtyczka gstreamer
 Group:		X11/Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
 
 %description gstreamer
-Plugin gstramer.
+Plugin gstreamer.
 
 %description gstreamer -l pl
 Wtyczka gstreamer.
@@ -76,8 +76,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/amarok
 %doc AUTHORS ChangeLog README TODO
+%attr(755,root,root) %{_bindir}/amarok
 %{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper}
 %attr(755,root,root) %{_bindir}/amarokapp
 %{_libdir}/kde3/libamarok_artsengine_plugin.la
