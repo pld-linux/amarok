@@ -35,11 +35,10 @@ BuildRequires:	unsermake >= 040511
 %{?with_xine:BuildRequires:		xine-lib-devel >= 2:1.0-0.rc5.0}
 %{?with_xmms:BuildRequires:		xmms-devel}
 %{?with_mysql:BuildRequires:		mysql-devel}
-#BuildRequires:	kdebindings-kjsembed-devel 
+#BuildRequires:	kdebindings-kjsembed-devel
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
-Requires:	libvisual-plugins >= 0.2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -127,6 +126,10 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+echo "Remember to install libvisual-plugins-* packages if you"
+echo "want to have a visualizations in amarok."
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
