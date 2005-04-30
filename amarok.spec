@@ -65,6 +65,10 @@ Wtyczka arts.
 Summary:	Plugin gstreamer
 Summary(pl):	Wtyczka gstreamer
 Group:		X11/Applications/Multimedia
+# needed libs
+# at least /usr/lib/gstreamer-0.8/libgstresample.so 
+# probably /usr/lib/gstreamer-0.8/libgstadder.so
+# and probably /usr/lib/gstreamer-0.8/libgstvolume.so
 Requires:	gstreamer-audio-effects
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
