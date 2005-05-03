@@ -1,4 +1,9 @@
 #
+# TODO:
+#	* postgresql support alongside mysql
+#	* NMM, MAS audio backend support
+#	* make descriptions less useless
+#
 # Conditional builds:
 %bcond_without	arts		# disable arts engine
 %bcond_without	gstreamer	# disable gstreamer
@@ -6,26 +11,29 @@
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_with	mysql		# enable mysql support
 #
-
+%define	_snap	050503
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.2
-Release:	1
+Version:	1.2.99
+Release:	0.%{_snap}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-# Source0-md5:	8db7d8985152ff29e8fb7377ada74527
+Source0:	%{name}-%{_snap}.tar.bz2
+# Source0-md5:	0082f47cb4503afc7d8e671cfd5cb983
+Patch0:		kde-common-gcc4.patch
 URL:		http://amarok.kde.org/
-Buildrequires:	alsa-lib-devel
-Buildrequires:	arts-qt-devel
-Buildrequires:	automake
+BuildRequires:	SDL-devel
+BuildRequires:	alsa-lib-devel
+BuildRequires:	arts-qt-devel
+BuildRequires:	automake
 %{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.1}
 BuildRequires:	kdebase-devel
+BuildRequires:	kdemultimedia-akode
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
-Buildrequires:	libmusicbrainz-devel
-Buildrequires:	libvisual-devel >= 0.2.0
-Buildrequires:	pcre-devel
+BuildRequires:	libmusicbrainz-devel
+BuildRequires:	libvisual-devel >= 0.2.0
+BuildRequires:	pcre-devel
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel
@@ -59,10 +67,29 @@ Plugin arts.
 %description arts -l pl
 Wtyczka arts.
 
+%package akode
+Summary:        Plugin akode
+Summary(pl):    Wtyczka akode
+Group:          X11/Applications/Multimedia
+Requires:       %{name} = %{version}-%{release}
+Provides:       %{name}-plugin = %{version}-%{release}
+
+%description akode
+Plugin akode.
+
+%description akode -l pl
+Wtyczka akode.
+
+
 %package gstreamer
 Summary:	Plugin gstreamer
 Summary(pl):	Wtyczka gstreamer
 Group:		X11/Applications/Multimedia
+# needed libs
+# at least /usr/lib/gstreamer-0.8/libgstresample.so 
+# probably /usr/lib/gstreamer-0.8/libgstadder.so
+# and probably /usr/lib/gstreamer-0.8/libgstvolume.so
+Requires:	gstreamer-audio-effects
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
 
@@ -86,15 +113,15 @@ Plugin xine.
 Wtyczka xine.
 
 %prep
-%setup -q
-
+%setup -q -n %{name}
+%patch0 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
 %build
-cp -f %{_datadir}/automake/config.sub admin
+cp -f /usr/share/automake/config.sub admin
 
-#export UNSERMAKE=%{_datadir}/unsermake/unsermake
+#export UNSERMAKE=/usr/share/unsermake/unsermake
 
 %{__make} -f admin/Makefile.common cvs
 
@@ -121,7 +148,7 @@ rm -rf $RPM_BUILD_ROOT
 # remove bogus dir
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
-%find_lang amarok --all-name --with-kde
+#find_lang amarok --all-name --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -132,12 +159,12 @@ echo "want to have a visualizations in amarok."
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README TODO
+%doc amarok/AUTHORS amarok/ChangeLog amarok/README amarok/TODO
 %attr(755,root,root) %{_bindir}/amarok
 %{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper2}
 %attr(755,root,root) %{_bindir}/amarokapp
 %attr(755,root,root) %{_bindir}/amarok_libvisual
-%attr(755,root,root) %{_bindir}/release_amarok
+#%attr(755,root,root) %{_bindir}/release_amarok
 %{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
@@ -145,6 +172,8 @@ echo "want to have a visualizations in amarok."
 %{_datadir}/apps/amarok
 %{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
 %{_datadir}/apps/konqsidebartng/add/amarok.desktop
+%{_datadir}/apps/konqsidebartng/entries/amarok.desktop
+%{_datadir}/apps/konqsidebartng/kicker_entries/amarok.desktop
 %{_datadir}/apps/profiles/amarok.profile.xml
 %{_datadir}/config/amarokrc
 %{_datadir}/config.kcfg/amarok.kcfg
@@ -166,6 +195,12 @@ echo "want to have a visualizations in amarok."
 %{_datadir}/services/amarok_artsengine_plugin.desktop
 %endif
 
+%files akode
+%defattr(644,root,root,755)
+%{_libdir}/kde3/libamarok_aKode-engine.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_aKode-engine.so
+%{_datadir}/services/amarok_aKode-engine.desktop
+
 %if %{with gstreamer}
 %files gstreamer
 %defattr(644,root,root,755)
@@ -181,5 +216,5 @@ echo "want to have a visualizations in amarok."
 %{_libdir}/kde3/libamarok_xine-engine.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
 %{_datadir}/services/amarok_xine-engine.desktop
-%{_datadir}/services/amarok_xineengine_plugin.desktop
+#%{_datadir}/services/amarok_xineengine_plugin.desktop
 %endif
