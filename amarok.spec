@@ -11,7 +11,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.2.3
-Release:	1
+Release:	1.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -65,11 +65,21 @@ Wtyczka arts.
 Summary:	Plugin gstreamer
 Summary(pl):	Wtyczka gstreamer
 Group:		X11/Applications/Multimedia
-# needed libs
-# at least /usr/lib/gstreamer-0.8/libgstresample.so 
-# probably /usr/lib/gstreamer-0.8/libgstadder.so
-# and probably /usr/lib/gstreamer-0.8/libgstvolume.so
+# deps, to get it working:
+# mp3 decoder: gstreamer-mad
+# ogg decoder: gstreamer-vorbis
+# audio output driver: gstreamer-audiosink-alsa
+# from gstreamer-audio-effects to control volume, etc
+# needed libs:
+#  at least /usr/lib/gstreamer-0.8/libgstresample.so 
+#  probably /usr/lib/gstreamer-0.8/libgstadder.so
+#  and probably /usr/lib/gstreamer-0.8/libgstvolume.so
+# gstreamer-musicbrainz for being able to edit id3 tags on files.
 Requires:	gstreamer-audio-effects
+Requires:	gstreamer-audiosink
+Requires:	gstreamer-mad
+Requires:	gstreamer-vorbis
+Requires:	gstreamer-musicbrainz
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
 
