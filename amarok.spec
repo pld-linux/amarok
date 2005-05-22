@@ -1,21 +1,29 @@
+# TODO
+# warning: Installed (but unpackaged) file(s) found:
+#   /usr/lib/kde3/libamarok_aKode-engine.la
+#   /usr/lib/kde3/libamarok_aKode-engine.so
+#   /usr/share/apps/konqsidebartng/entries/amarok.desktop
+#   /usr/share/apps/konqsidebartng/kicker_entries/amarok.desktop
+#   /usr/share/services/amarok_aKode-engine.desktop
+# - aKode engine?
 #
 # Conditional builds:
 %bcond_without	arts		# disable arts engine
 %bcond_without	gstreamer	# disable gstreamer
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
-%bcond_with	mysql		# enable mysql support
+%bcond_with	mysql			# enable mysql support
+%bcond_with	akode			# enable aKode engine
 #
-
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.2.3
-Release:	1.1
+Version:	1.2.4
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-# Source0-md5:	0082f47cb4503afc7d8e671cfd5cb983
+# Source0-md5:	9a3bb2c043d1db169c6a370aff439e0f
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
