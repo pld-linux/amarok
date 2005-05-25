@@ -9,9 +9,10 @@
 %bcond_without	gstreamer	# disable gstreamer
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
+%bcond_without	zeroconf	# disbale suport for zeroconf
 %bcond_with	mysql		# enable mysql support
 #
-%define	_snap	050503
+%define	_snap	050525
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
@@ -20,7 +21,7 @@ Release:	0.%{_snap}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	%{name}-%{_snap}.tar.bz2
-# Source0-md5:	0082f47cb4503afc7d8e671cfd5cb983
+# Source0-md5:	e2caf007c56b921556e65b5f9b6f3a92
 Patch0:		kde-common-gcc4.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
@@ -67,6 +68,7 @@ Plugin arts.
 %description arts -l pl
 Wtyczka arts.
 
+
 %package akode
 Summary:        Plugin akode
 Summary(pl):    Wtyczka akode
@@ -111,6 +113,21 @@ Plugin xine.
 
 %description xine -l pl
 Wtyczka xine.
+
+%package zeroconf
+Summary:	Zeroconf data
+Summary(pl):	Dane dla zeroconf
+Group:		X11/Applications/Multimedia
+Requires:	%{name} = %{version}-%{release}
+Requires:	kdenetwork-kdnssd
+Provides:	%{name}-plugin = %{version}-%{release}
+
+%description zeroconf
+Zeroconf data.
+
+%description zeroconf -l pl
+Zeroconf data.
+
 
 %prep
 %setup -q -n %{name}
@@ -157,7 +174,8 @@ rm -rf $RPM_BUILD_ROOT
 echo "Remember to install libvisual-plugins-* packages if you"
 echo "want to have a visualizations in amarok."
 
-%files -f %{name}.lang
+%files 
+# -f %{name}.lang
 %defattr(644,root,root,755)
 %doc amarok/AUTHORS amarok/ChangeLog amarok/README amarok/TODO
 %attr(755,root,root) %{_bindir}/amarok
@@ -217,4 +235,10 @@ echo "want to have a visualizations in amarok."
 %attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
 %{_datadir}/services/amarok_xine-engine.desktop
 #%{_datadir}/services/amarok_xineengine_plugin.desktop
+%endif
+
+%if %{with zeroconf}
+%files zeroconf
+%defattr(644,root,root,755)
+%{_datadir}/apps/zeroconf/_shoutcast._tcp
 %endif
