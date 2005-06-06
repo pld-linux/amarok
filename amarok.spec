@@ -12,16 +12,16 @@
 %bcond_without	zeroconf	# disbale suport for zeroconf
 %bcond_with	mysql		# enable mysql support
 #
-%define	_snap	050525
+%define	_beta	beta1
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.2.99
-Release:	0.%{_snap}.1
+Version:	1.3
+Release:	0.%{_beta}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	%{name}-%{_snap}.tar.bz2
-# Source0-md5:	e2caf007c56b921556e65b5f9b6f3a92
+Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-beta1.tar.bz2
+# Source0-md5:	d270fd69f58d3f4ba1c0d7ff4c520f5a
 Patch0:		kde-common-gcc4.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
@@ -70,11 +70,11 @@ Wtyczka arts.
 
 
 %package akode
-Summary:        Plugin akode
-Summary(pl):    Wtyczka akode
-Group:          X11/Applications/Multimedia
-Requires:       %{name} = %{version}-%{release}
-Provides:       %{name}-plugin = %{version}-%{release}
+Summary:	Plugin akode
+Summary(pl):	Wtyczka akode
+Group:		X11/Applications/Multimedia
+Requires:	%{name} = %{version}-%{release}
+Provides:	%{name}-plugin = %{version}-%{release}
 
 %description akode
 Plugin akode.
@@ -88,7 +88,7 @@ Summary:	Plugin gstreamer
 Summary(pl):	Wtyczka gstreamer
 Group:		X11/Applications/Multimedia
 # needed libs
-# at least /usr/lib/gstreamer-0.8/libgstresample.so 
+# at least /usr/lib/gstreamer-0.8/libgstresample.so
 # probably /usr/lib/gstreamer-0.8/libgstadder.so
 # and probably /usr/lib/gstreamer-0.8/libgstvolume.so
 Requires:	gstreamer-audio-effects
@@ -130,7 +130,7 @@ Zeroconf data.
 
 
 %prep
-%setup -q -n %{name}
+%setup -q -n %{name}-%{version}-%{_beta}
 %patch0 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
@@ -174,7 +174,8 @@ rm -rf $RPM_BUILD_ROOT
 echo "Remember to install libvisual-plugins-* packages if you"
 echo "want to have a visualizations in amarok."
 
-%files 
+%files
+%defattr(644,root,root,755)
 # -f %{name}.lang
 %defattr(644,root,root,755)
 %doc amarok/AUTHORS amarok/ChangeLog amarok/README amarok/TODO
