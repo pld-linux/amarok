@@ -178,7 +178,7 @@ echo "want to have a visualizations in amarok."
 %defattr(644,root,root,755)
 # -f %{name}.lang
 %defattr(644,root,root,755)
-%doc amarok/AUTHORS amarok/ChangeLog amarok/README amarok/TODO
+%doc AUTHORS ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/amarok
 %{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper2}
 %attr(755,root,root) %{_bindir}/amarokapp
