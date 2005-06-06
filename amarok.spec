@@ -102,6 +102,7 @@ Summary:	Plugin xine
 Summary(pl):	Wtyczka xine
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
+Requires:	xine-plugin-audio
 Provides:	%{name}-plugin = %{version}-%{release}
 
 %description xine
