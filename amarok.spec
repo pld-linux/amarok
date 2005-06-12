@@ -32,6 +32,7 @@ BuildRequires:	automake
 BuildRequires:	kdebase-devel
 BuildRequires:	kdemultimedia-akode
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
+BuildRequires:	libltdl-devel
 BuildRequires:	libmusicbrainz-devel
 BuildRequires:	libvisual-devel >= 0.2.0
 BuildRequires:	pcre-devel
