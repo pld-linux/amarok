@@ -13,7 +13,7 @@
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_with	mysql			# enable mysql support
-%bcond_with	akode			# enable aKode engine
+%bcond_with	akode			# enable aKode engine (too buggy/incomplete)
 #
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
