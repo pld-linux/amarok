@@ -3,6 +3,7 @@
 #	* postgresql support alongside mysql
 #	* NMM, MAS audio backend support
 #	* make descriptions less useless
+#	* HelixPlayer engine?
 #
 # Conditional builds:
 %bcond_without	arts		# disable arts engine
