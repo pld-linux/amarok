@@ -4,6 +4,7 @@
 #	* NMM, MAS audio backend support
 #	* make descriptions less useless
 #	* HelixPlayer engine?
+#	* nls files, kde html documents
 #
 # Conditional builds:
 %bcond_without	arts		# disable arts engine
