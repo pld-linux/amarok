@@ -19,7 +19,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.3
-Release:	0.%{_beta}.2
+Release:	0.%{_beta}.3
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta}.tar.bz2
@@ -63,7 +63,7 @@ Odtwarzacz audio dla KDE.
 Summary:	Plugin arts
 Summary(pl):	Wtyczka arts
 Group:		X11/Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
+PreReq:		%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
 
 %description arts
@@ -77,7 +77,7 @@ Wtyczka arts.
 Summary:	Plugin akode
 Summary(pl):	Wtyczka akode
 Group:		X11/Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
+PreReq:		%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
 
 %description akode
@@ -91,12 +91,12 @@ Wtyczka akode.
 Summary:	Plugin gstreamer
 Summary(pl):	Wtyczka gstreamer
 Group:		X11/Applications/Multimedia
+PreReq:		%{name} = %{version}-%{release}
 # needed libs
 # at least /usr/lib/gstreamer-0.8/libgstresample.so
 # probably /usr/lib/gstreamer-0.8/libgstadder.so
 # and probably /usr/lib/gstreamer-0.8/libgstvolume.so
 Requires:	gstreamer-audio-effects
-Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
 
 %description gstreamer
@@ -109,7 +109,7 @@ Wtyczka gstreamer.
 Summary:	Plugin xine
 Summary(pl):	Wtyczka xine
 Group:		X11/Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
+PreReq:		%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
 
 %description xine
@@ -122,7 +122,7 @@ Wtyczka xine.
 Summary:	Zeroconf data
 Summary(pl):	Dane dla zeroconf
 Group:		X11/Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
+PreReq:		%{name} = %{version}-%{release}
 Requires:	kdenetwork-kdnssd
 Provides:	%{name}-plugin = %{version}-%{release}
 
