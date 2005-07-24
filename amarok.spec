@@ -4,7 +4,6 @@
 #	* NMM, MAS audio backend support
 #	* make descriptions less useless
 #	* HelixPlayer engine?
-#	* nls files, kde html documents
 #
 # Conditional builds:
 %bcond_without	arts		# disable arts engine
@@ -19,7 +18,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.3
-Release:	0.%{_beta}.3
+Release:	0.%{_beta}.4
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta}.tar.bz2
@@ -169,7 +168,7 @@ rm -rf $RPM_BUILD_ROOT
 # remove bogus dir
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
-#find_lang amarok --all-name --with-kde
+%find_lang amarok --all-name --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -178,9 +177,7 @@ rm -rf $RPM_BUILD_ROOT
 echo "Remember to install libvisual-plugins-* packages if you"
 echo "want to have a visualizations in amarok."
 
-%files
-%defattr(644,root,root,755)
-# -f %{name}.lang
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/amarok
