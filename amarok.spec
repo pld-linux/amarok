@@ -31,7 +31,7 @@ BuildRequires:	arts-qt-devel
 BuildRequires:	automake
 %{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.1}
 BuildRequires:	kdebase-devel
-BuildRequires:	kdemultimedia-akode
+#BuildRequires:	kdemultimedia-akode
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	libltdl-devel
 BuildRequires:	libmusicbrainz-devel
@@ -71,18 +71,18 @@ Plugin arts.
 Wtyczka arts.
 
 
-%package akode
-Summary:	Plugin akode
-Summary(pl):	Wtyczka akode
-Group:		X11/Applications/Multimedia
-PreReq:		%{name} = %{version}-%{release}
-Provides:	%{name}-plugin = %{version}-%{release}
+#%package akode
+#Summary:	Plugin akode
+#Summary(pl):	Wtyczka akode
+#Group:		X11/Applications/Multimedia
+#PreReq:		%{name} = %{version}-%{release}
+#Provides:	%{name}-plugin = %{version}-%{release}
 
-%description akode
-Plugin akode.
+#%description akode
+#Plugin akode.
 
-%description akode -l pl
-Wtyczka akode.
+#%description akode -l pl
+#Wtyczka akode.
 
 
 %package gstreamer
@@ -214,11 +214,11 @@ echo "want to have a visualizations in amarok."
 %{_datadir}/services/amarok_artsengine_plugin.desktop
 %endif
 
-%files akode
-%defattr(644,root,root,755)
-%{_libdir}/kde3/libamarok_aKode-engine.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_aKode-engine.so
-%{_datadir}/services/amarok_aKode-engine.desktop
+#%files akode
+#%defattr(644,root,root,755)
+#%{_libdir}/kde3/libamarok_aKode-engine.la
+#%attr(755,root,root) %{_libdir}/kde3/libamarok_aKode-engine.so
+#%{_datadir}/services/amarok_aKode-engine.desktop
 
 %if %{with gstreamer}
 %files gstreamer
