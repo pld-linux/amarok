@@ -148,7 +148,7 @@ cp -f /usr/share/automake/config.sub admin
 %configure \
 	--disable-rpath \
 	%{!?with_arts:--without-arts} \
-	%{!?with_mas:--with-mas} \
+	%{?with_mas:--with-mas} \
 	%{!?with_xine:--without-xine} \
 	%{!?with_gstreamer:--without-gstreamer} \
 	%{!?with_akode:--without-akode} \
