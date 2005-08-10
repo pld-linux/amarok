@@ -12,7 +12,7 @@
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	zeroconf	# disable suport for zeroconf
 %bcond_with	mysql		# enable mysql support
-%bcond_with	akode			# enable aKode engine (too buggy/incomplete)
+%bcond_with	akode		# enable aKode engine (too buggy/incomplete)
 #
 %define	_beta	beta3
 Summary:	A KDE audio player
