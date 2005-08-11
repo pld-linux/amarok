@@ -1,9 +1,9 @@
 #
 # TODO:
 #	* postgresql support alongside mysql
-#	* NMM, MAS audio backend support
+#	* NMM audio backend support (fix build - propably some BRs)
 #	* make descriptions less useless
-#	* HelixPlayer engine?
+#	* HelixPlayer engine (fix build - propably some BRs)
 #
 # Conditional builds:
 %bcond_without	arts		# disable arts engine
