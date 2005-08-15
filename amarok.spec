@@ -17,16 +17,18 @@
 %bcond_with	mysql		# enable mysql support
 %bcond_with	akode		# enable aKode engine (too buggy/incomplete)
 #
-%define	_beta	beta3
+#%define	_beta	beta3
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.3
-Release:	0.%{_beta}.2
+#Release:	0.%{_beta}.2
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta}.tar.bz2
-# Source0-md5:	e6587bcdd3dc9a811d40d00b89e13ceb
+#Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta}.tar.bz2
+Source0:       http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
+# Source0-md5:	2dd100584795fb20c621fdbc96cbee1e
 Patch0:		kde-common-gcc4.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
@@ -133,7 +135,8 @@ Zeroconf data.
 Zeroconf data.
 
 %prep
-%setup -q -n %{name}-%{version}-%{_beta}
+#%setup -q -n %{name}-%{version}-%{_beta}
+%setup -q
 %patch0 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
