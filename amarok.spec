@@ -156,6 +156,7 @@ cp -f /usr/share/automake/config.sub admin
 	%{!?with_gstreamer:--without-gstreamer} \
 	%{!?with_akode:--without-akode} \
 	%{?with_helix:--with-helix} \
+	%{?with_nmm:--with-nmm} \
 	%{?with_mysql:--with-mysql} \
 	--disable-final \
 	--with-qt-libraries=%{_libdir} \
