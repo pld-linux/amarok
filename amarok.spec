@@ -40,6 +40,7 @@ BuildRequires:	libmusicbrainz-devel
 BuildRequires:	libvisual-devel >= 0.2.0
 BuildRequires:	pcre-devel
 BuildRequires:	rpmbuild(macros) >= 1.129
+BuildRequires:	rpm-pythonprov
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel
 BuildRequires:	taglib-devel >= 1.4
