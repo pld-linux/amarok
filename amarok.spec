@@ -8,12 +8,12 @@
 # Conditional builds:
 %bcond_without	arts		# disable arts engine
 %bcond_without	gstreamer	# disable gstreamer
-%bcond_without  mas		# disable MAS audio backend
+%bcond_without	mas		# disable MAS audio backend
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	zeroconf	# disable suport for zeroconf
-%bcond_with     helixplayer     # enable HelixPlayer engine
-%bcond_with     nmm             # enable NMM audio backend
+%bcond_with	helixplayer     # enable HelixPlayer engine
+%bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
 %bcond_with	akode		# enable aKode engine (too buggy/incomplete)
 #
