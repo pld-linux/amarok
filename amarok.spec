@@ -23,7 +23,7 @@ Version:	1.3
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:       http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
+Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 # Source0-md5:	2dd100584795fb20c621fdbc96cbee1e
 Patch0:		kde-common-gcc4.patch
 URL:		http://amarok.kde.org/
@@ -64,7 +64,7 @@ Odtwarzacz audio dla KDE.
 Summary:	Plugin arts
 Summary(pl):	Wtyczka arts
 Group:		X11/Applications/Multimedia
-PreReq:		%{name} = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
 
 %description arts
@@ -77,7 +77,7 @@ Wtyczka arts.
 Summary:	Plugin akode
 Summary(pl):	Wtyczka akode
 Group:		X11/Applications/Multimedia
-PreReq:		%{name} = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
 
 %description akode
@@ -132,7 +132,7 @@ Wtyczka xine.
 Summary:	Zeroconf data
 Summary(pl):	Dane dla zeroconf
 Group:		X11/Applications/Multimedia
-PreReq:		%{name} = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 Requires:	kdenetwork-kdnssd
 Provides:	%{name}-plugin = %{version}-%{release}
 
@@ -140,7 +140,7 @@ Provides:	%{name}-plugin = %{version}-%{release}
 Zeroconf data.
 
 %description zeroconf -l pl
-Zeroconf data.
+Dane dla zeroconf.
 
 %prep
 %setup -q
