@@ -1,3 +1,5 @@
+# This file does not like to be adapterized!
+# - or at least rpm is broken, as it doesn't build without rpm-pythonprov
 #
 # TODO:
 #	* postgresql support alongside mysql
@@ -96,7 +98,7 @@ Group:		X11/Applications/Multimedia
 # audio output driver: gstreamer-audiosink-alsa
 # from gstreamer-audio-effects to control volume, etc
 # needed libs:
-#  at least /usr/lib/gstreamer-0.8/libgstresample.so 
+#  at least /usr/lib/gstreamer-0.8/libgstresample.so
 #  probably /usr/lib/gstreamer-0.8/libgstadder.so
 #  and probably /usr/lib/gstreamer-0.8/libgstvolume.so
 # gstreamer-musicbrainz for being able to edit id3 tags on files.
