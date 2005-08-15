@@ -1,29 +1,31 @@
-# TODO
-# warning: Installed (but unpackaged) file(s) found:
-#   /usr/lib/kde3/libamarok_aKode-engine.la
-#   /usr/lib/kde3/libamarok_aKode-engine.so
-#   /usr/share/apps/konqsidebartng/entries/amarok.desktop
-#   /usr/share/apps/konqsidebartng/kicker_entries/amarok.desktop
-#   /usr/share/services/amarok_aKode-engine.desktop
-# - aKode engine?
+#
+# TODO:
+#	* postgresql support alongside mysql
+#	* NMM audio backend support (fix build - propably some BRs)
+#	* make descriptions less useless
+#	* HelixPlayer engine (fix build - propably some BRs)
 #
 # Conditional builds:
 %bcond_without	arts		# disable arts engine
 %bcond_without	gstreamer	# disable gstreamer
+%bcond_without	mas		# disable MAS audio backend
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
-%bcond_with	mysql			# enable mysql support
-%bcond_with	akode			# enable aKode engine (too buggy/incomplete)
-#
+%bcond_without	zeroconf	# disable suport for zeroconf
+%bcond_with	helix		# enable HelixPlayer engine
+%bcond_with	nmm             # enable NMM audio backend
+%bcond_with	mysql		# enable mysql support
+%bcond_with	akode		# enable aKode engine (too buggy/incomplete)
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.2.4
+Version:	1.3
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-# Source0-md5:	9a3bb2c043d1db169c6a370aff439e0f
+Source0:       http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
+# Source0-md5:	2dd100584795fb20c621fdbc96cbee1e
+Patch0:		kde-common-gcc4.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -31,15 +33,16 @@ BuildRequires:	arts-qt-devel
 BuildRequires:	automake
 %{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.1}
 BuildRequires:	kdebase-devel
-BuildRequires:	kdemultimedia-akode
+%{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
+BuildRequires:	libltdl-devel
 BuildRequires:	libmusicbrainz-devel
 BuildRequires:	libvisual-devel >= 0.2.0
 BuildRequires:	pcre-devel
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel
-BuildRequires:	taglib-devel >= 1.3.1
+BuildRequires:	taglib-devel >= 1.4
 #BuildRequires:	unsermake >= 040511
 %{?with_xine:BuildRequires:		xine-lib-devel >= 2:1.0-0.rc5.0}
 %{?with_xmms:BuildRequires:		xmms-devel}
@@ -60,7 +63,7 @@ Odtwarzacz audio dla KDE.
 Summary:	Plugin arts
 Summary(pl):	Wtyczka arts
 Group:		X11/Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
+PreReq:		%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
 
 %description arts
@@ -68,6 +71,19 @@ Plugin arts.
 
 %description arts -l pl
 Wtyczka arts.
+
+%package akode
+Summary:	Plugin akode
+Summary(pl):	Wtyczka akode
+Group:		X11/Applications/Multimedia
+PreReq:		%{name} = %{version}-%{release}
+Provides:	%{name}-plugin = %{version}-%{release}
+
+%description akode
+Plugin akode.
+
+%description akode -l pl
+Wtyczka akode.
 
 %package gstreamer
 Summary:	Plugin gstreamer
@@ -111,9 +127,23 @@ Plugin xine.
 %description xine -l pl
 Wtyczka xine.
 
+%package zeroconf
+Summary:	Zeroconf data
+Summary(pl):	Dane dla zeroconf
+Group:		X11/Applications/Multimedia
+PreReq:		%{name} = %{version}-%{release}
+Requires:	kdenetwork-kdnssd
+Provides:	%{name}-plugin = %{version}-%{release}
+
+%description zeroconf
+Zeroconf data.
+
+%description zeroconf -l pl
+Zeroconf data.
+
 %prep
 %setup -q
-
+%patch0 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
@@ -127,8 +157,12 @@ cp -f /usr/share/automake/config.sub admin
 %configure \
 	--disable-rpath \
 	%{!?with_arts:--without-arts} \
+	%{?with_mas:--with-mas} \
 	%{!?with_xine:--without-xine} \
 	%{!?with_gstreamer:--without-gstreamer} \
+	%{!?with_akode:--without-akode} \
+	%{?with_helix:--with-helix} \
+	%{?with_nmm:--with-nmm} \
 	%{?with_mysql:--with-mysql} \
 	--disable-final \
 	--with-qt-libraries=%{_libdir} \
@@ -171,6 +205,8 @@ echo "want to have a visualizations in amarok."
 %{_datadir}/apps/amarok
 %{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
 %{_datadir}/apps/konqsidebartng/add/amarok.desktop
+%{_datadir}/apps/konqsidebartng/entries/amarok.desktop
+%{_datadir}/apps/konqsidebartng/kicker_entries/amarok.desktop
 %{_datadir}/apps/profiles/amarok.profile.xml
 %{_datadir}/config/amarokrc
 %{_datadir}/config.kcfg/amarok.kcfg
@@ -192,6 +228,14 @@ echo "want to have a visualizations in amarok."
 %{_datadir}/services/amarok_artsengine_plugin.desktop
 %endif
 
+%if %{with akode}
+%files akode
+%defattr(644,root,root,755)
+%{_libdir}/kde3/libamarok_aKode-engine.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_aKode-engine.so
+%{_datadir}/services/amarok_aKode-engine.desktop
+%endif
+
 %if %{with gstreamer}
 %files gstreamer
 %defattr(644,root,root,755)
@@ -206,6 +250,13 @@ echo "want to have a visualizations in amarok."
 %defattr(644,root,root,755)
 %{_libdir}/kde3/libamarok_xine-engine.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
+%{_datadir}/config.kcfg/xinecfg.kcfg
 %{_datadir}/services/amarok_xine-engine.desktop
 #%{_datadir}/services/amarok_xineengine_plugin.desktop
+%endif
+
+%if %{with zeroconf}
+%files zeroconf
+%defattr(644,root,root,755)
+%{_datadir}/apps/zeroconf/_shoutcast._tcp
 %endif
