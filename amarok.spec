@@ -203,8 +203,10 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 rm -rf $RPM_BUILD_ROOT
 
 %post
-echo "Remember to install libvisual-plugins-* packages if you"
-echo "want to have a visualizations in amarok."
+if [ "$1" = 1 ]; then
+	echo "Remember to install libvisual-plugins-* packages if you"
+	echo "want to have a visualizations in amaroK."
+fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
