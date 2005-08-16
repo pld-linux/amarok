@@ -150,6 +150,7 @@ Summary:	amaroK scripts
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	kdebase-kdialog
+Requires:	python-PyQt
 
 %description scripts
 amaroK scripts allow you extend amaroK functionality.
