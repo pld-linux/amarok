@@ -13,7 +13,7 @@
 %bcond_without	mas		# disable MAS audio backend
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
-%bcond_without	zeroconf	# disable suport for zeroconf
+%bcond_without	zeroconf	# disable support for zeroconf
 %bcond_with	helix		# enable HelixPlayer engine
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
@@ -22,12 +22,13 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.3
-Release:	1
+Release:	1.2
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 # Source0-md5:	2dd100584795fb20c621fdbc96cbee1e
 Patch0:		kde-common-gcc4.patch
+Patch1:		http://websvn.kde.org/trunk/extragear/multimedia/amarok/src/playlistbrowseritem.h?rev=449581&r1=449054&r2=449581&makepatch=1&diff_format=u
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -144,9 +145,21 @@ Zeroconf data.
 %description zeroconf -l pl
 Dane dla zeroconf.
 
+%package scripts
+Summary:	amaroK scripts
+Group:		X11/Applications/Multimedia
+Requires:	%{name} = %{version}-%{release}
+
+%description scripts
+amaroK scripts allow you extend amaroK functionality.
+
+You can learn more about scripts in amaroK from here:
+<http://amarok.kde.org/wiki/index.php/Scripts>.
+
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p3
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
@@ -205,7 +218,13 @@ echo "want to have a visualizations in amarok."
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
-%{_datadir}/apps/amarok
+%dir %{_datadir}/apps/amarok
+%dir %{_datadir}/apps/amarok/scripts
+%{_datadir}/apps/amarok/*.rc
+%{_datadir}/apps/amarok/data
+%{_datadir}/apps/amarok/icons
+%{_datadir}/apps/amarok/images
+%{_datadir}/apps/amarok/themes
 %{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
 %{_datadir}/apps/konqsidebartng/add/amarok.desktop
 %{_datadir}/apps/konqsidebartng/entries/amarok.desktop
@@ -263,3 +282,81 @@ echo "want to have a visualizations in amarok."
 %defattr(644,root,root,755)
 %{_datadir}/apps/zeroconf/_shoutcast._tcp
 %endif
+
+%files scripts
+%defattr(644,root,root,755)
+
+%dir %{_datadir}/apps/amarok/scripts/alarm
+%{_datadir}/apps/amarok/scripts/alarm/README
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/alarm/alarm.py
+
+%dir %{_datadir}/apps/amarok/scripts/graphequalizer
+%{_datadir}/apps/amarok/scripts/graphequalizer/README
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/graphequalizer/graphequalizer
+
+%dir %{_datadir}/apps/amarok/scripts/playlist2html
+%{_datadir}/apps/amarok/scripts/playlist2html/README
+%{_datadir}/apps/amarok/scripts/playlist2html/Playlist.py
+%{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.py
+%{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.py
+
+%dir %{_datadir}/apps/amarok/scripts/templates
+%{_datadir}/apps/amarok/scripts/templates/amarok.rb
+%{_datadir}/apps/amarok/scripts/templates/python_qt_template.py
+%{_datadir}/apps/amarok/scripts/templates/ruby_qt_template.rb
+
+%dir %{_datadir}/apps/amarok/scripts/webcontrol
+%{_datadir}/apps/amarok/scripts/webcontrol/README
+%{_datadir}/apps/amarok/scripts/webcontrol/Globals.py
+%{_datadir}/apps/amarok/scripts/webcontrol/Playlist.py
+%{_datadir}/apps/amarok/scripts/webcontrol/RequestHandler.py
+%{_datadir}/apps/amarok/scripts/webcontrol/amarok_cut.png
+%{_datadir}/apps/amarok/scripts/webcontrol/controlbackground.png
+%{_datadir}/apps/amarok/scripts/webcontrol/main.css
+%{_datadir}/apps/amarok/scripts/webcontrol/main.js
+%{_datadir}/apps/amarok/scripts/webcontrol/player_end.png
+%{_datadir}/apps/amarok/scripts/webcontrol/player_pause.png
+%{_datadir}/apps/amarok/scripts/webcontrol/player_play.png
+%{_datadir}/apps/amarok/scripts/webcontrol/player_start.png
+%{_datadir}/apps/amarok/scripts/webcontrol/player_stop.png
+%{_datadir}/apps/amarok/scripts/webcontrol/template.thtml
+%{_datadir}/apps/amarok/scripts/webcontrol/vol_speaker.png
+%{_datadir}/apps/amarok/scripts/webcontrol/WebPublisher.py
+%attr(755,root,root)  %{_datadir}/apps/amarok/scripts/webcontrol/WebControl.py
+
+%dir %{_datadir}/apps/amarok/scripts/common
+%{_datadir}/apps/amarok/scripts/common/Publisher.py
+%{_datadir}/apps/amarok/scripts/common/Zeroconf.py
+
+%dir %{_datadir}/apps/amarok/scripts/shouter
+%{_datadir}/apps/amarok/scripts/shouter/README
+%{_datadir}/apps/amarok/scripts/shouter/ChangeLog
+%{_datadir}/apps/amarok/scripts/shouter/Amarok.py
+%{_datadir}/apps/amarok/scripts/shouter/Globals.py
+%{_datadir}/apps/amarok/scripts/shouter/Playlist.py
+%{_datadir}/apps/amarok/scripts/shouter/Services.py
+%{_datadir}/apps/amarok/scripts/shouter/ShouterConfig.py
+%{_datadir}/apps/amarok/scripts/shouter/ShouterExceptions.py
+%{_datadir}/apps/amarok/scripts/shouter/StreamConfig.py
+%{_datadir}/apps/amarok/scripts/shouter/StreamController.py
+%{_datadir}/apps/amarok/scripts/shouter/StreamPublisher.py
+%{_datadir}/apps/amarok/scripts/shouter/binfuncs.py
+%{_datadir}/apps/amarok/scripts/shouter/debug.py
+%{_datadir}/apps/amarok/scripts/shouter/propfind-req.xml
+%dir %{_datadir}/apps/amarok/scripts/shouter/silence
+%{_datadir}/apps/amarok/scripts/shouter/silence/silence-128.mp3
+%{_datadir}/apps/amarok/scripts/shouter/silence/silence-160.mp3
+%{_datadir}/apps/amarok/scripts/shouter/silence/silence-192.mp3
+%{_datadir}/apps/amarok/scripts/shouter/silence/silence-224.mp3
+%{_datadir}/apps/amarok/scripts/shouter/silence/silence-256.mp3
+%{_datadir}/apps/amarok/scripts/shouter/silence/silence-320.mp3
+%{_datadir}/apps/amarok/scripts/shouter/silence/silence-48.mp3
+%dir %{_datadir}/apps/amarok/scripts/shouter/test
+%{_datadir}/apps/amarok/scripts/shouter/test/client.py
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/shouter/Shouter.py
+
+%dir %{_datadir}/apps/amarok/scripts/amarok_live
+%{_datadir}/apps/amarok/scripts/amarok_live/README
+%{_datadir}/apps/amarok/scripts/amarok_live/amarok.live.remaster.part1.sh
+%{_datadir}/apps/amarok/scripts/amarok_live/amarok.live.remaster.part2.sh
+%attr(755,root,root)  %{_datadir}/apps/amarok/scripts/amarok_live/amarok_live.py
