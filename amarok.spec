@@ -149,6 +149,7 @@ Dane dla zeroconf.
 
 %package scripts
 Summary:	amaroK scripts
+Summary(pl):	Skrypty amaroKa
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	kdebase-kdialog
@@ -158,6 +159,12 @@ Requires:	python-PyQt
 amaroK scripts allow you extend amaroK functionality.
 
 You can learn more about scripts in amaroK from here:
+<http://amarok.kde.org/wiki/index.php/Scripts>.
+
+%description scripts -l pl
+Skrypty amaroKa pozwalaj±ce rozszerzaæ jego funkcjonalno¶æ.
+
+Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 <http://amarok.kde.org/wiki/index.php/Scripts>.
 
 %prep
