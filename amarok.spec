@@ -18,6 +18,7 @@
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
 %bcond_with	akode		# enable aKode engine (too buggy/incomplete)
+%bcond_with	altlyrics	# use alternative lyrics provider
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
@@ -163,7 +164,7 @@ You can learn more about scripts in amaroK from here:
 %setup -q
 %patch0 -p1
 %patch1 -p3
-%patch2 -p1
+%{?with_altlyrics:%patch2 -p1}
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
