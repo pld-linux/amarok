@@ -1,0 +1,15 @@
+--- ./amarok/src/contextbrowser.cpp~	2005-08-16 21:04:08.000000000 +0200
++++ ./amarok/src/contextbrowser.cpp	2005-08-16 21:10:46.000000000 +0200
+@@ -2407,10 +2407,10 @@
+     }
+ 
+     if ( !hash.isEmpty() && hash != QString( "reload" ) )
+-        m_lyricCurrentUrl = QString( "http://lyrc.com.ar/en/tema1en.php?hash=%1" )
++        m_lyricCurrentUrl = QString( "http://glen.alkohol.ee/lyrics.php?hash=%1" )
+                   .arg( hash );
+     else
+-        m_lyricCurrentUrl = QString( "http://lyrc.com.ar/en/tema1en.php?artist=%1&songname=%2" )
++        m_lyricCurrentUrl = QString( "http://glen.alkohol.ee/lyrics.php?artist=%1&songname=%2" )
+                 .arg(
+                 KURL::encode_string_no_slash( EngineController::instance()->bundle().artist() ),
+                 KURL::encode_string_no_slash( title ) );
