@@ -23,7 +23,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.3
-Release:	1.4
+Release:	1.5
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -35,6 +35,7 @@ URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	arts-qt-devel
+BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.1}
 BuildRequires:	kdebase-devel
@@ -175,7 +176,15 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
+# see kde bug #110909
+sed -i -e 's/amarok_live//' amarok/src/scripts/Makefile.am
+
 %build
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+
 cp -f /usr/share/automake/config.sub admin
 
 #export UNSERMAKE=/usr/share/unsermake/unsermake
@@ -369,8 +378,10 @@ fi
 %{_datadir}/apps/amarok/scripts/shouter/test/client.py
 %attr(755,root,root) %{_datadir}/apps/amarok/scripts/shouter/Shouter.py
 
+%if 0
 %dir %{_datadir}/apps/amarok/scripts/amarok_live
 %{_datadir}/apps/amarok/scripts/amarok_live/README
 %{_datadir}/apps/amarok/scripts/amarok_live/amarok.live.remaster.part1.sh
 %{_datadir}/apps/amarok/scripts/amarok_live/amarok.live.remaster.part2.sh
 %attr(755,root,root)  %{_datadir}/apps/amarok/scripts/amarok_live/amarok_live.py
+%endif
