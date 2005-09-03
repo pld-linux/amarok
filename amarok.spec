@@ -1,6 +1,3 @@
-# This file does not like to be adapterized!
-# - or at least rpm is broken, as it doesn't build without rpm-pythonprov
-#
 # TODO:
 #	* postgresql support alongside mysql
 #	* NMM audio backend support (fix build - propably some BRs)
