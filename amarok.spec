@@ -355,6 +355,7 @@ fi
 %{_datadir}/apps/amarok/scripts/shouter/Services.py
 %{_datadir}/apps/amarok/scripts/shouter/ShouterConfig.py
 %{_datadir}/apps/amarok/scripts/shouter/ShouterExceptions.py
+%{_datadir}/apps/amarok/scripts/shouter/SocketErrors.py
 %{_datadir}/apps/amarok/scripts/shouter/StreamConfig.py
 %{_datadir}/apps/amarok/scripts/shouter/StreamController.py
 %{_datadir}/apps/amarok/scripts/shouter/StreamPublisher.py
@@ -362,12 +363,6 @@ fi
 %{_datadir}/apps/amarok/scripts/shouter/debug.py
 %{_datadir}/apps/amarok/scripts/shouter/propfind-req.xml
 %dir %{_datadir}/apps/amarok/scripts/shouter/silence
-%{_datadir}/apps/amarok/scripts/shouter/silence/silence-128.mp3
-%{_datadir}/apps/amarok/scripts/shouter/silence/silence-160.mp3
-%{_datadir}/apps/amarok/scripts/shouter/silence/silence-192.mp3
-%{_datadir}/apps/amarok/scripts/shouter/silence/silence-224.mp3
-%{_datadir}/apps/amarok/scripts/shouter/silence/silence-256.mp3
-%{_datadir}/apps/amarok/scripts/shouter/silence/silence-320.mp3
 %{_datadir}/apps/amarok/scripts/shouter/silence/silence-48.mp3
 %dir %{_datadir}/apps/amarok/scripts/shouter/test
 %{_datadir}/apps/amarok/scripts/shouter/test/client.py
