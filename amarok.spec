@@ -28,6 +28,8 @@ Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 Patch0:		kde-common-gcc4.patch
 Patch1:		%{name}-lyricsurl.patch
 URL:		http://amarok.kde.org/
+#BuildRequires:	kdebindings-kjsembed-devel
+#BuildRequires:	unsermake >= 040511
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	arts-qt-devel
@@ -40,17 +42,15 @@ BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	libltdl-devel
 BuildRequires:	libmusicbrainz-devel
 BuildRequires:	libvisual-devel >= 0.2.0
+%{?with_mysql:BuildRequires:		mysql-devel}
 BuildRequires:	pcre-devel
-BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel
 BuildRequires:	taglib-devel >= 1.4
-#BuildRequires:	unsermake >= 040511
 %{?with_xine:BuildRequires:		xine-lib-devel >= 2:1.0-0.rc5.0}
 %{?with_xmms:BuildRequires:		xmms-devel}
-%{?with_mysql:BuildRequires:		mysql-devel}
-#BuildRequires:	kdebindings-kjsembed-devel
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
@@ -102,12 +102,12 @@ Group:		X11/Applications/Multimedia
 #  probably /usr/lib/gstreamer-0.8/libgstadder.so
 #  and probably /usr/lib/gstreamer-0.8/libgstvolume.so
 # gstreamer-musicbrainz for being able to edit id3 tags on files.
+Requires:	%{name} = %{version}-%{release}
 Requires:	gstreamer-audio-effects
 Requires:	gstreamer-audiosink
 Requires:	gstreamer-mad
-Requires:	gstreamer-vorbis
 Requires:	gstreamer-musicbrainz
-Requires:	%{name} = %{version}-%{release}
+Requires:	gstreamer-vorbis
 Provides:	%{name}-plugin = %{version}-%{release}
 
 %description gstreamer
