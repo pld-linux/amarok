@@ -12,7 +12,7 @@
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	zeroconf	# disable support for zeroconf
-%bcond_with included_sqlite # use included sqlite, not the distro's
+%bcond_with	included_sqlite # use included sqlite, not the distro's
 %bcond_with	helix		# enable HelixPlayer engine
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
