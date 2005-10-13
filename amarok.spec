@@ -3,6 +3,7 @@
 #	* NMM audio backend support (fix build - propably some BRs)
 #	* make descriptions less useless
 #	* HelixPlayer engine (fix build - propably some BRs)
+#	* track http://websvn.kde.org/trunk/extragear/multimedia/amarok/TODO?rev=470324&r1=470292&r2=470324
 #
 # Conditional builds:
 %bcond_without	arts		# disable arts engine
