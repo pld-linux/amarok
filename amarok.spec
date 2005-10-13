@@ -12,6 +12,7 @@
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	zeroconf	# disable support for zeroconf
+%bcond_with included_sqlite # use included sqlite, not the distro's
 %bcond_with	helix		# enable HelixPlayer engine
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
@@ -21,7 +22,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.3.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -48,7 +49,7 @@ BuildRequires:	pcre-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
-BuildRequires:	sqlite3-devel
+%{?!with_included_sqlite:BuildRequires:	sqlite3-devel}
 BuildRequires:	taglib-devel >= 1.4
 %{?with_xine:BuildRequires:		xine-lib-devel >= 2:1.0-0.rc5.0}
 %{?with_xmms:BuildRequires:		xmms-devel}
@@ -199,7 +200,7 @@ cp -f /usr/share/automake/config.sub admin
 	%{?with_mysql:--with-mysql} \
 	--disable-final \
 	--with-qt-libraries=%{_libdir} \
-	--without-included-sqlite
+	--with%{?!with_included_sqlite:out}-included-sqlite
 
 %{__make}
 
