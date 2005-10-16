@@ -200,7 +200,7 @@ cp -f /usr/share/automake/config.sub admin
 	%{?with_mysql:--with-mysql} \
 	--disable-final \
 	--with-qt-libraries=%{_libdir} \
-	--with%{?!with_included_sqlite:out}-included-sqlite
+	--with%{!?with_included_sqlite:out}-included-sqlite
 
 %{__make}
 
