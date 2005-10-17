@@ -2,7 +2,6 @@
 #	* postgresql support alongside mysql
 #	* NMM audio backend support (fix build - propably some BRs)
 #	* make descriptions less useless
-#	* HelixPlayer engine (fix build - propably some BRs)
 #	* track http://websvn.kde.org/trunk/extragear/multimedia/amarok/TODO?rev=470324&r1=470292&r2=470324
 #
 # Conditional builds:
@@ -16,6 +15,7 @@
 %bcond_with	helix		# enable HelixPlayer engine
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
+%bcond_with	pgsql		# enables postgresql support
 %bcond_with	akode		# enable aKode engine (too buggy/incomplete)
 %bcond_with	altlyrics	# use alternative lyrics provider
 Summary:	A KDE audio player
@@ -37,7 +37,7 @@ BuildRequires:	alsa-lib-devel
 BuildRequires:	arts-qt-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.1}
+%{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.6}
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
@@ -45,10 +45,12 @@ BuildRequires:	libltdl-devel
 BuildRequires:	libmusicbrainz-devel
 BuildRequires:	libvisual-devel >= 0.2.0
 %{?with_mysql:BuildRequires:		mysql-devel}
+%{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	pcre-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
+%{?with_helix:BuildRequires:helix-core}
 %{?!with_included_sqlite:BuildRequires:	sqlite3-devel}
 BuildRequires:	taglib-devel >= 1.4
 %{?with_xine:BuildRequires:		xine-lib-devel >= 2:1.0-0.rc5.0}
@@ -190,14 +192,15 @@ cp -f /usr/share/automake/config.sub admin
 
 %configure \
 	--disable-rpath \
-	%{!?with_arts:--without-arts} \
-	%{?with_mas:--with-mas} \
-	%{!?with_xine:--without-xine} \
-	%{!?with_gstreamer:--without-gstreamer} \
-	%{!?with_akode:--without-akode} \
-	%{?with_helix:--with-helix} \
-	%{?with_nmm:--with-nmm} \
-	%{?with_mysql:--with-mysql} \
+	--with%{!?with_arts:out}-arts \
+	--with%{!?with_mas:out}-mas \
+	--with%{!?with_xine:out}-xine \
+	--with%{!?with_gstreamer:out}-gstreamer \
+	--with%{!?with_akode:out}-akode \
+	--with%{!?with_helix:out}-helix \
+	--with%{!?with_nmm:out}-nmm \
+	--%{?with_mysql:en}%{!?with_mysql:dis}able-mysql \
+	--%{?with_mysql:en}%{!?with_mysql:dis}nable-postgresql \
 	--disable-final \
 	--with-qt-libraries=%{_libdir} \
 	--with%{!?with_included_sqlite:out}-included-sqlite
