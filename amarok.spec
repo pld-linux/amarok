@@ -200,7 +200,7 @@ cp -f /usr/share/automake/config.sub admin
 	--with%{!?with_helix:out}-helix \
 	--with%{!?with_nmm:out}-nmm \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-mysql \
-	--%{?with_mysql:en}%{!?with_mysql:dis}nable-postgresql \
+	--%{?with_mysql:en}%{!?with_mysql:dis}able-postgresql \
 	--disable-final \
 	--with-qt-libraries=%{_libdir} \
 	--with%{!?with_included_sqlite:out}-included-sqlite
