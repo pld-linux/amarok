@@ -11,7 +11,7 @@
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	zeroconf	# disable support for zeroconf
-%bcond_with	included_sqlite # use included sqlite, not the distro's
+%bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA)
 %bcond_with	helix		# enable HelixPlayer engine
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
@@ -22,7 +22,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.3.3
-Release:	2
+Release:	2.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
