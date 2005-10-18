@@ -22,7 +22,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.3.3
-Release:	2.1
+Release:	3.3
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -191,6 +191,7 @@ cp -f /usr/share/automake/config.sub admin
 %{__make} -f admin/Makefile.common cvs
 
 %configure \
+	--%{?debug:en}%{!?debug:dis}able-debug%{?debug:=full} \
 	--disable-rpath \
 	--with%{!?with_arts:out}-arts \
 	--with%{!?with_mas:out}-mas \
