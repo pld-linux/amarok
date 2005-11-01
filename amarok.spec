@@ -181,11 +181,6 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 sed -i -e 's/amarok_live//' amarok/src/scripts/Makefile.am
 
 %build
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-
 cp -f /usr/share/automake/config.sub admin
 
 #export UNSERMAKE=/usr/share/unsermake/unsermake
