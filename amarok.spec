@@ -22,7 +22,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.3.5
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -92,6 +92,21 @@ Plugin akode.
 
 %description akode -l pl
 Wtyczka akode.
+
+%package helix
+Summary:        Helix/Realplayer playback support for amarok
+Summary(pl):    Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka
+Group:          X11/Applications/Multimedia
+Requires:       %{name} = %{version}-%{release}
+Requires:	helix-core
+Provides:       %{name}-plugin = %{version}-%{release}
+
+%description helix
+Helix/Realplayer playback support for amarok.
+
+%description helix -l pl
+Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka.
+
 
 %package gstreamer
 Summary:	Plugin gstreamer
@@ -286,6 +301,15 @@ fi
 %attr(755,root,root) %{_libdir}/kde3/libamarok_gstengine_plugin.so
 %{_datadir}/config.kcfg/gstconfig.kcfg
 %{_datadir}/services/amarok_gstengine_plugin.desktop
+%endif
+
+%if %{with helix}
+%files helix
+%defattr(644,root,root,755)
+%{_libdir}/kde3/libamarok_helixengine_plugin.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_helixengine_plugin.so
+%{_datadir}/config.kcfg/helixconfig.kcfg
+%{_datadir}/services/amarok_helixengine_plugin.desktop
 %endif
 
 %if %{with xine}
