@@ -12,7 +12,7 @@
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	zeroconf	# disable support for zeroconf
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA)
-%bcond_without	helix		# enable HelixPlayer engine
+%bcond_with	helix		# enable HelixPlayer engine
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
 %bcond_with	pgsql		# enables postgresql support
