@@ -12,7 +12,7 @@
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	zeroconf	# disable support for zeroconf
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA)
-%bcond_with	helix		# enable HelixPlayer engine
+%bcond_without	helix		# enable HelixPlayer engine
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
 %bcond_with	pgsql		# enables postgresql support
@@ -51,7 +51,7 @@ BuildRequires:	pcre-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
-%{?with_helix:BuildRequires:helix-core}
+%{?with_helix:BuildRequires: helix-core}
 %{?!with_included_sqlite:BuildRequires:	sqlite3-devel}
 BuildRequires:	taglib-devel >= 1.4
 %{?with_xine:BuildRequires:		xine-lib-devel >= 2:1.0-0.rc5.0}
@@ -94,12 +94,12 @@ Plugin akode.
 Wtyczka akode.
 
 %package helix
-Summary:        Helix/Realplayer playback support for amarok
-Summary(pl):    Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka
-Group:          X11/Applications/Multimedia
-Requires:       %{name} = %{version}-%{release}
+Summary:	Helix/Realplayer playback support for amarok
+Summary(pl):	Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka
+Group:		X11/Applications/Multimedia
+Requires:	%{name} = %{version}-%{release}
 Requires:	helix-core
-Provides:       %{name}-plugin = %{version}-%{release}
+Provides:	%{name}-plugin = %{version}-%{release}
 
 %description helix
 Helix/Realplayer playback support for amarok.
