@@ -191,6 +191,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %{?with_altlyrics:%patch1 -p1}
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
+%patch2 -p1
 
 # see kde bug #110909
 sed -i -e 's/amarok_live//' amarok/src/scripts/Makefile.am
