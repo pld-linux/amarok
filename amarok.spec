@@ -18,17 +18,19 @@
 %bcond_with	pgsql		# enables postgresql support
 %bcond_with	akode		# enable aKode engine (too buggy/incomplete)
 %bcond_with	altlyrics	# use alternative lyrics provider
+#
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.3.6
-Release:	1
+Release:	1.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://nchc.dl.sourceforge.net/sourceforge/amarok/amarok-1.3.6.tar.bz2
 # Source0-md5:	f97ac51a8c2f150ffc4cc0ef49c59a2f
 Patch0:		kde-common-gcc4.patch
 Patch1:		%{name}-lyricsurl.patch
+Patch2:		%{name}-libtunepimp-0.4.0.patch
 URL:		http://amarok.kde.org/
 #BuildRequires:	kdebindings-kjsembed-devel
 #BuildRequires:	unsermake >= 040511
@@ -42,7 +44,7 @@ BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	libltdl-devel
-BuildRequires:	libmusicbrainz-devel
+BuildRequires:	libtunepimp-devel >= 0.4.0
 BuildRequires:	libvisual-devel >= 0.2.0
 %{?with_mysql:BuildRequires:		mysql-devel}
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
