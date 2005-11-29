@@ -23,7 +23,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.3.6
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://nchc.dl.sourceforge.net/sourceforge/amarok/amarok-1.3.6.tar.bz2
@@ -189,9 +189,9 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %setup -q
 %patch0 -p1
 %{?with_altlyrics:%patch1 -p1}
+%patch2 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
-%patch2 -p1
 
 # see kde bug #110909
 sed -i -e 's/amarok_live//' amarok/src/scripts/Makefile.am
