@@ -177,13 +177,13 @@ Requires:	python-PyQt
 amaroK scripts allow you extend amaroK functionality.
 
 You can learn more about scripts in amaroK from here:
-<http://amarok.kde.org/wiki/index.php/Scripts>.
+<http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %description scripts -l pl
 Skrypty amaroKa pozwalaj±ce rozszerzaæ jego funkcjonalno¶æ.
 
 Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
-<http://amarok.kde.org/wiki/index.php/Scripts>.
+<http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
 %setup -q
