@@ -22,12 +22,12 @@
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.3.6
-Release:	3
+Version:	1.3.7
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://nchc.dl.sourceforge.net/sourceforge/amarok/amarok-1.3.6.tar.bz2
-# Source0-md5:	f97ac51a8c2f150ffc4cc0ef49c59a2f
+Source0:	http://nchc.dl.sourceforge.net/sourceforge/amarok/%{name}-%{version}.tar.bz2
+# Source0-md5:	e2297042070643c105f8bb0e524c73ad
 Patch0:		kde-common-gcc4.patch
 Patch1:		%{name}-lyricsurl.patch
 Patch2:		%{name}-libtunepimp-0.4.0.patch
@@ -326,7 +326,7 @@ fi
 %if %{with zeroconf}
 %files zeroconf
 %defattr(644,root,root,755)
-%{_datadir}/apps/zeroconf/_shoutcast._tcp
+#%{_datadir}/apps/zeroconf/_shoutcast._tcp
 %endif
 
 %files scripts
@@ -374,27 +374,27 @@ fi
 %{_datadir}/apps/amarok/scripts/common/Publisher.py
 %{_datadir}/apps/amarok/scripts/common/Zeroconf.py
 
-%dir %{_datadir}/apps/amarok/scripts/shouter
-%{_datadir}/apps/amarok/scripts/shouter/README
-%{_datadir}/apps/amarok/scripts/shouter/ChangeLog
-%{_datadir}/apps/amarok/scripts/shouter/Amarok.py
-%{_datadir}/apps/amarok/scripts/shouter/Globals.py
-%{_datadir}/apps/amarok/scripts/shouter/Playlist.py
-%{_datadir}/apps/amarok/scripts/shouter/Services.py
-%{_datadir}/apps/amarok/scripts/shouter/ShouterConfig.py
-%{_datadir}/apps/amarok/scripts/shouter/ShouterExceptions.py
-%{_datadir}/apps/amarok/scripts/shouter/SocketErrors.py
-%{_datadir}/apps/amarok/scripts/shouter/StreamConfig.py
-%{_datadir}/apps/amarok/scripts/shouter/StreamController.py
-%{_datadir}/apps/amarok/scripts/shouter/StreamPublisher.py
-%{_datadir}/apps/amarok/scripts/shouter/binfuncs.py
-%{_datadir}/apps/amarok/scripts/shouter/debug.py
-%{_datadir}/apps/amarok/scripts/shouter/propfind-req.xml
-%dir %{_datadir}/apps/amarok/scripts/shouter/silence
-%{_datadir}/apps/amarok/scripts/shouter/silence/silence-48.mp3
-%dir %{_datadir}/apps/amarok/scripts/shouter/test
-%{_datadir}/apps/amarok/scripts/shouter/test/client.py
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/shouter/Shouter.py
+#%dir %{_datadir}/apps/amarok/scripts/shouter
+#%{_datadir}/apps/amarok/scripts/shouter/README
+#%{_datadir}/apps/amarok/scripts/shouter/ChangeLog
+#%{_datadir}/apps/amarok/scripts/shouter/Amarok.py
+#%{_datadir}/apps/amarok/scripts/shouter/Globals.py
+#%{_datadir}/apps/amarok/scripts/shouter/Playlist.py
+#%{_datadir}/apps/amarok/scripts/shouter/Services.py
+#%{_datadir}/apps/amarok/scripts/shouter/ShouterConfig.py
+#%{_datadir}/apps/amarok/scripts/shouter/ShouterExceptions.py
+#%{_datadir}/apps/amarok/scripts/shouter/SocketErrors.py
+#%{_datadir}/apps/amarok/scripts/shouter/StreamConfig.py
+#%{_datadir}/apps/amarok/scripts/shouter/StreamController.py
+#%{_datadir}/apps/amarok/scripts/shouter/StreamPublisher.py
+#%{_datadir}/apps/amarok/scripts/shouter/binfuncs.py
+#%{_datadir}/apps/amarok/scripts/shouter/debug.py
+#%{_datadir}/apps/amarok/scripts/shouter/propfind-req.xml
+#%dir %{_datadir}/apps/amarok/scripts/shouter/silence
+#%{_datadir}/apps/amarok/scripts/shouter/silence/silence-48.mp3
+#%dir %{_datadir}/apps/amarok/scripts/shouter/test
+#%{_datadir}/apps/amarok/scripts/shouter/test/client.py
+#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/shouter/Shouter.py
 
 %if 0
 %dir %{_datadir}/apps/amarok/scripts/amarok_live
