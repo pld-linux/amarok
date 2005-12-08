@@ -26,7 +26,7 @@ Version:	1.3.7
 Release:	0.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://nchc.dl.sourceforge.net/sourceforge/amarok/%{name}-%{version}.tar.bz2
+Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 # Source0-md5:	e2297042070643c105f8bb0e524c73ad
 Patch0:		kde-common-gcc4.patch
 Patch1:		%{name}-lyricsurl.patch
