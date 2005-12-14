@@ -19,6 +19,9 @@
 %bcond_with	akode		# enable aKode engine (too buggy/incomplete)
 %bcond_with	altlyrics	# use alternative lyrics provider
 #
+%ifarch i386
+%undefine	with_helix
+%endif
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
