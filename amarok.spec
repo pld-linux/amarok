@@ -31,6 +31,7 @@ Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 Patch0:		kde-common-gcc4.patch
 Patch1:		%{name}-lyricsurl.patch
 Patch2:		%{name}-libtunepimp-0.4.0.patch
+Patch3:		%{name}-helixplayer-morearchs.patch
 URL:		http://amarok.kde.org/
 #BuildRequires:	kdebindings-kjsembed-devel
 #BuildRequires:	unsermake >= 040511
@@ -52,8 +53,7 @@ BuildRequires:	pcre-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
-%{?with_helix:BuildRequires: helix-core}
-%{?!with_included_sqlite:BuildRequires:	sqlite3-devel}
+%{!?with_included_sqlite:BuildRequires:	sqlite3-devel}
 BuildRequires:	taglib-devel >= 1.4
 %{?with_xine:BuildRequires:		xine-lib-devel >= 2:1.0-0.rc5.0}
 %{?with_xmms:BuildRequires:		xmms-devel}
@@ -190,6 +190,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %patch0 -p1
 %{?with_altlyrics:%patch1 -p1}
 %patch2 -p1
+%patch3 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
@@ -203,7 +204,10 @@ cp -f /usr/share/automake/config.sub admin
 
 %{__make} -f admin/Makefile.common cvs
 
+# hack: passing something other than "no" or "yes" to --with-helix allows
+# us to pass HELIX_LIBS
 %configure \
+	HELIX_LIBS=%{_libdir}/helixplayer \
 	--%{?debug:en}%{!?debug:dis}able-debug%{?debug:=full} \
 	--disable-rpath \
 	--with%{!?with_arts:out}-arts \
@@ -211,7 +215,7 @@ cp -f /usr/share/automake/config.sub admin
 	--with%{!?with_xine:out}-xine \
 	--with%{!?with_gstreamer:out}-gstreamer \
 	--with%{!?with_akode:out}-akode \
-	--with%{!?with_helix:out}-helix \
+	--with%{!?with_helix:out}-helix%{?with_helix:=usegivenpath} \
 	--with%{!?with_nmm:out}-nmm \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-mysql \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-postgresql \
