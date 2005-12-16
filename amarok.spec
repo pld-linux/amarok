@@ -330,10 +330,12 @@ fi
 #%{_datadir}/services/amarok_xineengine_plugin.desktop
 %endif
 
+%if 0
 %if %{with zeroconf}
 %files zeroconf
 %defattr(644,root,root,755)
 #%{_datadir}/apps/zeroconf/_shoutcast._tcp
+%endif
 %endif
 
 %files scripts
