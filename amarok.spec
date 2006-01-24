@@ -12,7 +12,7 @@
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	zeroconf	# disable support for zeroconf
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA)
-%bcond_without	helix		# enable HelixPlayer engine
+%bcond_without	helix		# disable HelixPlayer engine
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
 %bcond_with	pgsql		# enables postgresql support
@@ -36,13 +36,12 @@ Patch1:		%{name}-lyricsurl.patch
 Patch2:		%{name}-libtunepimp-0.4.0.patch
 Patch3:		%{name}-helixplayer-morearchs.patch
 URL:		http://amarok.kde.org/
-#BuildRequires:	kdebindings-kjsembed-devel
-#BuildRequires:	unsermake >= 040511
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	arts-qt-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	gettext-devel
 %{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.6}
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
@@ -50,8 +49,8 @@ BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	libltdl-devel
 BuildRequires:	libtunepimp-devel >= 0.4.0
 BuildRequires:	libvisual-devel >= 0.2.0
-%{?with_mysql:BuildRequires:		mysql-devel}
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
+%{?with_mysql:BuildRequires:		mysql-devel}
 BuildRequires:	pcre-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
