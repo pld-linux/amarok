@@ -46,8 +46,8 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel
 %{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.6}
+BuildRequires:	gtk+2-devel
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
@@ -268,11 +268,16 @@ fi
 %attr(755,root,root) %{_bindir}/amarok_libvisual
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
 #%attr(755,root,root) %{_bindir}/release_amarok
-%{_libdir}/libamarok.so.*.*.*
+%attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
 %{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
+%{_libdir}/kde3/libamarok_ipod-mediadevice.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
+%{_libdir}/kde3/libamarok_vfat-mediadevice.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_vfat-mediadevice.so
+%{_libdir}/libamarok.la
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/*.rc
@@ -288,6 +293,8 @@ fi
 %{_datadir}/config/amarokrc
 %{_datadir}/config.kcfg/amarok.kcfg
 %{_datadir}/services/amarok_void-engine_plugin.desktop
+%{_datadir}/services/amarok_ipod-mediadevice.desktop
+%{_datadir}/services/amarok_vfat-mediadevice.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
