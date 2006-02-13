@@ -44,7 +44,9 @@ BuildRequires:	alsa-lib-devel
 BuildRequires:	arts-qt-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
+BuildRequires:	gtk+2-devel
 %{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.6}
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
@@ -266,6 +268,7 @@ fi
 %attr(755,root,root) %{_bindir}/amarok_libvisual
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
 #%attr(755,root,root) %{_bindir}/release_amarok
+%{_libdir}/libamarok.so.*.*.*
 %{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
