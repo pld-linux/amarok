@@ -13,6 +13,7 @@
 %bcond_without	zeroconf	# disable support for zeroconf
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA)
 %bcond_without	helix		# disable HelixPlayer engine
+%bcond_without	mp3players	# disable iPod and iRiver support
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
 %bcond_with	pgsql		# enables postgresql support
@@ -22,19 +23,21 @@
 %ifarch i386
 %undefine	with_helix
 %endif
+
+%define		_beta	beta1
+
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.3.8
-Release:	1
+Version:	1.4
+Release:	0.%{_beta}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-# Source0-md5:	fd1ee0509568e5f9f7d0aeb9af094786
+Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta}.tar.bz2
+# Source0-md5:	78dfa2c8c65cb7fe1cf26aaa6cc193e8
 Patch0:		kde-common-gcc4.patch
 Patch1:		%{name}-lyricsurl.patch
-Patch2:		%{name}-libtunepimp-0.4.0.patch
-Patch3:		%{name}-helixplayer-morearchs.patch
+Patch2:		%{name}-helixplayer-morearchs.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -46,10 +49,13 @@ BuildRequires:	gettext-devel
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
+%{?with_mp3players:BuildRequires:	libgpod-devel >= 0.2.0}
+%{?with_mp3players:BuildRequires:	libifp-devel}
 BuildRequires:	libltdl-devel
+%{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.4.0
 BuildRequires:	libvisual-devel >= 0.2.0
-%{?with_pgsql:BuildRequires:		libpqxx-devel}
+BuildRequires:	mpeg4ip-devel
 %{?with_mysql:BuildRequires:		mysql-devel}
 BuildRequires:	pcre-devel
 BuildRequires:	rpm-pythonprov
@@ -57,8 +63,8 @@ BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 %{!?with_included_sqlite:BuildRequires:	sqlite3-devel}
 BuildRequires:	taglib-devel >= 1.4
-%{?with_xine:BuildRequires:		xine-lib-devel >= 2:1.0-0.rc5.0}
-%{?with_xmms:BuildRequires:		xmms-devel}
+%{?with_xine:BuildRequires:	xine-lib-devel >= 1.0-rc4}
+%{?with_xmms:BuildRequires:	xmms-devel}
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
@@ -116,9 +122,9 @@ Summary:	Plugin gstreamer
 Summary(pl):	Wtyczka gstreamer
 Group:		X11/Applications/Multimedia
 # deps, to get it working:
-# mp3 decoder: gstreamer-mad
-# ogg decoder: gstreamer-vorbis
-# audio output driver: gstreamer-audiosink-alsa
+# mp3 decoder:	gstreamer-mad
+# ogg decoder:	gstreamer-vorbis
+# audio output driver:	gstreamer-audiosink-alsa
 # from gstreamer-audio-effects to control volume, etc
 # needed libs:
 #  at least /usr/lib/gstreamer-0.8/libgstresample.so
@@ -188,11 +194,10 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{_beta}
 %patch0 -p1
 %{?with_altlyrics:%patch1 -p1}
 %patch2 -p1
-%patch3 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
@@ -219,9 +224,12 @@ cp -f /usr/share/automake/config.sub admin
 	--with%{!?with_akode:out}-akode \
 	--with%{!?with_helix:out}-helix%{?with_helix:=usegivenpath} \
 	--with%{!?with_nmm:out}-nmm \
+        --with%{!?with_mp3players:out}-libgpod \
+	--with%{!?with_mp3players:out}-ifp \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-mysql \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-postgresql \
 	--disable-final \
+	--with-mp4v2 \
 	--with-qt-libraries=%{_libdir} \
 	--with%{!?with_included_sqlite:out}-included-sqlite
 
@@ -256,6 +264,7 @@ fi
 %{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper2}
 %attr(755,root,root) %{_bindir}/amarokapp
 %attr(755,root,root) %{_bindir}/amarok_libvisual
+%attr(755,root,root) %{_bindir}/amarokcollectionscanner
 #%attr(755,root,root) %{_bindir}/release_amarok
 %{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
@@ -340,9 +349,9 @@ fi
 %files scripts
 %defattr(644,root,root,755)
 
-%dir %{_datadir}/apps/amarok/scripts/alarm
-%{_datadir}/apps/amarok/scripts/alarm/README
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/alarm/alarm.py
+#%dir %{_datadir}/apps/amarok/scripts/alarm
+#%{_datadir}/apps/amarok/scripts/alarm/README
+#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/alarm/alarm.py
 
 %dir %{_datadir}/apps/amarok/scripts/graphequalizer
 %{_datadir}/apps/amarok/scripts/graphequalizer/README
