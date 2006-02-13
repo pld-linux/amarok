@@ -423,6 +423,19 @@ fi
 #%{_datadir}/apps/amarok/scripts/shouter/test/client.py
 #%attr(755,root,root) %{_datadir}/apps/amarok/scripts/shouter/Shouter.py
 
+%dir %{_datadir}/apps/amarok/scripts/lyrics_astraweb
+%{_datadir}/apps/amarok/scripts/lyrics_astraweb/COPYING
+%{_datadir}/apps/amarok/scripts/lyrics_astraweb/README
+%{_datadir}/apps/amarok/scripts/lyrics_astraweb/lyrics_astraweb.rb
+
+%dir %{_datadir}/apps/amarok/scripts/lyrics_lyrc
+%{_datadir}/apps/amarok/scripts/lyrics_lyrc/COPYING
+%{_datadir}/apps/amarok/scripts/lyrics_lyrc/README
+%{_datadir}/apps/amarok/scripts/lyrics_lyrc/lyrics_lyrc.rb
+
+%dir %{_datadir}/apps/amarok/scripts/ruby_debug
+%{_datadir}/apps/amarok/scripts/ruby_debug/debug.rb
+
 %if 0
 %dir %{_datadir}/apps/amarok/scripts/amarok_live
 %{_datadir}/apps/amarok/scripts/amarok_live/README
