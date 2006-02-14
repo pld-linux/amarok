@@ -60,6 +60,7 @@ BuildRequires:	libvisual-devel >= 0.2.0
 BuildRequires:	mpeg4ip-devel
 %{?with_mysql:BuildRequires:		mysql-devel}
 BuildRequires:	pcre-devel
+BuildRequires:	pkgconfig
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
@@ -203,14 +204,8 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
-# see kde bug #110909
-sed -i -e 's/amarok_live//' amarok/src/scripts/Makefile.am
-
 %build
 cp -f /usr/share/automake/config.sub admin
-
-#export UNSERMAKE=/usr/share/unsermake/unsermake
-
 %{__make} -f admin/Makefile.common cvs
 
 # hack: passing something other than "no" or "yes" to --with-helix allows
@@ -258,25 +253,25 @@ if [ "$1" = 1 ]; then
 	echo "Remember to install libvisual-plugins-* packages if you"
 	echo "want to have a visualizations in amaroK."
 fi
+/sbin/ldconfig
+
+%postun	-p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/amarok
-%{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper2}
 %attr(755,root,root) %{_bindir}/amarokapp
-%attr(755,root,root) %{_bindir}/amarok_libvisual
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
-#%attr(755,root,root) %{_bindir}/release_amarok
+%attr(755,root,root) %{_bindir}/amarok_libvisual
+%{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper2}
 %attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
 %{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
-%{_libdir}/kde3/libamarok_void-engine_plugin.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
-%{_libdir}/kde3/libamarok_ipod-mediadevice.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
 %{_libdir}/kde3/libamarok_vfat-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_vfat-mediadevice.so
+%{_libdir}/kde3/libamarok_void-engine_plugin.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
 %{_libdir}/libamarok.la
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
@@ -292,12 +287,17 @@ fi
 %{_datadir}/apps/profiles/amarok.profile.xml
 %{_datadir}/config/amarokrc
 %{_datadir}/config.kcfg/amarok.kcfg
-%{_datadir}/services/amarok_void-engine_plugin.desktop
-%{_datadir}/services/amarok_ipod-mediadevice.desktop
 %{_datadir}/services/amarok_vfat-mediadevice.desktop
+%{_datadir}/services/amarok_void-engine_plugin.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
+# TODO: move to subpackage
+%if %{with mp3players}
+%{_libdir}/kde3/libamarok_ipod-mediadevice.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
+%{_datadir}/services/amarok_ipod-mediadevice.desktop
+%endif
 
 %if %{with arts}
 %files arts
