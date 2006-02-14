@@ -204,6 +204,9 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
+# see kde bug #110909
+sed -i -e 's/amarok_live//' amarok/src/scripts/Makefile.am
+
 %build
 cp -f /usr/share/automake/config.sub admin
 %{__make} -f admin/Makefile.common cvs
