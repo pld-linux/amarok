@@ -110,7 +110,6 @@ Helix/Realplayer playback support for amarok.
 %description helix -l pl
 Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka.
 
-
 %package gstreamer
 Summary:	Plugin gstreamer
 Summary(pl):	Wtyczka gstreamer
@@ -157,7 +156,6 @@ Wtyczka xine.
 Summary:	Xmms wrapper
 Summary(pl):	Wrapper xmms
 Group:		X11/Applications/Multimedia
-Conflicts:	amarok < 1.3.8-2
 Requires:	%{name} = %{version}-%{release}
 
 %description xmms
