@@ -26,7 +26,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.3.8
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -153,6 +153,19 @@ Plugin xine.
 %description xine -l pl
 Wtyczka xine.
 
+%package xmms
+Summary:	Xmms wrapper
+Summary(pl):	Wrapper xmms
+Group:		X11/Applications/Multimedia
+Conflicts:	amarok < 1.3.8-2
+Requires:	%{name} = %{version}-%{release}
+
+%description xmms
+Xmms wrapper.
+
+%description xmms -l pl
+Wrapper xmms.
+
 %package zeroconf
 Summary:	Zeroconf data
 Summary(pl):	Dane dla zeroconf
@@ -201,8 +214,6 @@ sed -i -e 's/amarok_live//' amarok/src/scripts/Makefile.am
 
 %build
 cp -f /usr/share/automake/config.sub admin
-
-#export UNSERMAKE=/usr/share/unsermake/unsermake
 
 %{__make} -f admin/Makefile.common cvs
 
@@ -253,7 +264,6 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/amarok
-%{?with_xmms:%attr(755,root,root) %{_bindir}/amarok_xmmswrapper2}
 %attr(755,root,root) %{_bindir}/amarokapp
 %attr(755,root,root) %{_bindir}/amarok_libvisual
 #%attr(755,root,root) %{_bindir}/release_amarok
@@ -327,6 +337,12 @@ fi
 %{_datadir}/config.kcfg/xinecfg.kcfg
 %{_datadir}/services/amarok_xine-engine.desktop
 #%{_datadir}/services/amarok_xineengine_plugin.desktop
+%endif
+
+%if %{with xmms}
+%files xmms
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/amarok_xmmswrapper2
 %endif
 
 %if 0
