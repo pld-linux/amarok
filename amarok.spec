@@ -293,8 +293,11 @@ fi
 # TODO: move to subpackage
 %if %{with mp3players}
 %{_libdir}/kde3/libamarok_ipod-mediadevice.la
+%{_libdir}/kde3/libamarok_ifp-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
+%attr(755,root,root) %{_libdir}/kde3/libamarok_ifp-mediadevice.so
 %{_datadir}/services/amarok_ipod-mediadevice.desktop
+%{_datadir}/services/amarok_ifp-mediadevice.desktop
 %endif
 
 %if %{with akode}
