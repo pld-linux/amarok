@@ -5,7 +5,6 @@
 #	* track http://websvn.kde.org/trunk/extragear/multimedia/amarok/TODO?rev=470324&r1=470292&r2=470324
 #
 # Conditional builds:
-%bcond_without	arts		# disable arts engine
 %bcond_without	gstreamer	# disable gstreamer
 %bcond_without	mas		# disable MAS audio backend
 %bcond_without	xine		# disable xine engine
@@ -41,7 +40,6 @@ Patch2:		%{name}-helixplayer-morearchs.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
-BuildRequires:	arts-qt-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
@@ -78,19 +76,6 @@ A KDE audio player.
 
 %description -l pl
 Odtwarzacz audio dla KDE.
-
-%package arts
-Summary:	Plugin arts
-Summary(pl):	Wtyczka arts
-Group:		X11/Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
-Provides:	%{name}-plugin = %{version}-%{release}
-
-%description arts
-Plugin arts.
-
-%description arts -l pl
-Wtyczka arts.
 
 %package akode
 Summary:	Plugin akode
@@ -229,7 +214,6 @@ cp -f /usr/share/automake/config.sub admin
 	HELIX_LIBS=%{_libdir}/helixplayer \
 	--%{?debug:en}%{!?debug:dis}able-debug%{?debug:=full} \
 	--disable-rpath \
-	--with%{!?with_arts:out}-arts \
 	--with%{!?with_mas:out}-mas \
 	--with%{!?with_xine:out}-xine \
 	--with%{!?with_gstreamer:out}-gstreamer \
@@ -311,19 +295,6 @@ fi
 %{_libdir}/kde3/libamarok_ipod-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
 %{_datadir}/services/amarok_ipod-mediadevice.desktop
-%endif
-
-%if %{with arts}
-%files arts
-%defattr(644,root,root,755)
-%{_libdir}/kde3/libamarok_artsengine_plugin.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_artsengine_plugin.so
-%{_libdir}/libamarokarts.la
-%attr(755,root,root) %{_libdir}/libamarokarts.so
-%{_libdir}/mcop/Amarok
-%{_libdir}/mcop/amarokarts.mcopclass
-%{_libdir}/mcop/amarokarts.mcoptype
-%{_datadir}/services/amarok_artsengine_plugin.desktop
 %endif
 
 %if %{with akode}
