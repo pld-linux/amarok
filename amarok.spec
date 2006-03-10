@@ -64,7 +64,7 @@ BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 %{!?with_included_sqlite:BuildRequires:	sqlite3-devel}
 BuildRequires:	taglib-devel >= 1.4
-%{?with_xine:BuildRequires:	xine-lib-devel >= 1.0-rc4}
+%{?with_xine:BuildRequires:	xine-lib-devel >= 1.1.1}
 %{?with_xmms:BuildRequires:	xmms-devel}
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
