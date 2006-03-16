@@ -216,7 +216,7 @@ cp -f /usr/share/automake/config.sub admin
 	--disable-rpath \
 	--with%{!?with_mas:out}-mas \
 	--with%{!?with_xine:out}-xine \
-	--with%{!?with_gstreamer:out}-gstreamer \
+	--with%{!?with_gstreamer:out}-gstreamer10 \
 	--with%{!?with_akode:out}-akode \
 	--with%{!?with_helix:out}-helix%{?with_helix:=usegivenpath} \
 	--with%{!?with_nmm:out}-nmm \
@@ -311,10 +311,10 @@ fi
 %if %{with gstreamer}
 %files gstreamer
 %defattr(644,root,root,755)
-%{_libdir}/kde3/libamarok_gstengine_plugin.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_gstengine_plugin.so
+%{_libdir}/kde3/libamarok_gst10engine_plugin.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_gst10engine_plugin.so
 %{_datadir}/config.kcfg/gstconfig.kcfg
-%{_datadir}/services/amarok_gstengine_plugin.desktop
+%{_datadir}/services/amarok_gst10engine_plugin.desktop
 %endif
 
 %if %{with helix}
