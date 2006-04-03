@@ -1,5 +1,5 @@
---- amarok/admin/acinclude.m4.in.orig	2005-05-03 16:39:47.000000000 +0200
-+++ amarok/admin/acinclude.m4.in	2005-05-03 17:18:15.629229288 +0200
+--- amaroc/admin/acinclude.m4.in.orig	2006-04-03 18:02:49.000000000 +0200
++++ amaroc/admin/acinclude.m4.in	2006-04-03 18:20:39.000000000 +0200
 @@ -428,7 +428,7 @@
  if test "$1" = "default"; then
  
@@ -9,10 +9,11 @@
    fi
    if test -z "$kde_appsdir"; then
      kde_appsdir='\${datadir}/applnk'
-@@ -2909,46 +2909,6 @@
+@@ -2974,48 +2974,6 @@
+   fi
  ])
  
- 
+-
 -AC_DEFUN([KDE_CHECK_FOR_BAD_COMPILER],
 -[
 -  AC_MSG_CHECKING([whether $CC is blacklisted])
@@ -53,10 +54,11 @@
 -
 -])
 -
- dnl AC_VALIDIFY_CXXFLAGS checks for forbidden flags the user may have given
- AC_DEFUN([AC_VALIDIFY_CXXFLAGS],
- [dnl
-@@ -3058,8 +3018,6 @@
+-
+ AC_DEFUN([KDE_CHECK_FOR_OPT_NOINLINE_MATCH],
+ [
+   AC_CACHE_CHECK([whether system headers can cope with -O2 -fno-inline],
+@@ -3153,8 +3111,6 @@
  
    AC_PROG_CXX
  
@@ -65,7 +67,7 @@
    if test "$GXX" = "yes" || test "$CXX" = "KCC"; then
      if test "$kde_use_debug_code" != "no"; then
        if test "$CXX" = "KCC"; then
-@@ -4402,9 +4360,9 @@
+@@ -4576,9 +4532,9 @@
    LIBPYTHON=-lpython$version
  fi
  
@@ -77,15 +79,14 @@
    python_moddir=no
  fi
  
-@@ -4551,32 +4509,11 @@
+@@ -4725,32 +4681,11 @@
  [
      AC_MSG_CHECKING([for utmp file])
  
 -    AC_CACHE_VAL(kde_cv_utmp_file,
 -    [
 -    kde_cv_utmp_file=no
-+    AC_CACHE_VAL(kde_cv_utmp_file, [kde_cv_utmp_file=/var/run/utmpx])
- 
+-
 -    for ac_file in    \
 -                      \
 -	/var/run/utmp \
@@ -99,7 +100,8 @@
 -     fi
 -    done
 -    ])
--
++    AC_CACHE_VAL(kde_cv_utmp_file, [kde_cv_utmp_file=/var/run/utmpx])
+ 
 -    if test "$kde_cv_utmp_file" != "no"; then
 -	AC_DEFINE_UNQUOTED(UTMP, "$kde_cv_utmp_file", [Define the file for utmp entries])
 -	$1
@@ -114,7 +116,7 @@
  ])
  
  
-@@ -5359,7 +5296,7 @@
+@@ -5533,7 +5468,7 @@
    kde_qtdir="$with_qt_dir"
  fi
  
