@@ -52,6 +52,7 @@ BuildRequires:	libvisual-devel >= 0.2.0
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
 %{?with_mysql:BuildRequires:		mysql-devel}
 BuildRequires:	pcre-devel
+BuildRequires:	pkgconfig
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
