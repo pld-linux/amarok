@@ -16,24 +16,23 @@
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
 %bcond_with	pgsql		# enables postgresql support
-%bcond_with	akode		# enable aKode engine (too buggy/incomplete)
 %bcond_with	altlyrics	# use alternative lyrics provider
 #
 %ifarch i386
 %undefine	with_helix
 %endif
 
-%define		_beta	beta2
+%define		_beta	beta3c
 
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4
-Release:	0.%{_beta}.2
+Release:	0.%{_beta}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta}.tar.bz2
-# Source0-md5:	0c7e2a5e8ea2d73d8e73b986090cfc37
+Source0:	http://kent.dl.sourceforge.net/sourceforge/amarok/amarok-1.4-beta3c.tar.bz2
+# Source0-md5:	b92433b46005f0b2fc31e0ce0bf4cb3a
 Patch0:		kde-common-gcc4.patch
 Patch1:		%{name}-lyricsurl.patch
 Patch2:		%{name}-helixplayer-morearchs.patch
