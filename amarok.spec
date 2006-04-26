@@ -23,7 +23,7 @@
 %endif
 
 %define		_beta	beta3c
-%define		_rel	1.1
+%define		_rel	1.2
 
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
@@ -180,7 +180,6 @@ Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	kdebase-kdialog
 Requires:	python-PyQt
-Requires:	ruby
 Requires:	ruby-modules
 
 %description scripts
@@ -205,6 +204,13 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 
 # see kde bug #110909
 sed -i -e 's/amarok_live//' amarok/src/scripts/Makefile.am
+
+# kill env, call interpreter directly, so rpm automatics could rule
+sed -i -e '
+	1s,#!.*bin/env.*ruby,#!%{_bindir}/ruby,
+	1s,#!.*bin/env.*python,#!%{_bindir}/python,
+	1s,#!.*bin/env.*bash,#!/bin/bash,
+' amarok/src/scripts/*/*.{py,rb,sh}
 
 %build
 cp -f /usr/share/automake/config.sub admin
