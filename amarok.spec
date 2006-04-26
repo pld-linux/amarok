@@ -23,15 +23,16 @@
 %endif
 
 %define		_beta	beta3c
+%define		_rel	1.1
 
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4
-Release:	0.%{_beta}.1
+Release:	0.%{_beta}.%{_rel}
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://kent.dl.sourceforge.net/sourceforge/amarok/amarok-1.4-beta3c.tar.bz2
+Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta}.tar.bz2
 # Source0-md5:	b92433b46005f0b2fc31e0ce0bf4cb3a
 Patch0:		kde-common-gcc4.patch
 Patch1:		%{name}-lyricsurl.patch
@@ -179,6 +180,8 @@ Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	kdebase-kdialog
 Requires:	python-PyQt
+Requires:	ruby
+Requires:	ruby-modules
 
 %description scripts
 amaroK scripts allow you extend amaroK functionality.
@@ -351,10 +354,19 @@ fi
 
 %files scripts
 %defattr(644,root,root,755)
+%dir %{_datadir}/apps/amarok/scripts/common
+%{_datadir}/apps/amarok/scripts/common/Publisher.py
+%{_datadir}/apps/amarok/scripts/common/Zeroconf.py
 
-#%dir %{_datadir}/apps/amarok/scripts/alarm
-#%{_datadir}/apps/amarok/scripts/alarm/README
-#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/alarm/alarm.py
+%dir %{_datadir}/apps/amarok/scripts/templates
+%{_datadir}/apps/amarok/scripts/templates/amarok.rb
+%{_datadir}/apps/amarok/scripts/templates/python_qt_template.py
+%{_datadir}/apps/amarok/scripts/templates/ruby_qt_template.rb
+
+# amarok searches for executable programs for scripts
+# to figure out which files need to have execute permission, use this
+# find command:
+# $ find $RPM_BUILD_ROOT/usr/share/apps/amarok/scripts -perm +1
 
 %dir %{_datadir}/apps/amarok/scripts/graphequalizer
 %{_datadir}/apps/amarok/scripts/graphequalizer/README
@@ -363,13 +375,8 @@ fi
 %dir %{_datadir}/apps/amarok/scripts/playlist2html
 %{_datadir}/apps/amarok/scripts/playlist2html/README
 %{_datadir}/apps/amarok/scripts/playlist2html/Playlist.py
-%{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.py
-%{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.py
-
-%dir %{_datadir}/apps/amarok/scripts/templates
-%{_datadir}/apps/amarok/scripts/templates/amarok.rb
-%{_datadir}/apps/amarok/scripts/templates/python_qt_template.py
-%{_datadir}/apps/amarok/scripts/templates/ruby_qt_template.rb
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.py
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.py
 
 %dir %{_datadir}/apps/amarok/scripts/webcontrol
 %{_datadir}/apps/amarok/scripts/webcontrol/README
@@ -389,45 +396,18 @@ fi
 %{_datadir}/apps/amarok/scripts/webcontrol/vol_speaker.png
 %{_datadir}/apps/amarok/scripts/webcontrol/WebPublisher.py
 %{_datadir}/apps/amarok/scripts/webcontrol/WebControl.spec
-
 %attr(755,root,root)  %{_datadir}/apps/amarok/scripts/webcontrol/WebControl.py
-
-%dir %{_datadir}/apps/amarok/scripts/common
-%{_datadir}/apps/amarok/scripts/common/Publisher.py
-%{_datadir}/apps/amarok/scripts/common/Zeroconf.py
-
-#%dir %{_datadir}/apps/amarok/scripts/shouter
-#%{_datadir}/apps/amarok/scripts/shouter/README
-#%{_datadir}/apps/amarok/scripts/shouter/ChangeLog
-#%{_datadir}/apps/amarok/scripts/shouter/Amarok.py
-#%{_datadir}/apps/amarok/scripts/shouter/Globals.py
-#%{_datadir}/apps/amarok/scripts/shouter/Playlist.py
-#%{_datadir}/apps/amarok/scripts/shouter/Services.py
-#%{_datadir}/apps/amarok/scripts/shouter/ShouterConfig.py
-#%{_datadir}/apps/amarok/scripts/shouter/ShouterExceptions.py
-#%{_datadir}/apps/amarok/scripts/shouter/SocketErrors.py
-#%{_datadir}/apps/amarok/scripts/shouter/StreamConfig.py
-#%{_datadir}/apps/amarok/scripts/shouter/StreamController.py
-#%{_datadir}/apps/amarok/scripts/shouter/StreamPublisher.py
-#%{_datadir}/apps/amarok/scripts/shouter/binfuncs.py
-#%{_datadir}/apps/amarok/scripts/shouter/debug.py
-#%{_datadir}/apps/amarok/scripts/shouter/propfind-req.xml
-#%dir %{_datadir}/apps/amarok/scripts/shouter/silence
-#%{_datadir}/apps/amarok/scripts/shouter/silence/silence-48.mp3
-#%dir %{_datadir}/apps/amarok/scripts/shouter/test
-#%{_datadir}/apps/amarok/scripts/shouter/test/client.py
-#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/shouter/Shouter.py
 
 %dir %{_datadir}/apps/amarok/scripts/lyrics_astraweb
 %{_datadir}/apps/amarok/scripts/lyrics_astraweb/COPYING
 %{_datadir}/apps/amarok/scripts/lyrics_astraweb/README
-%{_datadir}/apps/amarok/scripts/lyrics_astraweb/lyrics_astraweb.rb
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/lyrics_astraweb/lyrics_astraweb.rb
 %{_datadir}/apps/amarok/scripts/lyrics_astraweb/lyrics_astraweb.spec
 
 %dir %{_datadir}/apps/amarok/scripts/lyrics_lyrc
 %{_datadir}/apps/amarok/scripts/lyrics_lyrc/COPYING
 %{_datadir}/apps/amarok/scripts/lyrics_lyrc/README
-%{_datadir}/apps/amarok/scripts/lyrics_lyrc/lyrics_lyrc.rb
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/lyrics_lyrc/lyrics_lyrc.rb
 %{_datadir}/apps/amarok/scripts/lyrics_lyrc/lyrics_lyrc.spec
 
 %dir %{_datadir}/apps/amarok/scripts/ruby_debug
