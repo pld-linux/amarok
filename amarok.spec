@@ -16,7 +16,6 @@
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
 %bcond_with	pgsql		# enables postgresql support
-%bcond_with	altlyrics	# use alternative lyrics provider
 #
 %ifarch i386
 %undefine	with_helix
@@ -197,7 +196,6 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %prep
 %setup -q -n %{name}-%{version}-%{_beta}
 #%patch0 -p1
-%{?with_altlyrics:%patch1 -p1}
 %patch2 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
