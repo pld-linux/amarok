@@ -21,13 +21,11 @@
 %undefine	with_helix
 %endif
 
-%define		_rel	0.1
-
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.0
-Release:	%{_rel}
+Release:	0,1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -193,7 +191,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 #%patch0 -p1
 %patch2 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
@@ -225,7 +223,7 @@ cp -f /usr/share/automake/config.sub admin
 	--with%{!?with_akode:out}-akode \
 	--with%{!?with_helix:out}-helix%{?with_helix:=usegivenpath} \
 	--with%{!?with_nmm:out}-nmm \
-        --with%{!?with_mp3players:out}-libgpod \
+	--with%{!?with_mp3players:out}-libgpod \
 	--with%{!?with_mp3players:out}-ifp \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-mysql \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-postgresql \
