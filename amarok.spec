@@ -5,7 +5,7 @@
 #	* track http://websvn.kde.org/trunk/extragear/multimedia/amarok/TODO?rev=470324&r1=470292&r2=470324
 #
 # Conditional builds:
-#%bcond_without	gstreamer	# disable gstreamer
+%bcond_with	gstreamer	# enable gstreamer (gst10 not stable)
 %bcond_without	mas		# disable MAS audio backend
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
@@ -40,7 +40,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
-#%{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.10.0}
+%{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.10.0}
 BuildRequires:	gtk+2-devel
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
@@ -101,10 +101,10 @@ Helix/Realplayer playback support for amarok.
 Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka.
 
 
-#%package gstreamer
-#Summary:	Plugin gstreamer
-#Summary(pl):	Wtyczka gstreamer
-#Group:		X11/Applications/Multimedia
+%package gstreamer
+Summary:	Plugin gstreamer
+Summary(pl):	Wtyczka gstreamer
+Group:		X11/Applications/Multimedia
 # deps, to get it working:
 # mp3 decoder:	gstreamer-mad
 # ogg decoder:	gstreamer-vorbis
@@ -115,19 +115,19 @@ Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka.
 #  probably /usr/lib/gstreamer-0.8/libgstadder.so
 #  and probably /usr/lib/gstreamer-0.8/libgstvolume.so
 # gstreamer-musicbrainz for being able to edit id3 tags on files.
-#Requires:	%{name} = %{version}-%{release}
-#Requires:	gstreamer-audio-effects
-#Requires:	gstreamer-audiosink
-#Requires:	gstreamer-mad
-#Requires:	gstreamer-musicbrainz
-#Requires:	gstreamer-vorbis
-#Provides:	%{name}-plugin = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
+Requires:	gstreamer-audio-effects
+Requires:	gstreamer-audiosink
+Requires:	gstreamer-mad
+Requires:	gstreamer-musicbrainz
+Requires:	gstreamer-vorbis
+Provides:	%{name}-plugin = %{version}-%{release}
 
-#%description gstreamer
-#Plugin gstreamer.
+%description gstreamer
+Plugin gstreamer.
 
-#%description gstreamer -l pl
-#Wtyczka gstreamer.
+%description gstreamer -l pl
+Wtyczka gstreamer.
 
 %package xine
 Summary:	Plugin xine
@@ -219,7 +219,7 @@ cp -f /usr/share/automake/config.sub admin
 	--disable-rpath \
 	--with%{!?with_mas:out}-mas \
 	--with%{!?with_xine:out}-xine \
-#	--with%{!?with_gstreamer:out}-gstreamer10 \
+	--with%{!?with_gstreamer:out}-gstreamer10 \
 	--with%{!?with_akode:out}-akode \
 	--with%{!?with_helix:out}-helix%{?with_helix:=usegivenpath} \
 	--with%{!?with_nmm:out}-nmm \
@@ -311,14 +311,14 @@ fi
 %{_datadir}/services/amarok_aKode-engine.desktop
 %endif
 
-#%if %{with gstreamer}
-#%files gstreamer
-#%defattr(644,root,root,755)
-#%{_libdir}/kde3/libamarok_gst10engine_plugin.la
-#%attr(755,root,root) %{_libdir}/kde3/libamarok_gst10engine_plugin.so
-#%{_datadir}/config.kcfg/gstconfig.kcfg
-#%{_datadir}/services/amarok_gst10engine_plugin.desktop
-#%endif
+%if %{with gstreamer}
+%files gstreamer
+%defattr(644,root,root,755)
+%{_libdir}/kde3/libamarok_gst10engine_plugin.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_gst10engine_plugin.so
+%{_datadir}/config.kcfg/gstconfig.kcfg
+%{_datadir}/services/amarok_gst10engine_plugin.desktop
+%endif
 
 %if %{with helix}
 %files helix
