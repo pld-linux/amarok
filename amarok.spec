@@ -5,7 +5,7 @@
 #	* track http://websvn.kde.org/trunk/extragear/multimedia/amarok/TODO?rev=470324&r1=470292&r2=470324
 #
 # Conditional builds:
-%bcond_without	gstreamer	# disable gstreamer
+#%bcond_without	gstreamer	# disable gstreamer
 %bcond_without	mas		# disable MAS audio backend
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
@@ -25,7 +25,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.0
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -40,7 +40,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
-%{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.10.0}
+#%{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.10.0}
 BuildRequires:	gtk+2-devel
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
@@ -101,10 +101,10 @@ Helix/Realplayer playback support for amarok.
 Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka.
 
 
-%package gstreamer
-Summary:	Plugin gstreamer
-Summary(pl):	Wtyczka gstreamer
-Group:		X11/Applications/Multimedia
+#%package gstreamer
+#Summary:	Plugin gstreamer
+#Summary(pl):	Wtyczka gstreamer
+#Group:		X11/Applications/Multimedia
 # deps, to get it working:
 # mp3 decoder:	gstreamer-mad
 # ogg decoder:	gstreamer-vorbis
@@ -115,19 +115,19 @@ Group:		X11/Applications/Multimedia
 #  probably /usr/lib/gstreamer-0.8/libgstadder.so
 #  and probably /usr/lib/gstreamer-0.8/libgstvolume.so
 # gstreamer-musicbrainz for being able to edit id3 tags on files.
-Requires:	%{name} = %{version}-%{release}
-Requires:	gstreamer-audio-effects
-Requires:	gstreamer-audiosink
-Requires:	gstreamer-mad
-Requires:	gstreamer-musicbrainz
-Requires:	gstreamer-vorbis
-Provides:	%{name}-plugin = %{version}-%{release}
+#Requires:	%{name} = %{version}-%{release}
+#Requires:	gstreamer-audio-effects
+#Requires:	gstreamer-audiosink
+#Requires:	gstreamer-mad
+#Requires:	gstreamer-musicbrainz
+#Requires:	gstreamer-vorbis
+#Provides:	%{name}-plugin = %{version}-%{release}
 
-%description gstreamer
-Plugin gstreamer.
+#%description gstreamer
+#Plugin gstreamer.
 
-%description gstreamer -l pl
-Wtyczka gstreamer.
+#%description gstreamer -l pl
+#Wtyczka gstreamer.
 
 %package xine
 Summary:	Plugin xine
@@ -219,7 +219,7 @@ cp -f /usr/share/automake/config.sub admin
 	--disable-rpath \
 	--with%{!?with_mas:out}-mas \
 	--with%{!?with_xine:out}-xine \
-	--with%{!?with_gstreamer:out}-gstreamer10 \
+#	--with%{!?with_gstreamer:out}-gstreamer10 \
 	--with%{!?with_akode:out}-akode \
 	--with%{!?with_helix:out}-helix%{?with_helix:=usegivenpath} \
 	--with%{!?with_nmm:out}-nmm \
@@ -269,8 +269,8 @@ fi
 %attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
 %{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
-%{_libdir}/kde3/libamarok_vfat-mediadevice.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_vfat-mediadevice.so
+%{_libdir}/kde3/libamarok_generic-mediadevice.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_generic-mediadevice.so
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
 %{_libdir}/libamarok.la
@@ -288,7 +288,7 @@ fi
 %{_datadir}/apps/profiles/amarok.profile.xml
 %{_datadir}/config/amarokrc
 %{_datadir}/config.kcfg/amarok.kcfg
-%{_datadir}/services/amarok_vfat-mediadevice.desktop
+%{_datadir}/services/amarok_generic-mediadevice.desktop
 %{_datadir}/services/amarok_void-engine_plugin.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
@@ -311,14 +311,14 @@ fi
 %{_datadir}/services/amarok_aKode-engine.desktop
 %endif
 
-%if %{with gstreamer}
-%files gstreamer
-%defattr(644,root,root,755)
-%{_libdir}/kde3/libamarok_gst10engine_plugin.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_gst10engine_plugin.so
-%{_datadir}/config.kcfg/gstconfig.kcfg
-%{_datadir}/services/amarok_gst10engine_plugin.desktop
-%endif
+#%if %{with gstreamer}
+#%files gstreamer
+#%defattr(644,root,root,755)
+#%{_libdir}/kde3/libamarok_gst10engine_plugin.la
+#%attr(755,root,root) %{_libdir}/kde3/libamarok_gst10engine_plugin.so
+#%{_datadir}/config.kcfg/gstconfig.kcfg
+#%{_datadir}/services/amarok_gst10engine_plugin.desktop
+#%endif
 
 %if %{with helix}
 %files helix
@@ -369,9 +369,9 @@ fi
 # find command:
 # $ find $RPM_BUILD_ROOT/usr/share/apps/amarok/scripts -perm +1
 
-%dir %{_datadir}/apps/amarok/scripts/graphequalizer
-%{_datadir}/apps/amarok/scripts/graphequalizer/README
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/graphequalizer/graphequalizer
+#%dir %{_datadir}/apps/amarok/scripts/graphequalizer
+#%{_datadir}/apps/amarok/scripts/graphequalizer/README
+#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/graphequalizer/graphequalizer
 
 %dir %{_datadir}/apps/amarok/scripts/playlist2html
 %{_datadir}/apps/amarok/scripts/playlist2html/README
@@ -397,6 +397,8 @@ fi
 %{_datadir}/apps/amarok/scripts/webcontrol/vol_speaker.png
 %{_datadir}/apps/amarok/scripts/webcontrol/WebPublisher.py
 %{_datadir}/apps/amarok/scripts/webcontrol/WebControl.spec
+%{_datadir}/apps/amarok/scripts/webcontrol/smallstar.png
+%{_datadir}/apps/amarok/scripts/webcontrol/star.png
 %attr(755,root,root)  %{_datadir}/apps/amarok/scripts/webcontrol/WebControl.py
 
 %dir %{_datadir}/apps/amarok/scripts/lyrics_astraweb
