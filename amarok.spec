@@ -5,51 +5,53 @@
 #	* track http://websvn.kde.org/trunk/extragear/multimedia/amarok/TODO?rev=470324&r1=470292&r2=470324
 #
 # Conditional builds:
-%bcond_without	arts		# disable arts engine
-%bcond_without	gstreamer	# disable gstreamer
+%bcond_with	gstreamer	# enable gstreamer (gst10 not stable)
 %bcond_without	mas		# disable MAS audio backend
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	zeroconf	# disable support for zeroconf
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA)
 %bcond_without	helix		# disable HelixPlayer engine
+%bcond_without	mp3players	# disable iPod and iRiver MP3 players support
 %bcond_with	nmm             # enable NMM audio backend
 %bcond_with	mysql		# enable mysql support
 %bcond_with	pgsql		# enables postgresql support
-%bcond_with	akode		# enable aKode engine (too buggy/incomplete)
-%bcond_with	altlyrics	# use alternative lyrics provider
 #
 %ifarch i386
 %undefine	with_helix
 %endif
+
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.3.9
+%define		_ver 1.4.0
+%define		_rel a
+Version:	%{_ver}%{_rel}
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-# Source0-md5:	fb4cb3dafd3d15657b78e24c33abcf76
-Patch0:		kde-common-gcc4.patch
-Patch1:		%{name}-lyricsurl.patch
-Patch2:		%{name}-libtunepimp-0.4.0.patch
-Patch3:		%{name}-helixplayer-morearchs.patch
+# Source0-md5:	3ceffe6465290eef618861cdb81b420a
+Patch0:		%{name}-helixplayer-morearchs.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
-BuildRequires:	arts-qt-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
-%{?with_gstreamer:BuildRequires:	gstreamer-plugins-devel >= 0.8.6}
+%{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.10.0}
+BuildRequires:	gtk+2-devel
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
+%{?with_mp3players:BuildRequires:	libgpod-devel >= 0.2.0}
+%{?with_mp3players:BuildRequires:	libifp-devel}
 BuildRequires:	libltdl-devel
+%{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.4.0
 BuildRequires:	libvisual-devel >= 0.2.0
-%{?with_pgsql:BuildRequires:		libpqxx-devel}
+BuildRequires:	mpeg4ip-devel
 %{?with_mysql:BuildRequires:		mysql-devel}
 BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
@@ -58,8 +60,8 @@ BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 %{!?with_included_sqlite:BuildRequires:	sqlite3-devel}
 BuildRequires:	taglib-devel >= 1.4
-%{?with_xine:BuildRequires:		xine-lib-devel >= 2:1.0-0.rc5.0}
-%{?with_xmms:BuildRequires:		xmms-devel}
+%{?with_xine:BuildRequires:	xine-lib-devel >= 1.1.1}
+%{?with_xmms:BuildRequires:	xmms-devel}
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
@@ -70,19 +72,6 @@ A KDE audio player.
 
 %description -l pl
 Odtwarzacz audio dla KDE.
-
-%package arts
-Summary:	Plugin arts
-Summary(pl):	Wtyczka arts
-Group:		X11/Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
-Provides:	%{name}-plugin = %{version}-%{release}
-
-%description arts
-Plugin arts.
-
-%description arts -l pl
-Wtyczka arts.
 
 %package akode
 Summary:	Plugin akode
@@ -116,9 +105,9 @@ Summary:	Plugin gstreamer
 Summary(pl):	Wtyczka gstreamer
 Group:		X11/Applications/Multimedia
 # deps, to get it working:
-# mp3 decoder: gstreamer-mad
-# ogg decoder: gstreamer-vorbis
-# audio output driver: gstreamer-audiosink-alsa
+# mp3 decoder:	gstreamer-mad
+# ogg decoder:	gstreamer-vorbis
+# audio output driver:	gstreamer-audiosink-alsa
 # from gstreamer-audio-effects to control volume, etc
 # needed libs:
 #  at least /usr/lib/gstreamer-0.8/libgstresample.so
@@ -186,6 +175,7 @@ Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	kdebase-kdialog
 Requires:	python-PyQt
+Requires:	ruby-modules
 
 %description scripts
 amaroK scripts allow you extend amaroK functionality.
@@ -200,20 +190,23 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{_ver}
 %patch0 -p1
-%{?with_altlyrics:%patch1 -p1}
-#%patch2 -p1 ## probably unnided
-%patch3 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
 # see kde bug #110909
 sed -i -e 's/amarok_live//' amarok/src/scripts/Makefile.am
 
+# kill env, call interpreter directly, so rpm automatics could rule
+sed -i -e '
+	1s,#!.*bin/env.*ruby,#!%{_bindir}/ruby,
+	1s,#!.*bin/env.*python,#!%{_bindir}/python,
+	1s,#!.*bin/env.*bash,#!/bin/bash,
+' amarok/src/scripts/*/*.{py,rb,sh}
+
 %build
 cp -f /usr/share/automake/config.sub admin
-
 %{__make} -f admin/Makefile.common cvs
 
 # hack: passing something other than "no" or "yes" to --with-helix allows
@@ -222,16 +215,18 @@ cp -f /usr/share/automake/config.sub admin
 	HELIX_LIBS=%{_libdir}/helixplayer \
 	--%{?debug:en}%{!?debug:dis}able-debug%{?debug:=full} \
 	--disable-rpath \
-	--with%{!?with_arts:out}-arts \
 	--with%{!?with_mas:out}-mas \
 	--with%{!?with_xine:out}-xine \
-	--with%{!?with_gstreamer:out}-gstreamer \
+	--with%{!?with_gstreamer:out}-gstreamer10 \
 	--with%{!?with_akode:out}-akode \
 	--with%{!?with_helix:out}-helix%{?with_helix:=usegivenpath} \
 	--with%{!?with_nmm:out}-nmm \
+	--with%{!?with_mp3players:out}-libgpod \
+	--with%{!?with_mp3players:out}-ifp \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-mysql \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-postgresql \
 	--disable-final \
+	--with-mp4v2 \
 	--with-qt-libraries=%{_libdir} \
 	--with%{!?with_included_sqlite:out}-included-sqlite
 
@@ -258,18 +253,25 @@ if [ "$1" = 1 ]; then
 	echo "Remember to install libvisual-plugins-* packages if you"
 	echo "want to have a visualizations in amaroK."
 fi
+/sbin/ldconfig
+
+%postun	-p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/amarok
 %attr(755,root,root) %{_bindir}/amarokapp
-%attr(755,root,root) %{_bindir}/amarok_libvisual
-#%attr(755,root,root) %{_bindir}/release_amarok
+%attr(755,root,root) %{_bindir}/amarokcollectionscanner
+#%attr(755,root,root) %{_bindir}/amarok_libvisual
+%attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
 %{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
+%{_libdir}/kde3/libamarok_generic-mediadevice.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_generic-mediadevice.so
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
+%{_libdir}/libamarok.la
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/*.rc
@@ -284,22 +286,19 @@ fi
 %{_datadir}/apps/profiles/amarok.profile.xml
 %{_datadir}/config/amarokrc
 %{_datadir}/config.kcfg/amarok.kcfg
+%{_datadir}/services/amarok_generic-mediadevice.desktop
 %{_datadir}/services/amarok_void-engine_plugin.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
-
-%if %{with arts}
-%files arts
-%defattr(644,root,root,755)
-%{_libdir}/kde3/libamarok_artsengine_plugin.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_artsengine_plugin.so
-%{_libdir}/libamarokarts.la
-%attr(755,root,root) %{_libdir}/libamarokarts.so
-%{_libdir}/mcop/Amarok
-%{_libdir}/mcop/amarokarts.mcopclass
-%{_libdir}/mcop/amarokarts.mcoptype
-%{_datadir}/services/amarok_artsengine_plugin.desktop
+# TODO: move to subpackage
+%if %{with mp3players}
+%{_libdir}/kde3/libamarok_ipod-mediadevice.la
+%{_libdir}/kde3/libamarok_ifp-mediadevice.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
+%attr(755,root,root) %{_libdir}/kde3/libamarok_ifp-mediadevice.so
+%{_datadir}/services/amarok_ipod-mediadevice.desktop
+%{_datadir}/services/amarok_ifp-mediadevice.desktop
 %endif
 
 %if %{with akode}
@@ -313,10 +312,10 @@ fi
 %if %{with gstreamer}
 %files gstreamer
 %defattr(644,root,root,755)
-%{_libdir}/kde3/libamarok_gstengine_plugin.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_gstengine_plugin.so
+%{_libdir}/kde3/libamarok_gst10engine_plugin.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_gst10engine_plugin.so
 %{_datadir}/config.kcfg/gstconfig.kcfg
-%{_datadir}/services/amarok_gstengine_plugin.desktop
+%{_datadir}/services/amarok_gst10engine_plugin.desktop
 %endif
 
 %if %{with helix}
@@ -354,25 +353,29 @@ fi
 
 %files scripts
 %defattr(644,root,root,755)
-
-%dir %{_datadir}/apps/amarok/scripts/alarm
-%{_datadir}/apps/amarok/scripts/alarm/README
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/alarm/alarm.py
-
-%dir %{_datadir}/apps/amarok/scripts/graphequalizer
-%{_datadir}/apps/amarok/scripts/graphequalizer/README
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/graphequalizer/graphequalizer
-
-%dir %{_datadir}/apps/amarok/scripts/playlist2html
-%{_datadir}/apps/amarok/scripts/playlist2html/README
-%{_datadir}/apps/amarok/scripts/playlist2html/Playlist.py
-%{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.py
-%{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.py
+%dir %{_datadir}/apps/amarok/scripts/common
+%{_datadir}/apps/amarok/scripts/common/Publisher.py
+%{_datadir}/apps/amarok/scripts/common/Zeroconf.py
 
 %dir %{_datadir}/apps/amarok/scripts/templates
 %{_datadir}/apps/amarok/scripts/templates/amarok.rb
 %{_datadir}/apps/amarok/scripts/templates/python_qt_template.py
 %{_datadir}/apps/amarok/scripts/templates/ruby_qt_template.rb
+
+# amarok searches for executable programs for scripts
+# to figure out which files need to have execute permission, use this
+# find command:
+# $ find $RPM_BUILD_ROOT/usr/share/apps/amarok/scripts -perm +1
+
+#%dir %{_datadir}/apps/amarok/scripts/graphequalizer
+#%{_datadir}/apps/amarok/scripts/graphequalizer/README
+#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/graphequalizer/graphequalizer
+
+%dir %{_datadir}/apps/amarok/scripts/playlist2html
+%{_datadir}/apps/amarok/scripts/playlist2html/README
+%{_datadir}/apps/amarok/scripts/playlist2html/Playlist.py
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.py
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.py
 
 %dir %{_datadir}/apps/amarok/scripts/webcontrol
 %{_datadir}/apps/amarok/scripts/webcontrol/README
@@ -391,33 +394,25 @@ fi
 %{_datadir}/apps/amarok/scripts/webcontrol/template.thtml
 %{_datadir}/apps/amarok/scripts/webcontrol/vol_speaker.png
 %{_datadir}/apps/amarok/scripts/webcontrol/WebPublisher.py
+%{_datadir}/apps/amarok/scripts/webcontrol/WebControl.spec
+%{_datadir}/apps/amarok/scripts/webcontrol/smallstar.png
+%{_datadir}/apps/amarok/scripts/webcontrol/star.png
 %attr(755,root,root)  %{_datadir}/apps/amarok/scripts/webcontrol/WebControl.py
 
-%dir %{_datadir}/apps/amarok/scripts/common
-%{_datadir}/apps/amarok/scripts/common/Publisher.py
-%{_datadir}/apps/amarok/scripts/common/Zeroconf.py
+%dir %{_datadir}/apps/amarok/scripts/lyrics_astraweb
+%{_datadir}/apps/amarok/scripts/lyrics_astraweb/COPYING
+%{_datadir}/apps/amarok/scripts/lyrics_astraweb/README
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/lyrics_astraweb/lyrics_astraweb.rb
+%{_datadir}/apps/amarok/scripts/lyrics_astraweb/lyrics_astraweb.spec
 
-#%dir %{_datadir}/apps/amarok/scripts/shouter
-#%{_datadir}/apps/amarok/scripts/shouter/README
-#%{_datadir}/apps/amarok/scripts/shouter/ChangeLog
-#%{_datadir}/apps/amarok/scripts/shouter/Amarok.py
-#%{_datadir}/apps/amarok/scripts/shouter/Globals.py
-#%{_datadir}/apps/amarok/scripts/shouter/Playlist.py
-#%{_datadir}/apps/amarok/scripts/shouter/Services.py
-#%{_datadir}/apps/amarok/scripts/shouter/ShouterConfig.py
-#%{_datadir}/apps/amarok/scripts/shouter/ShouterExceptions.py
-#%{_datadir}/apps/amarok/scripts/shouter/SocketErrors.py
-#%{_datadir}/apps/amarok/scripts/shouter/StreamConfig.py
-#%{_datadir}/apps/amarok/scripts/shouter/StreamController.py
-#%{_datadir}/apps/amarok/scripts/shouter/StreamPublisher.py
-#%{_datadir}/apps/amarok/scripts/shouter/binfuncs.py
-#%{_datadir}/apps/amarok/scripts/shouter/debug.py
-#%{_datadir}/apps/amarok/scripts/shouter/propfind-req.xml
-#%dir %{_datadir}/apps/amarok/scripts/shouter/silence
-#%{_datadir}/apps/amarok/scripts/shouter/silence/silence-48.mp3
-#%dir %{_datadir}/apps/amarok/scripts/shouter/test
-#%{_datadir}/apps/amarok/scripts/shouter/test/client.py
-#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/shouter/Shouter.py
+%dir %{_datadir}/apps/amarok/scripts/lyrics_lyrc
+%{_datadir}/apps/amarok/scripts/lyrics_lyrc/COPYING
+%{_datadir}/apps/amarok/scripts/lyrics_lyrc/README
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/lyrics_lyrc/lyrics_lyrc.rb
+%{_datadir}/apps/amarok/scripts/lyrics_lyrc/lyrics_lyrc.spec
+
+%dir %{_datadir}/apps/amarok/scripts/ruby_debug
+%{_datadir}/apps/amarok/scripts/ruby_debug/debug.rb
 
 %if 0
 %dir %{_datadir}/apps/amarok/scripts/amarok_live
