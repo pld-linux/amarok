@@ -14,8 +14,8 @@
 %bcond_without	helix		# disable HelixPlayer engine
 %bcond_without	mp3players	# disable iPod and iRiver MP3 players support
 %bcond_with	nmm             # enable NMM audio backend
-%bcond_with	mysql		# enable mysql support
-%bcond_with	pgsql		# enables postgresql support
+%bcond_with	mysql		# enable MySQL support
+%bcond_with	pgsql		# enable PostgreSQL support
 #
 %ifarch i386
 %undefine	with_helix
@@ -41,7 +41,6 @@ BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
 %{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.10.0}
-BuildRequires:	gtk+2-devel
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
@@ -50,7 +49,8 @@ BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	libltdl-devel
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.4.0
-BuildRequires:	libvisual-devel >= 0.2.0
+#BuildRequires:	libvisual-devel >= 0.2.0
+#BuildRequires:	libvisual-devel < 0.3
 BuildRequires:	mpeg4ip-devel
 %{?with_mysql:BuildRequires:		mysql-devel}
 BuildRequires:	pcre-devel
@@ -65,6 +65,7 @@ BuildRequires:	taglib-devel >= 1.4
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
+Obsoletes:	amarok-arts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -223,6 +224,7 @@ cp -f /usr/share/automake/config.sub admin
 	--with%{!?with_nmm:out}-nmm \
 	--with%{!?with_mp3players:out}-libgpod \
 	--with%{!?with_mp3players:out}-ifp \
+	--without-libvisual \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-mysql \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-postgresql \
 	--disable-final \
@@ -248,13 +250,12 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-if [ "$1" = 1 ]; then
-	echo "Remember to install libvisual-plugins-* packages if you"
-	echo "want to have a visualizations in amaroK."
-fi
-/sbin/ldconfig
+#if [ "$1" = 1 ]; then
+#	echo "Remember to install libvisual-plugins-* packages if you"
+#	echo "want to have a visualizations in amaroK."
+#fi
 
+%post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
 %files -f %{name}.lang
