@@ -24,14 +24,14 @@
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-%define		_ver 1.4.0
-%define		_rel a
-Version:	%{_ver}%{_rel}
-Release:	1
+%define		_ver 1.4.1
+%define		_rel beta1
+Version:	%{_ver}
+Release:	0.%{_rel}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-# Source0-md5:	3ceffe6465290eef618861cdb81b420a
+Source0:	http://dl.sourceforge.net/amarok/%{name}-%{_ver}-%{_rel}.tar.bz2
+# Source0-md5:	ee043cf6efa3f2ac7b470eb6c050c0f7
 Patch0:		%{name}-helixplayer-morearchs.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
@@ -49,8 +49,7 @@ BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 BuildRequires:	libltdl-devel
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.4.0
-#BuildRequires:	libvisual-devel >= 0.2.0
-#BuildRequires:	libvisual-devel < 0.3
+BuildRequires:	libvisual-devel >= 0.4.0
 BuildRequires:	mpeg4ip-devel
 %{?with_mysql:BuildRequires:		mysql-devel}
 BuildRequires:	pcre-devel
@@ -191,16 +190,16 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
-%setup -q -n %{name}-%{_ver}
+%setup -q -n %{name}-%{_ver}-%{_rel}
 %patch0 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
 # see kde bug #110909
-sed -i -e 's/amarok_live//' amarok/src/scripts/Makefile.am
+%{__sed} -i -e 's/amarok_live//' amarok/src/scripts/Makefile.am
 
 # kill env, call interpreter directly, so rpm automatics could rule
-sed -i -e '
+%{__sed} -i -e '
 	1s,#!.*bin/env.*ruby,#!%{_bindir}/ruby,
 	1s,#!.*bin/env.*python,#!%{_bindir}/python,
 	1s,#!.*bin/env.*bash,#!/bin/bash,
@@ -224,7 +223,6 @@ cp -f /usr/share/automake/config.sub admin
 	--with%{!?with_nmm:out}-nmm \
 	--with%{!?with_mp3players:out}-libgpod \
 	--with%{!?with_mp3players:out}-ifp \
-	--without-libvisual \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-mysql \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-postgresql \
 	--disable-final \
@@ -250,10 +248,10 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-#if [ "$1" = 1 ]; then
-#	echo "Remember to install libvisual-plugins-* packages if you"
-#	echo "want to have a visualizations in amaroK."
-#fi
+if [ "$1" = 1 ]; then
+	echo "Remember to install libvisual-plugins-* packages if you"
+	echo "want to have a visualizations in amaroK."
+fi
 
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
@@ -264,7 +262,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarok
 %attr(755,root,root) %{_bindir}/amarokapp
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
-#%attr(755,root,root) %{_bindir}/amarok_libvisual
+%attr(755,root,root) %{_bindir}/amarok_libvisual
 %attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
 %{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
