@@ -21,7 +21,7 @@
 %undefine	with_helix
 %endif
 
-%defne		_beta	beta1
+%define		_beta	beta1
 
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
