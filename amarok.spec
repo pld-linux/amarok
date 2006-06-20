@@ -305,6 +305,7 @@ fi
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ifp-mediadevice.so
 %{_datadir}/services/amarok_ipod-mediadevice.desktop
 %{_datadir}/services/amarok_ifp-mediadevice.desktop
+%{_datadir}/services/amarok_njb-mediadevice.desktop
 %endif
 
 %if %{with akode}
@@ -416,6 +417,17 @@ fi
 %{_datadir}/apps/amarok/scripts/lyrics_lyrc/README
 %attr(755,root,root) %{_datadir}/apps/amarok/scripts/lyrics_lyrc/lyrics_lyrc.rb
 %{_datadir}/apps/amarok/scripts/lyrics_lyrc/lyrics_lyrc.spec
+
+%dir %{_datadir}/apps/amarok/scripts/score_default
+%{_datadir}/apps/amarok/scripts/score_default/COPYING
+%{_datadir}/apps/amarok/scripts/score_default/README
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/score_default/score_default.rb
+%{_datadir}/apps/amarok/scripts/score_default/score_default.spec
+%dir %{_datadir}/apps/amarok/scripts/score_impulsive
+%{_datadir}/apps/amarok/scripts/score_impulsive/COPYING
+%{_datadir}/apps/amarok/scripts/score_impulsive/README
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/score_impulsive/score_impulsive.rb
+%{_datadir}/apps/amarok/scripts/score_impulsive/score_impulsive.spec
 
 %dir %{_datadir}/apps/amarok/scripts/ruby_debug
 %{_datadir}/apps/amarok/scripts/ruby_debug/debug.rb
