@@ -30,7 +30,7 @@ Version:	1.4.1
 Release:	0.%{_beta}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta1}.tar.bz2
+Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta}.tar.bz2
 # Source0-md5:	ee043cf6efa3f2ac7b470eb6c050c0f7
 Patch0:		%{name}-helixplayer-morearchs.patch
 URL:		http://amarok.kde.org/
