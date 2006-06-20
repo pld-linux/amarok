@@ -21,16 +21,16 @@
 %undefine	with_helix
 %endif
 
+%defne		_beta	beta1
+
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-%define		_ver 1.4.1
-%define		_rel beta1
-Version:	%{_ver}
-Release:	0.%{_rel}.1
+Version:	1.4.1
+Release:	0.%{_beta}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{_ver}-%{_rel}.tar.bz2
+Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta1}.tar.bz2
 # Source0-md5:	ee043cf6efa3f2ac7b470eb6c050c0f7
 Patch0:		%{name}-helixplayer-morearchs.patch
 URL:		http://amarok.kde.org/
@@ -47,6 +47,7 @@ BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 %{?with_mp3players:BuildRequires:	libgpod-devel >= 0.2.0}
 %{?with_mp3players:BuildRequires:	libifp-devel}
 BuildRequires:	libltdl-devel
+%{?with_mp3players:BuildRequires:	libnjb-devel}
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.4.0
 BuildRequires:	libvisual-devel >= 0.4.0
@@ -56,6 +57,7 @@ BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
+BuildRequires:	ruby-devel >= 1.8
 BuildRequires:	sed >= 4.0
 %{!?with_included_sqlite:BuildRequires:	sqlite3-devel}
 BuildRequires:	taglib-devel >= 1.4
@@ -190,7 +192,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
-%setup -q -n %{name}-%{_ver}-%{_rel}
+%setup -q -n %{name}-%{version}-%{_beta}
 %patch0 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
