@@ -33,6 +33,7 @@ Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta}.tar.bz2
 # Source0-md5:	ee043cf6efa3f2ac7b470eb6c050c0f7
 Patch0:		%{name}-helixplayer-morearchs.patch
+Patch1:		%{name}-libnjb.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -194,6 +195,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %prep
 %setup -q -n %{name}-%{version}-%{_beta}
 %patch0 -p1
+%patch1 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
@@ -271,6 +273,8 @@ fi
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
 %{_libdir}/kde3/libamarok_generic-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_generic-mediadevice.so
+%{_libdir}/kde3/libamarok_njb-mediadevice.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_njb-mediadevice.so
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
 %{_libdir}/libamarok.la
