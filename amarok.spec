@@ -224,6 +224,7 @@ cp -f /usr/share/automake/config.sub admin
 	--with%{!?with_helix:out}-helix%{?with_helix:=usegivenpath} \
 	--with%{!?with_nmm:out}-nmm \
 	--with%{!?with_mp3players:out}-libgpod \
+	--with%{!?with_mp3players:out}-libnjb \
 	--with%{!?with_mp3players:out}-ifp \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-mysql \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-postgresql \
