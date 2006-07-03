@@ -21,17 +21,15 @@
 %undefine	with_helix
 %endif
 
-%define		_beta	beta1
-
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.1
-Release:	0.%{_beta}.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta}.tar.bz2
-# Source0-md5:	ee043cf6efa3f2ac7b470eb6c050c0f7
+Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
+# Source0-md5:	4ed6e766541c4227d1d8c8eb93d0b891
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
 URL:		http://amarok.kde.org/
@@ -193,7 +191,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
-%setup -q -n %{name}-%{version}-%{_beta}
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
