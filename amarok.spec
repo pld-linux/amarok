@@ -1,8 +1,9 @@
 # TODO:
-#	* postgresql support alongside mysql
-#	* NMM audio backend support (fix build - propably some BRs)
-#	* make descriptions less useless
-#	* track http://websvn.kde.org/trunk/extragear/multimedia/amarok/TODO?rev=470324&r1=470292&r2=470324
+#	- postgresql support alongside mysql
+#	- NMM audio backend support (fix build - propably some BRs)
+#	- make descriptions less useless
+#	- track http://websvn.kde.org/trunk/extragear/multimedia/amarok/TODO?rev=470324&r1=470292&r2=470324
+#	- include /usr/bin/amarok_proxy.rb (proxy server for last.fm, but req. ruby)
 #
 # Conditional builds:
 %bcond_with	gstreamer	# enable gstreamer (gst10 not stable)
@@ -205,7 +206,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 	1s,#!.*bin/env.*ruby,#!%{_bindir}/ruby,
 	1s,#!.*bin/env.*python,#!%{_bindir}/python,
 	1s,#!.*bin/env.*bash,#!/bin/bash,
-' amarok/src/scripts/*/*.{py,rb,sh}
+' amarok/src/scripts/*/*.{py,rb,sh} amarok/src/amarok_proxy.rb
 
 %build
 cp -f /usr/share/automake/config.sub admin
@@ -271,8 +272,6 @@ fi
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
 %{_libdir}/kde3/libamarok_generic-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_generic-mediadevice.so
-%{_libdir}/kde3/libamarok_njb-mediadevice.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_njb-mediadevice.so
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
 %{_libdir}/libamarok.la
@@ -292,17 +291,21 @@ fi
 %{_datadir}/config.kcfg/amarok.kcfg
 %{_datadir}/services/amarok_generic-mediadevice.desktop
 %{_datadir}/services/amarok_void-engine_plugin.desktop
+%{_datadir}/services/lastfm.protocol
+%{_datadir}/servicetypes/amarok_codecinstall.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
 # TODO: move to subpackage
 %if %{with mp3players}
-%{_libdir}/kde3/libamarok_ipod-mediadevice.la
 %{_libdir}/kde3/libamarok_ifp-mediadevice.la
-%attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ifp-mediadevice.so
-%{_datadir}/services/amarok_ipod-mediadevice.desktop
+%{_libdir}/kde3/libamarok_ipod-mediadevice.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
+%{_libdir}/kde3/libamarok_njb-mediadevice.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_njb-mediadevice.so
 %{_datadir}/services/amarok_ifp-mediadevice.desktop
+%{_datadir}/services/amarok_ipod-mediadevice.desktop
 %{_datadir}/services/amarok_njb-mediadevice.desktop
 %endif
 
@@ -339,7 +342,6 @@ fi
 %attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
 %{_datadir}/config.kcfg/xinecfg.kcfg
 %{_datadir}/services/amarok_xine-engine.desktop
-#%{_datadir}/services/amarok_xineengine_plugin.desktop
 %endif
 
 %if %{with xmms}
