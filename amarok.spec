@@ -11,7 +11,7 @@
 %bcond_without	xine		# disable xine engine
 %bcond_without	xmms 		# disable xmms wrapping
 %bcond_without	zeroconf	# disable support for zeroconf
-%bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA)
+%bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA), needs sqlite >= 3.3 otherwise
 %bcond_without	helix		# disable HelixPlayer engine
 %bcond_without	mp3players	# disable iPod and iRiver MP3 players support
 %bcond_with	nmm             # enable NMM audio backend
