@@ -59,7 +59,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	ruby-devel >= 1.8
 BuildRequires:	sed >= 4.0
-%{!?with_included_sqlite:BuildRequires:	sqlite3-devel}
+%{!?with_included_sqlite:BuildRequires:	sqlite3-devel >= 3.3}
 BuildRequires:	taglib-devel >= 1.4
 %{?with_xine:BuildRequires:	xine-lib-devel >= 1.1.1}
 %{?with_xmms:BuildRequires:	xmms-devel}
