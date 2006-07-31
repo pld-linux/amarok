@@ -268,6 +268,7 @@ fi
 %attr(755,root,root) %{_bindir}/amarokapp
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
 %attr(755,root,root) %{_bindir}/amarok_libvisual
+%attr(755,root,root) %{_bindir}/amarok_proxy.rb
 %attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
 %{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
@@ -276,6 +277,14 @@ fi
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
 %{_libdir}/libamarok.la
+%{_libdir}/kde3/libamarok_daap-mediadevice.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_daap-mediadevice.so
+%{_libdir}/kde3/libamarok_massstorage-device.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_massstorage-device.so
+%{_libdir}/kde3/libamarok_nfs-device.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_nfs-device.so
+%{_libdir}/kde3/libamarok_smb-device.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_smb-device.so
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/*.rc
@@ -292,7 +301,11 @@ fi
 %{_datadir}/config.kcfg/amarok.kcfg
 %{_datadir}/services/amarok_generic-mediadevice.desktop
 %{_datadir}/services/amarok_void-engine_plugin.desktop
-#%{_datadir}/services/lastfm.protocol
+%{_datadir}/services/amarok_daap-mediadevice.desktop
+%{_datadir}/services/amarok_massstorage-device.desktop
+%{_datadir}/services/amarok_nfs-device.desktop
+%{_datadir}/services/amarok_smb-device.desktop
+%{_datadir}/services/amaroklastfm.protocol
 %{_datadir}/servicetypes/amarok_codecinstall.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
