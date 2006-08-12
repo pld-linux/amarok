@@ -14,7 +14,7 @@
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA), needs sqlite >= 3.3 otherwise
 %bcond_without	helix		# disable HelixPlayer engine
 %bcond_without	mp3players	# disable iPod and iRiver MP3 players support
-%bcond_with	nmm             # enable NMM audio backend
+%bcond_with	nmm		# enable NMM audio backend
 %bcond_with	mysql		# enable MySQL support
 %bcond_with	pgsql		# enable PostgreSQL support
 #
@@ -404,7 +404,7 @@ fi
 %{_datadir}/apps/amarok/scripts/webcontrol/WebControl.spec
 %{_datadir}/apps/amarok/scripts/webcontrol/smallstar.png
 %{_datadir}/apps/amarok/scripts/webcontrol/star.png
-%attr(755,root,root)  %{_datadir}/apps/amarok/scripts/webcontrol/WebControl.py
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/webcontrol/WebControl.py
 
 %dir %{_datadir}/apps/amarok/scripts/lyrics_astraweb
 %{_datadir}/apps/amarok/scripts/lyrics_astraweb/COPYING
@@ -437,5 +437,5 @@ fi
 %{_datadir}/apps/amarok/scripts/amarok_live/README
 %{_datadir}/apps/amarok/scripts/amarok_live/amarok.live.remaster.part1.sh
 %{_datadir}/apps/amarok/scripts/amarok_live/amarok.live.remaster.part2.sh
-%attr(755,root,root)  %{_datadir}/apps/amarok/scripts/amarok_live/amarok_live.py
+%attr(755,root,root) %{_datadir}/apps/amarok/scripts/amarok_live/amarok_live.py
 %endif
