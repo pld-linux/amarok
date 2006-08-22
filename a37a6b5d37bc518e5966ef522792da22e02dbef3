@@ -1,0 +1,4 @@
+- commented out akode support:
+  SVN commit 423723 by markey:
+  Disable akode engine. It (the engine) and/or akode is buggy and only implements a small subset
+  of our features. We're getting tons of bug reports for it. So that's it.
