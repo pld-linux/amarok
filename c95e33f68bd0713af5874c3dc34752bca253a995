@@ -1,0 +1,4 @@
+- BR: rpm-pythonprov because of:
+  error: Couldn't exec /usr/lib/rpm/pythondeps.sh: No such file or directory
+  getOutputFrom(): Broken pipe
+  Error: package build failed. (no more info)
