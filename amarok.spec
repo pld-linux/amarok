@@ -22,16 +22,16 @@
 %undefine	with_helix
 %endif
 
-%define		_beta	beta1
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.2
-Release:	0.%{_beta}.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}-%{_beta}.tar.bz2
-# Source0-md5:	bb5740f8dd207814cdb8adb3b9574763
+#Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
+Source0:	ftp://sunsite.informatik.rwth-aachen.de/pub/Linux/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
+# Source0-md5:	a1e5aac4294eb049021d1e2889c0d214
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
 URL:		http://amarok.kde.org/
@@ -193,7 +193,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
-%setup -q -n %{name}-%{version}-%{_beta}
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
@@ -269,6 +269,7 @@ fi
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
 %attr(755,root,root) %{_bindir}/amarok_libvisual
 %attr(755,root,root) %{_bindir}/amarok_proxy.rb
+%attr(755,root,root) %{_bindir}/amarok_daapserver.rb
 %attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
 %{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
@@ -287,6 +288,7 @@ fi
 %attr(755,root,root) %{_libdir}/kde3/libamarok_smb-device.so
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
+%{_datadir}/apps/amarok/ruby_lib
 %{_datadir}/apps/amarok/*.rc
 %{_datadir}/apps/amarok/data
 %{_datadir}/apps/amarok/icons
@@ -306,6 +308,8 @@ fi
 %{_datadir}/services/amarok_nfs-device.desktop
 %{_datadir}/services/amarok_smb-device.desktop
 %{_datadir}/services/amaroklastfm.protocol
+%{_datadir}/services/amarokitpc.protocol
+%{_datadir}/services/amarokpcast.protocol
 %{_datadir}/servicetypes/amarok_codecinstall.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
