@@ -25,12 +25,13 @@
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.4.1
-Release:	2
+Version:	1.4.2
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-# Source0-md5:	4ed6e766541c4227d1d8c8eb93d0b891
+#Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
+Source0:	http://sunsite.icm.edu.pl/pub/unix/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
+# Source0-md5:	a1e5aac4294eb049021d1e2889c0d214
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
 URL:		http://amarok.kde.org/
@@ -50,7 +51,6 @@ BuildRequires:	libltdl-devel
 %{?with_mp3players:BuildRequires:	libnjb-devel}
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.4.0
-BuildRequires:	libtunepimp-devel < 0.5.1
 BuildRequires:	libvisual-devel >= 0.4.0
 BuildRequires:	mpeg4ip-devel
 %{?with_mysql:BuildRequires:		mysql-devel}
@@ -292,7 +292,7 @@ fi
 %{_datadir}/config.kcfg/amarok.kcfg
 %{_datadir}/services/amarok_generic-mediadevice.desktop
 %{_datadir}/services/amarok_void-engine_plugin.desktop
-%{_datadir}/services/lastfm.protocol
+#%{_datadir}/services/lastfm.protocol
 %{_datadir}/servicetypes/amarok_codecinstall.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
