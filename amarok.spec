@@ -13,7 +13,7 @@
 %bcond_without	zeroconf	# disable support for zeroconf
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA), needs sqlite >= 3.3 otherwise
 %bcond_without	helix		# disable HelixPlayer engine
-%bcond_without	mp3players	# disable iPod and iRiver MP3 players support
+%bcond_with	mp3players	# disable iPod and iRiver MP3 players support
 %bcond_with	nmm		# enable NMM audio backend
 %bcond_with	mysql		# enable MySQL support
 %bcond_with	pgsql		# enable PostgreSQL support
@@ -26,7 +26,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.2
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -268,6 +268,8 @@ fi
 %attr(755,root,root) %{_bindir}/amarokapp
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
 %attr(755,root,root) %{_bindir}/amarok_libvisual
+%attr(755,root,root) %{_bindir}/amarok_proxy.rb
+%attr(755,root,root) %{_bindir}/amarok_daapserver.rb
 %attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
 %{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
@@ -276,8 +278,17 @@ fi
 %{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
 %{_libdir}/libamarok.la
+%{_libdir}/kde3/libamarok_daap-mediadevice.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_daap-mediadevice.so
+%{_libdir}/kde3/libamarok_massstorage-device.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_massstorage-device.so
+%{_libdir}/kde3/libamarok_nfs-device.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_nfs-device.so
+%{_libdir}/kde3/libamarok_smb-device.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_smb-device.so
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
+%{_datadir}/apps/amarok/ruby_lib
 %{_datadir}/apps/amarok/*.rc
 %{_datadir}/apps/amarok/data
 %{_datadir}/apps/amarok/icons
@@ -292,7 +303,13 @@ fi
 %{_datadir}/config.kcfg/amarok.kcfg
 %{_datadir}/services/amarok_generic-mediadevice.desktop
 %{_datadir}/services/amarok_void-engine_plugin.desktop
-#%{_datadir}/services/lastfm.protocol
+%{_datadir}/services/amarok_daap-mediadevice.desktop
+%{_datadir}/services/amarok_massstorage-device.desktop
+%{_datadir}/services/amarok_nfs-device.desktop
+%{_datadir}/services/amarok_smb-device.desktop
+%{_datadir}/services/amaroklastfm.protocol
+%{_datadir}/services/amarokitpc.protocol
+%{_datadir}/services/amarokpcast.protocol
 %{_datadir}/servicetypes/amarok_codecinstall.desktop
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
