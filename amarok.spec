@@ -47,8 +47,9 @@ BuildRequires:	kdebase-devel
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 %{?with_mp3players:BuildRequires:	libgpod-devel >= 0.2.0}
 %{?with_mp3players:BuildRequires:	libifp-devel}
+%{?with_mp3players:BuildRequires:       libmtp-devel}
+%{?with_mp3players:BuildRequires:       libnjb-devel}
 BuildRequires:	libltdl-devel
-%{?with_mp3players:BuildRequires:	libnjb-devel}
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.4.0
 BuildRequires:	libvisual-devel >= 0.4.0
@@ -227,6 +228,7 @@ cp -f /usr/share/automake/config.sub admin
 	--with%{!?with_nmm:out}-nmm \
 	--with%{!?with_mp3players:out}-libgpod \
 	--with%{!?with_mp3players:out}-libnjb \
+	--with%{!?with_mp3players:out}-libmtp \
 	--with%{!?with_mp3players:out}-ifp \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-mysql \
 	--%{?with_mysql:en}%{!?with_mysql:dis}able-postgresql \
