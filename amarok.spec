@@ -66,6 +66,7 @@ BuildRequires:	sed >= 4.0
 BuildRequires:	taglib-devel >= 1.4
 %{?with_xine:BuildRequires:	xine-lib-devel >= 1.1.1}
 %{?with_xmms:BuildRequires:	xmms-devel}
+Requires(post):	/sbin/ldconfig
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
@@ -256,12 +257,13 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+/sbin/ldconfig
 if [ "$1" = 1 ]; then
 	echo "Remember to install libvisual-plugins-* packages if you"
 	echo "want to have a visualizations in amaroK."
 fi
 
-%post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
 %files -f %{name}.lang
