@@ -1,9 +1,10 @@
 # TODO:
-#	- postgresql support alongside mysql
-#	- NMM audio backend support (fix build - propably some BRs)
-#	- make descriptions less useless
-#	- track http://websvn.kde.org/trunk/extragear/multimedia/amarok/TODO?rev=470324&r1=470292&r2=470324
-#	- include /usr/bin/amarok_proxy.rb (proxy server for last.fm, but req. ruby)
+# - postgresql support alongside mysql
+# - NMM audio backend support (fix build - propably some BRs)
+# - make descriptions less useless
+# - track http://websvn.kde.org/trunk/extragear/multimedia/amarok/TODO?rev=470324&r1=470292&r2=470324
+# - include /usr/bin/amarok_proxy.rb (proxy server for last.fm, but req. ruby)
+# - main package pulls /usr/bin/ruby
 #
 # Conditional builds:
 %bcond_with	gstreamer	# enable gstreamer (gst10 not stable)
