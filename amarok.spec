@@ -14,7 +14,7 @@
 %bcond_without	zeroconf	# disable support for zeroconf
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA), needs sqlite >= 3.3 otherwise
 %bcond_without	helix		# disable HelixPlayer engine
-%bcond_with	mp3players	# disable iPod and iRiver MP3 players support
+%bcond_without	mp3players	# disable iPod and iRiver MP3 players support
 %bcond_with	nmm		# enable NMM audio backend
 %bcond_with	mysql		# enable MySQL support
 %bcond_with	pgsql		# enable PostgreSQL support
@@ -326,10 +326,13 @@ fi
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ifp-mediadevice.so
 %{_libdir}/kde3/libamarok_ipod-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
+%{_libdir}/kde3/libamarok_mtp-mediadevice.la
+%attr(755,root,root) %{_libdir}/kde3/libamarok_mtp-mediadevice.so
 %{_libdir}/kde3/libamarok_njb-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_njb-mediadevice.so
 %{_datadir}/services/amarok_ifp-mediadevice.desktop
 %{_datadir}/services/amarok_ipod-mediadevice.desktop
+%{_datadir}/services/amarok_mtp-mediadevice.desktop
 %{_datadir}/services/amarok_njb-mediadevice.desktop
 %endif
 
