@@ -228,6 +228,7 @@ cp -f /usr/share/automake/config.sub admin
 	--with%{!?with_akode:out}-akode \
 	--with%{!?with_helix:out}-helix%{?with_helix:=usegivenpath} \
 	--with%{!?with_nmm:out}-nmm \
+	--with%{!?with_xmms:out}-xmms \
 	--with%{!?with_mp3players:out}-libgpod \
 	--with%{!?with_mp3players:out}-libnjb \
 	--with%{!?with_mp3players:out}-libmtp \
