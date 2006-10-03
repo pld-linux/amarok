@@ -35,6 +35,7 @@ Source0:	http://mirrors.isc.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{v
 # Source0-md5:	b0b4f8952ad23705c70815d50fd0af52
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
+Patch2:		kde-ac260-lt.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -53,7 +54,7 @@ BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 %{?with_mp3players:BuildRequires:	libnjb-devel}
 BuildRequires:	libltdl-devel
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
-BuildRequires:	libtunepimp-devel >= 0.4.0
+BuildRequires:	libtunepimp-devel >= 0.5.1-6
 BuildRequires:	libvisual-devel >= 0.4.0
 BuildRequires:	mpeg4ip-devel
 %{?with_mysql:BuildRequires:		mysql-devel}
@@ -200,6 +201,8 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
