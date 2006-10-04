@@ -48,7 +48,6 @@ BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 %{?with_mp3players:BuildRequires:	libgpod-devel >= 0.2.0}
-%{?with_mp3players:BuildRequires:	libgpod-devel < 0.3.1}
 %{?with_mp3players:BuildRequires:	libifp-devel}
 %{?with_mp3players:BuildRequires:	libmtp-devel}
 %{?with_mp3players:BuildRequires:	libnjb-devel}
@@ -74,6 +73,9 @@ Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
 Obsoletes:	amarok-arts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# temporary hack for proper libgpod::itdb_get_mountpoint() detection.
+%define		filterout_ld	-Wl,--as-needed
 
 %description
 A KDE audio player.
