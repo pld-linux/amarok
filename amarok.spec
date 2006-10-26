@@ -27,7 +27,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.3
-Release:	1
+Release:	4
 License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -35,6 +35,7 @@ Source0:	http://mirrors.isc.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{v
 # Source0-md5:	b0b4f8952ad23705c70815d50fd0af52
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
+Patch2:		kde-ac260-lt.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -48,8 +49,8 @@ BuildRequires:	kdebase-devel
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 %{?with_mp3players:BuildRequires:	libgpod-devel >= 0.2.0}
 %{?with_mp3players:BuildRequires:	libifp-devel}
-%{?with_mp3players:BuildRequires:       libmtp-devel}
-%{?with_mp3players:BuildRequires:       libnjb-devel}
+%{?with_mp3players:BuildRequires:	libmtp-devel}
+%{?with_mp3players:BuildRequires:	libnjb-devel}
 BuildRequires:	libltdl-devel
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.4.0
@@ -72,6 +73,9 @@ Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
 Obsoletes:	amarok-arts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# temporary hack for proper libgpod::itdb_get_mountpoint() detection.
+%define		filterout_ld	-Wl,--as-needed
 
 %description
 A KDE audio player.
@@ -199,6 +203,8 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
 
