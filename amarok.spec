@@ -53,7 +53,7 @@ BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 %{?with_mp3players:BuildRequires:	libnjb-devel}
 BuildRequires:	libltdl-devel
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
-BuildRequires:	libtunepimp-devel >= 0.5.1-6
+BuildRequires:	libtunepimp-devel >= 0.4.0
 BuildRequires:	libvisual-devel >= 0.4.0
 BuildRequires:	mpeg4ip-devel
 %{?with_mysql:BuildRequires:		mysql-devel}
