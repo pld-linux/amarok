@@ -26,13 +26,13 @@
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.4.3
-Release:	3
+Version:	1.4.4
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
 Source0:	http://mirrors.isc.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	b0b4f8952ad23705c70815d50fd0af52
+# Source0-md5:	56a9aec42088c338b81252f8e0651781
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
 Patch2:		kde-ac260-lt.patch
@@ -298,6 +298,9 @@ fi
 %attr(755,root,root) %{_libdir}/kde3/libamarok_nfs-device.so
 %{_libdir}/kde3/libamarok_smb-device.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_smb-device.so
+%{_libdir}/ruby_lib/http11.rb
+%{_libdir}/ruby_lib/libhttp11.la
+%attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0.0.0
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/ruby_lib
@@ -307,6 +310,8 @@ fi
 %{_datadir}/apps/amarok/images
 %{_datadir}/apps/amarok/themes
 %{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
+%{_datadir}/apps/konqueror/servicemenus/amarok_addaspodcast.desktop
+%{_datadir}/apps/konqueror/servicemenus/amarok_play_audiocd.desktop
 %{_datadir}/apps/konqsidebartng/add/amarok.desktop
 %{_datadir}/apps/konqsidebartng/entries/amarok.desktop
 %{_datadir}/apps/konqsidebartng/kicker_entries/amarok.desktop
