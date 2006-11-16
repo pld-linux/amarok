@@ -5,6 +5,7 @@
 # - track http://websvn.kde.org/trunk/extragear/multimedia/amarok/TODO?rev=470324&r1=470292&r2=470324
 # - include /usr/bin/amarok_proxy.rb (proxy server for last.fm, but req. ruby)
 # - main package pulls /usr/bin/ruby
+# - monitor http://bugs.kde.org/show_bug.cgi?id=137390 to remove the temporary fix
 #
 # Conditional builds:
 %bcond_with	gstreamer	# enable gstreamer (gst10 not stable)
@@ -35,8 +36,9 @@ Source0:	http://mirrors.isc.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{v
 # Source0-md5:	56a9aec42088c338b81252f8e0651781
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
-Patch2:		kde-ac260-lt.patch
-Patch3:		kde-common-PLD.patch
+Patch2:		%{name}-smp.patch
+Patch3:		kde-ac260-lt.patch
+Patch4:		kde-common-PLD.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -204,8 +206,9 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
+%patch2 -p0
 %patch3 -p1
+%patch4 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
