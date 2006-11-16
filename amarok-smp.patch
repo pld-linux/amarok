@@ -1,0 +1,11 @@
+--- amarok/src/app.cpp.old	2006-10-26 22:40:20.000000000 +0200
++++ amarok/src/app.cpp	2006-11-15 17:15:31.170432000 +0100
+@@ -115,7 +115,7 @@
+     new Amarok::DcopScriptHandler();
+     new Amarok::DcopDevicesHandler();
+ 
+-    fixHyperThreading();
++//    fixHyperThreading();
+ 
+     QTimer::singleShot( 0, this, SLOT( continueInit() ) );
+ 
