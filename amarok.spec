@@ -40,6 +40,7 @@ Patch2:		%{name}-smp.patch
 Patch3:		%{name}-sparc.patch
 Patch4:		kde-ac260-lt.patch
 Patch5:		kde-common-PLD.patch
+Patch6:		%{name}-gcc4.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -211,6 +212,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %patch3 -p0
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
