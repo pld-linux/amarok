@@ -1,0 +1,19 @@
+--- amarok-1.4.4/amarok/src/engine/helix/helix-sp/helix-include/common/include/hxtypes.h.orig	2006-10-26 22:40:20.000000000 +0200
++++ amarok-1.4.4/amarok/src/engine/helix/helix-sp/helix-include/common/include/hxtypes.h	2006-12-11 23:23:07.181351000 +0100
+@@ -326,16 +326,6 @@
+ #endif
+ #endif
+ 
+-#ifndef NOMINMAX
+-/* Always use macro versions of these! */
+-#ifndef max
+-#define max(a, b)  (((a) > (b)) ? (a) : (b))
+-#endif
+-#ifndef min
+-#define min(a, b)  (((a) < (b)) ? (a) : (b))
+-#endif
+-#endif
+-
+ /* Should use capitalized macro versions of these, as the lowercase
+ 		versions conflict with the STL spec */
+ //get these from sys/param.h to avoid tons of warnings about redefining them:
