@@ -28,7 +28,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.4
-Release:	5
+Release:	5.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -268,6 +268,8 @@ rm -rf $RPM_BUILD_ROOT
 # remove bogus dir
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
+rm $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
+
 %find_lang amarok --all-name --with-kde
 
 %clean
@@ -282,7 +284,7 @@ fi
 
 %postun	-p /sbin/ldconfig
 
-%files -f %{name}.lang
+%files -f amarok.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/amarok
@@ -291,24 +293,17 @@ fi
 %attr(755,root,root) %{_bindir}/amarok_libvisual
 %attr(755,root,root) %{_bindir}/amarok_proxy.rb
 %attr(755,root,root) %{_bindir}/amarok_daapserver.rb
+%attr(755,root,root) %{_libdir}/libamarok.so
 %attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
-%{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
-%{_libdir}/kde3/libamarok_generic-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_generic-mediadevice.so
-%{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
-%{_libdir}/libamarok.la
-%{_libdir}/kde3/libamarok_daap-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_daap-mediadevice.so
-%{_libdir}/kde3/libamarok_massstorage-device.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_massstorage-device.so
-%{_libdir}/kde3/libamarok_nfs-device.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_nfs-device.so
-%{_libdir}/kde3/libamarok_smb-device.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_smb-device.so
 %{_libdir}/ruby_lib/http11.rb
-%{_libdir}/ruby_lib/libhttp11.la
+%attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so
 %attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0.0.0
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
@@ -342,13 +337,9 @@ fi
 %{_iconsdir}/*/*/apps/amarok.*
 # TODO: move to subpackage
 %if %{with mp3players}
-%{_libdir}/kde3/libamarok_ifp-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ifp-mediadevice.so
-%{_libdir}/kde3/libamarok_ipod-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
-%{_libdir}/kde3/libamarok_mtp-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_mtp-mediadevice.so
-%{_libdir}/kde3/libamarok_njb-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_njb-mediadevice.so
 %{_datadir}/services/amarok_ifp-mediadevice.desktop
 %{_datadir}/services/amarok_ipod-mediadevice.desktop
@@ -359,7 +350,6 @@ fi
 %if %{with akode}
 %files akode
 %defattr(644,root,root,755)
-%{_libdir}/kde3/libamarok_aKode-engine.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_aKode-engine.so
 %{_datadir}/services/amarok_aKode-engine.desktop
 %endif
@@ -367,7 +357,6 @@ fi
 %if %{with gstreamer}
 %files gstreamer
 %defattr(644,root,root,755)
-%{_libdir}/kde3/libamarok_gst10engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_gst10engine_plugin.so
 %{_datadir}/config.kcfg/gstconfig.kcfg
 %{_datadir}/services/amarok_gst10engine_plugin.desktop
@@ -376,7 +365,6 @@ fi
 %if %{with helix}
 %files helix
 %defattr(644,root,root,755)
-%{_libdir}/kde3/libamarok_helixengine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_helixengine_plugin.so
 %{_datadir}/config.kcfg/helixconfig.kcfg
 %{_datadir}/services/amarok_helixengine_plugin.desktop
@@ -385,7 +373,6 @@ fi
 %if %{with xine}
 %files xine
 %defattr(644,root,root,755)
-%{_libdir}/kde3/libamarok_xine-engine.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
 %{_datadir}/config.kcfg/xinecfg.kcfg
 %{_datadir}/services/amarok_xine-engine.desktop
