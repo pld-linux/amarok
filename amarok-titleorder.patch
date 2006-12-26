@@ -1,0 +1,20 @@
+--- amarok-1.4.4/amarok/src/app.cpp~	2006-10-26 23:40:20.000000000 +0300
++++ amarok-1.4.4/amarok/src/app.cpp	2006-12-26 21:52:35.829202536 +0200
+@@ -994,7 +990,7 @@
+         if ( oldState == Engine::Paused )
+             Amarok::OSD::instance()->OSDWidget::show( i18n( "state, as in playing", "Play" ) );
+         if ( !bundle.prettyTitle().isEmpty() )
+-            m_pPlaylistWindow->setCaption( i18n("Amarok - %1").arg( bundle.veryNiceTitle() ) );
++            m_pPlaylistWindow->setCaption( i18n("%1 - Amarok").arg( bundle.veryNiceTitle() ) );
+         break;
+ 
+     case Engine::Paused:
+@@ -1016,7 +1012,7 @@
+ {
+     Amarok::OSD::instance()->show( bundle );
+     if ( !bundle.prettyTitle().isEmpty() )
+-        m_pPlaylistWindow->setCaption( i18n("Amarok - %1").arg( bundle.veryNiceTitle() ) );
++        m_pPlaylistWindow->setCaption( i18n("%1 - Amarok").arg( bundle.veryNiceTitle() ) );
+ 
+     TrackToolTip::instance()->setTrack( bundle );
+ }
