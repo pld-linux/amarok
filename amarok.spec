@@ -28,7 +28,7 @@ Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.4
-Release:	6
+Release:	7
 License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
@@ -41,6 +41,7 @@ Patch3:		%{name}-sparc.patch
 Patch4:		kde-ac260-lt.patch
 Patch5:		kde-common-PLD.patch
 Patch6:		%{name}-gcc4.patch
+Patch7:		%{name}-titleorder.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -54,9 +55,9 @@ BuildRequires:	kdebase-devel
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 %{?with_mp3players:BuildRequires:	libgpod-devel >= 0.2.0}
 %{?with_mp3players:BuildRequires:	libifp-devel}
+BuildRequires:	libltdl-devel
 %{?with_mp3players:BuildRequires:	libmtp-devel}
 %{?with_mp3players:BuildRequires:	libnjb-devel}
-BuildRequires:	libltdl-devel
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.5.1-6
 BuildRequires:	libvisual-devel >= 0.4.0
@@ -213,6 +214,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
@@ -268,7 +270,7 @@ rm -rf $RPM_BUILD_ROOT
 # remove bogus dir
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
-rm $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
+rm $RPM_BUILD_ROOT%{_libdir}/ruby_lib/libhttp11.la
 
 %find_lang amarok --all-name --with-kde
 
@@ -295,13 +297,21 @@ fi
 %attr(755,root,root) %{_bindir}/amarok_daapserver.rb
 %attr(755,root,root) %{_libdir}/libamarok.so
 %attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
+%{_libdir}/libamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
+%{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_generic-mediadevice.so
+%{_libdir}/kde3/libamarok_generic-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
+%{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_daap-mediadevice.so
+%{_libdir}/kde3/libamarok_daap-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_massstorage-device.so
+%{_libdir}/kde3/libamarok_massstorage-device.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_nfs-device.so
+%{_libdir}/kde3/libamarok_nfs-device.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_smb-device.so
+%{_libdir}/kde3/libamarok_smb-device.la
 %{_libdir}/ruby_lib/http11.rb
 %attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so
 %attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0.0.0
@@ -338,9 +348,13 @@ fi
 # TODO: move to subpackage
 %if %{with mp3players}
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ifp-mediadevice.so
+%{_libdir}/kde3/libamarok_ifp-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
+%{_libdir}/kde3/libamarok_ipod-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_mtp-mediadevice.so
+%{_libdir}/kde3/libamarok_mtp-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_njb-mediadevice.so
+%{_libdir}/kde3/libamarok_njb-mediadevice.la
 %{_datadir}/services/amarok_ifp-mediadevice.desktop
 %{_datadir}/services/amarok_ipod-mediadevice.desktop
 %{_datadir}/services/amarok_mtp-mediadevice.desktop
@@ -366,6 +380,7 @@ fi
 %files helix
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde3/libamarok_helixengine_plugin.so
+%{_libdir}/kde3/libamarok_helixengine_plugin.la
 %{_datadir}/config.kcfg/helixconfig.kcfg
 %{_datadir}/services/amarok_helixengine_plugin.desktop
 %endif
@@ -374,6 +389,7 @@ fi
 %files xine
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
+%{_libdir}/kde3/libamarok_xine-engine.la
 %{_datadir}/config.kcfg/xinecfg.kcfg
 %{_datadir}/services/amarok_xine-engine.desktop
 %endif
