@@ -41,6 +41,7 @@ Patch3:		%{name}-sparc.patch
 Patch4:		kde-ac260-lt.patch
 Patch5:		kde-common-PLD.patch
 Patch6:		%{name}-gcc4.patch
+Patch7:		%{name}-titleorder.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -54,9 +55,9 @@ BuildRequires:	kdebase-devel
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 %{?with_mp3players:BuildRequires:	libgpod-devel >= 0.2.0}
 %{?with_mp3players:BuildRequires:	libifp-devel}
+BuildRequires:	libltdl-devel
 %{?with_mp3players:BuildRequires:	libmtp-devel}
 %{?with_mp3players:BuildRequires:	libnjb-devel}
-BuildRequires:	libltdl-devel
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.5.1-6
 BuildRequires:	libvisual-devel >= 0.4.0
@@ -213,6 +214,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
@@ -223,7 +225,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 # kill env, call interpreter directly, so rpm automatics could rule
 %{__sed} -i -e '
 	1s,#!.*bin/env.*ruby,#!%{_bindir}/ruby,
-	1s,#!.*bin/env.*python,#!%{_bindir}/python,
+	1s,#!.*bin/env.*python,#!%{__python},
 	1s,#!.*bin/env.*bash,#!/bin/bash,
 ' amarok/src/scripts/*/*.{py,rb,sh} amarok/src/amarok_proxy.rb
 
