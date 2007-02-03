@@ -6,6 +6,8 @@
 # - include /usr/bin/amarok_proxy.rb (proxy server for last.fm, but req. ruby)
 # - main package pulls /usr/bin/ruby
 # - monitor http://bugs.kde.org/show_bug.cgi?id=137390 to remove the temporary fix
+# - karma & MFS (see README)
+# - ProjectM (see README)
 #
 # Conditional builds:
 %bcond_with	gstreamer	# enable gstreamer (gst10 not stable)
@@ -27,16 +29,16 @@
 Summary:	A KDE audio player
 Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.4.4
-Release:	8
+Version:	1.4.5
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-Source0:	http://mirrors.isc.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	56a9aec42088c338b81252f8e0651781
+#Source0:	http://mirrors.isc.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
+Source0:	http://mark.kollide.net/%{name}-%{version}.tar.bz2
+# Source0-md5:	81696ff44989334f0fc5dfd4142ded6d
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
-Patch2:		%{name}-smp.patch
 Patch3:		%{name}-sparc.patch
 Patch4:		kde-ac260-lt.patch
 Patch5:		kde-common-PLD.patch
@@ -53,15 +55,15 @@ BuildRequires:	gettext-devel
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
-%{?with_mp3players:BuildRequires:	libgpod-devel >= 0.2.0}
-%{?with_mp3players:BuildRequires:	libifp-devel}
+%{?with_mp3players:BuildRequires:	libgpod-devel >= 0.4.2}
+%{?with_mp3players:BuildRequires:	libifp-devel >= 1.0.0.2}
 BuildRequires:	libltdl-devel
-%{?with_mp3players:BuildRequires:	libmtp-devel}
-%{?with_mp3players:BuildRequires:	libnjb-devel}
+%{?with_mp3players:BuildRequires:	libmtp-devel >= 0.1.1}
+%{?with_mp3players:BuildRequires:	libnjb-devel >= 2.2.4}
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.5.1-6
 BuildRequires:	libvisual-devel >= 0.4.0
-BuildRequires:	mpeg4ip-devel
+BuildRequires:	mpeg4ip-devel >= 1:1.5
 %{?with_mysql:BuildRequires:		mysql-devel}
 BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
@@ -209,8 +211,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p0
-%patch3 -p0
+%patch3 -p1
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
@@ -225,7 +226,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 # kill env, call interpreter directly, so rpm automatics could rule
 %{__sed} -i -e '
 	1s,#!.*bin/env.*ruby,#!%{_bindir}/ruby,
-	1s,#!.*bin/env.*python,#!%{_bindir}/python,
+	1s,#!.*bin/env.*python,#!%{__python},
 	1s,#!.*bin/env.*bash,#!/bin/bash,
 ' amarok/src/scripts/*/*.{py,rb,sh} amarok/src/amarok_proxy.rb
 
