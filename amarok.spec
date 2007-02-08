@@ -13,7 +13,7 @@
 %bcond_with	gstreamer	# enable gstreamer (gst10 not stable)
 %bcond_without	mas		# disable MAS audio backend
 %bcond_without	xine		# disable xine engine
-%bcond_without	xmms 		# disable xmms wrapping
+%bcond_with	xmms 		# disable xmms wrapping
 %bcond_without	zeroconf	# disable support for zeroconf
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA), needs sqlite >= 3.3 otherwise
 %bcond_without	helix		# disable HelixPlayer engine
