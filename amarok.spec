@@ -33,10 +33,8 @@ Version:	1.4.5
 Release:	0.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-#Source0:	http://dl.sourceforge.net/amarok/%{name}-%{version}.tar.bz2
-#Source0:	http://mirrors.isc.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-Source0:	http://mark.kollide.net/%{name}-%{version}.tar.bz2
-# Source0-md5:	81696ff44989334f0fc5dfd4142ded6d
+Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
+# Source0-md5:	1dac1cb5ac9c9cdabdab5f69b39e92c8
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
 Patch3:		%{name}-sparc.patch
