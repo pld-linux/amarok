@@ -270,6 +270,7 @@ rm -rf $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
 rm $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
+rm $RPM_BUILD_ROOT%{_libdir}/ruby_lib/libhttp11.la
 
 %find_lang amarok --all-name --with-kde
 
