@@ -26,7 +26,7 @@
 %endif
 
 Summary:	A KDE audio player
-Summary(pl.UTF-8):   Odtwarzacz audio dla KDE
+Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.5
 Release:	2
@@ -90,7 +90,7 @@ Odtwarzacz audio dla KDE.
 
 %package akode
 Summary:	Plugin akode
-Summary(pl.UTF-8):   Wtyczka akode
+Summary(pl.UTF-8):	Wtyczka akode
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
@@ -103,7 +103,7 @@ Wtyczka akode.
 
 %package helix
 Summary:	Helix/Realplayer playback support for amarok
-Summary(pl.UTF-8):   Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka
+Summary(pl.UTF-8):	Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	helix-core
@@ -117,7 +117,7 @@ Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka.
 
 %package gstreamer
 Summary:	Plugin gstreamer
-Summary(pl.UTF-8):   Wtyczka gstreamer
+Summary(pl.UTF-8):	Wtyczka gstreamer
 Group:		X11/Applications/Multimedia
 # deps, to get it working:
 # mp3 decoder:	gstreamer-mad
@@ -145,7 +145,7 @@ Wtyczka gstreamer.
 
 %package xine
 Summary:	Plugin xine
-Summary(pl.UTF-8):   Wtyczka xine
+Summary(pl.UTF-8):	Wtyczka xine
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	xine-plugin-audio
@@ -159,7 +159,7 @@ Wtyczka xine.
 
 %package zeroconf
 Summary:	Zeroconf data
-Summary(pl.UTF-8):   Dane dla zeroconf
+Summary(pl.UTF-8):	Dane dla zeroconf
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	kdenetwork-kdnssd
@@ -173,7 +173,7 @@ Dane dla zeroconf.
 
 %package scripts
 Summary:	amaroK scripts
-Summary(pl.UTF-8):   Skrypty amaroKa
+Summary(pl.UTF-8):	Skrypty amaroKa
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	kdebase-kdialog
