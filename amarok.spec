@@ -13,7 +13,6 @@
 %bcond_with	gstreamer	# enable gstreamer (gst10 not stable)
 %bcond_without	mas		# disable MAS audio backend
 %bcond_without	xine		# disable xine engine
-%bcond_with	xmms 		# disable xmms wrapping
 %bcond_without	zeroconf	# disable support for zeroconf
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA), needs sqlite >= 3.3 otherwise
 %bcond_without	helix		# disable HelixPlayer engine
@@ -30,7 +29,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):   Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.5
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -72,12 +71,12 @@ BuildRequires:	sed >= 4.0
 %{!?with_included_sqlite:BuildRequires:	sqlite3-devel >= 3.3}
 BuildRequires:	taglib-devel >= 1.4
 %{?with_xine:BuildRequires:	xine-lib-devel >= 1.1.1}
-%{?with_xmms:BuildRequires:	xmms-devel}
 Requires(post):	/sbin/ldconfig
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
 Obsoletes:	amarok-arts
+Obsoletes:	amarok-xmms
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # temporary hack for proper libgpod::itdb_get_mountpoint() detection.
@@ -158,18 +157,6 @@ Plugin xine.
 %description xine -l pl.UTF-8
 Wtyczka xine.
 
-%package xmms
-Summary:	Xmms wrapper
-Summary(pl.UTF-8):   Wrapper xmms
-Group:		X11/Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
-
-%description xmms
-Xmms wrapper.
-
-%description xmms -l pl.UTF-8
-Wrapper xmms.
-
 %package zeroconf
 Summary:	Zeroconf data
 Summary(pl.UTF-8):   Dane dla zeroconf
@@ -244,7 +231,6 @@ cp -f /usr/share/automake/config.sub admin
 	--with%{!?with_akode:out}-akode \
 	--with%{!?with_helix:out}-helix%{?with_helix:=usegivenpath} \
 	--with%{!?with_nmm:out}-nmm \
-	--with%{!?with_xmms:out}-xmms \
 	--with%{!?with_mp3players:out}-libgpod \
 	--with%{!?with_mp3players:out}-libnjb \
 	--with%{!?with_mp3players:out}-libmtp \
@@ -378,12 +364,6 @@ fi
 %attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
 %{_datadir}/config.kcfg/xinecfg.kcfg
 %{_datadir}/services/amarok_xine-engine.desktop
-%endif
-
-%if %{with xmms}
-%files xmms
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/amarok_xmmswrapper2
 %endif
 
 %if 0
