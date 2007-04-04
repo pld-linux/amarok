@@ -242,7 +242,7 @@ cp -f /usr/share/automake/config.sub admin
 	--with-qt-libraries=%{_libdir} \
 	--with%{!?with_included_sqlite:out}-included-sqlite
 
-%{__make} -j3
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
