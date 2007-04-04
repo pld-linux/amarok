@@ -29,7 +29,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.5
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -242,7 +242,7 @@ cp -f /usr/share/automake/config.sub admin
 	--with-qt-libraries=%{_libdir} \
 	--with%{!?with_included_sqlite:out}-included-sqlite
 
-%{__make}
+%{__make} -j3
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -290,6 +290,7 @@ fi
 %attr(755,root,root) %{_libdir}/kde3/libamarok_massstorage-device.so
 %attr(755,root,root) %{_libdir}/kde3/libamarok_nfs-device.so
 %attr(755,root,root) %{_libdir}/kde3/libamarok_smb-device.so
+%dir %{_libdir}/ruby_lib
 %{_libdir}/ruby_lib/http11.rb
 %attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so
 %attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0.0.0
