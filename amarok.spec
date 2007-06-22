@@ -28,12 +28,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.4.5
-Release:	6
+Version:	1.4.6
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	1dac1cb5ac9c9cdabdab5f69b39e92c8
+# Source0-md5:	b3519d042732101acb74469746656cf0
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
 Patch2:		%{name}-smp.patch
@@ -214,8 +214,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %{__sed} -i -e '
 	1s,#!.*bin/env.*ruby,#!%{_bindir}/ruby,
 	1s,#!.*bin/env.*python,#!%{__python},
-	1s,#!.*bin/env.*bash,#!/bin/bash,
-' amarok/src/scripts/*/*.{py,rb,sh} amarok/src/amarok_proxy.rb
+' amarok/src/scripts/*/*.{py,rb} amarok/src/amarok_proxy.rb
 
 %build
 cp -f /usr/share/automake/config.sub admin
