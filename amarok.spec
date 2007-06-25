@@ -26,14 +26,14 @@
 %endif
 
 Summary:	A KDE audio player
-Summary(pl):	Odtwarzacz audio dla KDE
+Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.4.5
-Release:	5
+Version:	1.4.6
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	1dac1cb5ac9c9cdabdab5f69b39e92c8
+# Source0-md5:	b3519d042732101acb74469746656cf0
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
 Patch2:		%{name}-smp.patch
@@ -86,12 +86,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 A KDE audio player.
 
-%description -l pl
+%description -l pl.UTF-8
 Odtwarzacz audio dla KDE.
 
 %package akode
 Summary:	Plugin akode
-Summary(pl):	Wtyczka akode
+Summary(pl.UTF-8):	Wtyczka akode
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
@@ -99,12 +99,12 @@ Provides:	%{name}-plugin = %{version}-%{release}
 %description akode
 Plugin akode.
 
-%description akode -l pl
+%description akode -l pl.UTF-8
 Wtyczka akode.
 
 %package helix
 Summary:	Helix/Realplayer playback support for amarok
-Summary(pl):	Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka
+Summary(pl.UTF-8):	Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	helix-core
@@ -113,12 +113,12 @@ Provides:	%{name}-plugin = %{version}-%{release}
 %description helix
 Helix/Realplayer playback support for amarok.
 
-%description helix -l pl
+%description helix -l pl.UTF-8
 Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka.
 
 %package gstreamer
 Summary:	Plugin gstreamer
-Summary(pl):	Wtyczka gstreamer
+Summary(pl.UTF-8):	Wtyczka gstreamer
 Group:		X11/Applications/Multimedia
 # deps, to get it working:
 # mp3 decoder:	gstreamer-mad
@@ -141,12 +141,12 @@ Provides:	%{name}-plugin = %{version}-%{release}
 %description gstreamer
 Plugin gstreamer.
 
-%description gstreamer -l pl
+%description gstreamer -l pl.UTF-8
 Wtyczka gstreamer.
 
 %package xine
 Summary:	Plugin xine
-Summary(pl):	Wtyczka xine
+Summary(pl.UTF-8):	Wtyczka xine
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	xine-plugin-audio
@@ -155,12 +155,12 @@ Provides:	%{name}-plugin = %{version}-%{release}
 %description xine
 Plugin xine.
 
-%description xine -l pl
+%description xine -l pl.UTF-8
 Wtyczka xine.
 
 %package zeroconf
 Summary:	Zeroconf data
-Summary(pl):	Dane dla zeroconf
+Summary(pl.UTF-8):	Dane dla zeroconf
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	kdenetwork-kdnssd
@@ -169,12 +169,12 @@ Provides:	%{name}-plugin = %{version}-%{release}
 %description zeroconf
 Zeroconf data.
 
-%description zeroconf -l pl
+%description zeroconf -l pl.UTF-8
 Dane dla zeroconf.
 
 %package scripts
 Summary:	amaroK scripts
-Summary(pl):	Skrypty amaroKa
+Summary(pl.UTF-8):	Skrypty amaroKa
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	kdebase-kdialog
@@ -187,10 +187,10 @@ amaroK scripts allow you extend amaroK functionality.
 You can learn more about scripts in amaroK from here:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
-%description scripts -l pl
-Skrypty amaroKa pozwalaj±ce rozszerzaæ jego funkcjonalno¶æ.
+%description scripts -l pl.UTF-8
+Skrypty amaroKa pozwalajÄ…ce rozszerzaÄ‡ jego funkcjonalnoÅ›Ä‡.
 
-Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
+WiÄ™cej o skryptach w amaroKu moÅ¼na dowiedzieÄ‡ siÄ™ stÄ…d:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
@@ -214,8 +214,7 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 %{__sed} -i -e '
 	1s,#!.*bin/env.*ruby,#!%{_bindir}/ruby,
 	1s,#!.*bin/env.*python,#!%{__python},
-	1s,#!.*bin/env.*bash,#!/bin/bash,
-' amarok/src/scripts/*/*.{py,rb,sh} amarok/src/amarok_proxy.rb
+' amarok/src/scripts/*/*.{py,rb} amarok/src/amarok_proxy.rb
 
 %build
 cp -f /usr/share/automake/config.sub admin
@@ -405,13 +404,11 @@ fi
 # find command:
 # $ find $RPM_BUILD_ROOT/usr/share/apps/amarok/scripts -perm +1
 
-#%dir %{_datadir}/apps/amarok/scripts/graphequalizer
-#%{_datadir}/apps/amarok/scripts/graphequalizer/README
-#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/graphequalizer/graphequalizer
-
 %dir %{_datadir}/apps/amarok/scripts/playlist2html
 %{_datadir}/apps/amarok/scripts/playlist2html/README
 %{_datadir}/apps/amarok/scripts/playlist2html/Playlist.py
+%{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.spec
+%{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.spec
 %attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.py
 %attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.py
 
