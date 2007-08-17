@@ -28,12 +28,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.4.6
+Version:	1.4.7
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	b3519d042732101acb74469746656cf0
+# Source0-md5:	f1299e142da8a69bc3cff5d585e38d43
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
 Patch2:		%{name}-smp.patch
