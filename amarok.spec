@@ -76,6 +76,29 @@ Requires(post):	/sbin/ldconfig
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
+Suggests:	libvisual-plugin-actor-JESS
+Suggests:	libvisual-plugin-actor-bumpscope
+Suggests:	libvisual-plugin-actor-corona
+Suggests:	libvisual-plugin-actor-flower
+Suggests:	libvisual-plugin-actor-gdkpixbuf
+Suggests:	libvisual-plugin-actor-gforce
+Suggests:	libvisual-plugin-actor-gstreamer
+Suggests:	libvisual-plugin-actor-infinite
+Suggests:	libvisual-plugin-actor-jakdaw
+Suggests:	libvisual-plugin-actor-lv_analyzer
+Suggests:	libvisual-plugin-actor-lv_gltest
+Suggests:	libvisual-plugin-actor-lv_scope
+Suggests:	libvisual-plugin-actor-madspin
+Suggests:	libvisual-plugin-actor-nastyfft
+Suggests:	libvisual-plugin-actor-oinksie
+Suggests:	libvisual-plugin-input-alsa
+Suggests:	libvisual-plugin-input-esd
+Suggests:	libvisual-plugin-input-jack
+Suggests:	libvisual-plugin-input-mplayer
+Suggests:	libvisual-plugin-morph-alphablend
+Suggests:	libvisual-plugin-morph-flash
+Suggests:	libvisual-plugin-morph-slide
+Suggests:	libvisual-plugin-morph-tentacle
 Obsoletes:	amarok-arts
 Obsoletes:	amarok-xmms
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -264,12 +287,7 @@ rm $RPM_BUILD_ROOT%{_libdir}/ruby_lib/libhttp11.la
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-/sbin/ldconfig
-if [ "$1" = 1 ]; then
-	echo "Remember to install libvisual-plugins-* packages if you"
-	echo "want to have a visualizations in amaroK."
-fi
+%post -p /sbin/ldconfig
 
 %postun	-p /sbin/ldconfig
 
