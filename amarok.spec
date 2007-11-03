@@ -29,7 +29,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.7
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -101,6 +101,8 @@ Suggests:	libvisual-plugin-morph-slide
 Suggests:	libvisual-plugin-morph-tentacle
 Obsoletes:	amarok-arts
 Obsoletes:	amarok-xmms
+# sr@Latn vs. sr@latin
+Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # temporary hack for proper libgpod::itdb_get_mountpoint() detection.
@@ -282,6 +284,8 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 rm $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
 rm $RPM_BUILD_ROOT%{_libdir}/ruby_lib/libhttp11.la
 
+[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
+	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
 %find_lang amarok --all-name --with-kde
 
 %clean
