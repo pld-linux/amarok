@@ -29,7 +29,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.7
-Release:	4
+Release:	5
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -42,6 +42,7 @@ Patch4:		kde-ac260-lt.patch
 Patch5:		kde-common-PLD.patch
 Patch6:		%{name}-gcc4.patch
 Patch7:		%{name}-titleorder.patch
+Patch8:		%{name}-mpeg4ip.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -61,7 +62,7 @@ BuildRequires:	libltdl-devel
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.5.1-6
 BuildRequires:	libvisual-devel >= 0.4.0
-BuildRequires:	mpeg4ip-devel >= 1:1.5
+BuildRequires:	mpeg4ip-devel >= 1:1.6
 %{?with_mysql:BuildRequires:		mysql-devel}
 BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
@@ -228,6 +229,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
