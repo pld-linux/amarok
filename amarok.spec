@@ -34,14 +34,14 @@ License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/unstable/amarok/1.80/src/%{name}-1.80.tar.bz2
 # Source0-md5:	ed37b7f92454a5163d6e4060602a6805
-Patch0:		%{name}-helixplayer-morearchs.patch
-Patch1:		%{name}-libnjb.patch
-Patch2:		%{name}-smp.patch
-Patch3:		%{name}-sparc.patch
-Patch4:		kde-ac260-lt.patch
-Patch5:		kde-common-PLD.patch
-Patch6:		%{name}-gcc4.patch
-Patch7:		%{name}-titleorder.patch
+#Patch0:		%{name}-helixplayer-morearchs.patch
+#Patch1:		%{name}-libnjb.patch
+#Patch2:		%{name}-smp.patch
+#Patch3:		%{name}-sparc.patch
+#Patch4:		kde-ac260-lt.patch
+#Patch5:		kde-common-PLD.patch
+#Patch6:		%{name}-gcc4.patch
+#Patch7:		%{name}-titleorder.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
