@@ -69,6 +69,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	ruby-devel >= 1.8
 BuildRequires:	sed >= 4.0
+BuildRequires:	strigi-devel >= 0.5.5
 %{!?with_included_sqlite:BuildRequires:	sqlite3-devel >= 3.3}
 BuildRequires:	taglib-devel >= 1.4
 %{?with_xine:BuildRequires:	xine-lib-devel >= 1.1.1}
@@ -255,6 +256,7 @@ cd amarok-build
 %install
 rm -rf $RPM_BUILD_ROOT
 
+cd amarok-build
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	kde_htmldir=%{_kdedocdir} \
@@ -263,12 +265,12 @@ rm -rf $RPM_BUILD_ROOT
 # remove bogus dir
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
-rm $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
-rm $RPM_BUILD_ROOT%{_libdir}/ruby_lib/libhttp11.la
+#rm $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
+#rm $RPM_BUILD_ROOT%{_libdir}/ruby_lib/libhttp11.la
 
-[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
-	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
-%find_lang amarok --all-name --with-kde
+#[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
+#	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
+#%find_lang amarok --all-name --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -277,7 +279,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun	-p /sbin/ldconfig
 
-%files -f amarok.lang
+%files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/amarok
@@ -382,14 +384,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files scripts
 %defattr(644,root,root,755)
-%dir %{_datadir}/apps/amarok/scripts/common
-%{_datadir}/apps/amarok/scripts/common/Publisher.py
-%{_datadir}/apps/amarok/scripts/common/Zeroconf.py
+#%dir %{_datadir}/apps/amarok/scripts/common
+#%{_datadir}/apps/amarok/scripts/common/Publisher.py
+#%{_datadir}/apps/amarok/scripts/common/Zeroconf.py
 
-%dir %{_datadir}/apps/amarok/scripts/templates
-%{_datadir}/apps/amarok/scripts/templates/amarok.rb
-%{_datadir}/apps/amarok/scripts/templates/python_qt_template.py
-%{_datadir}/apps/amarok/scripts/templates/ruby_qt_template.rb
+#%dir %{_datadir}/apps/amarok/scripts/templates
+#%{_datadir}/apps/amarok/scripts/templates/amarok.rb
+#%{_datadir}/apps/amarok/scripts/templates/python_qt_template.py
+#%{_datadir}/apps/amarok/scripts/templates/ruby_qt_template.rb
 
 # amarok searches for executable programs for scripts
 # to figure out which files need to have execute permission, use this
@@ -400,39 +402,39 @@ rm -rf $RPM_BUILD_ROOT
 #%{_datadir}/apps/amarok/scripts/graphequalizer/README
 #%attr(755,root,root) %{_datadir}/apps/amarok/scripts/graphequalizer/graphequalizer
 
-%dir %{_datadir}/apps/amarok/scripts/playlist2html
-%{_datadir}/apps/amarok/scripts/playlist2html/README
-%{_datadir}/apps/amarok/scripts/playlist2html/Playlist.py
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.py
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.py
+#%dir %{_datadir}/apps/amarok/scripts/playlist2html
+#%{_datadir}/apps/amarok/scripts/playlist2html/README
+#%{_datadir}/apps/amarok/scripts/playlist2html/Playlist.py
+#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.py
+#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.py
 
-%dir %{_datadir}/apps/amarok/scripts/webcontrol
-%{_datadir}/apps/amarok/scripts/webcontrol/README
-%{_datadir}/apps/amarok/scripts/webcontrol/Globals.py
-%{_datadir}/apps/amarok/scripts/webcontrol/Playlist.py
-%{_datadir}/apps/amarok/scripts/webcontrol/RequestHandler.py
-%{_datadir}/apps/amarok/scripts/webcontrol/amarok_cut.png
-%{_datadir}/apps/amarok/scripts/webcontrol/controlbackground.png
-%{_datadir}/apps/amarok/scripts/webcontrol/main.css
-%{_datadir}/apps/amarok/scripts/webcontrol/main.js
-%{_datadir}/apps/amarok/scripts/webcontrol/player_end.png
-%{_datadir}/apps/amarok/scripts/webcontrol/player_pause.png
-%{_datadir}/apps/amarok/scripts/webcontrol/player_play.png
-%{_datadir}/apps/amarok/scripts/webcontrol/player_start.png
-%{_datadir}/apps/amarok/scripts/webcontrol/player_stop.png
-%{_datadir}/apps/amarok/scripts/webcontrol/template.thtml
-%{_datadir}/apps/amarok/scripts/webcontrol/vol_speaker.png
-%{_datadir}/apps/amarok/scripts/webcontrol/WebPublisher.py
-%{_datadir}/apps/amarok/scripts/webcontrol/WebControl.spec
-%{_datadir}/apps/amarok/scripts/webcontrol/smallstar.png
-%{_datadir}/apps/amarok/scripts/webcontrol/star.png
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/webcontrol/WebControl.py
+#%dir %{_datadir}/apps/amarok/scripts/webcontrol
+#%{_datadir}/apps/amarok/scripts/webcontrol/README
+#%{_datadir}/apps/amarok/scripts/webcontrol/Globals.py
+#%{_datadir}/apps/amarok/scripts/webcontrol/Playlist.py
+#%{_datadir}/apps/amarok/scripts/webcontrol/RequestHandler.py
+#%{_datadir}/apps/amarok/scripts/webcontrol/amarok_cut.png
+#%{_datadir}/apps/amarok/scripts/webcontrol/controlbackground.png
+#%{_datadir}/apps/amarok/scripts/webcontrol/main.css
+#%{_datadir}/apps/amarok/scripts/webcontrol/main.js
+#%{_datadir}/apps/amarok/scripts/webcontrol/player_end.png
+#%{_datadir}/apps/amarok/scripts/webcontrol/player_pause.png
+#%{_datadir}/apps/amarok/scripts/webcontrol/player_play.png
+#%{_datadir}/apps/amarok/scripts/webcontrol/player_start.png
+#%{_datadir}/apps/amarok/scripts/webcontrol/player_stop.png
+#%{_datadir}/apps/amarok/scripts/webcontrol/template.thtml
+#%{_datadir}/apps/amarok/scripts/webcontrol/vol_speaker.png
+#%{_datadir}/apps/amarok/scripts/webcontrol/WebPublisher.py
+#%{_datadir}/apps/amarok/scripts/webcontrol/WebControl.spec
+#%{_datadir}/apps/amarok/scripts/webcontrol/smallstar.png
+#%{_datadir}/apps/amarok/scripts/webcontrol/star.png
+#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/webcontrol/WebControl.py
 
-%dir %{_datadir}/apps/amarok/scripts/lyrics_astraweb
-%{_datadir}/apps/amarok/scripts/lyrics_astraweb/COPYING
-%{_datadir}/apps/amarok/scripts/lyrics_astraweb/README
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/lyrics_astraweb/lyrics_astraweb.rb
-%{_datadir}/apps/amarok/scripts/lyrics_astraweb/lyrics_astraweb.spec
+#%dir %{_datadir}/apps/amarok/scripts/lyrics_astraweb
+#%{_datadir}/apps/amarok/scripts/lyrics_astraweb/COPYING
+#%{_datadir}/apps/amarok/scripts/lyrics_astraweb/README
+#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/lyrics_astraweb/lyrics_astraweb.rb
+#%{_datadir}/apps/amarok/scripts/lyrics_astraweb/lyrics_astraweb.spec
 
 %dir %{_datadir}/apps/amarok/scripts/lyrics_lyrc
 %{_datadir}/apps/amarok/scripts/lyrics_lyrc/COPYING
