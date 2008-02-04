@@ -328,8 +328,8 @@ rm -rf $RPM_BUILD_ROOT
 #{_libdir}/ruby_lib/http11.rb
 #attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so
 #attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0.0.0
-#dir %{_datadir}/apps/amarok
-#dir %{_datadir}/apps/amarok/scripts
+%dir %{_datadir}/apps/amarok
+%dir %{_datadir}/apps/amarok/scripts
 #%{_datadir}/apps/amarok/ruby_lib
 #{_datadir}/apps/amarok/*.rc
 %{_datadir}/apps/amarok/data
