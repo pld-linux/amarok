@@ -6,8 +6,8 @@
 # - include /usr/bin/amarok_proxy.rb (proxy server for last.fm, but req. ruby)
 # - main package pulls /usr/bin/ruby
 # - monitor http://bugs.kde.org/show_bug.cgi?id=137390 to remove the temporary fix
-# - karma & MFS (see README)
 # - ProjectM (see README)
+# - karma & MFS (see README)
 #
 # Conditional builds:
 %bcond_with	gstreamer	# enable gstreamer (gst10 not stable)
@@ -29,7 +29,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.8.0
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/unstable/amarok/1.80/src/%{name}-1.80.tar.bz2
@@ -51,8 +51,8 @@ BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
 %{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.10.0}
 BuildRequires:	kde4-kdebase-devel
-%{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kde4-kdemultimedia-devel
+%{?with_akode:BuildRequires:	kdemultimedia-akode}
 %{?with_mp3players:BuildRequires:	libgpod-devel >= 0.4.2}
 %{?with_mp3players:BuildRequires:	libifp-devel >= 1.0.0.2}
 BuildRequires:	libltdl-devel
@@ -69,8 +69,8 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	ruby-devel >= 1.8
 BuildRequires:	sed >= 4.0
-BuildRequires:	strigi-devel >= 0.5.5
 %{!?with_included_sqlite:BuildRequires:	sqlite3-devel >= 3.3}
+BuildRequires:	strigi-devel >= 0.5.5
 BuildRequires:	taglib-devel >= 1.4
 %{?with_xine:BuildRequires:	xine-lib-devel >= 1.1.1}
 Requires(post):	/sbin/ldconfig
@@ -244,12 +244,12 @@ Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
 
 %build
 
-export QTDIR=%{_prefix}
+export QTDIR=%{_libdir}/qt4
 install -d amarok-build
 cd amarok-build
 %cmake \
 -DCMAKE_INSTALL_PREFIX=%{_prefix} \
-        ../
+		../
 
 %{__make}
 
@@ -283,104 +283,157 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/amarok
-%attr(755,root,root) %{_bindir}/amarokapp
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
-%attr(755,root,root) %{_bindir}/amarok_libvisual
-%attr(755,root,root) %{_bindir}/amarok_proxy.rb
-%attr(755,root,root) %{_bindir}/amarok_daapserver.rb
-%attr(755,root,root) %{_libdir}/libamarok.so
-%attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
-%attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
-%attr(755,root,root) %{_libdir}/kde3/libamarok_generic-mediadevice.so
-%attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
-%attr(755,root,root) %{_libdir}/kde3/libamarok_daap-mediadevice.so
-%attr(755,root,root) %{_libdir}/kde3/libamarok_massstorage-device.so
-%attr(755,root,root) %{_libdir}/kde3/libamarok_nfs-device.so
-%attr(755,root,root) %{_libdir}/kde3/libamarok_smb-device.so
-%dir %{_libdir}/ruby_lib
-%{_libdir}/ruby_lib/http11.rb
-%attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so
-%attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0.0.0
-%dir %{_datadir}/apps/amarok
-%dir %{_datadir}/apps/amarok/scripts
-%{_datadir}/apps/amarok/ruby_lib
-%{_datadir}/apps/amarok/*.rc
+#attr(755,root,root) %{_bindir}/amarok_libvisual
+#attr(755,root,root) %{_bindir}/amarok_proxy.rb
+#attr(755,root,root) %{_bindir}/amarok_daapserver.rb
+%attr(755,root,root) %{_libdir}/libamaroklib.so
+%attr(755,root,root) %{_libdir}/libamaroklib.so.*.*.*
+%attr(755,root,root) %{_libdir}/libamarok_taglib.so
+%attr(755,root,root) %{_libdir}/libamarok_taglib.so.1
+%attr(755,root,root) %{_libdir}/libamarok_taglib.so.1.0.0
+%attr(755,root,root) %{_libdir}/libamaroklib.so.1
+%attr(755,root,root) %{_libdir}/libamarokplasma.so
+%attr(755,root,root) %{_libdir}/libamarokplasma.so.1
+%attr(755,root,root) %{_libdir}/libamarokplasma.so.1.0.0
+%attr(755,root,root) %{_libdir}/strigi/strigita_audible.so
+%attr(755,root,root) %{_libdir}/strigi/strigita_mp4.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_containment_context.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_currenttrack.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lastfmevents.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lyrics.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_serviceinfo.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_wikipedia.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_current.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lastfm.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lyrics.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_service.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_wikipedia.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_service_ampache.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_service_jamendo.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_service_lastfm.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_service_magnatunestore.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_service_mp3tunes.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_service_shoutcast.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_ampache.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_lastfm.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_magnatunestore.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_mp3tunes.so
+%attr(755,root,root) %{_libdir}/kde4/libamarok_collection-daapcollection.so
+%attr(755,root,root) %{_libdir}/kde4/libamarok_collection-sqlcollection.so
+%attr(755,root,root) %{_libdir}/kde4/libamarok_generic-mediadevice.so
+%attr(755,root,root) %{_libdir}/kde4/libamarok_phonon-engine.so
+%attr(755,root,root) %{_libdir}/kde4/libamarok_void-engine_plugin.so
+#dir %{_libdir}/ruby_lib
+#{_libdir}/ruby_lib/http11.rb
+#attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so
+#attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0.0.0
+#dir %{_datadir}/apps/amarok
+#dir %{_datadir}/apps/amarok/scripts
+#%{_datadir}/apps/amarok/ruby_lib
+#{_datadir}/apps/amarok/*.rc
 %{_datadir}/apps/amarok/data
 %{_datadir}/apps/amarok/icons
 %{_datadir}/apps/amarok/images
-%{_datadir}/apps/amarok/themes
-%{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
-%{_datadir}/apps/konqueror/servicemenus/amarok_addaspodcast.desktop
-%{_datadir}/apps/konqueror/servicemenus/amarok_play_audiocd.desktop
-%{_datadir}/apps/konqsidebartng/add/amarok.desktop
-%{_datadir}/apps/konqsidebartng/entries/amarok.desktop
-%{_datadir}/apps/konqsidebartng/kicker_entries/amarok.desktop
+%{_datadir}/apps/desktoptheme
+#{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
+#{_datadir}/apps/konqueror/servicemenus/amarok_addaspodcast.desktop
+#{_datadir}/apps/konqueror/servicemenus/amarok_play_audiocd.desktop
+#{_datadir}/apps/konqsidebartng/add/amarok.desktop
+#{_datadir}/apps/konqsidebartng/entries/amarok.desktop
+#{_datadir}/apps/konqsidebartng/kicker_entries/amarok.desktop
 %{_datadir}/apps/profiles/amarok.profile.xml
 %{_datadir}/config/amarokrc
 %{_datadir}/config.kcfg/amarok.kcfg
-%{_datadir}/services/amarok_generic-mediadevice.desktop
-%{_datadir}/services/amarok_void-engine_plugin.desktop
-%{_datadir}/services/amarok_daap-mediadevice.desktop
-%{_datadir}/services/amarok_massstorage-device.desktop
-%{_datadir}/services/amarok_nfs-device.desktop
-%{_datadir}/services/amarok_smb-device.desktop
-%{_datadir}/services/amaroklastfm.protocol
-%{_datadir}/services/amarokitpc.protocol
-%{_datadir}/services/amarokpcast.protocol
-%{_datadir}/servicetypes/amarok_codecinstall.desktop
-%{_datadir}/servicetypes/amarok_plugin.desktop
-%{_desktopdir}/kde/amarok.desktop
+%{_datadir}/kde4/services/amarok_generic-mediadevice.desktop
+%{_datadir}/kde4/services/amarok_void-engine_plugin.desktop
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.collection.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.context.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.mediabrowser.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.player.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.playlist.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.playlistbrowser.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.script.xml
+%{_datadir}/kde4/services/ServiceMenus/amarok_append.desktop
+%{_datadir}/kde4/services/amarok-containment-context.desktop
+%{_datadir}/kde4/services/amarok-context-applet-currenttrack.desktop
+%{_datadir}/kde4/services/amarok-context-applet-lastfmevents.desktop
+%{_datadir}/kde4/services/amarok-context-applet-lyrics.desktop
+%{_datadir}/kde4/services/amarok-context-applet-serviceinfo.desktop
+%{_datadir}/kde4/services/amarok-context-applet-wikipedia.desktop
+%{_datadir}/kde4/services/amarok-data-engine-current.desktop
+%{_datadir}/kde4/services/amarok-data-engine-lastfm.desktop
+%{_datadir}/kde4/services/amarok-data-engine-lyrics.desktop
+%{_datadir}/kde4/services/amarok-data-engine-service.desktop
+%{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
+%{_datadir}/kde4/services/amarok_collection-daapcollection.desktop
+%{_datadir}/kde4/services/amarok_collection-sqlcollection.desktop
+%{_datadir}/kde4/services/amarok_phonon-engine.desktop
+%{_datadir}/kde4/services/amarok_service_ampache.desktop
+%{_datadir}/kde4/services/amarok_service_ampache_config.desktop
+%{_datadir}/kde4/services/amarok_service_jamendo.desktop
+%{_datadir}/kde4/services/amarok_service_lastfm.desktop
+%{_datadir}/kde4/services/amarok_service_lastfm_config.desktop
+%{_datadir}/kde4/services/amarok_service_magnatunestore.desktop
+%{_datadir}/kde4/services/amarok_service_magnatunestore_config.desktop
+%{_datadir}/kde4/services/amarok_service_mp3tunes.desktop
+%{_datadir}/kde4/services/amarok_service_mp3tunes_config.desktop
+%{_datadir}/kde4/services/amarok_service_shoutcast.desktop
+%{_datadir}/kde4/servicetypes/amarok_context_applet.desktop
+%{_datadir}/kde4/servicetypes/amarok_data_engine.desktop
+%{_datadir}/kde4/servicetypes/amarok_plugin.desktop
+%{_desktopdir}/kde4/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
 # TODO: move to subpackage
-%if %{with mp3players}
-%attr(755,root,root) %{_libdir}/kde3/libamarok_ifp-mediadevice.so
-%attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
-%attr(755,root,root) %{_libdir}/kde3/libamarok_mtp-mediadevice.so
-%attr(755,root,root) %{_libdir}/kde3/libamarok_njb-mediadevice.so
-%{_datadir}/services/amarok_ifp-mediadevice.desktop
-%{_datadir}/services/amarok_ipod-mediadevice.desktop
-%{_datadir}/services/amarok_mtp-mediadevice.desktop
-%{_datadir}/services/amarok_njb-mediadevice.desktop
-%endif
+#if %{with mp3players}
+#attr(755,root,root) %{_libdir}/kde3/libamarok_ifp-mediadevice.so
+#attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
+#attr(755,root,root) %{_libdir}/kde3/libamarok_mtp-mediadevice.so
+#attr(755,root,root) %{_libdir}/kde3/libamarok_njb-mediadevice.so
+#{_datadir}/services/amarok_ifp-mediadevice.desktop
+#{_datadir}/services/amarok_ipod-mediadevice.desktop
+#{_datadir}/services/amarok_mtp-mediadevice.desktop
+#{_datadir}/services/amarok_njb-mediadevice.desktop
+#endif
 
-%if %{with akode}
-%files akode
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde3/libamarok_aKode-engine.so
-%{_datadir}/services/amarok_aKode-engine.desktop
-%endif
+#if %{with akode}
+#files akode
+#defattr(644,root,root,755)
+#attr(755,root,root) %{_libdir}/kde3/libamarok_aKode-engine.so
+#{_datadir}/services/amarok_aKode-engine.desktop
+#%endif
 
-%if %{with gstreamer}
-%files gstreamer
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde3/libamarok_gst10engine_plugin.so
-%{_datadir}/config.kcfg/gstconfig.kcfg
-%{_datadir}/services/amarok_gst10engine_plugin.desktop
-%endif
+#%if %{with gstreamer}
+#%files gstreamer
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_libdir}/kde3/libamarok_gst10engine_plugin.so
+#%{_datadir}/config.kcfg/gstconfig.kcfg
+#%{_datadir}/services/amarok_gst10engine_plugin.desktop
+#%endif
 
-%if %{with helix}
-%files helix
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde3/libamarok_helixengine_plugin.so
-%{_datadir}/config.kcfg/helixconfig.kcfg
-%{_datadir}/services/amarok_helixengine_plugin.desktop
-%endif
+#%if %{with helix}
+#%files helix
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_libdir}/kde3/libamarok_helixengine_plugin.so
+#%{_datadir}/config.kcfg/helixconfig.kcfg
+#%{_datadir}/services/amarok_helixengine_plugin.desktop
+#%endif
 
 %if %{with xine}
 %files xine
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
+%attr(755,root,root) %{_libdir}/kde4/libamarok_xine-engine.so
 %{_datadir}/config.kcfg/xinecfg.kcfg
-%{_datadir}/services/amarok_xine-engine.desktop
+%{_datadir}/kde4/services/amarok_xine-engine.desktop
 %endif
 
-%if 0
-%if %{with zeroconf}
-%files zeroconf
-%defattr(644,root,root,755)
+#%if 0
+#%if %{with zeroconf}
+#%files zeroconf
+#%defattr(644,root,root,755)
 #%{_datadir}/apps/zeroconf/_shoutcast._tcp
-%endif
-%endif
+#%endif
+#%endif
 
 %files scripts
 %defattr(644,root,root,755)
@@ -456,10 +509,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/apps/amarok/scripts/ruby_debug
 %{_datadir}/apps/amarok/scripts/ruby_debug/debug.rb
 
-%if 0
-%dir %{_datadir}/apps/amarok/scripts/amarok_live
-%{_datadir}/apps/amarok/scripts/amarok_live/README
-%{_datadir}/apps/amarok/scripts/amarok_live/amarok.live.remaster.part1.sh
-%{_datadir}/apps/amarok/scripts/amarok_live/amarok.live.remaster.part2.sh
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/amarok_live/amarok_live.py
-%endif
+#%if 0
+#%dir %{_datadir}/apps/amarok/scripts/amarok_live
+#%{_datadir}/apps/amarok/scripts/amarok_live/README
+#%{_datadir}/apps/amarok/scripts/amarok_live/amarok.live.remaster.part1.sh
+#%{_datadir}/apps/amarok/scripts/amarok_live/amarok.live.remaster.part2.sh
+#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/amarok_live/amarok_live.py
+#%endif
