@@ -214,9 +214,9 @@ You can learn more about scripts in amaroK from here:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %description scripts -l pl.UTF-8
-Skrypty amaroKa pozwalaj±ce rozszerzaæ jego funkcjonalno¶æ.
+Skrypty amaroKa pozwalajÄ…ce rozszerzaÄ‡ jego funkcjonalnoÅ›Ä‡.
 
-Wiêcej o skryptach w amaroKu mo¿na dowiedzieæ siê st±d:
+WiÄ™cej o skryptach w amaroKu moÅ¼na dowiedzieÄ‡ siÄ™ stÄ…d:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
