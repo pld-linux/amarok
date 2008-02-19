@@ -53,7 +53,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
-%{?with_mp3players:BuildRequires:	libgpod-devel >= 0.4.2}
+%{?with_mp3players:BuildRequires:	libgpod-devel >= 0.6.0}
 %{?with_mp3players:BuildRequires:	libifp-devel >= 1.0.0.2}
 BuildRequires:	libltdl-devel
 %{?with_mp3players:BuildRequires:	libmtp-devel >= 0.1.1}
