@@ -28,12 +28,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.4.7
+Version:	1.4.8
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	f1299e142da8a69bc3cff5d585e38d43
+# Source0-md5:	7f65c4a8f3f0ff9042a5b5dd21b36cc8
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
 Patch2:		%{name}-smp.patch
@@ -53,7 +53,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
-%{?with_mp3players:BuildRequires:	libgpod-devel >= 0.4.2}
+%{?with_mp3players:BuildRequires:	libgpod-devel >= 0.6.0}
 %{?with_mp3players:BuildRequires:	libifp-devel >= 1.0.0.2}
 BuildRequires:	libltdl-devel
 %{?with_mp3players:BuildRequires:	libmtp-devel >= 0.1.1}
