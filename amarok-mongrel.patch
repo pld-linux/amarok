@@ -10,3 +10,43 @@
      if( !m_server->start( KProcIO::NotifyOnExit, true ) ) {
          error() << "Failed to start amarok_daapserver.rb" << endl;
          return;
+--- amarok-1.4.9.1/amarok/src/mediadevice/daap/Makefile.am~	2008-05-03 20:42:53.000000000 +0300
++++ amarok-1.4.9.1/amarok/src/mediadevice/daap/Makefile.am	2008-05-03 20:43:00.885572020 +0300
+@@ -39,7 +39,7 @@
+ SUBDIRS = daapreader mongrel
+ 
+ amarokrubylibdir = \
+-    $(kde_datadir)/amarok/ruby_lib
++    $(ruby_rubylibdir)/amarok
+ 
+ amarokrubylib_DATA = \
+     codes.rb
+--- amarok-1.4.9.1/amarok/src/mediadevice/daap/amarok_daapserver.rb~	2008-04-10 23:16:37.000000000 +0300
++++ amarok-1.4.9.1/amarok/src/mediadevice/daap/amarok_daapserver.rb	2008-05-03 20:43:49.504374104 +0300
+@@ -3,15 +3,10 @@
+ #A DAAP Server
+ # (c) 2006 Ian Monroe <ian@monroe.nu>
+ # License: GNU General Public License V2
+-$LOAD_PATH.push(ARGV[0])
+-puts "here it is: #{ARGV[0]}"
+-$LOAD_PATH.push(ARGV[1])
+-puts "here it is: #{ARGV[1]}"
+ 
+-require "codes.rb"
++require "amarok/codes"
+ require 'mongrel'
+-require "#{ARGV[2]}" #debug.rb
+-
++require "amarok/debug"
+ require 'uri'
+ require 'pp'
+ #require 'ruby-prof'
+--- amarok-1.4.9.1/amarok/src/scripts/ruby_debug/Makefile.am~	2008-04-10 23:16:37.000000000 +0300
++++ amarok-1.4.9.1/amarok/src/scripts/ruby_debug/Makefile.am	2008-05-03 20:44:52.908028283 +0300
+@@ -1,5 +1,5 @@
+ rubydebugdir = \
+-    $(kde_datadir)/amarok/scripts/ruby_debug
++    $(ruby_rubylibdir)/amarok
+ 
+ rubydebug_DATA = \
+     debug.rb
