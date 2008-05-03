@@ -6,8 +6,8 @@
 # - include /usr/bin/amarok_proxy.rb (proxy server for last.fm, but req. ruby)
 # - main package pulls /usr/bin/ruby
 # - monitor http://bugs.kde.org/show_bug.cgi?id=137390 to remove the temporary fix
-# - karma & MFS (see README)
 # - ProjectM (see README)
+# - karma & MFS (see README)
 #
 # Conditional builds:
 %bcond_with	gstreamer	# enable gstreamer (gst10 not stable)
@@ -28,12 +28,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.4.8
-Release:	2
+Version:	1.4.9.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	7f65c4a8f3f0ff9042a5b5dd21b36cc8
+# Source0-md5:	aa588778379a391ad3f4b3fc770217e4
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
 Patch2:		%{name}-smp.patch
@@ -76,6 +76,29 @@ Requires(post):	/sbin/ldconfig
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
+Suggests:	libvisual-plugin-actor-JESS
+Suggests:	libvisual-plugin-actor-bumpscope
+Suggests:	libvisual-plugin-actor-corona
+Suggests:	libvisual-plugin-actor-flower
+Suggests:	libvisual-plugin-actor-gdkpixbuf
+Suggests:	libvisual-plugin-actor-gforce
+Suggests:	libvisual-plugin-actor-gstreamer
+Suggests:	libvisual-plugin-actor-infinite
+Suggests:	libvisual-plugin-actor-jakdaw
+Suggests:	libvisual-plugin-actor-lv_analyzer
+Suggests:	libvisual-plugin-actor-lv_gltest
+Suggests:	libvisual-plugin-actor-lv_scope
+Suggests:	libvisual-plugin-actor-madspin
+Suggests:	libvisual-plugin-actor-nastyfft
+Suggests:	libvisual-plugin-actor-oinksie
+Suggests:	libvisual-plugin-input-alsa
+Suggests:	libvisual-plugin-input-esd
+Suggests:	libvisual-plugin-input-jack
+Suggests:	libvisual-plugin-input-mplayer
+Suggests:	libvisual-plugin-morph-alphablend
+Suggests:	libvisual-plugin-morph-flash
+Suggests:	libvisual-plugin-morph-slide
+Suggests:	libvisual-plugin-morph-tentacle
 Obsoletes:	amarok-arts
 Obsoletes:	amarok-xmms
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -256,19 +279,16 @@ rm -rf $RPM_BUILD_ROOT
 # remove bogus dir
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
-rm $RPM_BUILD_ROOT%{_libdir}/ruby_lib/libhttp11.la
+rm $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
+rm $RPM_BUILD_ROOT%{_libdir}/libamarok.{so,la}
+rm $RPM_BUILD_ROOT%{_libdir}/ruby_lib/libhttp11.{so,la}
 
 %find_lang amarok --all-name --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-/sbin/ldconfig
-if [ "$1" = 1 ]; then
-	echo "Remember to install libvisual-plugins-* packages if you"
-	echo "want to have a visualizations in amaroK."
-fi
+%post -p /sbin/ldconfig
 
 %postun	-p /sbin/ldconfig
 
@@ -281,26 +301,19 @@ fi
 %attr(755,root,root) %{_bindir}/amarok_libvisual
 %attr(755,root,root) %{_bindir}/amarok_proxy.rb
 %attr(755,root,root) %{_bindir}/amarok_daapserver.rb
-%attr(755,root,root) %{_libdir}/libamarok.so
 %attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
-%{_libdir}/libamarok.la
+%attr(755,root,root) %ghost %{_libdir}/libamarok.so.0
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
-%{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_generic-mediadevice.so
-%{_libdir}/kde3/libamarok_generic-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
-%{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_daap-mediadevice.so
-%{_libdir}/kde3/libamarok_daap-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_massstorage-device.so
-%{_libdir}/kde3/libamarok_massstorage-device.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_nfs-device.so
-%{_libdir}/kde3/libamarok_nfs-device.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_smb-device.so
-%{_libdir}/kde3/libamarok_smb-device.la
+%dir %{_libdir}/ruby_lib
 %{_libdir}/ruby_lib/http11.rb
-%attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so
 %attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0.0.0
+%attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/ruby_lib
@@ -334,13 +347,9 @@ fi
 # TODO: move to subpackage
 %if %{with mp3players}
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ifp-mediadevice.so
-%{_libdir}/kde3/libamarok_ifp-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
-%{_libdir}/kde3/libamarok_ipod-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_mtp-mediadevice.so
-%{_libdir}/kde3/libamarok_mtp-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_njb-mediadevice.so
-%{_libdir}/kde3/libamarok_njb-mediadevice.la
 %{_datadir}/services/amarok_ifp-mediadevice.desktop
 %{_datadir}/services/amarok_ipod-mediadevice.desktop
 %{_datadir}/services/amarok_mtp-mediadevice.desktop
@@ -366,7 +375,6 @@ fi
 %files helix
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde3/libamarok_helixengine_plugin.so
-%{_libdir}/kde3/libamarok_helixengine_plugin.la
 %{_datadir}/config.kcfg/helixconfig.kcfg
 %{_datadir}/services/amarok_helixengine_plugin.desktop
 %endif
@@ -375,7 +383,6 @@ fi
 %files xine
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
-%{_libdir}/kde3/libamarok_xine-engine.la
 %{_datadir}/config.kcfg/xinecfg.kcfg
 %{_datadir}/services/amarok_xine-engine.desktop
 %endif
@@ -404,13 +411,18 @@ fi
 # find command:
 # $ find $RPM_BUILD_ROOT/usr/share/apps/amarok/scripts -perm +1
 
+#%dir %{_datadir}/apps/amarok/scripts/graphequalizer
+#%{_datadir}/apps/amarok/scripts/graphequalizer/README
+#%attr(755,root,root) %{_datadir}/apps/amarok/scripts/graphequalizer/graphequalizer
+
 %dir %{_datadir}/apps/amarok/scripts/playlist2html
 %{_datadir}/apps/amarok/scripts/playlist2html/README
 %{_datadir}/apps/amarok/scripts/playlist2html/Playlist.py
-%{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.spec
-%{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.spec
 %attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.py
 %attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.py
+%{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.spec
+%{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.spec
+
 
 %dir %{_datadir}/apps/amarok/scripts/webcontrol
 %{_datadir}/apps/amarok/scripts/webcontrol/README
