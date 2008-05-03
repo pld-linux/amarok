@@ -1,0 +1,12 @@
+--- amarok-1.4.9.1/amarok/src/mediadevice/daap/daapserver.cpp~	2008-04-10 23:16:37.000000000 +0300
++++ amarok-1.4.9.1/amarok/src/mediadevice/daap/daapserver.cpp	2008-05-03 20:38:40.854585305 +0300
+@@ -30,9 +30,6 @@
+     m_server = new KProcIO();
+     m_server->setComm( KProcess::All );
+     *m_server << "amarok_daapserver.rb";
+-    *m_server << locate( "data", "amarok/ruby_lib/" );
+-    *m_server << locate( "lib", "ruby_lib/" );
+-    *m_server << locate( "data", "amarok/scripts/ruby_debug/debug.rb" );
+     if( !m_server->start( KProcIO::NotifyOnExit, true ) ) {
+         error() << "Failed to start amarok_daapserver.rb" << endl;
+         return;
