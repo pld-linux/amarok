@@ -6,8 +6,8 @@
 # - include /usr/bin/amarok_proxy.rb (proxy server for last.fm, but req. ruby)
 # - main package pulls /usr/bin/ruby
 # - monitor http://bugs.kde.org/show_bug.cgi?id=137390 to remove the temporary fix
-# - ProjectM (see README)
 # - karma & MFS (see README)
+# - ProjectM (see README)
 #
 # Conditional builds:
 %bcond_with	gstreamer	# enable gstreamer (gst10 not stable)
@@ -26,14 +26,14 @@
 %endif
 
 Summary:	A KDE audio player
-Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
+Summary(pl):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.4.9.1
-Release:	1
+Version:	1.4.5
+Release:	3
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	aa588778379a391ad3f4b3fc770217e4
+# Source0-md5:	1dac1cb5ac9c9cdabdab5f69b39e92c8
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
 Patch2:		%{name}-smp.patch
@@ -42,7 +42,6 @@ Patch4:		kde-ac260-lt.patch
 Patch5:		kde-common-PLD.patch
 Patch6:		%{name}-gcc4.patch
 Patch7:		%{name}-titleorder.patch
-Patch8:		%{name}-mongrel.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -54,7 +53,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	kdebase-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
-%{?with_mp3players:BuildRequires:	libgpod-devel >= 0.6.0}
+%{?with_mp3players:BuildRequires:	libgpod-devel >= 0.4.2}
 %{?with_mp3players:BuildRequires:	libifp-devel >= 1.0.0.2}
 BuildRequires:	libltdl-devel
 %{?with_mp3players:BuildRequires:	libmtp-devel >= 0.1.1}
@@ -77,30 +76,6 @@ Requires(post):	/sbin/ldconfig
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
-Requires:	ruby-mongrel
-Suggests:	libvisual-plugin-actor-JESS
-Suggests:	libvisual-plugin-actor-bumpscope
-Suggests:	libvisual-plugin-actor-corona
-Suggests:	libvisual-plugin-actor-flower
-Suggests:	libvisual-plugin-actor-gdkpixbuf
-Suggests:	libvisual-plugin-actor-gforce
-Suggests:	libvisual-plugin-actor-gstreamer
-Suggests:	libvisual-plugin-actor-infinite
-Suggests:	libvisual-plugin-actor-jakdaw
-Suggests:	libvisual-plugin-actor-lv_analyzer
-Suggests:	libvisual-plugin-actor-lv_gltest
-Suggests:	libvisual-plugin-actor-lv_scope
-Suggests:	libvisual-plugin-actor-madspin
-Suggests:	libvisual-plugin-actor-nastyfft
-Suggests:	libvisual-plugin-actor-oinksie
-Suggests:	libvisual-plugin-input-alsa
-Suggests:	libvisual-plugin-input-esd
-Suggests:	libvisual-plugin-input-jack
-Suggests:	libvisual-plugin-input-mplayer
-Suggests:	libvisual-plugin-morph-alphablend
-Suggests:	libvisual-plugin-morph-flash
-Suggests:	libvisual-plugin-morph-slide
-Suggests:	libvisual-plugin-morph-tentacle
 Obsoletes:	amarok-arts
 Obsoletes:	amarok-xmms
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -111,12 +86,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 A KDE audio player.
 
-%description -l pl.UTF-8
+%description -l pl
 Odtwarzacz audio dla KDE.
 
 %package akode
 Summary:	Plugin akode
-Summary(pl.UTF-8):	Wtyczka akode
+Summary(pl):	Wtyczka akode
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-plugin = %{version}-%{release}
@@ -124,12 +99,12 @@ Provides:	%{name}-plugin = %{version}-%{release}
 %description akode
 Plugin akode.
 
-%description akode -l pl.UTF-8
+%description akode -l pl
 Wtyczka akode.
 
 %package helix
 Summary:	Helix/Realplayer playback support for amarok
-Summary(pl.UTF-8):	Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka
+Summary(pl):	Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	helix-core
@@ -138,12 +113,12 @@ Provides:	%{name}-plugin = %{version}-%{release}
 %description helix
 Helix/Realplayer playback support for amarok.
 
-%description helix -l pl.UTF-8
+%description helix -l pl
 Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka.
 
 %package gstreamer
 Summary:	Plugin gstreamer
-Summary(pl.UTF-8):	Wtyczka gstreamer
+Summary(pl):	Wtyczka gstreamer
 Group:		X11/Applications/Multimedia
 # deps, to get it working:
 # mp3 decoder:	gstreamer-mad
@@ -166,12 +141,12 @@ Provides:	%{name}-plugin = %{version}-%{release}
 %description gstreamer
 Plugin gstreamer.
 
-%description gstreamer -l pl.UTF-8
+%description gstreamer -l pl
 Wtyczka gstreamer.
 
 %package xine
 Summary:	Plugin xine
-Summary(pl.UTF-8):	Wtyczka xine
+Summary(pl):	Wtyczka xine
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	xine-plugin-audio
@@ -180,12 +155,12 @@ Provides:	%{name}-plugin = %{version}-%{release}
 %description xine
 Plugin xine.
 
-%description xine -l pl.UTF-8
+%description xine -l pl
 Wtyczka xine.
 
 %package zeroconf
 Summary:	Zeroconf data
-Summary(pl.UTF-8):	Dane dla zeroconf
+Summary(pl):	Dane dla zeroconf
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	kdenetwork-kdnssd
@@ -194,12 +169,12 @@ Provides:	%{name}-plugin = %{version}-%{release}
 %description zeroconf
 Zeroconf data.
 
-%description zeroconf -l pl.UTF-8
+%description zeroconf -l pl
 Dane dla zeroconf.
 
 %package scripts
 Summary:	amaroK scripts
-Summary(pl.UTF-8):	Skrypty amaroKa
+Summary(pl):	Skrypty amaroKa
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Requires:	kdebase-kdialog
@@ -212,10 +187,10 @@ amaroK scripts allow you extend amaroK functionality.
 You can learn more about scripts in amaroK from here:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
-%description scripts -l pl.UTF-8
-Skrypty amaroKa pozwalające rozszerzać jego funkcjonalność.
+%description scripts -l pl
+Skrypty amaroKa pozwalaj�ce rozszerza� jego funkcjonalno��.
 
-Więcej o skryptach w amaroKu można dowiedzieć się stąd:
+Wi�cej o skryptach w amaroKu mo�na dowiedzie� si� st�d:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
@@ -228,7 +203,6 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-%patch8 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
@@ -240,7 +214,8 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %{__sed} -i -e '
 	1s,#!.*bin/env.*ruby,#!%{_bindir}/ruby,
 	1s,#!.*bin/env.*python,#!%{__python},
-' amarok/src/scripts/*/*.{py,rb} amarok/src/amarok_proxy.rb
+	1s,#!.*bin/env.*bash,#!/bin/bash,
+' amarok/src/scripts/*/*.{py,rb,sh} amarok/src/amarok_proxy.rb
 
 %build
 cp -f /usr/share/automake/config.sub admin
@@ -276,22 +251,25 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	ruby_rubylibdir=%{ruby_rubylibdir} \
 	kde_htmldir=%{_kdedocdir} \
 	kde_libs_htmldir=%{_kdedocdir}
 
 # remove bogus dir
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
-rm $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
-rm $RPM_BUILD_ROOT%{_libdir}/libamarok.{so,la}
+rm $RPM_BUILD_ROOT%{_libdir}/ruby_lib/libhttp11.la
 
 %find_lang amarok --all-name --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
+%post
+/sbin/ldconfig
+if [ "$1" = 1 ]; then
+	echo "Remember to install libvisual-plugins-* packages if you"
+	echo "want to have a visualizations in amaroK."
+fi
 
 %postun	-p /sbin/ldconfig
 
@@ -302,21 +280,31 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarokapp
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
 %attr(755,root,root) %{_bindir}/amarok_libvisual
-# used by last.fm and daap
 %attr(755,root,root) %{_bindir}/amarok_proxy.rb
-# used by daap
 %attr(755,root,root) %{_bindir}/amarok_daapserver.rb
+%attr(755,root,root) %{_libdir}/libamarok.so
 %attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libamarok.so.0
+%{_libdir}/libamarok.la
 %attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
+%{_libdir}/kde3/konqsidebar_universalamarok.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_generic-mediadevice.so
+%{_libdir}/kde3/libamarok_generic-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
+%{_libdir}/kde3/libamarok_void-engine_plugin.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_daap-mediadevice.so
+%{_libdir}/kde3/libamarok_daap-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_massstorage-device.so
+%{_libdir}/kde3/libamarok_massstorage-device.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_nfs-device.so
+%{_libdir}/kde3/libamarok_nfs-device.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_smb-device.so
+%{_libdir}/kde3/libamarok_smb-device.la
+%{_libdir}/ruby_lib/http11.rb
+%attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so
+%attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0.0.0
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
+%{_datadir}/apps/amarok/ruby_lib
 %{_datadir}/apps/amarok/*.rc
 %{_datadir}/apps/amarok/data
 %{_datadir}/apps/amarok/icons
@@ -344,20 +332,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
-
-# TODO: move to subpackage
-%dir %{ruby_rubylibdir}/amarok
-# used by daap
-%{ruby_rubylibdir}/amarok/codes.rb
-# used by daap and lyrics_lyrc
-%{ruby_rubylibdir}/amarok/debug.rb
-
 # TODO: move to subpackage
 %if %{with mp3players}
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ifp-mediadevice.so
+%{_libdir}/kde3/libamarok_ifp-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ipod-mediadevice.so
+%{_libdir}/kde3/libamarok_ipod-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_mtp-mediadevice.so
+%{_libdir}/kde3/libamarok_mtp-mediadevice.la
 %attr(755,root,root) %{_libdir}/kde3/libamarok_njb-mediadevice.so
+%{_libdir}/kde3/libamarok_njb-mediadevice.la
 %{_datadir}/services/amarok_ifp-mediadevice.desktop
 %{_datadir}/services/amarok_ipod-mediadevice.desktop
 %{_datadir}/services/amarok_mtp-mediadevice.desktop
@@ -383,6 +367,7 @@ rm -rf $RPM_BUILD_ROOT
 %files helix
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde3/libamarok_helixengine_plugin.so
+%{_libdir}/kde3/libamarok_helixengine_plugin.la
 %{_datadir}/config.kcfg/helixconfig.kcfg
 %{_datadir}/services/amarok_helixengine_plugin.desktop
 %endif
@@ -391,6 +376,7 @@ rm -rf $RPM_BUILD_ROOT
 %files xine
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde3/libamarok_xine-engine.so
+%{_libdir}/kde3/libamarok_xine-engine.la
 %{_datadir}/config.kcfg/xinecfg.kcfg
 %{_datadir}/services/amarok_xine-engine.desktop
 %endif
@@ -428,9 +414,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/amarok/scripts/playlist2html/Playlist.py
 %attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.py
 %attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.py
-%{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.spec
-%{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.spec
-
 
 %dir %{_datadir}/apps/amarok/scripts/webcontrol
 %{_datadir}/apps/amarok/scripts/webcontrol/README
@@ -476,6 +459,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/amarok/scripts/score_impulsive/README
 %attr(755,root,root) %{_datadir}/apps/amarok/scripts/score_impulsive/score_impulsive.rb
 %{_datadir}/apps/amarok/scripts/score_impulsive/score_impulsive.spec
+
+%dir %{_datadir}/apps/amarok/scripts/ruby_debug
+%{_datadir}/apps/amarok/scripts/ruby_debug/debug.rb
 
 %if 0
 %dir %{_datadir}/apps/amarok/scripts/amarok_live
