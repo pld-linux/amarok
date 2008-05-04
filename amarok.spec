@@ -42,6 +42,7 @@ Patch4:		kde-ac260-lt.patch
 Patch5:		kde-common-PLD.patch
 Patch6:		%{name}-gcc4.patch
 Patch7:		%{name}-titleorder.patch
+Patch8:		%{name}-mongrel.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
@@ -76,6 +77,7 @@ Requires(post):	/sbin/ldconfig
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
+Requires:	ruby-mongrel
 Suggests:	libvisual-plugin-actor-JESS
 Suggests:	libvisual-plugin-actor-bumpscope
 Suggests:	libvisual-plugin-actor-corona
@@ -226,6 +228,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
@@ -273,6 +276,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
+	ruby_rubylibdir=%{ruby_rubylibdir} \
 	kde_htmldir=%{_kdedocdir} \
 	kde_libs_htmldir=%{_kdedocdir}
 
@@ -281,7 +285,6 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
 rm $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
 rm $RPM_BUILD_ROOT%{_libdir}/libamarok.{so,la}
-rm $RPM_BUILD_ROOT%{_libdir}/ruby_lib/libhttp11.{so,la}
 
 %find_lang amarok --all-name --with-kde
 
@@ -299,7 +302,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarokapp
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
 %attr(755,root,root) %{_bindir}/amarok_libvisual
+# used by last.fm and daap
 %attr(755,root,root) %{_bindir}/amarok_proxy.rb
+# used by daap
 %attr(755,root,root) %{_bindir}/amarok_daapserver.rb
 %attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarok.so.0
@@ -310,13 +315,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde3/libamarok_massstorage-device.so
 %attr(755,root,root) %{_libdir}/kde3/libamarok_nfs-device.so
 %attr(755,root,root) %{_libdir}/kde3/libamarok_smb-device.so
-%dir %{_libdir}/ruby_lib
-%{_libdir}/ruby_lib/http11.rb
-%attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0.0.0
-%attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
-%{_datadir}/apps/amarok/ruby_lib
 %{_datadir}/apps/amarok/*.rc
 %{_datadir}/apps/amarok/data
 %{_datadir}/apps/amarok/icons
@@ -344,6 +344,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/servicetypes/amarok_plugin.desktop
 %{_desktopdir}/kde/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
+
+# TODO: move to subpackage
+%dir %{ruby_rubylibdir}/amarok
+# used by daap
+%{ruby_rubylibdir}/amarok/codes.rb
+# used by daap and lyrics_lyrc
+%{ruby_rubylibdir}/amarok/debug.rb
+
 # TODO: move to subpackage
 %if %{with mp3players}
 %attr(755,root,root) %{_libdir}/kde3/libamarok_ifp-mediadevice.so
@@ -468,9 +476,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/amarok/scripts/score_impulsive/README
 %attr(755,root,root) %{_datadir}/apps/amarok/scripts/score_impulsive/score_impulsive.rb
 %{_datadir}/apps/amarok/scripts/score_impulsive/score_impulsive.spec
-
-%dir %{_datadir}/apps/amarok/scripts/ruby_debug
-%{_datadir}/apps/amarok/scripts/ruby_debug/debug.rb
 
 %if 0
 %dir %{_datadir}/apps/amarok/scripts/amarok_live
