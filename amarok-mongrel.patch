@@ -1,0 +1,67 @@
+--- amarok-1.4.9.1/amarok/src/mediadevice/daap/daapserver.cpp~	2008-04-10 23:16:37.000000000 +0300
++++ amarok-1.4.9.1/amarok/src/mediadevice/daap/daapserver.cpp	2008-05-03 20:38:40.854585305 +0300
+@@ -30,9 +30,6 @@
+     m_server = new KProcIO();
+     m_server->setComm( KProcess::All );
+     *m_server << "amarok_daapserver.rb";
+-    *m_server << locate( "data", "amarok/ruby_lib/" );
+-    *m_server << locate( "lib", "ruby_lib/" );
+-    *m_server << locate( "data", "amarok/scripts/ruby_debug/debug.rb" );
+     if( !m_server->start( KProcIO::NotifyOnExit, true ) ) {
+         error() << "Failed to start amarok_daapserver.rb" << endl;
+         return;
+--- amarok-1.4.9.1/amarok/src/mediadevice/daap/Makefile.am	2008-05-03 20:43:00.885572020 +0300
++++ amarok-1.4.9.1/amarok/src/mediadevice/daap/Makefile.am	2008-05-03 20:47:24.272751916 +0300
+@@ -36,10 +36,10 @@
+ 
+ bin_SCRIPTS = amarok_daapserver.rb
+ 
+-SUBDIRS = daapreader mongrel
++SUBDIRS = daapreader
+ 
+ amarokrubylibdir = \
+-    $(kde_datadir)/amarok/ruby_lib
++    $(ruby_rubylibdir)/amarok
+ 
+ amarokrubylib_DATA = \
+     codes.rb
+--- amarok-1.4.9.1/amarok/src/mediadevice/daap/amarok_daapserver.rb~	2008-04-10 23:16:37.000000000 +0300
++++ amarok-1.4.9.1/amarok/src/mediadevice/daap/amarok_daapserver.rb	2008-05-03 20:43:49.504374104 +0300
+@@ -3,15 +3,10 @@
+ #A DAAP Server
+ # (c) 2006 Ian Monroe <ian@monroe.nu>
+ # License: GNU General Public License V2
+-$LOAD_PATH.push(ARGV[0])
+-puts "here it is: #{ARGV[0]}"
+-$LOAD_PATH.push(ARGV[1])
+-puts "here it is: #{ARGV[1]}"
+ 
+-require "codes.rb"
++require "amarok/codes"
+ require 'mongrel'
+-require "#{ARGV[2]}" #debug.rb
+-
++require "amarok/debug"
+ require 'uri'
+ require 'pp'
+ #require 'ruby-prof'
+--- amarok-1.4.9.1/amarok/src/scripts/ruby_debug/Makefile.am~	2008-04-10 23:16:37.000000000 +0300
++++ amarok-1.4.9.1/amarok/src/scripts/ruby_debug/Makefile.am	2008-05-03 20:44:52.908028283 +0300
+@@ -1,5 +1,5 @@
+ rubydebugdir = \
+-    $(kde_datadir)/amarok/scripts/ruby_debug
++    $(ruby_rubylibdir)/amarok
+ 
+ rubydebug_DATA = \
+     debug.rb
+--- amarok-1.4.9.1/amarok/src/scripts/lyrics_lyrc/lyrics_lyrc.rb~	2008-05-03 20:49:32.000000000 +0300
++++ amarok-1.4.9.1/amarok/src/scripts/lyrics_lyrc/lyrics_lyrc.rb	2008-05-04 13:10:28.364031973 +0300
+@@ -12,7 +12,7 @@
+ 
+ require "net/http"
+ require "rexml/document"
+-# require File.dirname( File.expand_path( __FILE__ ) ) + "/../ruby_debug/debug.rb"
++# require "amarok/debug"
+ require "uri"
+ 
+ @app_name = "Lyrics_Lyrc"

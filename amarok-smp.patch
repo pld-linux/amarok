@@ -1,0 +1,11 @@
+--- amarok-1.4.5/amarok/src/app.cpp~	2007-02-09 00:02:36.637412281 +0200
++++ amarok-1.4.5/amarok/src/app.cpp	2007-02-15 14:10:19.091799011 +0200
+@@ -186,7 +186,7 @@
+     new Amarok::DcopScriptHandler();
+     new Amarok::DcopDevicesHandler();
+ 
+-    fixHyperThreading();
++    // fixHyperThreading();
+     // tell AtomicString that this is the GUI thread
+     if ( !AtomicString::isMainThread() )
+         qWarning("AtomicString was initialized from a thread other than the GUI "
