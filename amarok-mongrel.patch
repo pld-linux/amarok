@@ -61,7 +61,7 @@
  require "net/http"
  require "rexml/document"
 -# require File.dirname( File.expand_path( __FILE__ ) ) + "/../ruby_debug/debug.rb"
-+# require "amarok/debug.rb"
++# require "amarok/debug"
  require "uri"
  
  @app_name = "Lyrics_Lyrc"
