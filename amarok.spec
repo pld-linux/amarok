@@ -29,7 +29,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.9.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -76,6 +76,7 @@ BuildRequires:	taglib-devel >= 1.4
 Requires(post):	/sbin/ldconfig
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
+Requires:	kdelibs-libs >= 9:3.5.9
 Requires:	kdemultimedia-audiocd >= 9:3.1.93
 Requires:	ruby-mongrel
 Suggests:	libvisual-plugin-actor-JESS
