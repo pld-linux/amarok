@@ -96,9 +96,6 @@ Obsoletes:	amarok-xmms
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-# temporary hack for proper libgpod::itdb_get_mountpoint() detection.
-%define		filterout_ld	-Wl,--as-needed
-
 %description
 A KDE audio player.
 
