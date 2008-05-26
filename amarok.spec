@@ -52,6 +52,7 @@ BuildRequires:	gettext-devel
 %{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.10.0}
 BuildRequires:	kde4-kdebase-devel
 BuildRequires:	kde4-kdemultimedia-devel
+BuildRequires:	kde4-kdesupport-taglib-devel
 %{?with_akode:BuildRequires:	kdemultimedia-akode}
 %{?with_mp3players:BuildRequires:	libgpod-devel >= 0.4.2}
 %{?with_mp3players:BuildRequires:	libifp-devel >= 1.0.0.2}
@@ -71,7 +72,6 @@ BuildRequires:	ruby-devel >= 1.8
 BuildRequires:	sed >= 4.0
 %{!?with_included_sqlite:BuildRequires:	sqlite3-devel >= 3.3}
 BuildRequires:	strigi-devel >= 0.5.5
-BuildRequires:	taglib-devel >= 1.4
 %{?with_xine:BuildRequires:	xine-lib-devel >= 1.1.1}
 Requires(post):	/sbin/ldconfig
 Requires:	%{name}-plugin = %{version}-%{release}
@@ -230,34 +230,19 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 #%patch6 -p1
 #%patch7 -p1
 
-#%{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
-#	amarok/src/amarok.desktop \
-
-# see kde bug #110909
-#%{__sed} -i -e 's/amarok_live//' amarok/src/scripts/Makefile.am
-
-# kill env, call interpreter directly, so rpm automatics could rule
-#%{__sed} -i -e '
-#	1s,#!.*bin/env.*ruby,#!%{_bindir}/ruby,
-#	1s,#!.*bin/env.*python,#!%{__python},
-#' amarok/src/scripts/*/*.{py,rb} amarok/src/amarok_proxy.rb
-
 %build
-
-export QTDIR=%{_libdir}/qt4
-install -d amarok-build
-cd amarok-build
+install -d build
+cd build
 %cmake \
--DCMAKE_INSTALL_PREFIX=%{_prefix} \
-		../
+	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	../
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-cd amarok-build
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	kde_htmldir=%{_kdedocdir} \
 	kde_libs_htmldir=%{_kdedocdir}
@@ -265,18 +250,10 @@ cd amarok-build
 # remove bogus dir
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
-#rm $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
-#rm $RPM_BUILD_ROOT%{_libdir}/ruby_lib/libhttp11.la
-
-#[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
-#	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
-#%find_lang amarok --all-name --with-kde
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
-
+%post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
 %files
@@ -284,9 +261,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/amarok
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
-#attr(755,root,root) %{_bindir}/amarok_libvisual
-#attr(755,root,root) %{_bindir}/amarok_proxy.rb
-#attr(755,root,root) %{_bindir}/amarok_daapserver.rb
 %attr(755,root,root) %{_libdir}/libamaroklib.so
 %attr(755,root,root) %{_libdir}/libamaroklib.so.*.*.*
 %attr(755,root,root) %{_libdir}/libamarok_taglib.so
@@ -324,24 +298,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/libamarok_generic-mediadevice.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_phonon-engine.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_void-engine_plugin.so
-#dir %{_libdir}/ruby_lib
-#{_libdir}/ruby_lib/http11.rb
-#attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so
-#attr(755,root,root) %{_libdir}/ruby_lib/libhttp11.so.0.0.0
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
-#%{_datadir}/apps/amarok/ruby_lib
-#{_datadir}/apps/amarok/*.rc
 %{_datadir}/apps/amarok/data
 %{_datadir}/apps/amarok/icons
 %{_datadir}/apps/amarok/images
 %{_datadir}/apps/desktoptheme
-#{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
-#{_datadir}/apps/konqueror/servicemenus/amarok_addaspodcast.desktop
-#{_datadir}/apps/konqueror/servicemenus/amarok_play_audiocd.desktop
-#{_datadir}/apps/konqsidebartng/add/amarok.desktop
-#{_datadir}/apps/konqsidebartng/entries/amarok.desktop
-#{_datadir}/apps/konqsidebartng/kicker_entries/amarok.desktop
 %{_datadir}/apps/profiles/amarok.profile.xml
 %{_datadir}/config/amarokrc
 %{_datadir}/config.kcfg/amarok.kcfg
