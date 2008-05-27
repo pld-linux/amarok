@@ -28,11 +28,11 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.8.0
-Release:	0.2
+Version:	1.80
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	ftp://ftp.kde.org/pub/kde/unstable/amarok/1.80/src/%{name}-1.80.tar.bz2
+Source0:	ftp://ftp.kde.org/pub/kde/unstable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	ed37b7f92454a5163d6e4060602a6805
 URL:		http://amarok.kde.org/
 BuildRequires:	SDL-devel
@@ -207,7 +207,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 <http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
-%setup -qn %{name}-1.80
+%setup -q
 
 %build
 install -d build
