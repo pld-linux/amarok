@@ -1,0 +1,33 @@
+--- amarok/cmake/modules/FindNjb.cmake.orig	2008-06-08 11:21:07.000000000 +0200
++++ amarok/cmake/modules/FindNjb.cmake	2008-06-08 11:27:09.000000000 +0200
+@@ -23,7 +23,7 @@
+     set(NJB_DEFINITIONS ${_NJBCflags})
+   endif(NOT WIN32)
+ 
+-  FIND_PATH(NJB_INCLUDE_DIR libnjb.h
++  FIND_PATH(NJB_INCLUDE_DIR libnjb/libnjb.h
+     ${_NJBIncDir}
+   )
+   
+--- amarok/src/mediadevice/njb/playlist.h.orig	2008-06-08 11:28:16.000000000 +0200
++++ amarok/src/mediadevice/njb/playlist.h	2008-06-08 11:29:17.000000000 +0200
+@@ -20,7 +20,7 @@
+ #define __playlist_h__
+ 
+ // libnjb
+-#include <libnjb.h>
++#include <libnjb/libnjb.h>
+ 
+ // Qt
+ #include <QStringList>
+--- amarok/src/mediadevice/njb/track.h.orig	2008-06-08 11:28:30.000000000 +0200
++++ amarok/src/mediadevice/njb/track.h	2008-06-08 11:29:43.000000000 +0200
+@@ -27,7 +27,7 @@
+ #include <Q3PtrList>
+ 
+ // libnjb
+-#include <libnjb.h>
++#include <libnjb/libnjb.h>
+ 
+ #include "metabundle.h"
+ 
