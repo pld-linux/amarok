@@ -77,7 +77,7 @@ Requires(post):	/sbin/ldconfig
 Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdelibs-libs >= 9:3.5.9
-Requires:	kdemultimedia-audiocd >= 9:3.1.93
+Requires:	kdemultimedia(audiocd) >= 9:3.1.93
 Requires:	ruby-mongrel
 Suggests:	libvisual-plugin-actor-JESS
 Suggests:	libvisual-plugin-actor-bumpscope
