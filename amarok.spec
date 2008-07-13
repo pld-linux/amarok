@@ -78,6 +78,7 @@ Requires:	%{name}-plugin = %{version}-%{release}
 Requires:	kdebase-core >= 9:3.1.93
 Requires:	kdelibs-libs >= 9:3.5.9
 Requires:	ruby-mongrel
+Obsoletes:	amarok-arts
 Suggests:	kdemultimedia(audiocd) >= 9:3.1.93
 Suggests:	libvisual-plugin-actor-JESS
 Suggests:	libvisual-plugin-actor-bumpscope
@@ -102,7 +103,7 @@ Suggests:	libvisual-plugin-morph-alphablend
 Suggests:	libvisual-plugin-morph-flash
 Suggests:	libvisual-plugin-morph-slide
 Suggests:	libvisual-plugin-morph-tentacle
-Obsoletes:	amarok-arts
+Suggests:	python-PyKDE
 Obsoletes:	amarok-xmms
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
