@@ -28,13 +28,16 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.80
+Version:	1.86
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/unstable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	ed37b7f92454a5163d6e4060602a6805
+# Source0-md5:	acf43672687a5f261ce36d668338a4c1
 URL:		http://amarok.kde.org/
+BuildRequires:	QtScript-devel
+BuildRequires:	QtUiTools-devel
+BuildRequires:	QtWebKit-devel
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf
@@ -44,7 +47,6 @@ BuildRequires:	gettext-devel
 %{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.10.0}
 BuildRequires:	kde4-kdebase-devel
 BuildRequires:	kde4-kdemultimedia-devel
-BuildRequires:	kde4-kdesupport-taglib-devel
 %{?with_mp3players:BuildRequires:	libgpod-devel >= 0.4.2}
 %{?with_mp3players:BuildRequires:	libifp-devel >= 1.0.0.2}
 BuildRequires:	libltdl-devel
@@ -62,6 +64,7 @@ BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	ruby-devel >= 1.8
 %{!?with_included_sqlite:BuildRequires:	sqlite3-devel >= 3.3}
 BuildRequires:	strigi-devel >= 0.5.5
+BuildRequires:	taglib-devel
 %{?with_xine:BuildRequires:	xine-lib-devel >= 1.1.1}
 Requires(post):	/sbin/ldconfig
 Requires:	%{name}-plugin = %{version}-%{release}
@@ -213,8 +216,11 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 install -d build
 cd build
 %cmake \
-	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
-	../
+		-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+%if "%{_lib}" == "lib64"
+		-DLIB_SUFFIX=64 \
+%endif
+		../
 
 %{__make}
 
@@ -326,6 +332,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
 
+%if %{with xine}
 %files xine
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/libamarok_xine-engine.so
