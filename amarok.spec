@@ -34,6 +34,7 @@ License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/unstable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	acf43672687a5f261ce36d668338a4c1
+Patch0:		kde4-kdeextragear-multimedia-NJB.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	QtScript-devel
 BuildRequires:	QtUiTools-devel
@@ -211,6 +212,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 install -d build
