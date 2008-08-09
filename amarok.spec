@@ -249,6 +249,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/amarok
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
+%attr(755,root,root) %{_bindir}/amarokmp3tunesharmonydaemon
 %attr(755,root,root) %{_libdir}/libamaroklib.so
 %attr(755,root,root) %{_libdir}/libamaroklib.so.*.*.*
 %attr(755,root,root) %{_libdir}/libamarok_taglib.so
@@ -258,6 +259,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libamarokplasma.so
 %attr(755,root,root) %{_libdir}/libamarokplasma.so.1
 %attr(755,root,root) %{_libdir}/libamarokplasma.so.1.0.0
+%attr(755,root,root) %{_libdir}/libamarokpud.so
+%attr(755,root,root) %{_libdir}/libamarokpud.so.1
+%attr(755,root,root) %{_libdir}/libamarokpud.so.1.0.0
 %attr(755,root,root) %{_libdir}/strigi/strigita_audible.so
 %attr(755,root,root) %{_libdir}/strigi/strigita_mp4.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_containment_context.so
@@ -266,6 +270,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lyrics.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_serviceinfo.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_wikipedia.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_albums.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_cloud.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_video.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_cloud.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_service_opmldirectory.so
+%attr(755,root,root) %{_libdir}/kde4/libamarok_collection-ipodcollection.so
+%attr(755,root,root) %{_libdir}/kde4/libamarok_collection-nepomukcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_current.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lyrics.so
@@ -283,27 +294,30 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_mp3tunes.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-daapcollection.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-sqlcollection.so
-%attr(755,root,root) %{_libdir}/kde4/libamarok_generic-mediadevice.so
-%attr(755,root,root) %{_libdir}/kde4/libamarok_phonon-engine.so
-%attr(755,root,root) %{_libdir}/kde4/libamarok_void-engine_plugin.so
+#%attr(755,root,root) %{_libdir}/kde4/libamarok_generic-mediadevice.so
+#%attr(755,root,root) %{_libdir}/kde4/libamarok_phonon-engine.so
+#%attr(755,root,root) %{_libdir}/kde4/libamarok_void-engine_plugin.so
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/data
 %{_datadir}/apps/amarok/icons
 %{_datadir}/apps/amarok/images
 %{_datadir}/apps/desktoptheme
-%{_datadir}/apps/profiles/amarok.profile.xml
-%{_datadir}/config/amarokrc
+#%{_datadir}/apps/profiles/amarok.profile.xml
 %{_datadir}/config.kcfg/amarok.kcfg
-%{_datadir}/kde4/services/amarok_generic-mediadevice.desktop
-%{_datadir}/kde4/services/amarok_void-engine_plugin.desktop
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.collection.xml
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.context.xml
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.mediabrowser.xml
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.player.xml
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.playlist.xml
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.playlistbrowser.xml
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.script.xml
+%{_datadir}/config/amarok.knsrc
+#%{_datadir}/kde4/services/amarok_generic-mediadevice.desktop
+#%{_datadir}/kde4/services/amarok_void-engine_plugin.desktop
+%{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.player.xml
+%{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.root.xml
+%{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.tracklist.xml
+#%{_datadir}/dbus-1/interfaces/org.kde.amarok.collection.xml
+#%{_datadir}/dbus-1/interfaces/org.kde.amarok.context.xml
+#%{_datadir}/dbus-1/interfaces/org.kde.amarok.mediabrowser.xml
+#%{_datadir}/dbus-1/interfaces/org.kde.amarok.player.xml
+#%{_datadir}/dbus-1/interfaces/org.kde.amarok.playlist.xml
+#%{_datadir}/dbus-1/interfaces/org.kde.amarok.playlistbrowser.xml
+#%{_datadir}/dbus-1/interfaces/org.kde.amarok.script.xml
 %{_datadir}/kde4/services/ServiceMenus/amarok_append.desktop
 %{_datadir}/kde4/services/amarok-containment-context.desktop
 %{_datadir}/kde4/services/amarok-context-applet-currenttrack.desktop
@@ -318,7 +332,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
 %{_datadir}/kde4/services/amarok_collection-daapcollection.desktop
 %{_datadir}/kde4/services/amarok_collection-sqlcollection.desktop
-%{_datadir}/kde4/services/amarok_phonon-engine.desktop
+#%{_datadir}/kde4/services/amarok_phonon-engine.desktop
 %{_datadir}/kde4/services/amarok_service_ampache.desktop
 %{_datadir}/kde4/services/amarok_service_ampache_config.desktop
 %{_datadir}/kde4/services/amarok_service_jamendo.desktop
@@ -329,6 +343,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok_service_mp3tunes.desktop
 %{_datadir}/kde4/services/amarok_service_mp3tunes_config.desktop
 %{_datadir}/kde4/services/amarok_service_shoutcast.desktop
+%{_datadir}/kde4/services/amarok-context-applet-albums.desktop
+%{_datadir}/kde4/services/amarok-context-applet-cloud.desktop
+%{_datadir}/kde4/services/amarok-context-applet-video.desktop
+%{_datadir}/kde4/services/amarok-data-engine-cloud.desktop
+%{_datadir}/kde4/services/amarok_collection-ipodcollection.desktop
+%{_datadir}/kde4/services/amarok_collection-nepomukcollection.desktop
+%{_datadir}/kde4/services/amarok_service_opmldirectory.desktop
 %{_datadir}/kde4/servicetypes/amarok_context_applet.desktop
 %{_datadir}/kde4/servicetypes/amarok_data_engine.desktop
 %{_datadir}/kde4/servicetypes/amarok_plugin.desktop
@@ -338,29 +359,21 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with xine}
 %files xine
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde4/libamarok_xine-engine.so
-%{_datadir}/config.kcfg/xinecfg.kcfg
-%{_datadir}/kde4/services/amarok_xine-engine.desktop
+#%attr(755,root,root) %{_libdir}/kde4/libamarok_xine-engine.so
+#%{_datadir}/config.kcfg/xinecfg.kcfg
+#%{_datadir}/kde4/services/amarok_xine-engine.desktop
 %endif
-
 %files scripts
 %defattr(644,root,root,755)
-%dir %{_datadir}/apps/amarok/scripts/lyrics_lyrc
-%{_datadir}/apps/amarok/scripts/lyrics_lyrc/COPYING
-%{_datadir}/apps/amarok/scripts/lyrics_lyrc/README
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/lyrics_lyrc/lyrics_lyrc.rb
-%{_datadir}/apps/amarok/scripts/lyrics_lyrc/lyrics_lyrc.spec
-
-%dir %{_datadir}/apps/amarok/scripts/score_default
-%{_datadir}/apps/amarok/scripts/score_default/COPYING
-%{_datadir}/apps/amarok/scripts/score_default/README
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/score_default/score_default.rb
-%{_datadir}/apps/amarok/scripts/score_default/score_default.spec
-%dir %{_datadir}/apps/amarok/scripts/score_impulsive
-%{_datadir}/apps/amarok/scripts/score_impulsive/COPYING
-%{_datadir}/apps/amarok/scripts/score_impulsive/README
-%attr(755,root,root) %{_datadir}/apps/amarok/scripts/score_impulsive/score_impulsive.rb
-%{_datadir}/apps/amarok/scripts/score_impulsive/score_impulsive.spec
-
-%dir %{_datadir}/apps/amarok/scripts/ruby_debug
-%{_datadir}/apps/amarok/scripts/ruby_debug/debug.rb
+%dir %{_datadir}/apps/amarok/scripts/qtscript_debug
+%{_datadir}/apps/amarok/scripts/qtscript_debug/debug.js
+%{_datadir}/apps/amarok/scripts/qtscript_debug/main.js
+%{_datadir}/apps/amarok/scripts/qtscript_debug/script.spec
+%dir %{_datadir}/apps/amarok/scripts/radio_station_service
+%{_datadir}/apps/amarok/scripts/radio_station_service/COPYING
+%{_datadir}/apps/amarok/scripts/radio_station_service/README
+%{_datadir}/apps/amarok/scripts/radio_station_service/main.js
+%{_datadir}/apps/amarok/scripts/radio_station_service/script.spec
+%dir %{_datadir}/apps/amarok/scripts/script_console
+%{_datadir}/apps/amarok/scripts/script_console/main.js
+%{_datadir}/apps/amarok/scripts/script_console/script.spec
