@@ -40,6 +40,7 @@ Buildrequires:	QtOpenGL-devel
 BuildRequires:	QtScript-devel
 BuildRequires:	QtUiTools-devel
 BuildRequires:	QtWebKit-devel
+BuildRequires:	QtSvg-devel
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf
@@ -64,6 +65,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	ruby-devel >= 1.8
+BuildRequires:	soprano-devel
 %{!?with_included_sqlite:BuildRequires:	sqlite3-devel >= 3.3}
 BuildRequires:	strigi-devel >= 0.5.5
 BuildRequires:	taglib-devel
