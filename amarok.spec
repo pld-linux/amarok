@@ -57,6 +57,8 @@ BuildRequires:	libltdl-devel
 %{?with_mp3players:BuildRequires:	libnjb-devel >= 2.2.4}
 %{?with_pgsql:BuildRequires:		libpqxx-devel}
 BuildRequires:	libtunepimp-devel >= 0.5.1-6
+BuildRequires:	loudmouth-devel
+BuildRequires:  xorg-lib-libXpm-devel
 BuildRequires:	libvisual-devel >= 0.4.0
 BuildRequires:	mpeg4ip-devel >= 1:1.6
 %{?with_mysql:BuildRequires:		mysql-devel}
