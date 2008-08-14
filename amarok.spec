@@ -136,18 +136,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarok
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
 %attr(755,root,root) %{_bindir}/amarokmp3tunesharmonydaemon
-%attr(755,root,root) %{_libdir}/libamaroklib.so
+%attr(755,root,root) %ghost %{_libdir}/libamaroklib.so.?
 %attr(755,root,root) %{_libdir}/libamaroklib.so.*.*.*
-%attr(755,root,root) %{_libdir}/libamarok_taglib.so
-%attr(755,root,root) %{_libdir}/libamarok_taglib.so.1
-%attr(755,root,root) %{_libdir}/libamarok_taglib.so.1.0.0
-%attr(755,root,root) %{_libdir}/libamaroklib.so.1
-%attr(755,root,root) %{_libdir}/libamarokplasma.so
-%attr(755,root,root) %{_libdir}/libamarokplasma.so.1
-%attr(755,root,root) %{_libdir}/libamarokplasma.so.1.0.0
-%attr(755,root,root) %{_libdir}/libamarokpud.so
-%attr(755,root,root) %{_libdir}/libamarokpud.so.1
-%attr(755,root,root) %{_libdir}/libamarokpud.so.1.0.0
+%attr(755,root,root) %ghost %{_libdir}/libamarok_taglib.so.?
+%attr(755,root,root) %{_libdir}/libamarok_taglib.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libamarokplasma.so.?
+%attr(755,root,root) %{_libdir}/libamarokplasma.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libamarokpud.so.?
+%attr(755,root,root) %{_libdir}/libamarokpud.so.*.*.*
 %attr(755,root,root) %{_libdir}/strigi/strigita_audible.so
 %attr(755,root,root) %{_libdir}/strigi/strigita_mp4.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_containment_context.so
