@@ -12,11 +12,18 @@ Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{vers
 # Source0-md5:	acf43672687a5f261ce36d668338a4c1
 Patch0:		kde4-kdeextragear-multimedia-NJB.patch
 URL:		http://amarok.kde.org/
+Buildrequires:	Qt3Support-devel >= %{qtver}
+Buildrequires:	QtCore-devel >= %{qtver}
+Buildrequires:	QtDBus-devel >= %{qtver}
+BuildRequires:	QtNetwork-devel >= %{qtver}
 Buildrequires:	QtOpenGL-devel >= %{qtver}
 BuildRequires:	QtScript-devel >= %{qtver}
+BuildRequires:	QtSql-devel >= %{qtver}
 BuildRequires:	QtSvg-devel >= %{qtver}
+BuildRequires:	QtTest-devel >= %{qtver}
 BuildRequires:	QtUiTools-devel >= %{qtver}
 BuildRequires:	QtWebKit-devel >= %{qtver}
+BuildRequires:	QtXml-devel >= %{qtver}
 BuildRequires:	cmake >= 2.6.0
 BuildRequires:	glib2-devel
 BuildRequires:	kde4-kdebase-devel
