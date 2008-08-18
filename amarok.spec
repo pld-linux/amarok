@@ -45,6 +45,7 @@ BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	soprano-devel >= 2.1
 BuildRequires:	strigi-devel >= 0.5.10
 BuildRequires:	taglib-devel
+BuildRequires:	utempter-devel
 BuildRequires:	xorg-lib-libXpm-devel
 Requires(post):	/sbin/ldconfig
 Requires:	kde4-kdebase-core
