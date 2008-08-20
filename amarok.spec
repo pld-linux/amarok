@@ -4,12 +4,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.86
-Release:	2
+Version:	1.90
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	acf43672687a5f261ce36d668338a4c1
+# Source0-md5:	823fcaea9450110bc9ea9fceba674b4e
 Patch0:		kde4-kdeextragear-multimedia-NJB.patch
 URL:		http://amarok.kde.org/
 Buildrequires:	Qt3Support-devel >= %{qtver}
@@ -144,6 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarok
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
 %attr(755,root,root) %{_bindir}/amarokmp3tunesharmonydaemon
+%attr(755,root,root) %{_bindir}/amarok_afttagger
 %attr(755,root,root) %ghost %{_libdir}/libamaroklib.so.?
 %attr(755,root,root) %{_libdir}/libamaroklib.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarok_taglib.so.?
@@ -184,6 +185,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_mp3tunes.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-daapcollection.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-sqlcollection.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_mediadevices.so
+%attr(755,root,root) %{_libdir}/kde4/libamarok_collection-mtpcollection.so
+%attr(755,root,root) %{_libdir}/libamarok_taglib.so
+%attr(755,root,root) %{_libdir}/libamaroklib.so
+%attr(755,root,root) %{_libdir}/libamarokplasma.so
+%attr(755,root,root) %{_libdir}/libamarokpud.so
+%{_datadir}/kde4/services/amarok-context-applet-mediadevices.desktop
+%{_datadir}/kde4/services/amarok_collection-mtpcollection.desktop
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/data
@@ -234,13 +243,21 @@ rm -rf $RPM_BUILD_ROOT
 
 %files scripts
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_core.so
+%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_gui.so
+%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_network.so
+%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_sql.so
+%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_uitools.so
+%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_xml.so
+%dir %{_datadir}/apps/amarok/scripts/webcontrol
+%{_datadir}/apps/amarok/scripts/webcontrol/main.js
+%{_datadir}/apps/amarok/scripts/webcontrol/script.spec
+%dir %{_libdir}/kde4/plugins/script/amarok/qtscript_debug/debug
+%{_libdir}/kde4/plugins/script/amarok/qtscript_debug/debug/__init__.js
 %dir %{_datadir}/apps/amarok/scripts/qtscript_debug
-%{_datadir}/apps/amarok/scripts/qtscript_debug/debug.js
 %{_datadir}/apps/amarok/scripts/qtscript_debug/main.js
 %{_datadir}/apps/amarok/scripts/qtscript_debug/script.spec
 %dir %{_datadir}/apps/amarok/scripts/radio_station_service
-%{_datadir}/apps/amarok/scripts/radio_station_service/COPYING
-%{_datadir}/apps/amarok/scripts/radio_station_service/README
 %{_datadir}/apps/amarok/scripts/radio_station_service/main.js
 %{_datadir}/apps/amarok/scripts/radio_station_service/script.spec
 %dir %{_datadir}/apps/amarok/scripts/script_console
