@@ -24,7 +24,7 @@ BuildRequires:	QtTest-devel >= %{qtver}
 BuildRequires:	QtUiTools-devel >= %{qtver}
 BuildRequires:	QtWebKit-devel >= %{qtver}
 BuildRequires:	QtXml-devel >= %{qtver}
-BuildRequires:	cmake >= 2.6.0
+BuildRequires:	cmake >= 2.6.1-2
 BuildRequires:	glib2-devel
 BuildRequires:	kde4-kdebase-devel
 BuildRequires:	kde4-kdemultimedia-devel
@@ -113,7 +113,6 @@ install -d build
 cd build
 %cmake \
 		-DCMAKE_INSTALL_PREFIX=%{_prefix} \
-		-DCMAKE_AR=%{_bindir}/ar \
 %if "%{_lib}" == "lib64"
 		-DLIB_SUFFIX=64 \
 %endif
