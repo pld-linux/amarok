@@ -254,11 +254,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/apps/amarok/scripts/webcontrol
 %{_datadir}/apps/amarok/scripts/webcontrol/main.js
 %{_datadir}/apps/amarok/scripts/webcontrol/script.spec
-%dir %{_libdir}/kde4/plugins/script/amarok/qtscript_debug/debug
-%{_libdir}/kde4/plugins/script/amarok/qtscript_debug/debug/__init__.js
-%dir %{_datadir}/apps/amarok/scripts/qtscript_debug
-%{_datadir}/apps/amarok/scripts/qtscript_debug/main.js
-%{_datadir}/apps/amarok/scripts/qtscript_debug/script.spec
 %dir %{_datadir}/apps/amarok/scripts/radio_station_service
 %{_datadir}/apps/amarok/scripts/radio_station_service/main.js
 %{_datadir}/apps/amarok/scripts/radio_station_service/script.spec
