@@ -15,6 +15,7 @@ URL:		http://amarok.kde.org/
 Buildrequires:	Qt3Support-devel >= %{qtver}
 Buildrequires:	QtCore-devel >= %{qtver}
 Buildrequires:	QtDBus-devel >= %{qtver}
+Buildrequires:	QtDesigner-devel >= %{qtver}
 BuildRequires:	QtNetwork-devel >= %{qtver}
 Buildrequires:	QtOpenGL-devel >= %{qtver}
 BuildRequires:	QtScript-devel >= %{qtver}
