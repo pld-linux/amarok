@@ -11,6 +11,7 @@ Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	823fcaea9450110bc9ea9fceba674b4e
 Patch0:		kde4-kdeextragear-multimedia-NJB.patch
+Patch1:		%{name}-lib64.patch
 URL:		http://amarok.kde.org/
 Buildrequires:	Qt3Support-devel >= %{qtver}
 Buildrequires:	QtCore-devel >= %{qtver}
@@ -108,6 +109,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p0
 
 %build
 install -d build
