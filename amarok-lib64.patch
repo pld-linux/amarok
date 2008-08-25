@@ -1,61 +1,61 @@
---- src/scriptengine/generator/generator/qtscript_core.cmake.orig	2008-08-21 21:21:35.776343250 +0200
-+++ src/scriptengine/generator/generator/qtscript_core.cmake	2008-08-21 21:24:00.377380250 +0200
+--- amarok/src/scriptengine/generator/generator/qtscript_core.cmake.orig	2008-08-21 21:21:35.776343250 +0200
++++ amarok/src/scriptengine/generator/generator/qtscript_core.cmake	2008-08-21 21:24:00.377380250 +0200
 @@ -103,4 +103,4 @@
  add_library( qtscript_core MODULE ${Generated_QtCore_SRCS} )
  add_dependencies( qtscript_core generator )
  target_link_libraries( qtscript_core ${QT_LIBRARIES})
 -install( TARGETS qtscript_core DESTINATION lib/kde4/plugins/script )
 +install( TARGETS qtscript_core DESTINATION lib${LIB_SUFFIX}/kde4/plugins/script )
---- src/scriptengine/generator/generator/qtscript_gui.cmake.orig	2008-08-21 21:21:35.780343500 +0200
-+++ src/scriptengine/generator/generator/qtscript_gui.cmake	2008-08-21 21:24:00.377380250 +0200
+--- amarok/src/scriptengine/generator/generator/qtscript_gui.cmake.orig	2008-08-21 21:21:35.780343500 +0200
++++ amarok/src/scriptengine/generator/generator/qtscript_gui.cmake	2008-08-21 21:24:00.377380250 +0200
 @@ -561,4 +561,4 @@
  add_library( qtscript_gui MODULE ${Generated_QtGUI_SRCS} )
  add_dependencies( qtscript_gui generator )
  target_link_libraries( qtscript_gui ${QT_LIBRARIES})
 -install( TARGETS qtscript_gui DESTINATION lib/kde4/plugins/script )
 +install( TARGETS qtscript_gui DESTINATION lib${LIB_SUFFIX}/kde4/plugins/script )
---- src/scriptengine/generator/generator/qtscript_network.cmake.orig	2008-08-21 21:21:35.780343500 +0200
-+++ src/scriptengine/generator/generator/qtscript_network.cmake	2008-08-21 21:24:00.381380500 +0200
+--- amarok/src/scriptengine/generator/generator/qtscript_network.cmake.orig	2008-08-21 21:21:35.780343500 +0200
++++ amarok/src/scriptengine/generator/generator/qtscript_network.cmake	2008-08-21 21:24:00.381380500 +0200
 @@ -51,4 +51,4 @@
  add_library( qtscript_network MODULE ${Generated_QtNetwork_SRCS} )
  add_dependencies( qtscript_network generator )
  target_link_libraries( qtscript_network ${QT_LIBRARIES})
 -install( TARGETS qtscript_network DESTINATION lib/kde4/plugins/script )
 +install( TARGETS qtscript_network DESTINATION lib${LIB_SUFFIX}/kde4/plugins/script )
---- src/scriptengine/generator/generator/qtscript_sql.cmake.orig	2008-08-21 21:21:35.784343750 +0200
-+++ src/scriptengine/generator/generator/qtscript_sql.cmake	2008-08-21 21:24:00.381380500 +0200
+--- amarok/src/scriptengine/generator/generator/qtscript_sql.cmake.orig	2008-08-21 21:21:35.784343750 +0200
++++ amarok/src/scriptengine/generator/generator/qtscript_sql.cmake	2008-08-21 21:24:00.381380500 +0200
 @@ -27,4 +27,4 @@
  add_library( qtscript_sql MODULE ${Generated_QtSql_SRCS} )
  add_dependencies( qtscript_sql generator )
  target_link_libraries( qtscript_sql ${QT_LIBRARIES})
 -install( TARGETS qtscript_sql DESTINATION lib/kde4/plugins/script )
 +install( TARGETS qtscript_sql DESTINATION lib${LIB_SUFFIX}/kde4/plugins/script )
---- src/scriptengine/generator/generator/qtscript_uitools.cmake.orig	2008-08-21 21:21:35.788344000 +0200
-+++ src/scriptengine/generator/generator/qtscript_uitools.cmake	2008-08-21 21:24:00.381380500 +0200
+--- amarok/src/scriptengine/generator/generator/qtscript_uitools.cmake.orig	2008-08-21 21:21:35.788344000 +0200
++++ amarok/src/scriptengine/generator/generator/qtscript_uitools.cmake	2008-08-21 21:24:00.381380500 +0200
 @@ -7,4 +7,4 @@
  add_library( qtscript_uitools MODULE ${Generated_QtUiTools_SRCS} )
  add_dependencies( qtscript_uitools generator )
  target_link_libraries( qtscript_uitools ${QT_LIBRARIES})
 -install( TARGETS qtscript_uitools DESTINATION lib/kde4/plugins/script )
 +install( TARGETS qtscript_uitools DESTINATION lib${LIB_SUFFIX}/kde4/plugins/script )
---- src/scriptengine/generator/generator/qtscript_webkit.cmake.orig	2008-08-21 21:21:35.792344250 +0200
-+++ src/scriptengine/generator/generator/qtscript_webkit.cmake	2008-08-21 21:24:00.381380500 +0200
+--- amarok/src/scriptengine/generator/generator/qtscript_webkit.cmake.orig	2008-08-21 21:21:35.792344250 +0200
++++ amarok/src/scriptengine/generator/generator/qtscript_webkit.cmake	2008-08-21 21:24:00.381380500 +0200
 @@ -17,4 +17,4 @@
  add_library( qtscript_webkit MODULE ${Generated_QtWebkit_SRCS} )
  add_dependencies( qtscript_webkit generator )
  target_link_libraries( qtscript_webkit ${QT_LIBRARIES})
 -install( TARGETS qtscript_webkit DESTINATION lib/kde4/plugins/script )
 +install( TARGETS qtscript_webkit DESTINATION lib${LIB_SUFFIX}/kde4/plugins/script )
---- src/scriptengine/generator/generator/qtscript_xml.cmake.orig	2008-08-21 21:21:35.796344500 +0200
-+++ src/scriptengine/generator/generator/qtscript_xml.cmake	2008-08-21 21:24:00.381380500 +0200
+--- amarok/src/scriptengine/generator/generator/qtscript_xml.cmake.orig	2008-08-21 21:21:35.796344500 +0200
++++ amarok/src/scriptengine/generator/generator/qtscript_xml.cmake	2008-08-21 21:24:00.381380500 +0200
 @@ -48,4 +48,4 @@
  add_library( qtscript_xml MODULE ${Generated_QtXML_SRCS} )
  add_dependencies( qtscript_xml generator )
  target_link_libraries( qtscript_xml ${QT_LIBRARIES})
 -install( TARGETS qtscript_xml DESTINATION lib/kde4/plugins/script )
 +install( TARGETS qtscript_xml DESTINATION lib${LIB_SUFFIX}/kde4/plugins/script )
---- src/scriptengine/generator/generator/qtscript_xmlpatterns.cmake.orig	2008-08-21 21:21:35.796344500 +0200
-+++ src/scriptengine/generator/generator/qtscript_xmlpatterns.cmake	2008-08-21 21:24:00.381380500 +0200
+--- amarok/src/scriptengine/generator/generator/qtscript_xmlpatterns.cmake.orig	2008-08-21 21:21:35.796344500 +0200
++++ amarok/src/scriptengine/generator/generator/qtscript_xmlpatterns.cmake	2008-08-21 21:24:00.381380500 +0200
 @@ -28,4 +28,4 @@
  add_library( qtscript_xmlpatterns MODULE ${Generated_QtXMLPatterns_SRCS} )
  add_dependencies( qtscript_xmlpatterns generator )
