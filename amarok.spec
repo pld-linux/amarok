@@ -4,12 +4,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.92.2
+Version:	1.94
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	658f8a388d87fad83d8ef1c8ae59e292
+# Source0-md5:	bad0c49818b31b2dfe283630c2a5903e
 Patch0:		%{name}-lib64.patch
 URL:		http://amarok.kde.org/
 Buildrequires:	Qt3Support-devel >= %{qtver}
@@ -162,12 +162,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_serviceinfo.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_wikipedia.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_albums.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_cloud.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_video.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_cloud.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_opmldirectory.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-ipodcollection.so
-%attr(755,root,root) %{_libdir}/kde4/libamarok_collection-nepomukcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_current.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lyrics.so
@@ -191,6 +189,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libamaroklib.so
 %attr(755,root,root) %{_libdir}/libamarokplasma.so
 %attr(755,root,root) %{_libdir}/libamarokpud.so
+%attr(755,root,root) %{_libdir}/libamarok_service_liblastfm.so
 %{_datadir}/kde4/services/amarok-context-applet-mediadevices.desktop
 %{_datadir}/kde4/services/amarok_collection-mtpcollection.desktop
 %dir %{_datadir}/apps/amarok
@@ -229,15 +228,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok_service_mp3tunes_config.desktop
 %{_datadir}/kde4/services/amarok_service_shoutcast.desktop
 %{_datadir}/kde4/services/amarok-context-applet-albums.desktop
-%{_datadir}/kde4/services/amarok-context-applet-cloud.desktop
 %{_datadir}/kde4/services/amarok-context-applet-video.desktop
 %{_datadir}/kde4/services/amarok-data-engine-cloud.desktop
 %{_datadir}/kde4/services/amarok_collection-ipodcollection.desktop
-%{_datadir}/kde4/services/amarok_collection-nepomukcollection.desktop
 %{_datadir}/kde4/services/amarok_service_opmldirectory.desktop
 %{_datadir}/kde4/servicetypes/amarok_context_applet.desktop
 %{_datadir}/kde4/servicetypes/amarok_data_engine.desktop
 %{_datadir}/kde4/servicetypes/amarok_plugin.desktop
+%{_datadir}/kde4/servicetypes/amarok_codecinstall.desktop
 %{_desktopdir}/kde4/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
 
@@ -249,12 +247,17 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_sql.so
 %attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_uitools.so
 %attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_xml.so
-%dir %{_datadir}/apps/amarok/scripts/webcontrol
-%{_datadir}/apps/amarok/scripts/webcontrol/main.js
-%{_datadir}/apps/amarok/scripts/webcontrol/script.spec
 %dir %{_datadir}/apps/amarok/scripts/radio_station_service
 %{_datadir}/apps/amarok/scripts/radio_station_service/main.js
 %{_datadir}/apps/amarok/scripts/radio_station_service/script.spec
 %dir %{_datadir}/apps/amarok/scripts/script_console
 %{_datadir}/apps/amarok/scripts/script_console/main.js
 %{_datadir}/apps/amarok/scripts/script_console/script.spec
+%dir %{_datadir}/apps/amarok/scripts/lyrics_lyricwiki
+%{_datadir}/apps/amarok/scripts/lyrics_lyricwiki/main.js
+%{_datadir}/apps/amarok/scripts/lyrics_lyricwiki/script.spec
+%dir %{_datadir}/apps/amarok/scripts/librivox_service
+%{_datadir}/apps/amarok/scripts/librivox_service/main.js
+%{_datadir}/apps/amarok/scripts/librivox_service/LibrivoxLogo.png
+%{_datadir}/apps/amarok/scripts/librivox_service/LibrivoxService.html
+%{_datadir}/apps/amarok/scripts/librivox_service/script.spec
