@@ -25,6 +25,7 @@ BuildRequires:	QtTest-devel >= %{qtver}
 BuildRequires:	QtUiTools-devel >= %{qtver}
 BuildRequires:	QtWebKit-devel >= %{qtver}
 BuildRequires:	QtXml-devel >= %{qtver}
+BuildRequires:	automoc4
 BuildRequires:	cmake >= 2.6.1-2
 BuildRequires:	glib2-devel
 BuildRequires:	kde4-kdebase-devel
