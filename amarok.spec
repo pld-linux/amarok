@@ -27,7 +27,9 @@ BuildRequires:	QtWebKit-devel >= %{qtver}
 BuildRequires:	QtXml-devel >= %{qtver}
 BuildRequires:	automoc4
 BuildRequires:	cmake >= 2.6.1-2
+BuildRequires:	curl-devel
 BuildRequires:	glib2-devel
+BuildRequires:	giflib-devel
 BuildRequires:	kde4-kdebase-devel
 BuildRequires:	kde4-kdemultimedia-devel
 BuildRequires:	libgpod-devel >= 0.4.2
