@@ -4,12 +4,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.94
-Release:	2
+Version:	1.98
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	bad0c49818b31b2dfe283630c2a5903e
+# Source0-md5:	410863050e5de95df82106cc9dfe486a
 Patch0:		%{name}-lib64.patch
 URL:		http://amarok.kde.org/
 Buildrequires:	Qt3Support-devel >= %{qtver}
@@ -163,17 +163,17 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/strigi/strigita_mp4.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_containment_context.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_currenttrack.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lastfmevents.so
+#%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lastfmevents.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lyrics.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_serviceinfo.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_wikipedia.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_albums.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_video.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_cloud.so
+#%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_video.so
+#%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_cloud.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_opmldirectory.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-ipodcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_current.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lastfm.so
+#%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lyrics.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_service.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_wikipedia.so
@@ -212,12 +212,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/ServiceMenus/amarok_append.desktop
 %{_datadir}/kde4/services/amarok-containment-context.desktop
 %{_datadir}/kde4/services/amarok-context-applet-currenttrack.desktop
-%{_datadir}/kde4/services/amarok-context-applet-lastfmevents.desktop
+#%{_datadir}/kde4/services/amarok-context-applet-lastfmevents.desktop
 %{_datadir}/kde4/services/amarok-context-applet-lyrics.desktop
 %{_datadir}/kde4/services/amarok-context-applet-serviceinfo.desktop
 %{_datadir}/kde4/services/amarok-context-applet-wikipedia.desktop
 %{_datadir}/kde4/services/amarok-data-engine-current.desktop
-%{_datadir}/kde4/services/amarok-data-engine-lastfm.desktop
+#%{_datadir}/kde4/services/amarok-data-engine-lastfm.desktop
 %{_datadir}/kde4/services/amarok-data-engine-lyrics.desktop
 %{_datadir}/kde4/services/amarok-data-engine-service.desktop
 %{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
@@ -234,14 +234,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok_service_mp3tunes_config.desktop
 %{_datadir}/kde4/services/amarok_service_shoutcast.desktop
 %{_datadir}/kde4/services/amarok-context-applet-albums.desktop
-%{_datadir}/kde4/services/amarok-context-applet-video.desktop
-%{_datadir}/kde4/services/amarok-data-engine-cloud.desktop
+#%{_datadir}/kde4/services/amarok-context-applet-video.desktop
+#%{_datadir}/kde4/services/amarok-data-engine-cloud.desktop
 %{_datadir}/kde4/services/amarok_collection-ipodcollection.desktop
 %{_datadir}/kde4/services/amarok_service_opmldirectory.desktop
 %{_datadir}/kde4/servicetypes/amarok_context_applet.desktop
 %{_datadir}/kde4/servicetypes/amarok_data_engine.desktop
 %{_datadir}/kde4/servicetypes/amarok_plugin.desktop
 %{_datadir}/kde4/servicetypes/amarok_codecinstall.desktop
+%{_datadir}/kde4/servicetypes/amarok_containment.desktop
 %{_desktopdir}/kde4/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
 
