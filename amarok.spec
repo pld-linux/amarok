@@ -29,7 +29,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.10
-Release:	5
+Release:	6
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -117,6 +117,15 @@ A KDE audio player.
 
 %description -l pl.UTF-8
 Odtwarzacz audio dla KDE.
+
+%package -n konqueror-addon-amarok
+Summary:	Amarok sidebar for Konqueror
+Group:		X11/Applications/Multimedia
+Requires:	%{name} = %{version}-%{release}
+Provides:	%{name}-plugin = %{version}-%{release}
+
+%description -n konqueror-addon-amarok
+Amarok sidebar for Konqueror
 
 %package akode
 Summary:	Plugin akode
@@ -315,7 +324,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarok_daapserver.rb
 %attr(755,root,root) %{_libdir}/libamarok.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarok.so.0
-%attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
 %attr(755,root,root) %{_libdir}/kde3/libamarok_generic-mediadevice.so
 %attr(755,root,root) %{_libdir}/kde3/libamarok_void-engine_plugin.so
 %attr(755,root,root) %{_libdir}/kde3/libamarok_daap-mediadevice.so
@@ -329,12 +337,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/amarok/icons
 %{_datadir}/apps/amarok/images
 %{_datadir}/apps/amarok/themes
-%{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
-%{_datadir}/apps/konqueror/servicemenus/amarok_addaspodcast.desktop
-%{_datadir}/apps/konqueror/servicemenus/amarok_play_audiocd.desktop
-%{_datadir}/apps/konqsidebartng/add/amarok.desktop
-%{_datadir}/apps/konqsidebartng/entries/amarok.desktop
-%{_datadir}/apps/konqsidebartng/kicker_entries/amarok.desktop
 %{_datadir}/apps/profiles/amarok.profile.xml
 %{_datadir}/config/amarokrc
 %{_datadir}/config.kcfg/amarok.kcfg
@@ -370,6 +372,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/services/amarok_mtp-mediadevice.desktop
 %{_datadir}/services/amarok_njb-mediadevice.desktop
 %endif
+
+%files -n konqueror-addon-amarok
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde3/konqsidebar_universalamarok.so
+%{_datadir}/apps/konqueror/servicemenus/amarok_append.desktop
+%{_datadir}/apps/konqueror/servicemenus/amarok_addaspodcast.desktop
+%{_datadir}/apps/konqueror/servicemenus/amarok_play_audiocd.desktop
+%{_datadir}/apps/konqsidebartng/add/amarok.desktop
+%{_datadir}/apps/konqsidebartng/entries/amarok.desktop
+%{_datadir}/apps/konqsidebartng/kicker_entries/amarok.desktop
 
 %if %{with akode}
 %files akode
