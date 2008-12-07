@@ -122,7 +122,6 @@ Odtwarzacz audio dla KDE.
 Summary:	Amarok sidebar for Konqueror
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
-Provides:	%{name}-plugin = %{version}-%{release}
 
 %description -n konqueror-addon-amarok
 Amarok sidebar for Konqueror
