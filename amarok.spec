@@ -1,6 +1,8 @@
+# TODO
+# - try not to link with static mysql
+
 %define		state	unstable
 %define		qtver	4.4.1
-
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
