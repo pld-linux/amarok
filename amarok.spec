@@ -120,11 +120,15 @@ Odtwarzacz audio dla KDE.
 
 %package -n konqueror-addon-amarok
 Summary:	Amarok sidebar for Konqueror
+Summary(pl.UTF-8):	Pasek z Amarokiem dla Konquerora
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 
 %description -n konqueror-addon-amarok
-Amarok sidebar for Konqueror
+Amarok sidebar for Konqueror.
+
+%description -n konqueror-addon-amarok -l pl.UTF-8
+Pasek z Amarokiem dla Konquerora.
 
 %package akode
 Summary:	Plugin akode
