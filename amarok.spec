@@ -29,7 +29,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.10
-Release:	6
+Release:	7
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -218,7 +218,7 @@ Summary:	amaroK scripts
 Summary(pl.UTF-8):	Skrypty amaroKa
 Group:		X11/Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
-Requires:	kdebase-kdialog
+Requires:	/usr/bin/kdialog
 Requires:	python-PyQt
 Requires:	ruby-modules
 
@@ -302,6 +302,9 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
 rm $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
 rm $RPM_BUILD_ROOT%{_libdir}/libamarok.{so,la}
+
+# example plugin code
+rm -rf $RPM_BUILD_ROOT%{_datadir}/apps/amarok/scripts/templates
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
 	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
@@ -431,11 +434,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/amarok/scripts/common/Publisher.py
 %{_datadir}/apps/amarok/scripts/common/Zeroconf.py
 
-%dir %{_datadir}/apps/amarok/scripts/templates
-%{_datadir}/apps/amarok/scripts/templates/amarok.rb
-%{_datadir}/apps/amarok/scripts/templates/python_qt_template.py
-%{_datadir}/apps/amarok/scripts/templates/ruby_qt_template.rb
-
 # amarok searches for executable programs for scripts
 # to figure out which files need to have execute permission, use this
 # find command:
@@ -452,7 +450,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.py
 %{_datadir}/apps/amarok/scripts/playlist2html/PlaylistServer.spec
 %{_datadir}/apps/amarok/scripts/playlist2html/playlist2html.spec
-
 
 %dir %{_datadir}/apps/amarok/scripts/webcontrol
 %{_datadir}/apps/amarok/scripts/webcontrol/README
