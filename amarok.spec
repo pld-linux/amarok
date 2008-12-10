@@ -1,17 +1,17 @@
 # TODO
 # - try not to link with static mysql
 
-%define		state	unstable
-%define		qtver	4.4.1
+%define		state	stable
+%define		qtver	4.4.3
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	1.98
+Version:	2.0
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	410863050e5de95df82106cc9dfe486a
+Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
+# Source0-md5:	bcecfedd3976df0e8a0bd4a499b89fcb
 Patch0:		%{name}-lib64.patch
 URL:		http://amarok.kde.org/
 Buildrequires:	Qt3Support-devel >= %{qtver}
@@ -211,6 +211,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.player.xml
 %{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.root.xml
 %{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.tracklist.xml
+%{_datadir}/kde4/services/amaroklastfm.protocol
 %{_datadir}/kde4/services/ServiceMenus/amarok_append.desktop
 %{_datadir}/kde4/services/amarok-containment-context.desktop
 %{_datadir}/kde4/services/amarok-context-applet-currenttrack.desktop
