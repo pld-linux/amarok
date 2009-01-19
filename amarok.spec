@@ -45,6 +45,10 @@ Patch7:		%{name}-titleorder.patch
 Patch8:		%{name}-mongrel.patch
 Patch9:		%{name}-libmtp.patch
 URL:		http://amarok.kde.org/
+# Upgrade to 2.0.1.1 required?
+# http://www.trapkit.de/advisories/TKADV2009-002.txt
+# http://amarok.kde.org/de/node/600
+BuildRequires:	security(TKADV2009-002)
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf
