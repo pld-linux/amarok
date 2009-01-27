@@ -29,7 +29,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.10
-Release:	7
+Release:	8
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -48,7 +48,7 @@ URL:		http://amarok.kde.org/
 # Upgrade to 2.0.1.1 required?
 # http://www.trapkit.de/advisories/TKADV2009-002.txt
 # http://amarok.kde.org/de/node/600
-BuildRequires:	security(TKADV2009-002)
+#BuildRequires:	security(TKADV2009-002)
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf
