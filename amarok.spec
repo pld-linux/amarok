@@ -13,6 +13,7 @@ Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	818bc2b0350f35cba0fff0a72b9ffd22
 Patch0:		%{name}-lib64.patch
+Patch1:		%{name}-no-sqlcollection.patch
 URL:		http://amarok.kde.org/
 Buildrequires:	Qt3Support-devel >= %{qtver}
 Buildrequires:	QtCore-devel >= %{qtver}
@@ -113,6 +114,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 
 %prep
 %setup -q
+%patch1 -p0
 
 %build
 install -d build
@@ -190,7 +192,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_magnatunestore.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_mp3tunes.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-daapcollection.so
-%attr(755,root,root) %{_libdir}/kde4/libamarok_collection-sqlcollection.so
+# disabled with no-sqlcollection.patch
+#%attr(755,root,root) %{_libdir}/kde4/libamarok_collection-sqlcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_mediadevices.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-mtpcollection.so
 %attr(755,root,root) %{_libdir}/libamarok_taglib.so
@@ -225,7 +228,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-data-engine-service.desktop
 %{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
 %{_datadir}/kde4/services/amarok_collection-daapcollection.desktop
-%{_datadir}/kde4/services/amarok_collection-sqlcollection.desktop
+# disabled with no-sqlcollection.patch
+#%{_datadir}/kde4/services/amarok_collection-sqlcollection.desktop
 %{_datadir}/kde4/services/amarok_service_ampache.desktop
 %{_datadir}/kde4/services/amarok_service_ampache_config.desktop
 %{_datadir}/kde4/services/amarok_service_jamendo.desktop
