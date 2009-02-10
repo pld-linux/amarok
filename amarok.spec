@@ -3,17 +3,19 @@
 
 %define		state	stable
 %define		qtver	4.4.3
+%define		snap	924419
+
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.0.1.1
-Release:	1
+Version:	2.1
+Release:	0.%{snap}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	818bc2b0350f35cba0fff0a72b9ffd22
+#Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
+Source0:	%{name}-%{version}.tar.bz2
+# Source0-md5:	165e1bc195432a74a04e85fba404cae9
 Patch0:		%{name}-lib64.patch
-Patch1:		%{name}-no-sqlcollection.patch
 URL:		http://amarok.kde.org/
 Buildrequires:	Qt3Support-devel >= %{qtver}
 Buildrequires:	QtCore-devel >= %{qtver}
@@ -35,7 +37,7 @@ BuildRequires:	glib2-devel
 BuildRequires:	giflib-devel
 BuildRequires:	kde4-kdebase-devel
 BuildRequires:	kde4-kdemultimedia-devel
-BuildRequires:	libgpod-devel >= 0.4.2
+BuildRequires:	libgpod-devel >= 0.7.0
 BuildRequires:	libifp-devel >= 1.0.0.2
 BuildRequires:	libmtp-devel >= 0.3.0
 BuildRequires:	libnjb-devel >= 2.2.4
@@ -114,7 +116,6 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 
 %prep
 %setup -q
-%patch1 -p0
 
 %build
 install -d build
@@ -140,7 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 # remove bogus dir
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
-%find_lang %{name} --with-kde 
+#%find_lang %{name} --with-kde 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -148,7 +149,8 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files -f %{name}.lang
+#%files -f %{name}.lang
+%files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/amarok
@@ -159,13 +161,16 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libamaroklib.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarok_taglib.so.?
 %attr(755,root,root) %{_libdir}/libamarok_taglib.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libamarokplasma.so.?
-%attr(755,root,root) %{_libdir}/libamarokplasma.so.*.*.*
+#%attr(755,root,root) %ghost %{_libdir}/libamarokplasma.so.?
+#%attr(755,root,root) %{_libdir}/libamarokplasma.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarokpud.so.?
 %attr(755,root,root) %{_libdir}/libamarokpud.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmediadevicelib.so.?
+%attr(755,root,root) %{_libdir}/libmediadevicelib.so.*.*.*
 %attr(755,root,root) %{_libdir}/strigi/strigita_audible.so
 %attr(755,root,root) %{_libdir}/strigi/strigita_mp4.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_containment_context.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_containment_vertical.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_bookmark.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_currenttrack.so
 #%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lastfmevents.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lyrics.so
@@ -192,17 +197,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_magnatunestore.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_mp3tunes.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-daapcollection.so
-# disabled with no-sqlcollection.patch
-#%attr(755,root,root) %{_libdir}/kde4/libamarok_collection-sqlcollection.so
+%attr(755,root,root) %{_libdir}/kde4/libamarok_collection-sqlcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_mediadevices.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-mtpcollection.so
 %attr(755,root,root) %{_libdir}/libamarok_taglib.so
 %attr(755,root,root) %{_libdir}/libamaroklib.so
-%attr(755,root,root) %{_libdir}/libamarokplasma.so
+#%attr(755,root,root) %{_libdir}/libamarokplasma.so
 %attr(755,root,root) %{_libdir}/libamarokpud.so
 %attr(755,root,root) %{_libdir}/libamarok_service_liblastfm.so
-%{_datadir}/kde4/services/amarok-context-applet-mediadevices.desktop
-%{_datadir}/kde4/services/amarok_collection-mtpcollection.desktop
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/data
@@ -214,22 +216,25 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.player.xml
 %{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.root.xml
 %{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.tracklist.xml
+%{_datadir}/kde4/services/amarok.protocol
 %{_datadir}/kde4/services/amaroklastfm.protocol
 %{_datadir}/kde4/services/ServiceMenus/amarok_append.desktop
-%{_datadir}/kde4/services/amarok-containment-context.desktop
+%{_datadir}/kde4/services/amarok-containment-vertical.desktop
+%{_datadir}/kde4/services/amarok-context-applet-bookmark.desktop
 %{_datadir}/kde4/services/amarok-context-applet-currenttrack.desktop
 #%{_datadir}/kde4/services/amarok-context-applet-lastfmevents.desktop
 %{_datadir}/kde4/services/amarok-context-applet-lyrics.desktop
 %{_datadir}/kde4/services/amarok-context-applet-serviceinfo.desktop
 %{_datadir}/kde4/services/amarok-context-applet-wikipedia.desktop
+%{_datadir}/kde4/services/amarok-context-applet-mediadevices.desktop
+%{_datadir}/kde4/services/amarok_collection-mtpcollection.desktop
 %{_datadir}/kde4/services/amarok-data-engine-current.desktop
 #%{_datadir}/kde4/services/amarok-data-engine-lastfm.desktop
 %{_datadir}/kde4/services/amarok-data-engine-lyrics.desktop
 %{_datadir}/kde4/services/amarok-data-engine-service.desktop
 %{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
 %{_datadir}/kde4/services/amarok_collection-daapcollection.desktop
-# disabled with no-sqlcollection.patch
-#%{_datadir}/kde4/services/amarok_collection-sqlcollection.desktop
+%{_datadir}/kde4/services/amarok_collection-sqlcollection.desktop
 %{_datadir}/kde4/services/amarok_service_ampache.desktop
 %{_datadir}/kde4/services/amarok_service_ampache_config.desktop
 %{_datadir}/kde4/services/amarok_service_jamendo.desktop
@@ -249,7 +254,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/servicetypes/amarok_data_engine.desktop
 %{_datadir}/kde4/servicetypes/amarok_plugin.desktop
 %{_datadir}/kde4/servicetypes/amarok_codecinstall.desktop
-%{_datadir}/kde4/servicetypes/amarok_containment.desktop
+#%{_datadir}/kde4/servicetypes/amarok_containment.desktop
 %{_desktopdir}/kde4/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
 
