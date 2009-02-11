@@ -15,7 +15,7 @@ Group:		X11/Applications/Multimedia
 #Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
 Source0:	%{name}-%{version}.tar.bz2
 # Source0-md5:	165e1bc195432a74a04e85fba404cae9
-Patch0:		%{name}-lib64.patch
+Patch0:		%{name}-link.patch
 URL:		http://amarok.kde.org/
 Buildrequires:	Qt3Support-devel >= %{qtver}
 Buildrequires:	QtCore-devel >= %{qtver}
@@ -116,6 +116,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
 install -d build
