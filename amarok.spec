@@ -44,7 +44,7 @@ BuildRequires:	libnjb-devel >= 2.2.4
 BuildRequires:	libvisual-devel >= 0.4.0
 BuildRequires:	loudmouth-devel
 BuildRequires:	mpeg4ip-devel >= 1:1.6
-BuildRequires:	mysql-devel
+BuildRequires:	mysql-devel >= 5.1.31-3
 BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
 BuildRequires:	qt4-build >= %{qtver}
