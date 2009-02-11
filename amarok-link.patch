@@ -1,0 +1,11 @@
+--- src/collection/sqlcollection/CMakeLists.txt	2009-02-10 19:58:04.000000000 +0100
++++ src/collection/sqlcollection/CMakeLists.txt-new	2009-02-11 16:27:38.333057559 +0100
+@@ -75,7 +75,7 @@
+ if(NOT WIN32)
+     target_link_libraries(amarok_collection-sqlcollection crypto ssl)
+     if(NOT APPLE)
+-        target_link_libraries(amarok_collection-sqlcollection crypt pthread)
++        target_link_libraries(amarok_collection-sqlcollection crypt pthread dl)
+     endif(NOT APPLE)
+ endif(NOT WIN32)
+ 
