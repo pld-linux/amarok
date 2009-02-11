@@ -201,10 +201,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-sqlcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_mediadevices.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-mtpcollection.so
-%attr(755,root,root) %{_libdir}/libamarok_taglib.so
-%attr(755,root,root) %{_libdir}/libamaroklib.so
-#%attr(755,root,root) %{_libdir}/libamarokplasma.so
-%attr(755,root,root) %{_libdir}/libamarokpud.so
 %attr(755,root,root) %{_libdir}/libamarok_service_liblastfm.so
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
