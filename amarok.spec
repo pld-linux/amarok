@@ -61,7 +61,9 @@ Requires(post):	/sbin/ldconfig
 Requires:	kde4-kdebase-core
 Requires:	kde4-kdemultimedia-audiocd
 Requires:	kde4-phonon
-Requires:	mysql >= 5.1.31-3
+# It should require mysql-embeded
+#Requires:	mysql >= 5.1.31-3
+Conflicts:	mysql < 5.1.31-3
 Suggests:	libvisual-plugin-actor-JESS
 Suggests:	libvisual-plugin-actor-bumpscope
 Suggests:	libvisual-plugin-actor-corona
