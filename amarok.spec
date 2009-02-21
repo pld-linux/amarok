@@ -3,20 +3,19 @@
 
 %define		state	stable
 %define		qtver	4.4.3
-%define		snap	924419
+%define		snap	929354
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	2.1
-Release:	0.%{snap}.5
+Release:	0.%{snap}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
-Source0:	%{name}-%{version}.tar.bz2
-# Source0-md5:	165e1bc195432a74a04e85fba404cae9
+Source0:	%{name}-%{version}-%{snap}.tar.bz2
+# Source0-md5:	7cc8997065ff97016fb343ef8e24851b
 Patch0:		%{name}-link.patch
-Patch1:		%{name}-wikilang.patch
 URL:		http://amarok.kde.org/
 Buildrequires:	Qt3Support-devel >= %{qtver}
 Buildrequires:	QtCore-devel >= %{qtver}
@@ -34,8 +33,8 @@ BuildRequires:	QtXml-devel >= %{qtver}
 BuildRequires:	automoc4
 BuildRequires:	cmake >= 2.6.1-2
 BuildRequires:	curl-devel
-BuildRequires:	glib2-devel
 BuildRequires:	giflib-devel
+BuildRequires:	glib2-devel
 BuildRequires:	kde4-kdebase-devel
 BuildRequires:	kde4-kdemultimedia-devel
 BuildRequires:	libgpod-devel >= 0.7.0
@@ -121,7 +120,6 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %prep
 %setup -q
 %patch0 -p0
-%patch1 -p0
 
 %build
 install -d build
@@ -148,7 +146,7 @@ rm -rf $RPM_BUILD_ROOT
 # remove bogus dir
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
-#%find_lang %{name} --with-kde 
+#%find_lang %{name} --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -207,6 +205,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-sqlcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_mediadevices.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-mtpcollection.so
+%attr(755,root,root) %{_libdir}/kde4/libamarok_massstorage-device.so
 %attr(755,root,root) %{_libdir}/libamarok_service_liblastfm.so
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
@@ -252,6 +251,7 @@ rm -rf $RPM_BUILD_ROOT
 #%{_datadir}/kde4/services/amarok-context-applet-video.desktop
 #%{_datadir}/kde4/services/amarok-data-engine-cloud.desktop
 %{_datadir}/kde4/services/amarok_collection-ipodcollection.desktop
+%{_datadir}/kde4/services/amarok_massstorage-device.desktop
 %{_datadir}/kde4/services/amarok_service_opmldirectory.desktop
 %{_datadir}/kde4/servicetypes/amarok_context_applet.desktop
 %{_datadir}/kde4/servicetypes/amarok_data_engine.desktop
