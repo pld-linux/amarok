@@ -10,8 +10,6 @@
 # - karma & MFS (see README)
 #
 # Conditional builds:
-%bcond_with	gstreamer	# enable gstreamer (gst10 not stable)
-%bcond_without	mas		# disable MAS audio backend
 %bcond_without	xine		# disable xine engine
 %bcond_without	zeroconf	# disable support for zeroconf
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA), needs sqlite >= 3.3 otherwise
@@ -29,7 +27,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.10
-Release:	8
+Release:	9
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -55,9 +53,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
-%{?with_gstreamer:BuildRequires:	gstreamer-devel >= 0.10.0}
 BuildRequires:	kdebase-devel
-%{?with_akode:BuildRequires:	kdemultimedia-akode}
 BuildRequires:	kdemultimedia-devel >= 9:3.1.93
 %{?with_mp3players:BuildRequires:	libgpod-devel >= 0.6.0}
 %{?with_mp3players:BuildRequires:	libifp-devel >= 1.0.0.2}
@@ -88,7 +84,6 @@ Suggests:	libvisual-plugin-actor-corona
 Suggests:	libvisual-plugin-actor-flower
 Suggests:	libvisual-plugin-actor-gdkpixbuf
 Suggests:	libvisual-plugin-actor-gforce
-%{?with_gstreamer:Suggests:	libvisual-plugin-actor-gstreamer}
 Suggests:	libvisual-plugin-actor-infinite
 Suggests:	libvisual-plugin-actor-jakdaw
 Suggests:	libvisual-plugin-actor-lv_analyzer
@@ -134,19 +129,6 @@ Amarok sidebar for Konqueror.
 %description -n konqueror-addon-amarok -l pl.UTF-8
 Pasek z Amarokiem dla Konquerora.
 
-%package akode
-Summary:	Plugin akode
-Summary(pl.UTF-8):	Wtyczka akode
-Group:		X11/Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
-Provides:	%{name}-plugin = %{version}-%{release}
-
-%description akode
-Plugin akode.
-
-%description akode -l pl.UTF-8
-Wtyczka akode.
-
 %package helix
 Summary:	Helix/Realplayer playback support for amarok
 Summary(pl.UTF-8):	Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka
@@ -160,34 +142,6 @@ Helix/Realplayer playback support for amarok.
 
 %description helix -l pl.UTF-8
 Wsparcie dla odtwarzania przez Helix/Realplayera dla amaroka.
-
-%package gstreamer
-Summary:	Plugin gstreamer
-Summary(pl.UTF-8):	Wtyczka gstreamer
-Group:		X11/Applications/Multimedia
-# deps, to get it working:
-# mp3 decoder:	gstreamer-mad
-# ogg decoder:	gstreamer-vorbis
-# audio output driver:	gstreamer-audiosink-alsa
-# from gstreamer-audio-effects to control volume, etc
-# needed libs:
-#  at least /usr/lib/gstreamer-0.8/libgstresample.so
-#  probably /usr/lib/gstreamer-0.8/libgstadder.so
-#  and probably /usr/lib/gstreamer-0.8/libgstvolume.so
-# gstreamer-musicbrainz for being able to edit id3 tags on files.
-Requires:	%{name} = %{version}-%{release}
-Requires:	gstreamer-audio-effects
-Requires:	gstreamer-audiosink
-Requires:	gstreamer-mad
-Requires:	gstreamer-musicbrainz
-Requires:	gstreamer-vorbis
-Provides:	%{name}-plugin = %{version}-%{release}
-
-%description gstreamer
-Plugin gstreamer.
-
-%description gstreamer -l pl.UTF-8
-Wtyczka gstreamer.
 
 %package xine
 Summary:	Plugin xine
@@ -273,10 +227,7 @@ cp -f /usr/share/automake/config.sub admin
 	HELIX_LIBS=%{_libdir}/helixplayer \
 	--%{?debug:en}%{!?debug:dis}able-debug%{?debug:=full} \
 	--disable-rpath \
-	--with%{!?with_mas:out}-mas \
 	--with%{!?with_xine:out}-xine \
-	--with%{!?with_gstreamer:out}-gstreamer10 \
-	--with%{!?with_akode:out}-akode \
 	--with%{!?with_helix:out}-helix%{?with_helix:=usegivenpath} \
 	--with%{!?with_nmm:out}-nmm \
 	--with%{!?with_mp3players:out}-libgpod \
@@ -392,21 +343,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/konqsidebartng/add/amarok.desktop
 %{_datadir}/apps/konqsidebartng/entries/amarok.desktop
 %{_datadir}/apps/konqsidebartng/kicker_entries/amarok.desktop
-
-%if %{with akode}
-%files akode
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde3/libamarok_aKode-engine.so
-%{_datadir}/services/amarok_aKode-engine.desktop
-%endif
-
-%if %{with gstreamer}
-%files gstreamer
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde3/libamarok_gst10engine_plugin.so
-%{_datadir}/config.kcfg/gstconfig.kcfg
-%{_datadir}/services/amarok_gst10engine_plugin.desktop
-%endif
 
 %if %{with helix}
 %files helix
