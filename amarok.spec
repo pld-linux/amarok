@@ -9,7 +9,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	2.1
-Release:	0.%{snap}.3
+Release:	0.%{snap}.2
 License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
@@ -151,10 +151,9 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p	/sbin/ldconfig
-%postun	-p	/sbin/ldconfig
+%post		-p /sbin/ldconfig
+%postun		-p /sbin/ldconfig
 
-#%%files -f %{name}.lang
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
