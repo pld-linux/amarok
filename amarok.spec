@@ -151,10 +151,10 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post	-p	/sbin/ldconfig
+%postun	-p	/sbin/ldconfig
 
-#%files -f %{name}.lang
+#%%files -f %{name}.lang
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
@@ -166,8 +166,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libamaroklib.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarok_taglib.so.?
 %attr(755,root,root) %{_libdir}/libamarok_taglib.so.*.*.*
-#%attr(755,root,root) %ghost %{_libdir}/libamarokplasma.so.?
-#%attr(755,root,root) %{_libdir}/libamarokplasma.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarokpud.so.?
 %attr(755,root,root) %{_libdir}/libamarokpud.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmediadevicelib.so.?
@@ -177,17 +175,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_containment_vertical.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_bookmark.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_currenttrack.so
-#%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lastfmevents.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lyrics.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_serviceinfo.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_wikipedia.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_albums.so
-#%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_video.so
-#%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_cloud.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_opmldirectory.so
 %attr(755,root,root) %{_libdir}/kde4/libamarok_collection-ipodcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_current.so
-#%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lyrics.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_service.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_wikipedia.so
@@ -224,14 +218,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-containment-vertical.desktop
 %{_datadir}/kde4/services/amarok-context-applet-bookmark.desktop
 %{_datadir}/kde4/services/amarok-context-applet-currenttrack.desktop
-#%{_datadir}/kde4/services/amarok-context-applet-lastfmevents.desktop
 %{_datadir}/kde4/services/amarok-context-applet-lyrics.desktop
 %{_datadir}/kde4/services/amarok-context-applet-serviceinfo.desktop
 %{_datadir}/kde4/services/amarok-context-applet-wikipedia.desktop
 %{_datadir}/kde4/services/amarok-context-applet-mediadevices.desktop
 %{_datadir}/kde4/services/amarok_collection-mtpcollection.desktop
 %{_datadir}/kde4/services/amarok-data-engine-current.desktop
-#%{_datadir}/kde4/services/amarok-data-engine-lastfm.desktop
 %{_datadir}/kde4/services/amarok-data-engine-lyrics.desktop
 %{_datadir}/kde4/services/amarok-data-engine-service.desktop
 %{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
@@ -248,8 +240,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok_service_mp3tunes_config.desktop
 %{_datadir}/kde4/services/amarok_service_shoutcast.desktop
 %{_datadir}/kde4/services/amarok-context-applet-albums.desktop
-#%{_datadir}/kde4/services/amarok-context-applet-video.desktop
-#%{_datadir}/kde4/services/amarok-data-engine-cloud.desktop
 %{_datadir}/kde4/services/amarok_collection-ipodcollection.desktop
 %{_datadir}/kde4/services/amarok_massstorage-device.desktop
 %{_datadir}/kde4/services/amarok_service_opmldirectory.desktop
@@ -257,7 +247,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/servicetypes/amarok_data_engine.desktop
 %{_datadir}/kde4/servicetypes/amarok_plugin.desktop
 %{_datadir}/kde4/servicetypes/amarok_codecinstall.desktop
-#%{_datadir}/kde4/servicetypes/amarok_containment.desktop
 %{_desktopdir}/kde4/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
 
