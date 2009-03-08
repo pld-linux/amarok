@@ -3,18 +3,18 @@
 
 %define		state	stable
 %define		qtver	4.4.3
-%define		snap	936025
+%define		snap	936984
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	2.1
-Release:	0.%{snap}.2
+Release:	0.%{snap}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
 Source0:	%{name}-%{version}-%{snap}.tar.bz2
-# Source0-md5:	077aa422fbde10fa5ac48381296f9abb
+# Source0-md5:	f3dc24666ab26758d5278bca2d6aa568
 Patch0:		%{name}-link.patch
 URL:		http://amarok.kde.org/
 Buildrequires:	Qt3Support-devel >= %{qtver}
