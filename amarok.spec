@@ -8,6 +8,7 @@
 # - monitor http://bugs.kde.org/show_bug.cgi?id=137390 to remove the temporary fix
 # - ProjectM (see README)
 # - karma & MFS (see README)
+# - ipod mount should not inherit descriptions (like fuse mount has /dev/alsa nodes open)
 #
 # Conditional builds:
 %bcond_without	xine		# disable xine engine
