@@ -18,12 +18,12 @@ Source0:	%{name}-%{version}-%{snap}.tar.bz2
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-artist_postfix.patch
 URL:		http://amarok.kde.org/
-Buildrequires:	Qt3Support-devel >= %{qtver}
-Buildrequires:	QtCore-devel >= %{qtver}
-Buildrequires:	QtDBus-devel >= %{qtver}
-Buildrequires:	QtDesigner-devel >= %{qtver}
+BuildRequires:	Qt3Support-devel >= %{qtver}
+BuildRequires:	QtCore-devel >= %{qtver}
+BuildRequires:	QtDBus-devel >= %{qtver}
+BuildRequires:	QtDesigner-devel >= %{qtver}
 BuildRequires:	QtNetwork-devel >= %{qtver}
-Buildrequires:	QtOpenGL-devel >= %{qtver}
+BuildRequires:	QtOpenGL-devel >= %{qtver}
 BuildRequires:	QtScript-devel >= %{qtver}
 BuildRequires:	QtSql-devel >= %{qtver}
 BuildRequires:	QtSvg-devel >= %{qtver}
@@ -61,9 +61,6 @@ Requires(post,postun):	/sbin/ldconfig
 Requires:	kde4-kdebase-core
 Requires:	kde4-kdemultimedia-audiocd
 Requires:	kde4-phonon
-# It should require mysql-embeded
-#Requires:	mysql >= 5.1.31-3
-Conflicts:	mysql < 5.1.31-3
 Suggests:	libvisual-plugin-actor-JESS
 Suggests:	libvisual-plugin-actor-bumpscope
 Suggests:	libvisual-plugin-actor-corona
@@ -89,6 +86,9 @@ Suggests:	libvisual-plugin-morph-slide
 Suggests:	libvisual-plugin-morph-tentacle
 Obsoletes:	amarok-arts
 Obsoletes:	amarok-xmms
+# It should require mysql-embeded
+#Requires:	mysql >= 5.1.31-3
+Conflicts:	mysql < 5.1.31-3
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
