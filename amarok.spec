@@ -3,18 +3,18 @@
 
 %define		state	stable
 %define		qtver	4.4.3
-%define		snap	936984
+%define		snap	940579
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	2.1
-Release:	0.%{snap}.2
+Release:	0.%{snap}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
 Source0:	%{name}-%{version}-%{snap}.tar.bz2
-# Source0-md5:	f3dc24666ab26758d5278bca2d6aa568
+# Source0-md5:	236b9d881b40221e7e717c8024842172
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-artist_postfix.patch
 URL:		http://amarok.kde.org/
@@ -165,8 +165,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarok_afttagger
 %attr(755,root,root) %ghost %{_libdir}/libamaroklib.so.?
 %attr(755,root,root) %{_libdir}/libamaroklib.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libamarok_taglib.so.?
-%attr(755,root,root) %{_libdir}/libamarok_taglib.so.*.*.*
+#%attr(755,root,root) %ghost %{_libdir}/libamarok_taglib.so.?
+#%attr(755,root,root) %{_libdir}/libamarok_taglib.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarokpud.so.?
 %attr(755,root,root) %{_libdir}/libamarokpud.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmediadevicelib.so.?
