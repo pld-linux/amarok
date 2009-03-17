@@ -17,6 +17,7 @@ Source0:	%{name}-%{version}-%{snap}.tar.bz2
 # Source0-md5:	236b9d881b40221e7e717c8024842172
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-artist_postfix.patch
+Patch2:		%{name}-qthreadpool.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtCore-devel >= %{qtver}
@@ -87,7 +88,7 @@ Suggests:	libvisual-plugin-morph-tentacle
 Obsoletes:	amarok-arts
 Obsoletes:	amarok-xmms
 # It should require mysql-embeded
-#Requires:	mysql >= 5.1.31-3
+Requires:	mysql >= 5.1.31-3
 Conflicts:	mysql < 5.1.31-3
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
@@ -122,8 +123,13 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %setup -q
 %patch0 -p0
 %patch1 -p0
+%patch2 -p0
 
 %build
+# regenerate xmls
+cd src/scriptengine/generator/generator
+./generate.sh
+cd -
 install -d build
 cd build
 %cmake \
