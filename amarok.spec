@@ -2,8 +2,8 @@
 # - try not to link with static mysql
 
 %define		state	stable
-%define		qtver	4.4.3
-%define		snap	940579
+%define		qtver	4.5.0
+%define		snap	941228
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
@@ -14,7 +14,7 @@ License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
 Source0:	%{name}-%{version}-%{snap}.tar.bz2
-# Source0-md5:	236b9d881b40221e7e717c8024842172
+# Source0-md5:	7f317c00a2762f0fb7915b94770e1d19
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-artist_postfix.patch
 Patch2:		%{name}-qthreadpool.patch
