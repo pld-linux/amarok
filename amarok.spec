@@ -18,6 +18,7 @@ Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{ver
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-artist_postfix.patch
 Patch2:		%{name}-qthreadpool.patch
+Patch3:		%{name}-qtsrcipt_notr.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtCore-devel >= %{qtver}
@@ -125,6 +126,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %patch0 -p0
 %patch1 -p0
 #%patch2 -p0
+%patch3 -p1
 
 %build
 # regenerate xmls
