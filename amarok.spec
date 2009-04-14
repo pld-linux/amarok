@@ -1,20 +1,20 @@
 # TODO
 # - try not to link with static mysql
 
-%define		state	stable
+%define		state	unstable
 %define		qtver	4.5.0
 %define		snap	941228
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.1
-Release:	0.%{snap}.2
+Version:	2.0.90
+Release:	0.%{snap}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-#Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
-Source0:	%{name}-%{version}-%{snap}.tar.bz2
-# Source0-md5:	7f317c00a2762f0fb7915b94770e1d19
+Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
+# Source0-md5:	6c904ac95926e383cd1c1c32aa3c1f0f
+#Source0:	%{name}-%{version}-%{snap}.tar.bz2
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-artist_postfix.patch
 Patch2:		%{name}-qthreadpool.patch
@@ -124,13 +124,13 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %setup -q
 %patch0 -p0
 %patch1 -p0
-%patch2 -p0
+#%patch2 -p0
 
 %build
 # regenerate xmls
-cd src/scriptengine/generator/generator
-./generate.sh
-cd -
+#cd src/scriptengine/generator/generator
+#./generate.sh
+#cd -
 install -d build
 cd build
 %cmake \
