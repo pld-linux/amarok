@@ -12,13 +12,12 @@ Version:	2.0.90
 Release:	0.%{snap}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	ftp://ftp.kde.org/pub/kde/%{state}/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	6c904ac95926e383cd1c1c32aa3c1f0f
 #Source0:	%{name}-%{version}-%{snap}.tar.bz2
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-artist_postfix.patch
 Patch2:		%{name}-qthreadpool.patch
-Patch3:		%{name}-qtsrcipt_notr.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtCore-devel >= %{qtver}
@@ -52,6 +51,7 @@ BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
 BuildRequires:	qt4-build >= %{qtver}
 BuildRequires:	qt4-qmake >= %{qtver}
+BuildRequires:	qtscriptbindings
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	soprano-devel >= 2.1
@@ -126,13 +126,8 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %patch0 -p0
 %patch1 -p0
 #%patch2 -p0
-%patch3 -p1
 
 %build
-# regenerate xmls
-#cd src/scriptengine/generator/generator
-#./generate.sh
-#cd -
 install -d build
 cd build
 %cmake \
@@ -262,12 +257,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files scripts
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_core.so
-%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_gui.so
-%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_network.so
-%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_sql.so
-%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_uitools.so
-%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_xml.so
+#%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_core.so
+#%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_gui.so
+#%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_network.so
+#%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_sql.so
+#%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_uitools.so
+#%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_xml.so
 %dir %{_datadir}/apps/amarok/scripts/radio_station_service
 %{_datadir}/apps/amarok/scripts/radio_station_service/main.js
 %{_datadir}/apps/amarok/scripts/radio_station_service/script.spec
