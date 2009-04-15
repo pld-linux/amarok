@@ -64,6 +64,7 @@ Requires(post,postun):	/sbin/ldconfig
 Requires:	kde4-kdebase-core
 Requires:	kde4-kdemultimedia-audiocd
 Requires:	kde4-phonon
+Requires:	qtscriptbindings
 Suggests:	libvisual-plugin-actor-JESS
 Suggests:	libvisual-plugin-actor-bumpscope
 Suggests:	libvisual-plugin-actor-corona
@@ -257,12 +258,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files scripts
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_core.so
-#%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_gui.so
-#%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_network.so
-#%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_sql.so
-#%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_uitools.so
-#%attr(755,root,root) %{_libdir}/kde4/plugins/script/libqtscript_xml.so
 %dir %{_datadir}/apps/amarok/scripts/radio_station_service
 %{_datadir}/apps/amarok/scripts/radio_station_service/main.js
 %{_datadir}/apps/amarok/scripts/radio_station_service/script.spec
