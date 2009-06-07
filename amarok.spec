@@ -8,7 +8,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	2.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -149,7 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 # remove bogus dir
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
-#%find_lang %{name} --with-kde
+%find_lang %{name} --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -157,7 +157,7 @@ rm -rf $RPM_BUILD_ROOT
 %post		-p /sbin/ldconfig
 %postun		-p /sbin/ldconfig
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/amarok
@@ -267,3 +267,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/amarok/scripts/librivox_service/LibrivoxLogo.png
 %{_datadir}/apps/amarok/scripts/librivox_service/LibrivoxService.html
 %{_datadir}/apps/amarok/scripts/librivox_service/script.spec
+%{_datadir}/apps/amarok/scripts/librivox_service/LibrivoxEmblem.png
+%{_datadir}/apps/amarok/scripts/librivox_service/LibrivoxIcon.png
+%{_datadir}/apps/amarok/scripts/librivox_service/audio_book128.png
