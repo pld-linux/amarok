@@ -3,9 +3,16 @@ set -x
 pkg=amarok
 branch=1.4
 tag=fdfafa156c9cda88ed3c045445548e4ca2b129bd
-#tag=8cdcf9d8b634763b515c419805e98e9aa9107224
-#tag=be0564032fc09a9ad6e5e3f22447e3582473904d
 url=git://gitorious.org/amarok/history.git
+
+filter() {
+	set -x
+	# - was not present in tarball
+	# see release_scripts/RELEASE_HOWTO for more exceptions
+	filterdiff -x "a/src/engine/gst10/*" | \
+	cat
+}
+
 
 if [ ! -d git ]; then
 	git clone $url git
@@ -16,5 +23,5 @@ fi
 
 cd git
 	git pull
-	git diff $tag > ../$pkg-branch.diff
+	git diff $tag | filter > ../$pkg-branch.diff
 cd ..
