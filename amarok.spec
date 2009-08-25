@@ -1,4 +1,5 @@
 # TODO:
+# - create branch diff from http://gitorious.org/amarok/history
 # - postgresql support alongside mysql
 # - NMM audio backend support (fix build - propably some BRs)
 # - make descriptions less useless
@@ -43,6 +44,7 @@ Patch7:		%{name}-titleorder.patch
 Patch8:		%{name}-mongrel.patch
 Patch9:		%{name}-libmtp.patch
 Patch10:	kde-am.patch
+Patch11:	gcc44.patch
 URL:		http://amarok.kde.org/
 # Upgrade to 2.0.1.1 required?
 # http://www.trapkit.de/advisories/TKADV2009-002.txt
@@ -206,6 +208,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %patch8 -p1
 %patch9 -p0
 %patch10 -p1
+%patch11 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
