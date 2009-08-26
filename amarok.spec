@@ -33,6 +33,7 @@ License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	3bdbf26181bf5e5925f48968caba7ac2
+Patch100:	%{name}-branch.diff
 Patch0:		%{name}-helixplayer-morearchs.patch
 Patch1:		%{name}-libnjb.patch
 Patch2:		%{name}-smp.patch
@@ -44,7 +45,6 @@ Patch7:		%{name}-titleorder.patch
 Patch8:		%{name}-mongrel.patch
 Patch9:		%{name}-libmtp.patch
 Patch10:	kde-am.patch
-Patch11:	gcc44.patch
 URL:		http://amarok.kde.org/
 # Upgrade to 2.0.1.1 required?
 # http://www.trapkit.de/advisories/TKADV2009-002.txt
@@ -197,6 +197,10 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 
 %prep
 %setup -q
+cd %{name}
+ln -s ../ChangeLog .
+%patch100 -p1
+cd ..
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -208,7 +212,6 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %patch8 -p1
 %patch9 -p0
 %patch10 -p1
-%patch11 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \

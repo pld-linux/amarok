@@ -1,0 +1,807 @@
+diff --git a/ChangeLog b/ChangeLog
+index 97c97e4..6a7ba9d 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,6 +1,9 @@
+ Amarok ChangeLog
+ ================
+-(C) 2002-2007 the Amarok authors.
++(C) 2002-2009 the Amarok authors.
++
++  BUGFIX:
++    * Fix possible buffer overflows when parsing Audible .aa files.
+ 
+ VERSION 1.4.10
+   BUGFIX:
+diff --git a/src/amarok.desktop b/src/amarok.desktop
+index 3abedff..873ab0f 100644
+--- a/src/amarok.desktop
++++ b/src/amarok.desktop
+@@ -88,6 +88,7 @@ Comment[it]=Amarok - Riscopri la tua musica!
+ Comment[ja]=Amarok - あなたの音楽を再発見
+ Comment[km]=Amarok - រកឃើញ​តន្ត្រី​របស់​អ្នក​ឡើង​វិញ !
+ Comment[lt]=Amarok – atraskite savo muziką iš naujo!
++Comment[ms]=Amarok - Terokai Muzik Anda!
+ Comment[nds]=Amarok - Beleev Dien Musik nieg!
+ Comment[nl]=Amarok - Herontdek uw muziek!
+ Comment[nn]=Amarok – gjenoppdag musikken din!
+diff --git a/src/amarok_addaspodcast.desktop b/src/amarok_addaspodcast.desktop
+index 0b9e5f2..9789b08 100644
+--- a/src/amarok_addaspodcast.desktop
++++ b/src/amarok_addaspodcast.desktop
+@@ -24,6 +24,7 @@ Name[it]=Aggiungi come podcast in Amarok
+ Name[ja]=ポッドキャストとして Amarok に追加
+ Name[km]=បន្ថែម​ជា​ផតខាស់​ទៅ Amarok
+ Name[lt]=Įterpti Podcast į Amarok grojaraštį
++Name[ms]=Tambah sebagai Podcast kepada Amarok
+ Name[nb]= Legg til Amarok som podkast
+ Name[nds]=As Podcast na Amarok tofögen
+ Name[ne]=अमारोकमा पोडकास्टको रूपमा थप्नुहोस्
+diff --git a/src/amarok_append.desktop b/src/amarok_append.desktop
+index 1d6dac5..d591d61 100644
+--- a/src/amarok_append.desktop
++++ b/src/amarok_append.desktop
+@@ -40,6 +40,7 @@ Name[ka]=რეპერტუარში დამატება
+ Name[km]=បន្ថែម​ទៅ​ខាង​ចុង​បញ្ជីចាក់
+ Name[lt]=Pridėti prie Amarok grojaraščio
+ Name[mk]=Додај на листата
++Name[ms]=Tambah ke Senaraimain
+ Name[nb]=Legg til spilleliste
+ Name[nds]=Na Afspeellist tofögen
+ Name[ne]=बजाउने सूचीमा थप्नुहोस्
+@@ -94,6 +95,7 @@ Name[ka]=დამატება და დაკვრა
+ Name[km]=បន្ថែម​ខាង​ចុង & ចាក់
+ Name[lt]=Pridėti ir groti
+ Name[mk]=Додај и пушти
++Name[ms]=Tambah & Main
+ Name[nb]=Legg til og spill
+ Name[nds]=Tofögen un afspelen
+ Name[ne]=थप्नुहोस् र बजाउनुहोस्
+@@ -148,6 +150,7 @@ Name[ka]=ჩანაწერის რიგში ჩამატება
+ Name[km]=ដាក់​បទ​ក្នុង​ជួរ
+ Name[lt]=Pridėti į eilę
+ Name[mk]=Стави нумера во редица
++Name[ms]=Susun Trek
+ Name[nb]=Legg spor i kø
+ Name[nds]=Stück inregen
+ Name[ne]=लाम ट्रयाक
+diff --git a/src/amarok_play_audiocd.desktop b/src/amarok_play_audiocd.desktop
+index 6ccd96e..4d7224f 100644
+--- a/src/amarok_play_audiocd.desktop
++++ b/src/amarok_play_audiocd.desktop
+@@ -29,6 +29,7 @@ Name[ka]=აუიდიო CD-ის დაკვრა Amarok-ით
+ Name[km]=ចាក់​ស៊ីឌី​អូឌីយ៉ូ​ជា​មួយ Amarok
+ Name[lt]=Groti audio CD su Amarok
+ Name[mk]=Свири аудиоцд со Амарок
++Name[ms]=Main CD Audio dengan Amarok
+ Name[nb]=Spill lyd-CD med Amarok
+ Name[nds]=Audio-CD mit Amarok afspelen
+ Name[ne]=अमारोकसँग अडियो सीडी बजाउनुहोस्
+diff --git a/src/amarok_plugin.desktop b/src/amarok_plugin.desktop
+index 0879856..2bf5578 100644
+--- a/src/amarok_plugin.desktop
++++ b/src/amarok_plugin.desktop
+@@ -28,6 +28,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/contextbrowser.cpp b/src/contextbrowser.cpp
+index 63cfa61..58af5c5 100644
+--- a/src/contextbrowser.cpp
++++ b/src/contextbrowser.cpp
+@@ -4189,7 +4189,7 @@ ContextBrowser::wikiResult( KIO::Job* job ) //SLOT
+     }
+ 
+     // Ok lets remove the top and bottom parts of the page
+-    m_wiki = m_wiki.mid( m_wiki.find( "<h1 class=\"firstHeading\">" ) );
++    m_wiki = m_wiki.mid( m_wiki.find( "<h1 id=\"firstHeading\"" ) );
+     m_wiki = m_wiki.mid( 0, m_wiki.find( "<div class=\"printfooter\">" ) );
+     // Adding back license information
+     m_wiki += copyright;
+diff --git a/src/database_refactor/sqlite/amarok_sqlite_dbengine_plugin.desktop b/src/database_refactor/sqlite/amarok_sqlite_dbengine_plugin.desktop
+index affc2fb..4739f50 100644
+--- a/src/database_refactor/sqlite/amarok_sqlite_dbengine_plugin.desktop
++++ b/src/database_refactor/sqlite/amarok_sqlite_dbengine_plugin.desktop
+@@ -68,6 +68,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/device/massstorage/amarok_massstorage-device.desktop b/src/device/massstorage/amarok_massstorage-device.desktop
+index 7b9ea61..a71dd72 100644
+--- a/src/device/massstorage/amarok_massstorage-device.desktop
++++ b/src/device/massstorage/amarok_massstorage-device.desktop
+@@ -26,6 +26,7 @@ Name[ka]=არქივის შესანახი მოწყობილ
+ Name[km]=ឧបករណ៍​ផ្ទុក​ធំ
+ Name[lt]=Duomenų saugojimo įrenginys
+ Name[mk]=Уред за складирање податоци
++Name[ms]=Peranti Mass Storage
+ Name[nb]=Masselagerenhet
+ Name[nds]=Bültspieker-Reedschap
+ Name[ne]=बृहत भण्डारण यन्त्र
+diff --git a/src/engine/gst10/amarok_gst10engine_plugin.desktop b/src/engine/gst10/amarok_gst10engine_plugin.desktop
+index 31c5cca..2e9ca2c 100644
+diff --git a/src/engine/helix/amarok_helixengine_plugin.desktop b/src/engine/helix/amarok_helixengine_plugin.desktop
+index 79dc221..c3aeb32 100644
+--- a/src/engine/helix/amarok_helixengine_plugin.desktop
++++ b/src/engine/helix/amarok_helixengine_plugin.desktop
+@@ -81,6 +81,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/engine/helix/helix-configdialog.cpp b/src/engine/helix/helix-configdialog.cpp
+index 15895db..87297be 100644
+--- a/src/engine/helix/helix-configdialog.cpp
++++ b/src/engine/helix/helix-configdialog.cpp
+@@ -117,6 +117,9 @@ HelixSoundDevice::HelixSoundDevice( QWidget *parent,
+ #ifdef USE_HELIX_ALSA
+    deviceComboBox->insertItem("alsa"); // and neither are the equivalents in gst (osssink and alsasink)
+ #endif
++#ifdef USE_HELIX_ESD
++   deviceComboBox->insertItem("esd");
++#endif
+    deviceComboBox->setCurrentItem(HelixConfig::outputplugin());
+    QLabel* op = new QLabel( i18n("Output plugin:"), parent );
+    op->setAlignment( QLabel::WordBreak | QLabel::AlignVCenter );
+@@ -204,6 +207,8 @@ HelixSoundDevice::save()
+       HelixConfig::setOutputplugin(deviceComboBox->currentText());
+       if (deviceComboBox->currentText() == "oss")
+          m_engine->setOutputSink(HelixSimplePlayer::OSS);
++      else if (deviceComboBox->currentText() == "esd")
++         m_engine->setOutputSink(HelixSimplePlayer::ESOUND);
+       else
+          m_engine->setOutputSink(HelixSimplePlayer::ALSA);
+ 
+@@ -223,6 +228,7 @@ void HelixSoundDevice::setSoundSystem( int api )
+    switch (api)
+    {
+       case HelixSimplePlayer::OSS:
++      case HelixSimplePlayer::ESOUND:
+          deviceComboBox->setCurrentItem("oss");
+          checkBox_outputDevice->setEnabled( false );
+          lineEdit_outputDevice->setEnabled(false);
+@@ -473,7 +479,7 @@ int HelixConfigDialog::setSoundSystem( int api )
+    }
+    else
+    {
+-      HelixConfig::setOutputplugin(api ? "alsa" : "oss");
++      HelixConfig::setOutputplugin(api ? "alsa" : ( api ? "esd" : "oss") );
+       HelixConfig::writeConfig();
+       return 1;
+    }
+diff --git a/src/engine/helix/helix-engine.cpp b/src/engine/helix/helix-engine.cpp
+index f8c8b26..11e8ffc 100644
+--- a/src/engine/helix/helix-engine.cpp
++++ b/src/engine/helix/helix-engine.cpp
+@@ -15,6 +15,7 @@
+ #include <climits>
+ #include <cmath>
+ #include <stdarg.h>
++#include <string.h>
+ 
+ #include <config.h>
+ 
+@@ -196,6 +197,8 @@ HelixEngine::init()
+ 
+    if (HelixConfig::outputplugin() == "oss")
+       setOutputSink( HelixSimplePlayer::OSS );
++   else if (HelixConfig::outputplugin() == "esd")
++      setOutputSink( HelixSimplePlayer::ESOUND );
+    else
+    {
+       setOutputSink( HelixSimplePlayer::ALSA );
+diff --git a/src/engine/helix/helix-sp/helix-sp.cpp b/src/engine/helix/helix-sp/helix-sp.cpp
+index c7ac594..61bb95b 100644
+--- a/src/engine/helix/helix-sp/helix-sp.cpp
++++ b/src/engine/helix/helix-sp/helix-sp.cpp
+@@ -383,17 +383,21 @@ HelixSimplePlayer::HelixSimplePlayer() :
+ #else
+    m_direct(OSS),
+ #endif
+-   m_AlsaCapableCore(false),
++   m_AlsaCapableCore(true),
+    m_nDevID(-1),
++#ifdef USE_HELIX_ALSA
+    m_pAlsaMixerHandle(NULL),
+    m_pAlsaMasterMixerElem(NULL),
+    m_pAlsaPCMMixerElem(NULL),
+    m_alsaDevice("default"),
++#endif
+    m_urlchanged(0),
+    m_volBefore(-1),
+-   m_volAtStart(-1),
+-   m_MvolBefore(-1),
++   m_volAtStart(-1)
++#ifdef USE_HELIX_ALSA
++   ,m_MvolBefore(-1),
+    m_MvolAtStart(-1)
++#endif
+ {
+ 
+    pthread_mutexattr_t ma;
+@@ -671,6 +675,12 @@ int HelixSimplePlayer::initDirectSS()
+       m_direct = ALSA;
+       openAudioDevice();
+    }
++   else if (m_outputsink == ESOUND)
++   {
++      closeAudioDevice();
++      m_direct = ESOUND;
++      openAudioDevice();
++   }
+    else
+    {
+       closeAudioDevice();
+@@ -895,8 +905,10 @@ void HelixSimplePlayer::tearDown()
+       delete ppctrl[i];
+   }
+ 
++#ifdef USE_HELIX_ALSA
+    if (pAudioDevice)
+       pAudioDevice->Release();
++#endif
+ 
+    if (pAudioDeviceResponse)
+       pAudioDeviceResponse->Release();
+@@ -997,10 +1009,13 @@ void HelixSimplePlayer::tearDown()
+ 
+ void HelixSimplePlayer::setOutputSink( HelixSimplePlayer::AUDIOAPI out )
+ {
+-#ifdef USE_HELIX_ALSA
++#ifndef USE_HELIX_ALSA
+    m_outputsink = out;
+ #else
+-   m_outputsink = OSS;
++   if (out == ALSA)
++      m_outputsink = OSS;
++   else
++      m_outputsink = out;
+ #endif
+ }
+ 
+@@ -1148,6 +1163,9 @@ void HelixSimplePlayer::openAudioDevice()
+       }
+       break;
+ 
++      case ESOUND:
++         break;
++
+       default:
+          print2stderr("Unknown audio interface in openAudioDevice()\n");
+    }
+@@ -1206,6 +1224,9 @@ void HelixSimplePlayer::closeAudioDevice()
+       }
+       break;
+ 
++      case ESOUND:
++         break;
++
+       default:
+          print2stderr("Unknown audio interface in closeAudioDevice()\n");
+    }
+@@ -1347,7 +1368,9 @@ int HelixSimplePlayer::getDirectPCMVolume()
+ 
+          if (m_nDevID < 0 || (::ioctl( m_nDevID, MIXER_READ(HX_VOLUME), &nVolume) < 0))
+          {
++#ifdef USE_HELIX_ALSA
+             print2stderr("ioctl fails when reading HW volume: mnDevID=%d, errno=%d\n", m_nDevID, errno);
++#endif
+             nRetVolume = 50; // sensible default
+          }
+          else
+@@ -1412,6 +1435,9 @@ int HelixSimplePlayer::getDirectPCMVolume()
+       }
+       break;
+ 
++      case ESOUND:
++         break;
++
+       default:
+          print2stderr("Unknown audio interface in getDirectPCMVolume()\n");
+    }
+@@ -1482,6 +1508,9 @@ void HelixSimplePlayer::setDirectPCMVolume(int vol)
+       }
+       break;
+ 
++      case ESOUND:
++         break;
++
+       default:
+          print2stderr("Unknown audio interface in setDirectPCMVolume()\n");
+    }
+@@ -1503,7 +1532,9 @@ int HelixSimplePlayer::setURL(const char *file, int playerIndex, bool islocal)
+       if (len >= MAXPATHLEN)
+          return -1;;
+ 
++#ifdef USE_HELIX_ALSA
+       print2stderr("SETURL MASTER VOL: %d\n",getDirectMasterVolume());
++#endif
+ 
+       if (ppctrl[playerIndex]->pszURL)
+          delete [] ppctrl[playerIndex]->pszURL;
+@@ -1699,7 +1730,9 @@ void HelixSimplePlayer::start(int playerIndex, bool fadein, unsigned long fadeti
+       if (!ppctrl[playerIndex]->pszURL)
+          return;
+ 
++#ifdef USE_HELIX_ALSA
+       print2stderr("START MASTER VOL: %d\n",getDirectMasterVolume());
++#endif
+ 
+       if (bEnableVerboseMode)
+       {
+diff --git a/src/engine/helix/helix-sp/helix-sp.h b/src/engine/helix/helix-sp/helix-sp.h
+index 1b758b5..912af39 100644
+--- a/src/engine/helix/helix-sp/helix-sp.h
++++ b/src/engine/helix/helix-sp/helix-sp.h
+@@ -23,6 +23,7 @@ class HelixSimplePlayerAudioStreamInfoResponse;
+ #include <limits.h>
+ #include <sys/param.h>
+ #include <pthread.h>
++#include <string.h>
+ #include <vector>
+ #include <config.h>
+ #include <iostream>
+@@ -32,6 +33,7 @@ using std::vector;
+ 
+ #define MAX_PLAYERS 100 // that should do it...
+ #define MAX_SCOPE_SAMPLES 5120
++#undef USE_HELIX_ALSA
+ 
+ class HelixSimplePlayer;
+ class CHXURL;
+@@ -324,8 +326,8 @@ private:
+    struct _snd_mixer*      m_pAlsaMixerHandle;
+    struct _snd_mixer_elem* m_pAlsaMasterMixerElem;
+    struct _snd_mixer_elem* m_pAlsaPCMMixerElem;
+-#endif
+    char *m_alsaDevice;
++#endif
+    bool m_urlchanged;
+    int m_volBefore;
+    int m_volAtStart;
+diff --git a/src/engine/helix/helix-sp/hspcontext.cpp b/src/engine/helix/helix-sp/hspcontext.cpp
+index f87a914..5398373 100644
+--- a/src/engine/helix/helix-sp/hspcontext.cpp
++++ b/src/engine/helix/helix-sp/hspcontext.cpp
+@@ -153,12 +153,17 @@ HSPEngineContext::ReadPref(const char* pref_key, IHXBuffer*& buffer)
+ 
+           if (m_splayer->getOutputSink() == HelixSimplePlayer::ALSA)
+              strcpy((char *)outbuf, "3"); // set SoundDriver = kALSA (ie 3) for Alsa native support
++          else if (m_splayer->getOutputSink() == HelixSimplePlayer::ESOUND)
++             strcpy((char *)outbuf, "2"); // set SoundDriver = kESOUND (ie 2) for Enlightenment Sound Daemon
+           else if (m_splayer->getOutputSink() == HelixSimplePlayer::OSS)
+              strcpy((char *)outbuf, "0"); // set SoundDriver = kOSS (ie 0) for OSS
+           buffer = ibuf;
+ 
+-          if (m_splayer->getOutputSink() == HelixSimplePlayer::ALSA || m_splayer->getOutputSink() == HelixSimplePlayer::OSS)
+-             m_splayer->print2stderr("Setting Sound System to %s\n", m_splayer->getOutputSink() == HelixSimplePlayer::ALSA ? "ALSA" : "OSS");
++          if (m_splayer->getOutputSink() == HelixSimplePlayer::ALSA || 
++              m_splayer->getOutputSink() == HelixSimplePlayer::ESOUND ||
++              m_splayer->getOutputSink() == HelixSimplePlayer::OSS)
++             m_splayer->print2stderr("Setting Sound System to %s\n", m_splayer->getOutputSink() == HelixSimplePlayer::ALSA ? 
++                                     "ALSA" : (m_splayer->getOutputSink() == HelixSimplePlayer::ESOUND ? "ESD" : "OSS") );
+           else
+              m_splayer->print2stderr("Setting Sound System to UNKNOWN: %d\n", m_splayer->getOutputSink());
+        }
+diff --git a/src/engine/helix/hxplayercontrol.cpp b/src/engine/helix/hxplayercontrol.cpp
+index 6c76eac..9633688 100644
+--- a/src/engine/helix/hxplayercontrol.cpp
++++ b/src/engine/helix/hxplayercontrol.cpp
+@@ -15,6 +15,8 @@
+  the alsa guys
+  ***************************************************************************/
+ 
++#include <stdlib.h>
++#include <string.h>
+ #include <sys/time.h>
+ #include <sys/types.h>
+ #include <sys/wait.h>
+diff --git a/src/engine/kdemm/amarok_kdemmengine_plugin.desktop b/src/engine/kdemm/amarok_kdemmengine_plugin.desktop
+index 7bb868d..510d0de 100644
+--- a/src/engine/kdemm/amarok_kdemmengine_plugin.desktop
++++ b/src/engine/kdemm/amarok_kdemmengine_plugin.desktop
+@@ -83,6 +83,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/engine/mas/amarok_masengine_plugin.desktop b/src/engine/mas/amarok_masengine_plugin.desktop
+index a35835d..50fa1ec 100644
+--- a/src/engine/mas/amarok_masengine_plugin.desktop
++++ b/src/engine/mas/amarok_masengine_plugin.desktop
+@@ -83,6 +83,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/engine/void/amarok_void-engine_plugin.desktop b/src/engine/void/amarok_void-engine_plugin.desktop
+index f9a30c4..63565ba 100644
+--- a/src/engine/void/amarok_void-engine_plugin.desktop
++++ b/src/engine/void/amarok_void-engine_plugin.desktop
+@@ -82,6 +82,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/engine/xine/amarok_xine-engine.desktop b/src/engine/xine/amarok_xine-engine.desktop
+index 1a06661..f2f14d7 100644
+--- a/src/engine/xine/amarok_xine-engine.desktop
++++ b/src/engine/xine/amarok_xine-engine.desktop
+@@ -85,6 +85,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/engine/yauap/amarok_yauap-engine_plugin.desktop b/src/engine/yauap/amarok_yauap-engine_plugin.desktop
+index 0bd0d11..5b87948 100644
+--- a/src/engine/yauap/amarok_yauap-engine_plugin.desktop
++++ b/src/engine/yauap/amarok_yauap-engine_plugin.desktop
+@@ -73,6 +73,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/mediadevice/daap/amarok_daap-mediadevice.desktop b/src/mediadevice/daap/amarok_daap-mediadevice.desktop
+index 51da100..06acb30 100644
+--- a/src/mediadevice/daap/amarok_daap-mediadevice.desktop
++++ b/src/mediadevice/daap/amarok_daap-mediadevice.desktop
+@@ -76,6 +76,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/mediadevice/generic/amarok_generic-mediadevice.desktop b/src/mediadevice/generic/amarok_generic-mediadevice.desktop
+index 8993262..15043b1 100644
+--- a/src/mediadevice/generic/amarok_generic-mediadevice.desktop
++++ b/src/mediadevice/generic/amarok_generic-mediadevice.desktop
+@@ -77,6 +77,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/mediadevice/ifp/amarok_ifp-mediadevice.desktop b/src/mediadevice/ifp/amarok_ifp-mediadevice.desktop
+index 4906e1d..fc5d210 100644
+--- a/src/mediadevice/ifp/amarok_ifp-mediadevice.desktop
++++ b/src/mediadevice/ifp/amarok_ifp-mediadevice.desktop
+@@ -28,6 +28,7 @@ Name[ka]=მედია მოწყობილობა iRiver iFP
+ Name[km]=ឧបករណ៍​មេឌៀ iFP របស់ iRiver
+ Name[lt]=iRiver iFP media įrenginys
+ Name[mk]=Уред за мултимедија iRiver iFP
++Name[ms]=Peranti Media iRiver iFP
+ Name[nb]=iRiver iFP medieenhet
+ Name[nds]=iFP-Medienreedschap vun iRiver
+ Name[ne]=iRiver iFP मिडिया यन्त्र
+@@ -78,6 +79,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/mediadevice/ipod/amarok_ipod-mediadevice.desktop b/src/mediadevice/ipod/amarok_ipod-mediadevice.desktop
+index 90f4b7b..5ef93e2 100644
+--- a/src/mediadevice/ipod/amarok_ipod-mediadevice.desktop
++++ b/src/mediadevice/ipod/amarok_ipod-mediadevice.desktop
+@@ -28,6 +28,7 @@ Name[ka]=მედია მოწყობილობა Apple iPod
+ Name[km]=ឧបករណ៍​មេឌៀ iPod របស់​អ៊េផល
+ Name[lt]=Apple iPod daugialypės terpės įrenginys
+ Name[mk]=Уред за мултимедија Apple iPod
++Name[ms]=Peranti Media Apple iPod
+ Name[nb]=Apple iPod medieenhet
+ Name[nds]=Apple-iPott
+ Name[ne]=एप्पल iPod मिडिया यन्त्र
+@@ -78,6 +79,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/mediadevice/mtp/amarok_mtp-mediadevice.desktop b/src/mediadevice/mtp/amarok_mtp-mediadevice.desktop
+index bd8627e..1c302d2 100644
+--- a/src/mediadevice/mtp/amarok_mtp-mediadevice.desktop
++++ b/src/mediadevice/mtp/amarok_mtp-mediadevice.desktop
+@@ -76,6 +76,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/mediadevice/njb/amarok_njb-mediadevice.desktop b/src/mediadevice/njb/amarok_njb-mediadevice.desktop
+index 540e4c7..3d30a40 100644
+--- a/src/mediadevice/njb/amarok_njb-mediadevice.desktop
++++ b/src/mediadevice/njb/amarok_njb-mediadevice.desktop
+@@ -26,6 +26,7 @@ Name[ka]=Creative Nomad Jukebox მედია მოწყობილობ
+ Name[km]=ឧបករណ៍​មេឌៀ Nomad Jukebox របស់ Creative
+ Name[lt]=Creative Nomad Jukebox daugialypės terpės įrenginys
+ Name[mk]=Уред за мултимедија Creative Nomad Jukebox
++Name[ms]=Peranti Media Creative Nomad Jukebox
+ Name[nb]=Creative Nomad Jukebox medieenhet
+ Name[nds]=Creative-Medienreedschap Nomad Jukebox
+ Name[ne]=सिर्जानात्मक नोम्याड जुकेबक्स मिडिया यन्त्र
+@@ -76,6 +77,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/mediadevice/riokarma/amarok_riokarma-mediadevice.desktop b/src/mediadevice/riokarma/amarok_riokarma-mediadevice.desktop
+index 18d071f..c276ed0 100644
+--- a/src/mediadevice/riokarma/amarok_riokarma-mediadevice.desktop
++++ b/src/mediadevice/riokarma/amarok_riokarma-mediadevice.desktop
+@@ -75,6 +75,7 @@ Comment[ka]=მოდული Amarok-ისთვის
+ Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់ Amarok
+ Comment[lt]=Amarok įskiepis
+ Comment[mk]=Приклучок за Амарок
++Comment[ms]=Plugin untuk Amarok
+ Comment[nb]=Programtillegg for Amarok
+ Comment[nds]=Moduul för Amarok
+ Comment[ne]=अमारोकका लागि प्लगइन
+diff --git a/src/metabundlesaver.cpp b/src/metabundlesaver.cpp
+index e6c0f7a..823ae07 100644
+--- a/src/metabundlesaver.cpp
++++ b/src/metabundlesaver.cpp
+@@ -6,7 +6,7 @@
+ 
+ #include <stdlib.h>
+ #include <unistd.h>
+-#include <stdio.h>
++#include <cstdio>
+ #include <time.h>
+ #include <sys/time.h>
+ #include <sys/types.h>
+diff --git a/src/metadata/audible/audibleproperties.cpp b/src/metadata/audible/audibleproperties.cpp
+index 238e6be..83f65df 100644
+--- a/src/metadata/audible/audibleproperties.cpp
++++ b/src/metadata/audible/audibleproperties.cpp
+@@ -30,6 +30,7 @@
+ #include "taglib_audiblefile.h"
+ 
+ #include <netinet/in.h> // ntohl
++#include <stdio.h>
+ 
+ using namespace TagLib;
+ 
+diff --git a/src/metadata/audible/audibletag.cpp b/src/metadata/audible/audibletag.cpp
+index c3a3e7f..149db6a 100644
+--- a/src/metadata/audible/audibletag.cpp
++++ b/src/metadata/audible/audibletag.cpp
+@@ -28,6 +28,7 @@
+ #include <taglib/tag.h>
+ 
+ #include <netinet/in.h> // ntohl
++#include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+ 
+@@ -71,7 +72,8 @@ void Audible::Tag::readTags( FILE *fp )
+ {
+     char buf[1023];
+     fseek(fp, OFF_PRODUCT_ID, SEEK_SET);
+-    fread(buf, strlen("product_id"), 1, fp);
++    if (fread(buf, strlen("product_id"), 1, fp) != 1)
++        return;
+     if(memcmp(buf, "product_id", strlen("product_id")))
+     {
+         buf[20]='\0';
+@@ -130,24 +132,65 @@ void Audible::Tag::readTags( FILE *fp )
+ 
+ bool Audible::Tag::readTag( FILE *fp, char **name, char **value)
+ {
++    // arbitrary value that has to be smaller than 2^32-1 and that should be large enough for all tags                                                                                         
++    const uint32_t maxtaglen = 100000;    
++
+     uint32_t nlen;
+-    fread(&nlen, sizeof(nlen), 1, fp);
++    if (fread(&nlen, sizeof(nlen), 1, fp) != 1)
++        return false;
+     nlen = ntohl(nlen);
+     //fprintf(stderr, "tagname len=%x\n", (unsigned)nlen);
+-    *name = new char[nlen+1];
+-    (*name)[nlen] = '\0';
++    if (nlen > maxtaglen)
++        return false;
+ 
+     uint32_t vlen;
+-    fread(&vlen, sizeof(vlen), 1, fp);
++    if (fread(&vlen, sizeof(vlen), 1, fp) != 1)
++        return false;
+     vlen = ntohl(vlen);
+     //fprintf(stderr, "tag len=%x\n", (unsigned)vlen);
++    if (vlen > maxtaglen)
++        return false;
++
++    *name = new char[nlen+1];
++    if (!*name)
++        return false;
++        
+     *value = new char[vlen+1];
++    if (!*value)
++    {
++        delete[] *name;
++        *name = 0;
++        return false;
++    }
++
++    (*name)[nlen] = '\0';
+     (*value)[vlen] = '\0';
+ 
+-    fread(*name, nlen, 1, fp);
+-    fread(*value, vlen, 1, fp);
++    if (fread(*name, nlen, 1, fp) != 1)
++    {
++        delete[] *name;
++        *name = 0;
++        delete[] *value;
++        *value = 0;
++        return false;
++    }
++    if (fread(*value, vlen, 1, fp) != 1)
++    {
++        delete[] *name;
++        *name = 0;
++        delete[] *value;
++        *value = 0;
++        return false;
++    }
+     char lasttag;
+-    fread(&lasttag, 1, 1, fp);
++    if (fread(&lasttag, 1, 1, fp) != 1)
++    {
++        delete[] *name;
++        *name = 0;
++        delete[] *value;
++        *value = 0;
++        return false;
++    }
+     //fprintf(stderr, "%s: \"%s\"\n", *name, *value);
+ 
+     m_tagsEndOffset += 2 * 4 + nlen + vlen + 1;
+diff --git a/src/metadata/audible/taglib_audiblefile.cpp b/src/metadata/audible/taglib_audiblefile.cpp
+index fae4516..b7f4fc2 100644
+--- a/src/metadata/audible/taglib_audiblefile.cpp
++++ b/src/metadata/audible/taglib_audiblefile.cpp
+@@ -26,6 +26,7 @@
+ #include "taglib_audiblefile.h"
+ 
+ #include "audibletag.h"
++#include <stdio.h>
+ #include <taglib/tfile.h>
+ #include <taglib/audioproperties.h>
+ 
+diff --git a/src/metadata/audible/taglib_audiblefiletyperesolver.cpp b/src/metadata/audible/taglib_audiblefiletyperesolver.cpp
+index f3fa261..f153855 100644
+--- a/src/metadata/audible/taglib_audiblefiletyperesolver.cpp
++++ b/src/metadata/audible/taglib_audiblefiletyperesolver.cpp
+@@ -22,6 +22,7 @@
+ #include "taglib_audiblefiletyperesolver.h"
+ #include "taglib_audiblefile.h"
+ 
++#include <stdio.h>
+ #include <string.h>
+ 
+ TagLib::File *AudibleFileTypeResolver::createFile(const char *fileName,
+diff --git a/src/metadata/mp4/mp4file.cpp b/src/metadata/mp4/mp4file.cpp
+index ec8feb0..de21584 100644
+--- a/src/metadata/mp4/mp4file.cpp
++++ b/src/metadata/mp4/mp4file.cpp
+@@ -30,6 +30,7 @@ email                : aumuell@reserv.at
+ #include <audioproperties.h>
+ 
+ #include <stdint.h>
++#include <stdlib.h>
+ 
+ #define MP4V2_HAS_WRITE_BUG 1
+ 
+diff --git a/src/metadata/mp4/mp4properties.cpp b/src/metadata/mp4/mp4properties.cpp
+index 978dfc5..8888182 100644
+--- a/src/metadata/mp4/mp4properties.cpp
++++ b/src/metadata/mp4/mp4properties.cpp
+@@ -30,6 +30,7 @@ email                : andrew.leadbetter@gmail.com
+ #endif
+ 
+ #include <stdint.h>
++#include <string.h>
+ 
+ #ifndef UINT64_TO_DOUBLE
+ #define UINT64_TO_DOUBLE(a) ((double)((int64_t)(a)))
+diff --git a/src/metadata/mp4/mp4tag.cpp b/src/metadata/mp4/mp4tag.cpp
+index 611aaa0..fdcb7a6 100644
+--- a/src/metadata/mp4/mp4tag.cpp
++++ b/src/metadata/mp4/mp4tag.cpp
+@@ -24,6 +24,8 @@ email                : andrew.leadbetter@gmail.com
+ 
+ #include <tag.h>
+ #include <stdint.h>
++#include <stdlib.h>
++#include <string.h>
+ 
+ using namespace TagLib;
+ 
+diff --git a/src/metadata/mp4/taglib_mp4filetyperesolver.cpp b/src/metadata/mp4/taglib_mp4filetyperesolver.cpp
+index af41fa1..59341bd 100644
+--- a/src/metadata/mp4/taglib_mp4filetyperesolver.cpp
++++ b/src/metadata/mp4/taglib_mp4filetyperesolver.cpp
+@@ -24,6 +24,7 @@
+ 
+ #include "taglib_mp4filetyperesolver.h"
+ #include "mp4file.h"
++#include <string.h>
+ 
+ TagLib::File *MP4FileTypeResolver::createFile(const char *fileName,
+         bool readProperties,
+diff --git a/src/metadata/wav/wavfile.cpp b/src/metadata/wav/wavfile.cpp
+index eda9be0..89f4ec2 100644
+--- a/src/metadata/wav/wavfile.cpp
++++ b/src/metadata/wav/wavfile.cpp
+@@ -29,6 +29,8 @@
+ #include <taglib/audioproperties.h>
+ #include <taglib/tag.h>
+ 
++#include <stdio.h>
++
+ namespace TagLib {
+ ////////////////////////////////////////////////////////////////////////////////
+ // public members
+diff --git a/src/metadata/wav/wavfiletyperesolver.cpp b/src/metadata/wav/wavfiletyperesolver.cpp
+index 962e4f6..9e839b8 100644
+--- a/src/metadata/wav/wavfiletyperesolver.cpp
++++ b/src/metadata/wav/wavfiletyperesolver.cpp
+@@ -22,6 +22,7 @@
+ #include "wavfiletyperesolver.h"
+ #include "wavfile.h"
+ 
++#include <stdio.h>
+ #include <string.h>
+ 
+ TagLib::File *WavFileTypeResolver::createFile(const char *fileName,
+diff --git a/src/metadata/wav/wavproperties.cpp b/src/metadata/wav/wavproperties.cpp
+index 08b094f..42e150d 100644
+--- a/src/metadata/wav/wavproperties.cpp
++++ b/src/metadata/wav/wavproperties.cpp
+@@ -30,6 +30,7 @@
+ #include "wavfile.h"
+ 
+ #include <netinet/in.h> // ntohl
++#include <stdio.h>
+ 
+ using namespace TagLib;
+ 
