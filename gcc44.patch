@@ -1,0 +1,12 @@
+--- amarok-1.4.10/amarok/src/engine/helix/helix-sp/helix-sp.cpp~	2009-08-26 11:54:15.000000000 +0300
++++ amarok-1.4.10/amarok/src/engine/helix/helix-sp/helix-sp.cpp	2009-08-26 12:11:01.439976507 +0300
+@@ -1540,8 +1540,7 @@
+          delete [] ppctrl[playerIndex]->pszURL;
+ 
+       // see if the file is already in the form of a url
+-      char *tmp = strstr(file, "://");
+-      if (!tmp)
++      if (!strstr(file, "://"))
+       {
+          char pszURLOrig[MAXPATHLEN];
+          const char* pszAddOn;
