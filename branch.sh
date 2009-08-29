@@ -1,4 +1,5 @@
 #!/bin/sh
+# http://gitorious.org/amarok/history/commits/1.4
 set -x
 pkg=amarok
 branch=1.4
