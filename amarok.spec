@@ -1,18 +1,18 @@
 # TODO
 # - try not to link with static mysql
 
-%define		state	unstable
+%define		state	stable
 %define		qtver	4.5.0
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.1.85
+Version:	2.2.0
 Release:	0.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	38311a55767fb8d85254b248a46433d8
+# Source0-md5:	5a0188c5eb7d343109b82964942d8eb5
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-qthreadpool.patch
 URL:		http://amarok.kde.org/
@@ -54,8 +54,8 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	soprano-devel >= 2.1
 BuildRequires:	strigi-devel >= 0.5.10
-BuildRequires:	taglib-devel
-BuildRequires:	taglib-extras-devel >= 0.1
+BuildRequires:	taglib-devel >= 1.6
+BuildRequires:	taglib-extras-devel >= 1.0.0
 BuildRequires:	utempter-devel
 BuildRequires:	xorg-lib-libXpm-devel
 Requires(post,postun):	/sbin/ldconfig
@@ -186,7 +186,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_magnatunestore.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_mp3tunes.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_service_shoutcast.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_ampache.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_magnatunestore.so
@@ -248,7 +247,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok_service_magnatunestore_config.desktop
 %{_datadir}/kde4/services/amarok_service_mp3tunes.desktop
 %{_datadir}/kde4/services/amarok_service_mp3tunes_config.desktop
-%{_datadir}/kde4/services/amarok_service_shoutcast.desktop
 %{_datadir}/kde4/services/amarok-context-applet-albums.desktop
 %{_datadir}/kde4/services/amarok_collection-ipodcollection.desktop
 %{_datadir}/kde4/services/amarok_massstorage-device.desktop
