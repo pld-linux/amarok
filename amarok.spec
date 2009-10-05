@@ -2,7 +2,7 @@
 # - try not to link with static mysql
 
 %define		state	stable
-%define		qtver	4.5.0
+%define		qtver	4.5.3
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
