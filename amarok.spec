@@ -3,12 +3,13 @@
 
 %define		state	stable
 %define		qtver	4.5.3
+%define		kdever	4.3.2
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	2.2.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -34,8 +35,8 @@ BuildRequires:	cmake >= 2.6.1-2
 BuildRequires:	curl-devel
 BuildRequires:	giflib-devel
 BuildRequires:	glib2-devel
-BuildRequires:	kde4-kdebase-devel
-BuildRequires:	kde4-kdemultimedia-devel
+BuildRequires:	kde4-kdebase-devel >= %{kdever}
+BuildRequires:	kde4-kdemultimedia-devel >= %{kdever}
 BuildRequires:	libgpod-devel >= 0.7.0
 BuildRequires:	libifp-devel >= 1.0.0.2
 BuildRequires:	liblastfm-devel
