@@ -33,6 +33,7 @@ BuildRequires:	QtXml-devel >= %{qtver}
 BuildRequires:	automoc4
 BuildRequires:	cmake >= 2.6.1-2
 BuildRequires:	curl-devel
+BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
 BuildRequires:	glib2-devel
 BuildRequires:	kde4-kdebase-devel >= %{kdever}
