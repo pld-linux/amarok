@@ -9,6 +9,7 @@
 # - monitor http://bugs.kde.org/show_bug.cgi?id=137390 to remove the temporary fix
 # - ProjectM (see README)
 # - karma & MFS (see README)
+# - needs autoconf < 2.64-3 to build (make patch)
 #
 # Conditional builds:
 %bcond_without	xine		# disable xine engine
@@ -28,7 +29,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.10
-Release:	11
+Release:	12
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
