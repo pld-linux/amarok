@@ -1,0 +1,13 @@
+--- amarok-1.4.10/configure.in.in~	2008-08-14 00:21:51.000000000 +0300
++++ amarok-1.4.10/configure.in.in	2010-01-02 11:02:39.846780562 +0200
+@@ -1,6 +1,10 @@
+ #MIN_CONFIG(3.3)
+ CXXFLAGS="$CXXFLAGS $KDE_DEFAULT_CXXFLAGS"
+ 
++dnl Checks for programs.
++AC_PROG_CC
++AC_PROG_CXX
++
+ if test "$build_arts" = "yes"; then
+     AC_DEFINE(USE_ARTS, 1, [If we use arts volume])
+     LIB_ARTS="-lartskde"

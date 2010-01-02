@@ -49,6 +49,7 @@ Patch9:		%{name}-libmtp.patch
 Patch10:	kde-am.patch
 Patch11:	gcc44.patch
 Patch12:	coverfetcher.patch
+Patch13:	amarok-ac.patch
 URL:		http://amarok.kde.org/
 # Upgrade to 2.0.1.1 required?
 # http://www.trapkit.de/advisories/TKADV2009-002.txt
@@ -117,6 +118,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # temporary hack for proper libgpod::itdb_get_mountpoint() detection.
 %define		filterout_ld	-Wl,--as-needed
+
+# build broken with spaces in CC
+%undefine	with_ccache
 
 %description
 A KDE audio player.
@@ -218,6 +222,7 @@ cd ..
 %patch10 -p1
 %patch11 -p1
 %patch12 -p1
+%patch13 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
