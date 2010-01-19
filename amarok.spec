@@ -1,18 +1,18 @@
 # TODO
 # - try not to link with static mysql
 
-%define		state	stable
-%define		qtver	4.5.0
+%define		state	unstable
+%define		qtver	4.6.0
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.2.0
+Version:	2.2.1.90
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	5a0188c5eb7d343109b82964942d8eb5
+# Source0-md5:	0fb6c98618c91159a26e3f2e837ef132
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-qthreadpool.patch
 URL:		http://amarok.kde.org/
@@ -207,10 +207,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_massstorage-device.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_runnerscript_javascript.so
 %dir %{_datadir}/apps/amarok
+%{_datadir}/apps/amarok/amarok.notifyrc
 %attr(755,root,root) %{_libdir}/libamaroklib.so
 %attr(755,root,root) %{_libdir}/libamarokocsclient.so
 %attr(755,root,root) %{_libdir}/libamarokocsclient.so.4
-%attr(755,root,root) %{_libdir}/libamarokocsclient.so.4.3.0
+%attr(755,root,root) %{_libdir}/libamarokocsclient.so.4.4.0
 %attr(755,root,root) %{_libdir}/libamarokpud.so
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/data
