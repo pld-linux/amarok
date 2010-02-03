@@ -1,8 +1,9 @@
 # TODO
 # - try not to link with static mysql
 
-%define		state	unstable
+%define		_state	unstable
 %define		qtver	4.6.0
+%define		kdever	4.3.5
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
@@ -11,7 +12,7 @@ Version:	2.2.1.90
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	0fb6c98618c91159a26e3f2e837ef132
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-qthreadpool.patch
@@ -29,13 +30,13 @@ BuildRequires:	QtTest-devel >= %{qtver}
 BuildRequires:	QtUiTools-devel >= %{qtver}
 BuildRequires:	QtWebKit-devel >= %{qtver}
 BuildRequires:	QtXml-devel >= %{qtver}
-BuildRequires:	automoc4
-BuildRequires:	cmake >= 2.6.1-2
+BuildRequires:	automoc4 >= 0.9.88
+BuildRequires:	cmake >= 2.6.3
 BuildRequires:	curl-devel
 BuildRequires:	giflib-devel
 BuildRequires:	glib2-devel
-BuildRequires:	kde4-kdebase-devel
-BuildRequires:	kde4-kdemultimedia-devel
+BuildRequires:	kde4-kdelibs-devel >= %{kdever}
+BuildRequires:	kde4-kdemultimedia-devel >= %{kdever}
 BuildRequires:	libgpod-devel >= 0.7.0
 BuildRequires:	libifp-devel >= 1.0.0.2
 BuildRequires:	liblastfm-devel
