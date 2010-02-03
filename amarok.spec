@@ -35,6 +35,7 @@ BuildRequires:	cmake >= 2.6.3
 BuildRequires:	curl-devel
 BuildRequires:	giflib-devel
 BuildRequires:	glib2-devel
+BuildRequires:	kde4-kdebase-workspace-devel >= %{kdever}
 BuildRequires:	kde4-kdelibs-devel >= %{kdever}
 BuildRequires:	kde4-kdemultimedia-devel >= %{kdever}
 BuildRequires:	libgpod-devel >= 0.7.0
