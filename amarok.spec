@@ -20,7 +20,7 @@
 %bcond_with	nmm		# enable NMM audio backend
 %bcond_with	mysql		# enable MySQL support
 %bcond_with	pgsql		# enable PostgreSQL support
-#
+
 %ifarch i386
 %undefine	with_helix
 %endif
@@ -29,7 +29,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.10
-Release:	12
+Release:	13
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -287,8 +287,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/apps/amarok/scripts/templates
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
-
+%post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
 %files -f amarok.lang
