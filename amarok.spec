@@ -2,8 +2,8 @@
 # - try not to link with static mysql
 
 %define		state	stable
-%define		qtver	4.5.3
-%define		kdever	4.3.3
+%define		qtver	4.6.2
+%define		kdever	4.4.1
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
@@ -12,10 +12,11 @@ Version:	2.2.2
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	c2c4ae2f2ff7154a064b554cdee557a9
+Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}-patched.tar.bz2
+# Source0-md5:	9b4453597e4affb1a6bebe715499782f
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-qthreadpool.patch
+Patch2:		%{name}-disable_qtscriptbindings_check_fix.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtCore-devel >= %{qtver}
@@ -127,6 +128,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %setup -q
 #%patch0 -p0
 #%patch1 -p0
+%patch2 -p1
 
 %build
 install -d build
