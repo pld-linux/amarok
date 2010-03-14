@@ -29,7 +29,7 @@ BuildRequires:	QtSvg-devel >= %{qtver}
 BuildRequires:	QtUiTools-devel >= %{qtver}
 BuildRequires:	QtWebKit-devel >= %{qtver}
 BuildRequires:	QtXml-devel >= %{qtver}
-BuildRequires:	automoc4 => 0.9.88
+BuildRequires:	automoc4 >= 0.9.88
 BuildRequires:	cmake >= 2.6.3
 BuildRequires:	curl-devel
 BuildRequires:	gettext-devel
