@@ -1,19 +1,19 @@
 # TODO
 # - try not to link with static mysql
 
-%define		state	stable
+%define		state	unstable
 %define		qtver	4.6.2
 %define		kdever	4.4.1
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.2.2
+Version:	2.2.2.90
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}-patched.tar.bz2
-# Source0-md5:	9b4453597e4affb1a6bebe715499782f
+Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
+# Source0-md5:	386dbfcf7edb4012432693cba14fe893
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-qthreadpool.patch
 Patch2:		%{name}-disable_qtscriptbindings_check_fix.patch
@@ -144,6 +144,9 @@ rm -rf $RPM_BUILD_ROOT
 # remove bogus dir
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
+# remove unsupported locale
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/sr@ijekavian
+
 %find_lang %{name} --with-kde
 
 %clean
@@ -205,6 +208,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libamarokocsclient.so
 %attr(755,root,root) %ghost %{_libdir}/libamarokocsclient.so.?
 %attr(755,root,root) %{_libdir}/libamarokocsclient.so.*.*.*
+%attr(755,root,root) %{_libdir}/libamarok-sqlcollection.so
+%attr(755,root,root) %ghost %{_libdir}/libamarok-sqlcollection.so.?
+%attr(755,root,root) %{_libdir}/libamarok-sqlcollection.so.*.*.*
 %attr(755,root,root) %{_libdir}/libamarokpud.so
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/data
