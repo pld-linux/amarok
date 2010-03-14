@@ -21,32 +21,24 @@ URL:		http://amarok.kde.org/
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtCore-devel >= %{qtver}
 BuildRequires:	QtDBus-devel >= %{qtver}
-#BuildRequires:	QtDesigner-devel >= %{qtver}
 BuildRequires:	QtNetwork-devel >= %{qtver}
 BuildRequires:	QtOpenGL-devel >= %{qtver}
 BuildRequires:	QtScript-devel >= %{qtver}
 BuildRequires:	QtSql-devel >= %{qtver}
 BuildRequires:	QtSvg-devel >= %{qtver}
-#BuildRequires:	QtTest-devel >= %{qtver}
 BuildRequires:	QtUiTools-devel >= %{qtver}
 BuildRequires:	QtWebKit-devel >= %{qtver}
 BuildRequires:	QtXml-devel >= %{qtver}
-BuildRequires:	automoc4
-BuildRequires:	cmake >= 2.6.1-2
+BuildRequires:	automoc4 => 0.9.88
+BuildRequires:	cmake >= 2.6.3
 BuildRequires:	curl-devel
 BuildRequires:	gettext-devel
-#BuildRequires:	giflib-devel
 BuildRequires:	glib2-devel
-BuildRequires:	kde4-kdebase-devel >= %{kdever}
 BuildRequires:	kde4-kdemultimedia-devel >= %{kdever}
 BuildRequires:	libgpod-devel >= 0.7.0
-#BuildRequires:	libifp-devel >= 1.0.0.2
 BuildRequires:	liblastfm-devel
 BuildRequires:	libmtp-devel >= 0.3.0
-#BuildRequires:	libnjb-devel >= 2.2.4
-#BuildRequires:	libvisual-devel >= 0.4.0
 BuildRequires:	loudmouth-devel
-#BuildRequires:	mpeg4ip-devel >= 1:1.6
 BuildRequires:	mysql-devel >= 5.1.31-3
 BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
@@ -54,13 +46,10 @@ BuildRequires:	qca-devel
 BuildRequires:	qt4-build >= %{qtver}
 BuildRequires:	qt4-qmake >= %{qtver}
 BuildRequires:	qtscriptbindings
-#BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
-#BuildRequires:	soprano-devel >= 2.1
 BuildRequires:	strigi-devel >= 0.5.10
 BuildRequires:	taglib-devel >= 1.6
 BuildRequires:	taglib-extras-devel >= 1.0.0
-#BuildRequires:	utempter-devel
 BuildRequires:	xorg-lib-libXpm-devel
 Requires(post,postun):	/sbin/ldconfig
 Requires:	kde4-kdebase-core
@@ -214,8 +203,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/apps/amarok
 %attr(755,root,root) %{_libdir}/libamaroklib.so
 %attr(755,root,root) %{_libdir}/libamarokocsclient.so
-%attr(755,root,root) %{_libdir}/libamarokocsclient.so.4
-%attr(755,root,root) %{_libdir}/libamarokocsclient.so.4.*.*
+%attr(755,root,root) %ghost %{_libdir}/libamarokocsclient.so.?
+%attr(755,root,root) %{_libdir}/libamarokocsclient.so.*.*.*
 %attr(755,root,root) %{_libdir}/libamarokpud.so
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/data
