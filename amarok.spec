@@ -147,7 +147,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 # remove unsupported locale
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/sr@ijekavian
 
-%find_lang %{name} amarokpkg --with-kde
+%find_lang %{name} --all-name --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
