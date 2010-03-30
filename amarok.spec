@@ -3,7 +3,7 @@
 
 %define		state	stable
 %define		qtver	4.6.2
-%define		kdever	4.4.1
+%define		kdever	4.4.2
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
