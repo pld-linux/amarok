@@ -9,14 +9,12 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	2.3.0
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	fc672a2848e36b3b44eb81dd1466e4f4
-Patch0:		%{name}-link.patch
-Patch1:		%{name}-qthreadpool.patch
-#Patch2:		%{name}-disable_qtscriptbindings_check_fix.patch
+Patch0:		%{name}-disable_qtscriptbindings_check_fix.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtCore-devel >= %{qtver}
@@ -115,9 +113,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 
 %prep
 %setup -q
-#%patch0 -p0
-#%patch1 -p0
-#%patch2 -p1
+%patch0 -p1
 
 %build
 install -d build
