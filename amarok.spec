@@ -15,6 +15,7 @@
 #
 # Conditional builds:
 %bcond_without	xine		# disable xine engine
+%bcond_with	arts			# build with aRts support
 %bcond_with	zeroconf	# enable support for zeroconf
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA), needs sqlite >= 3.3 otherwise
 %bcond_without	helix		# disable HelixPlayer engine
@@ -31,7 +32,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.10
-Release:	13.1
+Release:	14
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -66,7 +67,7 @@ BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
 BuildRequires:	kdebase-devel
-BuildRequires:	kdemultimedia-devel >= 9:3.1.93
+%{?with_arts:BuildRequires:	kdemultimedia-devel >= 9:3.1.93}
 %{?with_mp3players:BuildRequires:	libgpod-devel >= 0.6.0}
 %{?with_mp3players:BuildRequires:	libifp-devel >= 1.0.0.2}
 BuildRequires:	libltdl-devel
@@ -253,6 +254,7 @@ cp -f /usr/share/automake/config.sub admin
 	--%{?debug:en}%{!?debug:dis}able-debug%{?debug:=full} \
 	--disable-rpath \
 	--with%{!?with_xine:out}-xine \
+	--with%{!?with_arts:out}-arts \
 	--with%{!?with_helix:out}-helix%{?with_helix:=usegivenpath} \
 	--with%{!?with_nmm:out}-nmm \
 	--with%{!?with_mp3players:out}-libgpod \
