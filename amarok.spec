@@ -1,25 +1,27 @@
 # TODO:
 # - create branch diff from http://gitorious.org/amarok/history
-# - postgresql support alongside mysql
 # - NMM audio backend support (fix build - propably some BRs)
 # - make descriptions less useless
 # - track http://websvn.kde.org/trunk/extragear/multimedia/amarok/TODO?rev=470324&r1=470292&r2=470324
 # - include /usr/bin/amarok_proxy.rb (proxy server for last.fm, but req. ruby)
 # - main package pulls /usr/bin/ruby
 # - monitor http://bugs.kde.org/show_bug.cgi?id=137390 to remove the temporary fix
+# - monitor http://amarok-14.sourceforge.net/ for changes
+# - monitor http://code.google.com/p/clementine-player/ for changes
+# - monitor http://pana.bunnies.net/ for changes
 # - ProjectM (see README)
 # - karma & MFS (see README)
 # - needs autoconf < 2.64-3 to build (make patch)
 #
 # Conditional builds:
 %bcond_without	xine		# disable xine engine
-%bcond_without	zeroconf	# disable support for zeroconf
+%bcond_with	zeroconf	# enable support for zeroconf
 %bcond_without	included_sqlite # don't use included sqlite (VERY BAD IDEA), needs sqlite >= 3.3 otherwise
 %bcond_without	helix		# disable HelixPlayer engine
 %bcond_without	mp3players	# disable iPod and iRiver MP3 players support
 %bcond_with	nmm		# enable NMM audio backend
-%bcond_with	mysql		# enable MySQL support
-%bcond_with	pgsql		# enable PostgreSQL support
+%bcond_without	mysql		# disable MySQL support
+%bcond_without	pgsql		# disable PostgreSQL support
 
 %ifarch i386
 %undefine	with_helix
@@ -29,7 +31,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	1.4.10
-Release:	13
+Release:	13.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/stable/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -50,6 +52,8 @@ Patch10:	kde-am.patch
 Patch11:	gcc44.patch
 Patch12:	coverfetcher.patch
 Patch13:	amarok-ac.patch
+Patch14:	%{name}-ruby19.patch
+Patch15:	%{name}-gcc45.patch
 URL:		http://amarok.kde.org/
 # Upgrade to 2.0.1.1 required?
 # http://www.trapkit.de/advisories/TKADV2009-002.txt
@@ -77,7 +81,7 @@ BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
-BuildRequires:	ruby-devel >= 1.8
+BuildRequires:	ruby-devel >= 1.9
 BuildRequires:	sed >= 4.0
 %{!?with_included_sqlite:BuildRequires:	sqlite3-devel >= 3.3}
 BuildRequires:	taglib-devel >= 1.4
@@ -223,6 +227,8 @@ cd ..
 %patch11 -p1
 %patch12 -p1
 %patch13 -p1
+%patch14 -p1
+%patch15 -p1
 
 %{__sed} -i -e 's/Categories=.*/Categories=Qt;KDE;AudioVideo;Player;/' \
 	amarok/src/amarok.desktop \
@@ -378,12 +384,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/services/amarok_xine-engine.desktop
 %endif
 
-%if 0
 %if %{with zeroconf}
 %files zeroconf
 %defattr(644,root,root,755)
 #%{_datadir}/apps/zeroconf/_shoutcast._tcp
-%endif
 %endif
 
 %files scripts
