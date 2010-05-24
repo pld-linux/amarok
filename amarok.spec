@@ -1,19 +1,19 @@
 # TODO
 # - try not to link with static mysql
 
-%define		state	stable
+%define		state	unstable
 %define		qtver	4.6.2
 %define		kdever	4.4.2
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.3.0
-Release:	3
+Version:	2.3.0.90
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	fc672a2848e36b3b44eb81dd1466e4f4
+# Source0-md5:	a2eb7e81de59ab813ac2490f657d6dc4
 Patch0:		%{name}-disable_qtscriptbindings_check_fix.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	Qt3Support-devel >= %{qtver}
@@ -165,15 +165,36 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libamarokpud.so.*.*.*
 %attr(755,root,root) %{_libdir}/strigi/strigita_audible.so
 %attr(755,root,root) %{_libdir}/strigi/strigita_mp4.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_appletscript_simple_javascript.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_collection-audiocdcollection.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_collection-daapcollection.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_collection-ipodcollection.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_collection-mtpcollection.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_collection-mysqlecollection.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_collection-mysqlservercollection.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_collection-umscollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_containment_vertical.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_currenttrack.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lyrics.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_wikipedia.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_albums.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_coverbling.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_currenttrack.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_info.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lyrics.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_photos.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_similarArtists.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_upcomingEvents.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_videoclip.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_wikipedia.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_opmldirectory.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_current.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_info.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lyrics.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_photos.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_similarArtists.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_upcomingEvents.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_videoclip.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_wikipedia.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_massstorage-device.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_runnerscript_javascript.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_ampache.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_jamendo.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_lastfm.so
@@ -183,22 +204,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_magnatunestore.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_mp3tunes.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_appletscript_simple_javascript.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-audiocdcollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-daapcollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-ipodcollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-mtpcollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-mysqlecollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-mysqlservercollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-umscollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_info.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_photos.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_videoclip.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_info.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_photos.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_videoclip.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_massstorage-device.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_runnerscript_javascript.so
 %dir %{_datadir}/apps/amarok
 %attr(755,root,root) %{_libdir}/libamaroklib.so
 %attr(755,root,root) %{_libdir}/libamarokocsclient.so
@@ -227,15 +232,35 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amaroklastfm.protocol
 %{_datadir}/kde4/services/amarokitpc.protocol
 %{_datadir}/kde4/services/ServiceMenus/amarok_append.desktop
-%{_datadir}/kde4/services/amarok-containment-vertical.desktop
-%{_datadir}/kde4/services/amarok-context-applet-currenttrack.desktop
-%{_datadir}/kde4/services/amarok-context-applet-lyrics.desktop
-%{_datadir}/kde4/services/amarok-context-applet-wikipedia.desktop
-%{_datadir}/kde4/services/amarok_collection-mtpcollection.desktop
-%{_datadir}/kde4/services/amarok-data-engine-current.desktop
-%{_datadir}/kde4/services/amarok-data-engine-lyrics.desktop
-%{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
+%{_datadir}/kde4/services/amarok_collection-audiocdcollection.desktop
 %{_datadir}/kde4/services/amarok_collection-daapcollection.desktop
+%{_datadir}/kde4/services/amarok_collection-ipodcollection.desktop
+%{_datadir}/kde4/services/amarok_collection-mtpcollection.desktop
+%{_datadir}/kde4/services/amarok_collection-mysqlecollection.desktop
+%{_datadir}/kde4/services/amarok_collection-mysqlservercollection.desktop
+%{_datadir}/kde4/services/amarok_collection-umscollection.desktop
+%{_datadir}/kde4/services/amarok-containment-vertical.desktop
+%{_datadir}/kde4/services/amarok-context-applet-albums.desktop
+%{_datadir}/kde4/services/amarok-context-applet-coverbling.desktop
+%{_datadir}/kde4/services/amarok-context-applet-currenttrack.desktop
+%{_datadir}/kde4/services/amarok-context-applet-info.desktop
+%{_datadir}/kde4/services/amarok-context-applet-lyrics.desktop
+%{_datadir}/kde4/services/amarok-context-applet-photos.desktop
+%{_datadir}/kde4/services/amarok-context-applet-similarArtists.desktop
+%{_datadir}/kde4/services/amarok-context-applet-upcomingEvents.desktop
+%{_datadir}/kde4/services/amarok-context-applet-videoclip.desktop
+%{_datadir}/kde4/services/amarok-context-applet-wikipedia.desktop
+%{_datadir}/kde4/services/amarok-data-engine-current.desktop
+%{_datadir}/kde4/services/amarok-data-engine-info.desktop
+%{_datadir}/kde4/services/amarok-data-engine-lyrics.desktop
+%{_datadir}/kde4/services/amarok-data-engine-photos.desktop
+%{_datadir}/kde4/services/amarok-data-engine-similarArtists.desktop
+%{_datadir}/kde4/services/amarok-data-engine-upcomingEvents.desktop
+%{_datadir}/kde4/services/amarok-data-engine-videoclip.desktop
+%{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
+%{_datadir}/kde4/services/amarok_massstorage-device.desktop
+%{_datadir}/kde4/services/amarok-scriptengine-applet-simple-javascript.desktop
+%{_datadir}/kde4/services/amarok-scriptengine-runner-javascript.desktop
 %{_datadir}/kde4/services/amarok_service_ampache.desktop
 %{_datadir}/kde4/services/amarok_service_ampache_config.desktop
 %{_datadir}/kde4/services/amarok_service_jamendo.desktop
@@ -245,22 +270,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok_service_magnatunestore_config.desktop
 %{_datadir}/kde4/services/amarok_service_mp3tunes.desktop
 %{_datadir}/kde4/services/amarok_service_mp3tunes_config.desktop
-%{_datadir}/kde4/services/amarok-context-applet-albums.desktop
-%{_datadir}/kde4/services/amarok_collection-ipodcollection.desktop
-%{_datadir}/kde4/services/amarok_massstorage-device.desktop
 %{_datadir}/kde4/services/amarok_service_opmldirectory.desktop
-%{_datadir}/kde4/services/amarok-context-applet-info.desktop
-%{_datadir}/kde4/services/amarok-context-applet-photos.desktop
-%{_datadir}/kde4/services/amarok-context-applet-videoclip.desktop
-%{_datadir}/kde4/services/amarok-data-engine-info.desktop
-%{_datadir}/kde4/services/amarok-data-engine-photos.desktop
-%{_datadir}/kde4/services/amarok-data-engine-videoclip.desktop
-%{_datadir}/kde4/services/amarok-scriptengine-applet-simple-javascript.desktop
-%{_datadir}/kde4/services/amarok-scriptengine-runner-javascript.desktop
-%{_datadir}/kde4/services/amarok_collection-audiocdcollection.desktop
-%{_datadir}/kde4/services/amarok_collection-mysqlecollection.desktop
-%{_datadir}/kde4/services/amarok_collection-mysqlservercollection.desktop
-%{_datadir}/kde4/services/amarok_collection-umscollection.desktop
 %{_datadir}/kde4/servicetypes/amarok_context_applet.desktop
 %{_datadir}/kde4/servicetypes/amarok_data_engine.desktop
 %{_datadir}/kde4/servicetypes/amarok_plugin.desktop
