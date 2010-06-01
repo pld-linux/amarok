@@ -134,6 +134,9 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 # remove unsupported locale
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/sr@ijekavian*
 
+# remove .so symlinks so that noone gets the stupid idea to package them
+rm -f $RPM_BUILD_ROOT/%{_libdir}/lib*.so
+
 %find_lang %{name} --all-name --with-kde
 
 %clean
@@ -150,19 +153,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
 %attr(755,root,root) %{_bindir}/amarokmp3tunesharmonydaemon
 %attr(755,root,root) %{_bindir}/amarok_afttagger
-%attr(755,root,root) %{_libdir}/libamarok-sqlcollection.so
 %attr(755,root,root) %ghost %{_libdir}/libamarok-sqlcollection.so.?
 %attr(755,root,root) %{_libdir}/libamarok-sqlcollection.so.*.*.*
-%attr(755,root,root) %{_libdir}/libamarokocsclient.so
 %attr(755,root,root) %ghost %{_libdir}/libamarokocsclient.so.?
 %attr(755,root,root) %{_libdir}/libamarokocsclient.so.*.*.*
-%attr(755,root,root) %{_libdir}/libamaroklib.so
 %attr(755,root,root) %ghost %{_libdir}/libamaroklib.so.?
 %attr(755,root,root) %{_libdir}/libamaroklib.so.*.*.*
-%attr(755,root,root) %{_libdir}/libamarokpud.so
 %attr(755,root,root) %ghost %{_libdir}/libamarokpud.so.?
 %attr(755,root,root) %{_libdir}/libamarokpud.so.*.*.*
-%attr(755,root,root) %{_libdir}/libamarokcore.so
 %attr(755,root,root) %ghost %{_libdir}/libamarokcore.so.?
 %attr(755,root,root) %{_libdir}/libamarokcore.so.*.*.*
 %attr(755,root,root) %{_libdir}/strigi/strigita_audible.so
