@@ -16,22 +16,14 @@ Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{vers
 # Source0-md5:	6679adaf5cc757b1515a9f03cdcb6066
 Patch0:		%{name}-disable_qtscriptbindings_check_fix.patch
 URL:		http://amarok.kde.org/
-BuildRequires:	Qt3Support-devel >= %{qtver}
-BuildRequires:	QtCore-devel >= %{qtver}
-BuildRequires:	QtDBus-devel >= %{qtver}
 BuildRequires:	QtNetwork-devel >= %{qtver}
-BuildRequires:	QtOpenGL-devel >= %{qtver}
-BuildRequires:	QtScript-devel >= %{qtver}
 BuildRequires:	QtSql-devel >= %{qtver}
-BuildRequires:	QtSvg-devel >= %{qtver}
-BuildRequires:	QtUiTools-devel >= %{qtver}
-BuildRequires:	QtWebKit-devel >= %{qtver}
-BuildRequires:	QtXml-devel >= %{qtver}
 BuildRequires:	automoc4 >= 0.9.88
 BuildRequires:	cmake >= 2.8.0
 BuildRequires:	curl-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel
+BuildRequires:	kde4-kdelibs-devel >= %{kdever}
 BuildRequires:	kde4-kdemultimedia-devel >= %{kdever}
 BuildRequires:	libgpod-devel >= 0.7.0
 BuildRequires:	liblastfm-devel
@@ -50,7 +42,6 @@ BuildRequires:	taglib-devel >= 1.6
 BuildRequires:	taglib-extras-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXpm-devel
 Requires(post,postun):	/sbin/ldconfig
-Requires:	kde4-kdebase-core
 Requires:	kde4-kdemultimedia-audiocd
 Requires:	kde4-phonon
 Requires:	qtscriptbindings
