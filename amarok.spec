@@ -162,6 +162,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libamarokpud.so
 %attr(755,root,root) %ghost %{_libdir}/libamarokpud.so.?
 %attr(755,root,root) %{_libdir}/libamarokpud.so.*.*.*
+%attr(755,root,root) %{_libdir}/libamarokcore.so
 %attr(755,root,root) %ghost %{_libdir}/libamarokcore.so.?
 %attr(755,root,root) %{_libdir}/libamarokcore.so.*.*.*
 %attr(755,root,root) %{_libdir}/strigi/strigita_audible.so
