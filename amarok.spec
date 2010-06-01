@@ -3,17 +3,17 @@
 
 %define		state	stable
 %define		qtver	4.6.2
-%define		kdever	4.4.2
+%define		kdever	4.4.4
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.3.0
-Release:	3
+Version:	2.3.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	fc672a2848e36b3b44eb81dd1466e4f4
+# Source0-md5:	6679adaf5cc757b1515a9f03cdcb6066
 Patch0:		%{name}-disable_qtscriptbindings_check_fix.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	Qt3Support-devel >= %{qtver}
@@ -28,7 +28,7 @@ BuildRequires:	QtUiTools-devel >= %{qtver}
 BuildRequires:	QtWebKit-devel >= %{qtver}
 BuildRequires:	QtXml-devel >= %{qtver}
 BuildRequires:	automoc4 >= 0.9.88
-BuildRequires:	cmake >= 2.6.3
+BuildRequires:	cmake >= 2.8.0
 BuildRequires:	curl-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel
@@ -45,7 +45,7 @@ BuildRequires:	qt4-build >= %{qtver}
 BuildRequires:	qt4-qmake >= %{qtver}
 BuildRequires:	qtscriptbindings
 BuildRequires:	rpmbuild(macros) >= 1.129
-BuildRequires:	strigi-devel >= 0.5.10
+BuildRequires:	strigi-devel >= 0.7.0
 BuildRequires:	taglib-devel >= 1.6
 BuildRequires:	taglib-extras-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXpm-devel
