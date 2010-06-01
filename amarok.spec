@@ -163,6 +163,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libamaroklib.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarokpud.so.?
 %attr(755,root,root) %{_libdir}/libamarokpud.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libamarokcore.so.?
+%attr(755,root,root) %{_libdir}/libamarokcore.so.*.*.*
 %attr(755,root,root) %{_libdir}/strigi/strigita_audible.so
 %attr(755,root,root) %{_libdir}/strigi/strigita_mp4.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_containment_vertical.so
@@ -170,7 +172,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lyrics.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_wikipedia.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_albums.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_service_opmldirectory.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_similarArtists.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_upcomingEvents.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_similarArtists.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_upcomingEvents.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_current.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lyrics.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_wikipedia.so
@@ -179,6 +184,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_magnatunestore.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_mp3tunes.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_service_opmldirectory.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_ampache.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_magnatunestore.so
@@ -232,6 +238,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-context-applet-lyrics.desktop
 %{_datadir}/kde4/services/amarok-context-applet-wikipedia.desktop
 %{_datadir}/kde4/services/amarok_collection-mtpcollection.desktop
+%{_datadir}/kde4/services/amarok-context-applet-similarArtists.desktop
+%{_datadir}/kde4/services/amarok-context-applet-upcomingEvents.desktop
+%{_datadir}/kde4/services/amarok-data-engine-similarArtists.desktop
+%{_datadir}/kde4/services/amarok-data-engine-upcomingEvents.desktop
 %{_datadir}/kde4/services/amarok-data-engine-current.desktop
 %{_datadir}/kde4/services/amarok-data-engine-lyrics.desktop
 %{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
