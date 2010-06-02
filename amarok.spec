@@ -135,7 +135,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/sr@ijekavian*
 
 # remove .so symlinks so that noone gets the stupid idea to package them
-rm -f $RPM_BUILD_ROOT/%{_libdir}/lib*.so
+rm -f $RPM_BUILD_ROOT%{_libdir}/lib*.so
 
 %find_lang %{name} --all-name --with-kde
 
