@@ -8,12 +8,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.3.1
-Release:	3
+Version:	2.3.2
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	6679adaf5cc757b1515a9f03cdcb6066
+# Source0-md5:	4e03dc009f8b44d9b8dfb5f6d1034081
 Patch0:		%{name}-disable_qtscriptbindings_check_fix.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	QtNetwork-devel >= %{qtver}
@@ -28,6 +28,7 @@ BuildRequires:	kde4-kdemultimedia-devel >= %{kdever}
 BuildRequires:	libgpod-devel >= 0.7.0
 BuildRequires:	liblastfm-devel
 BuildRequires:	libmtp-devel >= 0.3.0
+BuildRequires:	libwrap-devel
 BuildRequires:	loudmouth-devel
 BuildRequires:	mysql-devel >= 5.1.31-3
 BuildRequires:	pcre-devel
@@ -36,7 +37,8 @@ BuildRequires:	qca-devel
 BuildRequires:	qt4-build >= %{qtver}
 BuildRequires:	qt4-qmake >= %{qtver}
 BuildRequires:	qtscriptbindings
-BuildRequires:	rpmbuild(macros) >= 1.129
+BuildRequires:	rpmbuild(macros) >= 1.577
+BuildRequires:	soprano-devel
 BuildRequires:	strigi-devel >= 0.7.0
 BuildRequires:	taglib-devel >= 1.6
 BuildRequires:	taglib-extras-devel >= 1.0.0
@@ -109,14 +111,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %build
 install -d build
 cd build
-%cmake \
-	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
-	-DLIB_INSTALL_DIR=%{_libdir} \
-	-DCMAKE_BUILD_TYPE=%{!?debug:Release}%{?debug:Debug} \
-%if "%{_lib}" == "lib64"
-	-DLIB_SUFFIX=64 \
-%endif
-	../
+%cmake ..
 
 %{__make}
 
@@ -177,6 +172,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_albums.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_currenttrack.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_info.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_labels.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lyrics.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_photos.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_similarArtists.so
@@ -185,6 +181,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_wikipedia.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_current.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_info.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_labels.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lyrics.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_photos.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_similarArtists.so
@@ -234,6 +231,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-context-applet-albums.desktop
 %{_datadir}/kde4/services/amarok-context-applet-currenttrack.desktop
 %{_datadir}/kde4/services/amarok-context-applet-info.desktop
+%{_datadir}/kde4/services/amarok-context-applet-labels.desktop
 %{_datadir}/kde4/services/amarok-context-applet-lyrics.desktop
 %{_datadir}/kde4/services/amarok-context-applet-photos.desktop
 %{_datadir}/kde4/services/amarok-context-applet-similarArtists.desktop
@@ -242,6 +240,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-context-applet-wikipedia.desktop
 %{_datadir}/kde4/services/amarok-data-engine-current.desktop
 %{_datadir}/kde4/services/amarok-data-engine-info.desktop
+%{_datadir}/kde4/services/amarok-data-engine-labels.desktop
 %{_datadir}/kde4/services/amarok-data-engine-lyrics.desktop
 %{_datadir}/kde4/services/amarok-data-engine-photos.desktop
 %{_datadir}/kde4/services/amarok-data-engine-similarArtists.desktop
