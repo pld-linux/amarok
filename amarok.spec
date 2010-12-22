@@ -1,19 +1,20 @@
 # TODO
-# - try not to link with static mysql
+# 	- try not to link with static mysql
+#	- libampache_account_login.so is missing
 
-%define		state	stable
+%define		state	unstable
 %define		qtver	4.7.0
 %define		kdever	4.5.0
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.3.2
-Release:	2
-License:	GPL
+Version:	2.3.90
+Release:	1
+License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	4e03dc009f8b44d9b8dfb5f6d1034081
+# Source0-md5:	6dc00a1291a45996458452251fb5fd0e
 Patch0:		%{name}-disable_qtscriptbindings_check_fix.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	QtNetwork-devel >= %{qtver}
@@ -123,14 +124,11 @@ rm -rf $RPM_BUILD_ROOT
 	kde_htmldir=%{_kdedocdir} \
 	kde_libs_htmldir=%{_kdedocdir}
 
-# remove bogus dir
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
-
 # remove unsupported locale
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/sr@ijekavian*
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/sr@ijekavian*
 
 # remove .so symlinks so that noone gets the stupid idea to package them
-rm -f $RPM_BUILD_ROOT%{_libdir}/lib*.so
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.so
 
 %find_lang %{name} --all-name --with-kde
 
@@ -150,16 +148,21 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarok_afttagger
 %attr(755,root,root) %ghost %{_libdir}/libamarok-sqlcollection.so.?
 %attr(755,root,root) %{_libdir}/libamarok-sqlcollection.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libamarok-transcoding.so.?
+%attr(755,root,root) %{_libdir}/libamarok-transcoding.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libamarokcore.so.?
+%attr(755,root,root) %{_libdir}/libamarokcore.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarokocsclient.so.?
 %attr(755,root,root) %{_libdir}/libamarokocsclient.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamaroklib.so.?
 %attr(755,root,root) %{_libdir}/libamaroklib.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarokpud.so.?
 %attr(755,root,root) %{_libdir}/libamarokpud.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libamarokcore.so.?
-%attr(755,root,root) %{_libdir}/libamarokcore.so.*.*.*
-%attr(755,root,root) %{_libdir}/strigi/strigita_audible.so
-%attr(755,root,root) %{_libdir}/strigi/strigita_mp4.so
+%attr(755,root,root) %ghost %{_libdir}/libamarokqtjson.so.?
+%attr(755,root,root) %{_libdir}/libamarokqtjson.so.*.*.*
+#%%attr(755,root,root) %{_libdir}/strigi/strigita_audible.so
+#%%attr(755,root,root) %{_libdir}/strigi/strigita_mp4.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_tabs.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_appletscript_simple_javascript.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-audiocdcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-daapcollection.so
@@ -185,10 +188,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lyrics.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_photos.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_similarArtists.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_tabs.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_upcomingEvents.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_videoclip.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_wikipedia.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_massstorage-device.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_collection-playdarcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_runnerscript_javascript.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_ampache.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_jamendo.so
@@ -200,6 +205,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_magnatunestore.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_mp3tunes.so
+%{_libdir}/kde4/amarok_collection-upnpcollection.so
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/data
@@ -211,11 +217,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/config.kcfg/amarokconfig.kcfg
 %{_datadir}/config/amarok.knsrc
 %{_datadir}/config/amarokapplets.knsrc
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.App.xml
 %{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.player.xml
 %{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.root.xml
 %{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.tracklist.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.Mpris1Extensions.Player.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.Mpris2Extensions.Player.xml
 %{_datadir}/dbus-1/interfaces/org.kde.amarok.Collection.xml
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.SqlCollection.xml
 %{_datadir}/kde4/services/amarok.protocol
 %{_datadir}/kde4/services/amaroklastfm.protocol
 %{_datadir}/kde4/services/amarokitpc.protocol
@@ -226,6 +234,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok_collection-mtpcollection.desktop
 %{_datadir}/kde4/services/amarok_collection-mysqlecollection.desktop
 %{_datadir}/kde4/services/amarok_collection-mysqlservercollection.desktop
+%{_datadir}/kde4/services/amarok_collection-playdarcollection.desktop
+%{_datadir}/kde4/services/amarok_collection-upnpcollection.desktop
 %{_datadir}/kde4/services/amarok_collection-umscollection.desktop
 %{_datadir}/kde4/services/amarok-containment-vertical.desktop
 %{_datadir}/kde4/services/amarok-context-applet-albums.desktop
@@ -235,6 +245,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-context-applet-lyrics.desktop
 %{_datadir}/kde4/services/amarok-context-applet-photos.desktop
 %{_datadir}/kde4/services/amarok-context-applet-similarArtists.desktop
+%{_datadir}/kde4/services/amarok-context-applet-tabs.desktop
 %{_datadir}/kde4/services/amarok-context-applet-upcomingEvents.desktop
 %{_datadir}/kde4/services/amarok-context-applet-videoclip.desktop
 %{_datadir}/kde4/services/amarok-context-applet-wikipedia.desktop
@@ -244,6 +255,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-data-engine-lyrics.desktop
 %{_datadir}/kde4/services/amarok-data-engine-photos.desktop
 %{_datadir}/kde4/services/amarok-data-engine-similarArtists.desktop
+%{_datadir}/kde4/services/amarok-data-engine-tabs.desktop
 %{_datadir}/kde4/services/amarok-data-engine-upcomingEvents.desktop
 %{_datadir}/kde4/services/amarok-data-engine-videoclip.desktop
 %{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
