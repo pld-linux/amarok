@@ -8,12 +8,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.3.2
-Release:	2
+Version:	2.4.0
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	4e03dc009f8b44d9b8dfb5f6d1034081
+# Source0-md5:	bdb6ddc8e38d0982a0786ff8ac96d923
 Patch0:		%{name}-disable_qtscriptbindings_check_fix.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	QtNetwork-devel >= %{qtver}
@@ -28,6 +28,7 @@ BuildRequires:	kde4-kdemultimedia-devel >= %{kdever}
 BuildRequires:	libgpod-devel >= 0.7.0
 BuildRequires:	liblastfm-devel
 BuildRequires:	libmtp-devel >= 0.3.0
+BuildRequires:	libofa-devel
 BuildRequires:	libwrap-devel
 BuildRequires:	loudmouth-devel
 BuildRequires:	mysql-devel >= 5.1.31-3
@@ -158,8 +159,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libamarokpud.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarokcore.so.?
 %attr(755,root,root) %{_libdir}/libamarokcore.so.*.*.*
-%attr(755,root,root) %{_libdir}/strigi/strigita_audible.so
-%attr(755,root,root) %{_libdir}/strigi/strigita_mp4.so
+%attr(755,root,root) %ghost %{_libdir}/libamarok-transcoding.so.?
+%attr(755,root,root) %{_libdir}/libamarok-transcoding.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libamarokqtjson.so.?
+%attr(755,root,root) %{_libdir}/libamarokqtjson.so.*.*.*
 %attr(755,root,root) %{_libdir}/kde4/amarok_appletscript_simple_javascript.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-audiocdcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-daapcollection.so
@@ -200,6 +203,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_magnatunestore.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_mp3tunes.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_collection-playdarcollection.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_collection-upnpcollection.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_tabs.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_tabs.so
 %dir %{_datadir}/apps/amarok
 %dir %{_datadir}/apps/amarok/scripts
 %{_datadir}/apps/amarok/data
@@ -215,7 +222,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.root.xml
 %{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.tracklist.xml
 %{_datadir}/dbus-1/interfaces/org.kde.amarok.Collection.xml
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.SqlCollection.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.App.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.Mpris1Extensions.Player.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.Mpris2Extensions.Player.xml
+%{_datadir}/applications/kde4/amarok_containers.desktop
 %{_datadir}/kde4/services/amarok.protocol
 %{_datadir}/kde4/services/amaroklastfm.protocol
 %{_datadir}/kde4/services/amarokitpc.protocol
@@ -260,6 +270,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok_service_opmldirectory.desktop
 %{_datadir}/kde4/services/amarok-scriptengine-applet-simple-javascript.desktop
 %{_datadir}/kde4/services/amarok-scriptengine-runner-javascript.desktop
+%{_datadir}/kde4/services/amarok-context-applet-tabs.desktop
+%{_datadir}/kde4/services/amarok-data-engine-tabs.desktop
+%{_datadir}/kde4/services/amarok_collection-playdarcollection.desktop
+%{_datadir}/kde4/services/amarok_collection-upnpcollection.desktop
 %{_datadir}/kde4/servicetypes/amarok_codecinstall.desktop
 %{_datadir}/kde4/servicetypes/amarok_context_applet.desktop
 %{_datadir}/kde4/servicetypes/amarok_data_engine.desktop
