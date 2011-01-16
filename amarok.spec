@@ -131,7 +131,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/sr@ijekavian*
 
 # remove .so symlinks so that noone gets the stupid idea to package them
-rm -f $RPM_BUILD_ROOT%{_libdir}/lib*.so
+rm -f $RPM_BUILD_ROOT%{_libdir}/libamarok*.so
 
 %find_lang %{name} --all-name --with-kde
 
@@ -163,6 +163,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libamarok-transcoding.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarokqtjson.so.?
 %attr(755,root,root) %{_libdir}/libamarokqtjson.so.*.*.*
+%attr(755,root,root) %{_libdir}/libampache_account_login.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_appletscript_simple_javascript.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-audiocdcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-daapcollection.so
