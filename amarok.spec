@@ -10,7 +10,7 @@ Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	2.4.0
 Release:	1
-License:	GPL
+License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	bdb6ddc8e38d0982a0786ff8ac96d923
@@ -125,13 +125,13 @@ rm -rf $RPM_BUILD_ROOT
 	kde_libs_htmldir=%{_kdedocdir}
 
 # remove bogus dir
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/xx
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/xx
 
 # remove unsupported locale
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/sr@ijekavian*
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/sr@ijekavian*
 
 # remove .so symlinks so that noone gets the stupid idea to package them
-rm -f $RPM_BUILD_ROOT%{_libdir}/libamarok*.so
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libamarok*.so
 
 %find_lang %{name} --all-name --with-kde
 
