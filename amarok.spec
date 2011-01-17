@@ -38,7 +38,7 @@ BuildRequires:	qca-devel
 BuildRequires:	qt4-build >= %{qtver}
 BuildRequires:	qt4-qmake >= %{qtver}
 BuildRequires:	qtscriptbindings
-BuildRequires:	rpmbuild(macros) >= 1.577
+BuildRequires:	rpmbuild(macros) >= 1.600
 BuildRequires:	soprano-devel
 BuildRequires:	strigi-devel >= 0.7.0
 BuildRequires:	taglib-devel >= 1.6
