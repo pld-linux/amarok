@@ -2,8 +2,8 @@
 # - try not to link with static mysql
 
 %define		state	stable
-%define		qtver	4.7.0
-%define		kdever	4.5.0
+%define		qtver	4.7.1
+%define		kdever	4.5.5
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
@@ -112,7 +112,8 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %build
 install -d build
 cd build
-%cmake ..
+%cmake \
+	../
 
 %{__make}
 
