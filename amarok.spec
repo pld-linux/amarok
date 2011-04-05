@@ -1,5 +1,7 @@
+#
 # TODO
-# - try not to link with static mysql
+# - use mysql-embedded in the future and try not to link with static mysqld lib
+#
 
 %define		state	stable
 %define		qtver	4.7.1
@@ -31,7 +33,7 @@ BuildRequires:	libmtp-devel >= 0.3.0
 BuildRequires:	libofa-devel
 BuildRequires:	libwrap-devel
 BuildRequires:	loudmouth-devel
-BuildRequires:	mysql-devel >= 5.1.31-3
+#BuildRequires:	mysql-devel >= 5.1.31-3
 BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
 BuildRequires:	qca-devel
@@ -112,6 +114,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 install -d build
 cd build
 %cmake \
+	-DWITH_MYSQL_EMBEDDED=OFF \
 	../
 
 %{__make}
