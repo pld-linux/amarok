@@ -169,7 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-daapcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-ipodcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-mtpcollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-mysqlecollection.so
+#%%attr(755,root,root) %{_libdir}/kde4/amarok_collection-mysqlecollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-mysqlservercollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-umscollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_containment_vertical.so
@@ -235,7 +235,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok_collection-daapcollection.desktop
 %{_datadir}/kde4/services/amarok_collection-ipodcollection.desktop
 %{_datadir}/kde4/services/amarok_collection-mtpcollection.desktop
-%{_datadir}/kde4/services/amarok_collection-mysqlecollection.desktop
+#%%{_datadir}/kde4/services/amarok_collection-mysqlecollection.desktop
 %{_datadir}/kde4/services/amarok_collection-mysqlservercollection.desktop
 %{_datadir}/kde4/services/amarok_collection-umscollection.desktop
 %{_datadir}/kde4/services/amarok-containment-vertical.desktop
