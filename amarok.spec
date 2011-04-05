@@ -33,7 +33,7 @@ BuildRequires:	libmtp-devel >= 0.3.0
 BuildRequires:	libofa-devel
 BuildRequires:	libwrap-devel
 BuildRequires:	loudmouth-devel
-#BuildRequires:	mysql-devel >= 5.1.31-3
+BuildRequires:	mysql-devel >= 5.1.31-3
 BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
 BuildRequires:	qca-devel
