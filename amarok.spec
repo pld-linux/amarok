@@ -28,6 +28,7 @@ BuildRequires:	glib2-devel
 BuildRequires:	kde4-kdelibs-devel >= %{kdever}
 BuildRequires:	kde4-kdemultimedia-devel >= %{kdever}
 BuildRequires:	libgpod-devel >= 0.7.0
+BuildRequires:	libaio-devel
 BuildRequires:	liblastfm-devel
 BuildRequires:	libmtp-devel >= 0.3.0
 BuildRequires:	libofa-devel
