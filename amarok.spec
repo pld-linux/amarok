@@ -10,12 +10,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.4.0
-Release:	5
+Version:	2.4.1
+Release:	0.1
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	bdb6ddc8e38d0982a0786ff8ac96d923
+# Source0-md5:	4c65c5cd4d7bd267bdbef8e912fd6cb6
 Patch0:		%{name}-disable_qtscriptbindings_check_fix.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	QtNetwork-devel >= %{qtver}
@@ -27,8 +27,8 @@ BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel
 BuildRequires:	kde4-kdelibs-devel >= %{kdever}
 BuildRequires:	kde4-kdemultimedia-devel >= %{kdever}
-BuildRequires:	libgpod-devel >= 0.7.0
 BuildRequires:	libaio-devel
+BuildRequires:	libgpod-devel >= 0.7.0
 BuildRequires:	liblastfm-devel
 BuildRequires:	libmtp-devel >= 0.3.0
 BuildRequires:	libofa-devel
@@ -162,8 +162,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libamarokcore.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libamarok-transcoding.so.?
 %attr(755,root,root) %{_libdir}/libamarok-transcoding.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libamarokqtjson.so.?
-%attr(755,root,root) %{_libdir}/libamarokqtjson.so.*.*.*
+#%%attr(755,root,root) %ghost %{_libdir}/libamarokqtjson.so.?
+#%%attr(755,root,root) %{_libdir}/libamarokqtjson.so.*.*.*
 %attr(755,root,root) %{_libdir}/libampache_account_login.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_appletscript_simple_javascript.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-audiocdcollection.so
@@ -193,7 +193,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_upcomingEvents.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_videoclip.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_wikipedia.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_massstorage-device.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_device_massstorage.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_device_nfs.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_device_smb.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_runnerscript_javascript.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_ampache.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_jamendo.so
@@ -227,7 +229,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/org.kde.amarok.App.xml
 %{_datadir}/dbus-1/interfaces/org.kde.amarok.Mpris1Extensions.Player.xml
 %{_datadir}/dbus-1/interfaces/org.kde.amarok.Mpris2Extensions.Player.xml
-%{_datadir}/applications/kde4/amarok_containers.desktop
+%{_desktopdir}/kde4/amarok_containers.desktop
 %{_datadir}/kde4/services/amarok.protocol
 %{_datadir}/kde4/services/amaroklastfm.protocol
 %{_datadir}/kde4/services/amarokitpc.protocol
@@ -259,7 +261,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-data-engine-upcomingEvents.desktop
 %{_datadir}/kde4/services/amarok-data-engine-videoclip.desktop
 %{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
-%{_datadir}/kde4/services/amarok_massstorage-device.desktop
+%{_datadir}/kde4/services/amarok_device_massstorage.desktop
+%{_datadir}/kde4/services/amarok_device_nfs.desktop
+%{_datadir}/kde4/services/amarok_device_smb.desktop
 %{_datadir}/kde4/services/amarok_service_ampache.desktop
 %{_datadir}/kde4/services/amarok_service_ampache_config.desktop
 %{_datadir}/kde4/services/amarok_service_jamendo.desktop
