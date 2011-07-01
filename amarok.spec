@@ -20,6 +20,7 @@ Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{vers
 Patch0:		%{name}-disable_qtscriptbindings_check_fix.patch
 Patch1:		%{name}-ffmpeg08.patch
 Patch2:		%{name}-upnp-dep.patch
+Patch3:		%{name}-qt_regression.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	QtNetwork-devel >= %{qtver}
 BuildRequires:	QtSql-devel >= %{qtver}
@@ -35,7 +36,7 @@ BuildRequires:	kde4-kdemultimedia-devel >= %{kdever}
 BuildRequires:	libaio-devel
 BuildRequires:	libgpod-devel >= 0.7.0
 BuildRequires:	liblastfm-devel
-BuildRequires:	libmtp-devel >= 0.3.0
+BuildRequires:	libmtp-devel >= 1.0.4
 BuildRequires:	libofa-devel
 BuildRequires:	libwrap-devel
 BuildRequires:	loudmouth-devel
@@ -118,6 +119,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 install -d build
