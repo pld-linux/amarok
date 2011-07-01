@@ -25,6 +25,7 @@ BuildRequires:	QtSql-devel >= %{qtver}
 BuildRequires:	automoc4 >= 0.9.88
 BuildRequires:	cmake >= 2.8.0
 BuildRequires:	curl-devel
+BuildRequires:	ffmpeg-devel > 0.7.1
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel
 BuildRequires:	kde4-kdelibs-devel >= %{kdever}
