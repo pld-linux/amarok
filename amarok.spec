@@ -41,6 +41,7 @@ BuildRequires:	mysql-devel >= 5.1.31-3
 BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
 BuildRequires:	qca-devel
+BuildRequires:	qjson-devel >= 0.5
 BuildRequires:	qt4-build >= %{qtver}
 BuildRequires:	qt4-qmake >= %{qtver}
 BuildRequires:	qtscriptbindings
@@ -211,9 +212,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_magnatunestore.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_mp3tunes.so
-%if "%{pld_release}" != "ti"
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-playdarcollection.so
-%endif
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-upnpcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_tabs.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_tabs.so
@@ -284,9 +283,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-scriptengine-runner-javascript.desktop
 %{_datadir}/kde4/services/amarok-context-applet-tabs.desktop
 %{_datadir}/kde4/services/amarok-data-engine-tabs.desktop
-%if "%{pld_release}" != "ti"
 %{_datadir}/kde4/services/amarok_collection-playdarcollection.desktop
-%endif
 %{_datadir}/kde4/services/amarok_collection-upnpcollection.desktop
 %{_datadir}/kde4/servicetypes/amarok_codecinstall.desktop
 %{_datadir}/kde4/servicetypes/amarok_context_applet.desktop
