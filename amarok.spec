@@ -19,6 +19,7 @@ Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{vers
 # Source0-md5:	4c65c5cd4d7bd267bdbef8e912fd6cb6
 Patch0:		%{name}-disable_qtscriptbindings_check_fix.patch
 Patch1:		%{name}-ffmpeg08.patch
+Patch2:		%{name}-upnp-dep.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	QtNetwork-devel >= %{qtver}
 BuildRequires:	QtSql-devel >= %{qtver}
@@ -115,6 +116,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 install -d build
