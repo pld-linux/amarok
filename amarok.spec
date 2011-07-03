@@ -295,6 +295,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
 %{_datadir}/config/amarok_homerc
+%attr(755,root,root) %{_datadir}/apps/kconf_update/*.pl
+%{_datadir}/apps/kconf_update/amarok.upd
 
 %files scripts
 %defattr(644,root,root,755)
