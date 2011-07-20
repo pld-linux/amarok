@@ -1,7 +1,6 @@
 #
 # TODO
 # - use mysql-embedded in the future and try not to link with static mysqld lib
-# - does not run
 #
 
 %define		state	unstable
