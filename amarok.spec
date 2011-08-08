@@ -1,7 +1,6 @@
 #
 # TODO
 # - use mysql-embedded in the future and try not to link with static mysqld lib
-# - does not run
 #
 
 %define		state	stable
@@ -11,15 +10,13 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.4.1
-Release:	0.1
+Version:	2.4.3
+Release:	1
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	4c65c5cd4d7bd267bdbef8e912fd6cb6
-Patch0:		%{name}-disable_qtscriptbindings_check_fix.patch
-Patch1:		%{name}-ffmpeg08.patch
-Patch2:		%{name}-upnp-dep.patch
+# Source0-md5:	24e8141bcbd065448911fa872c50197d
+Patch0:		%{name}-upnp-dep.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	QtNetwork-devel >= %{qtver}
 BuildRequires:	QtSql-devel >= %{qtver}
@@ -116,8 +113,6 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
 install -d build
