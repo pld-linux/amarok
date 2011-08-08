@@ -1,6 +1,7 @@
 #
 # TODO
 # - use mysql-embedded in the future and try not to link with static mysqld lib
+# - amarok now requires his own database which is not automaticly created 
 #
 
 %define		state	stable
