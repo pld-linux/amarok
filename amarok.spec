@@ -1,7 +1,7 @@
 #
 # TODO
 # - use mysql-embedded in the future and try not to link with static mysqld lib
-# - does not run
+# - amarok now requires his own database which is not automaticly created 
 #
 
 %define		state	stable
@@ -11,15 +11,13 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.4.1
-Release:	0.1
+Version:	2.4.3
+Release:	2
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	4c65c5cd4d7bd267bdbef8e912fd6cb6
-Patch0:		%{name}-disable_qtscriptbindings_check_fix.patch
-Patch1:		%{name}-ffmpeg08.patch
-Patch2:		%{name}-upnp-dep.patch
+# Source0-md5:	24e8141bcbd065448911fa872c50197d
+Patch0:		%{name}-upnp-dep.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	QtNetwork-devel >= %{qtver}
 BuildRequires:	QtSql-devel >= %{qtver}
@@ -29,12 +27,13 @@ BuildRequires:	curl-devel
 BuildRequires:	ffmpeg-devel >= 0.7.1
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel
+BuildRequires:	herqq-devel
 BuildRequires:	kde4-kdelibs-devel >= %{kdever}
 BuildRequires:	kde4-kdemultimedia-devel >= %{kdever}
 BuildRequires:	libaio-devel
 BuildRequires:	libgpod-devel >= 0.7.0
 BuildRequires:	liblastfm-devel
-BuildRequires:	libmtp-devel >= 0.3.0
+BuildRequires:	libmtp-devel >= 1.0.4
 BuildRequires:	libofa-devel
 BuildRequires:	libwrap-devel
 BuildRequires:	loudmouth-devel
@@ -49,7 +48,7 @@ BuildRequires:	qtscriptbindings
 BuildRequires:	rpmbuild(macros) >= 1.600
 BuildRequires:	soprano-devel
 BuildRequires:	strigi-devel >= 0.7.0
-BuildRequires:	taglib-devel >= 1.6
+BuildRequires:	taglib-devel >= 1.7
 BuildRequires:	taglib-extras-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXpm-devel
 Requires(post,postun):	/sbin/ldconfig
@@ -115,8 +114,6 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
 install -d build
@@ -294,6 +291,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/amarok.desktop
 %{_iconsdir}/*/*/apps/amarok.*
 %{_datadir}/config/amarok_homerc
+%attr(755,root,root) %{_datadir}/apps/kconf_update/*.pl
+%{_datadir}/apps/kconf_update/amarok.upd
 
 %files scripts
 %defattr(644,root,root,755)
