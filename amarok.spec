@@ -48,7 +48,7 @@ BuildRequires:	qtscriptbindings
 BuildRequires:	rpmbuild(macros) >= 1.600
 BuildRequires:	soprano-devel
 BuildRequires:	strigi-devel >= 0.7.0
-BuildRequires:	taglib-devel >= 1.6
+BuildRequires:	taglib-devel >= 1.7
 BuildRequires:	taglib-extras-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXpm-devel
 Requires(post,postun):	/sbin/ldconfig
