@@ -4,19 +4,19 @@
 # - amarok now requires his own database which is not automaticly created 
 #
 
-%define		state	stable
+%define		state	unstable
 %define		qtver	4.7.1
 %define		kdever	4.5.5
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.4.3
-Release:	2
+Version:	2.4.90
+Release:	0.1
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	24e8141bcbd065448911fa872c50197d
+# Source0-md5:	92c77437c70f0086e91b4dc4842268c7
 Patch0:		%{name}-upnp-dep.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	QtNetwork-devel >= %{qtver}
