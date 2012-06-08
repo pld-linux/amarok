@@ -2,8 +2,11 @@
 # TODO
 # - use mysql-embedded in the future and try not to link with static mysqld lib
 # - amarok now requires his own database which is not automaticly created 
-#
-
+# Add spec:
+# libmygpo-qt (1.0.5 or higher)  <http://wiki.gpodder.org/wiki/Libmygpo-qt>
+#     Enable gpodder.net service
+# -- Performing Test COMPLEX_TAGLIB_FILENAME - Failed
+# /home/users/builder/rpm/BUILD/amarok-2.5.0/build/CMakeFiles/CMakeTmp/src.cxx:5:38: error: cannot convert 'const wchar_t*' to 'TagLib::FileName {aka const char*}' in initialization
 %define		state	stable
 %define		qtver	4.7.1
 %define		kdever	4.5.5
@@ -11,12 +14,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.4.3
-Release:	2
+Version:	2.5.0
+Release:	1
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	24e8141bcbd065448911fa872c50197d
+# Source0-md5:	b7983eaa33e4771769ae9e330c811995
 Patch0:		%{name}-upnp-dep.patch
 URL:		http://amarok.kde.org/
 BuildRequires:	QtNetwork-devel >= %{qtver}
@@ -185,6 +188,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lyrics.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_photos.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_similarArtists.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_spectrum_analyzer.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_upcomingEvents.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_videoclip.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_wikipedia.so
@@ -194,6 +198,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lyrics.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_photos.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_similarArtists.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_spectrum_analyzer.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_upcomingEvents.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_videoclip.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_wikipedia.so
@@ -207,10 +212,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_magnatunestore.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_mp3tunes.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_service_opmldirectory.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_service_amazonstore.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_ampache.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_lastfm.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_magnatunestore.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_mp3tunes.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_amazonstore.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-playdarcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-upnpcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_tabs.so
@@ -253,6 +260,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-context-applet-lyrics.desktop
 %{_datadir}/kde4/services/amarok-context-applet-photos.desktop
 %{_datadir}/kde4/services/amarok-context-applet-similarArtists.desktop
+%{_datadir}/kde4/services/amarok-context-applet-spectrum-analyzer.desktop
 %{_datadir}/kde4/services/amarok-context-applet-upcomingEvents.desktop
 %{_datadir}/kde4/services/amarok-context-applet-videoclip.desktop
 %{_datadir}/kde4/services/amarok-context-applet-wikipedia.desktop
@@ -262,12 +270,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-data-engine-lyrics.desktop
 %{_datadir}/kde4/services/amarok-data-engine-photos.desktop
 %{_datadir}/kde4/services/amarok-data-engine-similarArtists.desktop
+%{_datadir}/kde4/services/amarok-data-engine-spectrum-analyzer.desktop
 %{_datadir}/kde4/services/amarok-data-engine-upcomingEvents.desktop
 %{_datadir}/kde4/services/amarok-data-engine-videoclip.desktop
 %{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
 %{_datadir}/kde4/services/amarok_device_massstorage.desktop
 %{_datadir}/kde4/services/amarok_device_nfs.desktop
 %{_datadir}/kde4/services/amarok_device_smb.desktop
+%{_datadir}/kde4/services/amarok_service_amazonstore.desktop
+%{_datadir}/kde4/services/amarok_service_amazonstore_config.desktop
 %{_datadir}/kde4/services/amarok_service_ampache.desktop
 %{_datadir}/kde4/services/amarok_service_ampache_config.desktop
 %{_datadir}/kde4/services/amarok_service_jamendo.desktop
