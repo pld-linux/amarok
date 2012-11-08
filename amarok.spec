@@ -189,7 +189,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_similarArtists.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_spectrum_analyzer.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_upcomingEvents.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_videoclip.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_wikipedia.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_current.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_info.so
@@ -199,7 +198,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_similarArtists.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_spectrum_analyzer.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_upcomingEvents.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_videoclip.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_wikipedia.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_device_massstorage.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_device_nfs.so
@@ -261,7 +259,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-context-applet-similarArtists.desktop
 %{_datadir}/kde4/services/amarok-context-applet-spectrum-analyzer.desktop
 %{_datadir}/kde4/services/amarok-context-applet-upcomingEvents.desktop
-%{_datadir}/kde4/services/amarok-context-applet-videoclip.desktop
 %{_datadir}/kde4/services/amarok-context-applet-wikipedia.desktop
 %{_datadir}/kde4/services/amarok-data-engine-current.desktop
 %{_datadir}/kde4/services/amarok-data-engine-info.desktop
@@ -271,7 +268,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok-data-engine-similarArtists.desktop
 %{_datadir}/kde4/services/amarok-data-engine-spectrum-analyzer.desktop
 %{_datadir}/kde4/services/amarok-data-engine-upcomingEvents.desktop
-%{_datadir}/kde4/services/amarok-data-engine-videoclip.desktop
 %{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
 %{_datadir}/kde4/services/amarok_device_massstorage.desktop
 %{_datadir}/kde4/services/amarok_device_nfs.desktop
