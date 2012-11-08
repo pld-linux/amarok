@@ -32,7 +32,6 @@ BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel
 BuildRequires:	herqq-devel
 BuildRequires:	kde4-kdelibs-devel >= %{kdever}
-BuildRequires:	kde4-kdemultimedia-devel >= %{kdever}
 BuildRequires:	libaio-devel
 BuildRequires:	libgpod-devel >= 0.7.0
 BuildRequires:	liblastfm-devel
