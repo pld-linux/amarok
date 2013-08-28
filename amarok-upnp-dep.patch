@@ -9,13 +9,13 @@ diff -urN amarok-2.4.0.90.orig/CMakeLists.txt amarok-2.4.0.90/CMakeLists.txt
 +    macro_optional_find_package(HUpnp)
 +    macro_log_feature ( HUPNP_FOUND "HUpnp" "HUpnp is an universal Plug and Play Library" "http://herqq.org/" FALSE "" "" )
 +
-     # macro_optional_find_package(Strigi)
-     # macro_log_feature( STRIGI_FOUND "strigi" "Index metadata of files" "http://strigi.sourceforge.net" FALSE "" "" )
- 
+     # We tell users that we need 1.0.3, but we really check just >= 1.0.0. This is because
+     # upstream forgot to update version in lastfm/global.h, so it looks like 1.0.2. :-(
+     # will be fixed in liblastfm-1.0.4
 diff -urN amarok-2.4.0.90.orig/src/core-impl/collections/CMakeLists.txt amarok-2.4.0.90/src/core-impl/collections/CMakeLists.txt
 --- amarok-2.4.0.90.orig/src/core-impl/collections/CMakeLists.txt	2011-04-19 00:03:27.940000015 +0000
 +++ amarok-2.4.0.90/src/core-impl/collections/CMakeLists.txt	2011-04-19 00:07:06.753333348 +0000
-@@ -25,4 +25,6 @@
+@@ -25,5 +25,7 @@
  if( QJSON_FOUND )
      add_subdirectory( playdarcollection )
  endif( QJSON_FOUND )
@@ -23,6 +23,7 @@ diff -urN amarok-2.4.0.90.orig/src/core-impl/collections/CMakeLists.txt amarok-2
 +if( HUPNP_FOUND )
 +    add_subdirectory( upnpcollection )
 +endif( HUPNP_FOUND )
+ add_subdirectory( nepomukcollection )
 diff -urN amarok-2.4.0.90.orig/cmake/modules/FindHUpnp.cmake amarok-2.4.0.90/cmake/modules/FindHUpnp.cmake
 --- amarok-2.4.0.90.orig/cmake/modules/FindHUpnp.cmake	2011-04-19 01:59:14.313333349 +0000
 +++ amarok-2.4.0.90/cmake/modules/FindHUpnp.cmake	2011-04-19 02:14:13.670000016 +0000
