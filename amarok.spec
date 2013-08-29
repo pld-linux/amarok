@@ -121,6 +121,7 @@ Więcej o skryptach w amaroKu można dowiedzieć się stąd:
 install -d build
 cd build
 %cmake \
+	-DKDE4_BUILD_TESTS=OFF \
 	-DWITH_MYSQL_EMBEDDED=OFF \
 	../
 
