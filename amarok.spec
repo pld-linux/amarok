@@ -15,7 +15,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	2.8.0
-Release:	4
+Release:	5
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
@@ -32,6 +32,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel
 BuildRequires:	herqq-devel
 BuildRequires:	kde4-kdelibs-devel >= %{kdever}
+BuildRequires:	kde4-nepomuk-core-devel
 BuildRequires:	libaio-devel
 BuildRequires:	libgpod-devel >= 0.7.0
 BuildRequires:	liblastfm-devel
@@ -206,6 +207,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_magnatunestore.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_mp3tunes.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_amazonstore.so
+%attr(755,root,root) %{_libdir}/kde4/amarok_collection-nepomukcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-playdarcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_collection-upnpcollection.so
 %attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_tabs.so
@@ -239,6 +241,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/amarok_collection-mtpcollection.desktop
 #%%{_datadir}/kde4/services/amarok_collection-mysqlecollection.desktop
 %{_datadir}/kde4/services/amarok_collection-mysqlservercollection.desktop
+%{_datadir}/kde4/services/amarok_collection-nepomukcollection.desktop
 %{_datadir}/kde4/services/amarok_collection-umscollection.desktop
 %{_datadir}/kde4/services/amarok-containment-vertical.desktop
 %{_datadir}/kde4/services/amarok-context-applet-analyzer.desktop
