@@ -8,91 +8,58 @@
 # -- Performing Test COMPLEX_TAGLIB_FILENAME - Failed
 # /home/users/builder/rpm/BUILD/amarok-2.5.0/build/CMakeFiles/CMakeTmp/src.cxx:5:38: error: cannot convert 'const wchar_t*' to 'TagLib::FileName {aka const char*}' in initialization
 %define		state	stable
-%define		qtver	4.7.1
+%define		qtver	6.7.0
 %define		kdever	4.5.5
 
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	2.8.0
-Release:	10
+Version:	3.3.0
+Release:	1
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications/Multimedia
-Source0:	ftp://ftp.kde.org/pub/kde/%{state}/amarok/%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	53cfcb4819668b10e13b061478c7b32a
-Patch0:		%{name}-upnp-dep.patch
-Patch1:		find-taglib.patch
-Patch2:		ffmpeg3.patch
+Source0:	https://download.kde.org/%{state}/amarok/%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	b4368da2775d6e3ebe81df4439697c7c
 URL:		http://amarok.kde.org/
-BuildRequires:	QtCore-devel >= %{qtver}
-BuildRequires:	QtGui-devel >= %{qtver}
-BuildRequires:	QtNetwork-devel >= %{qtver}
-BuildRequires:	QtOpenGL-devel >= %{qtver}
-BuildRequires:	QtScript-devel >= %{qtver}
-BuildRequires:	QtSql-devel >= %{qtver}
-BuildRequires:	QtSvg-devel >= %{qtver}
-BuildRequires:	QtWebKit-devel >= %{qtver}
-BuildRequires:	QtXml-devel >= %{qtver}
-BuildRequires:	automoc4 >= 0.9.88
-BuildRequires:	cmake >= 2.8.0
-BuildRequires:	curl-devel
-BuildRequires:	ffmpeg-devel >= 0.7.1
+BuildRequires:	Qt6Core-devel >= %{qtver}
+BuildRequires:	Qt6DBus-devel >= %{qtver}
+BuildRequires:	Qt6Gui-devel >= %{qtver}
+BuildRequires:	Qt6Qt5Compat-devel >= %{qtver}
+BuildRequires:	Qt6Svg-devel >= %{qtver}
+BuildRequires:	fftw3-devel
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel
-BuildRequires:	herqq-devel
-BuildRequires:	kde4-kdelibs-devel >= %{kdever}
-BuildRequires:	kde4-nepomuk-core-devel
-BuildRequires:	libaio-devel
-BuildRequires:	libgpod-devel >= 0.7.0
-BuildRequires:	liblastfm-devel
-BuildRequires:	libmtp-devel >= 1.0.4
-BuildRequires:	libofa-devel
-BuildRequires:	libwrap-devel
-BuildRequires:	loudmouth-devel
-BuildRequires:	mysql-devel >= 5.1.31-3
-BuildRequires:	pcre-devel
+BuildRequires:	kf6-extra-cmake-modules >= 6.0.0
+BuildRequires:	kf6-karchive-devel >= 6.0.0
+BuildRequires:	kf6-kcmutils-devel >= 6.0.0
+BuildRequires:	kf6-kcolorscheme-devel >= 6.16.0
+BuildRequires:	kf6-kcoreaddons-devel >= 6.16.0
+BuildRequires:	kf6-kcrash-devel >= 6.0.0
+BuildRequires:	kf6-kdbusaddons-devel >= 6.0.0
+BuildRequires:	kf6-kdnssd-devel >= 6.0.0
+BuildRequires:	kf6-kdoctools-devel >= 6.0.0
+BuildRequires:	kf6-kglobalaccel-devel >= 6.0.0
+BuildRequires:	kf6-kguiaddons-devel >= 6.16.0
+BuildRequires:	kf6-ki18n-devel >= 6.16.0
+BuildRequires:	kf6-kiconthemes-devel >= 6.0.0
+BuildRequires:	kf6-kio-devel >= 6.16.0
+BuildRequires:	kf6-knotifications-devel >= 6.0.0
+BuildRequires:	kf6-kpackage-devel >= 6.0.0
+BuildRequires:	kf6-kstatusnotifieritem-devel >= 6.0.0
+BuildRequires:	kf6-ktexteditor-devel >= 6.0.0
+BuildRequires:	kf6-ktextwidgets-devel >= 6.0.0
+BuildRequires:	kf6-kwindowsystem-devel >= 6.0.0
+BuildRequires:	kf6-solid-devel >= 6.0.0
+BuildRequires:	kf6-threadweaver-devel >= 6.0.0
+BuildRequires:	mysql8.0-devel
 BuildRequires:	pkgconfig
-BuildRequires:	qca-devel
-BuildRequires:	qjson-devel >= 0.5
-BuildRequires:	qt4-build >= %{qtver}
-BuildRequires:	qt4-qmake >= %{qtver}
-BuildRequires:	qtscriptbindings
-BuildRequires:	rpmbuild(macros) >= 1.600
-BuildRequires:	soprano-devel
-BuildRequires:	strigi-devel >= 0.7.0
-BuildRequires:	taglib-devel >= 1.7
-BuildRequires:	taglib-extras-devel >= 1.0.0
-BuildRequires:	xorg-lib-libXpm-devel
+BuildRequires:	taglib-devel
 Requires(post,postun):	/sbin/ldconfig
-Requires:	kde4-phonon
-Requires:	qtscriptbindings
-Suggests:	libvisual-plugin-actor-JESS
-Suggests:	libvisual-plugin-actor-bumpscope
-Suggests:	libvisual-plugin-actor-corona
-Suggests:	libvisual-plugin-actor-flower
-Suggests:	libvisual-plugin-actor-gdkpixbuf
-Suggests:	libvisual-plugin-actor-gforce
-Suggests:	libvisual-plugin-actor-gstreamer
-Suggests:	libvisual-plugin-actor-infinite
-Suggests:	libvisual-plugin-actor-jakdaw
-Suggests:	libvisual-plugin-actor-lv_analyzer
-Suggests:	libvisual-plugin-actor-lv_gltest
-Suggests:	libvisual-plugin-actor-lv_scope
-Suggests:	libvisual-plugin-actor-madspin
-Suggests:	libvisual-plugin-actor-nastyfft
-Suggests:	libvisual-plugin-actor-oinksie
-Suggests:	libvisual-plugin-input-alsa
-Suggests:	libvisual-plugin-input-jack
-Suggests:	libvisual-plugin-input-mplayer
-Suggests:	libvisual-plugin-morph-alphablend
-Suggests:	libvisual-plugin-morph-flash
-Suggests:	libvisual-plugin-morph-slide
-Suggests:	libvisual-plugin-morph-tentacle
-Obsoletes:	amarok-arts
-Obsoletes:	amarok-xmms
+Obsoletes:	amarok-arts < 3.3.0
+Obsoletes:	amarok-xmms < 3.3.0
 # It should require mysql-embeded
-Requires:	mysql >= 5.1.31-3
-Conflicts:	mysql < 5.1.31-3
+Requires:	%{name}-data = %{version}-%{release}
+#Requires:	mysql8.0 >= 5.1.31-3
+#Conflicts:	mysql < 5.1.31-3
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -103,220 +70,159 @@ A KDE audio player.
 %description -l pl.UTF-8
 Odtwarzacz audio dla KDE.
 
-%package scripts
-Summary:	amaroK scripts
-Summary(pl.UTF-8):	Skrypty amaroKa
-Group:		X11/Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
-Requires:	kde4-kdebase-kdialog
+%package data
+Summary:	Data files for amarok
+Summary(pl.UTF-8):	Dane dla amarok
+Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
+Obsoletes:	amarok-scripts < 3.3.0
+BuildArch:	noarch
 
-%description scripts
-amaroK scripts allow you extend amaroK functionality.
+%description data
+Data files for amarok.
 
-You can learn more about scripts in amaroK from here:
-<http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
+%description data -l pl.UTF-8
+Dane dla amarok.
 
-%description scripts -l pl.UTF-8
-Skrypty amaroKa pozwalające rozszerzać jego funkcjonalność.
-
-Więcej o skryptach w amaroKu można dowiedzieć się stąd:
-<http://amarok.kde.org/amarokwiki/index.php/Script-Writing_HowTo>.
 
 %prep
 %setup -q
-%patch -P0 -p1
-%patch -P1 -p1
-%patch -P2 -p1
 
 %build
-install -d build
-cd build
 %cmake \
-	-DKDE4_BUILD_TESTS=OFF \
-	-DWITH_MYSQL_EMBEDDED=OFF \
-	../
+	-B build \
+	-G Ninja \
+	%{!?with_tests:-DBUILD_TESTING=OFF} \
+	-DKDE_INSTALL_DOCBUNDLEDIR=%{_kdedocdir} \
+	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+	-DWITHOUT_EMBEDDED_DB=ON
 
-%{__make}
+%ninja_build -C build
+
+%if %{with tests}
+ctest --test-dir build
+%endif
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
+%ninja_install -C build
 
-%{__make} -C build install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	kde_htmldir=%{_kdedocdir} \
-	kde_libs_htmldir=%{_kdedocdir}
+rm -rf $RPM_BUILD_ROOT%{_kdedocdir}/{sr,zh_CN}
 
-# remove unsupported locale
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/sr@ijekavian*
+# not supported by glibc yet
+%{__rm} -rf $RPM_BUILD_ROOT%{_localedir}/ie
 
-# remove .so symlinks so that noone gets the stupid idea to package them
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libamarok*.so
+%find_lang %{name} --all-name --with-kde --with-qm
 
-%find_lang %{name} --all-name --with-kde
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+
+%post data
+%update_desktop_database_post
+
+%postun data
+%update_desktop_database_postun
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post		-p /sbin/ldconfig
-%postun		-p /sbin/ldconfig
-
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
+/etc/xdg/amarok_homerc
 %attr(755,root,root) %{_bindir}/amarok
-%attr(755,root,root) %{_bindir}/amarokpkg
-%attr(755,root,root) %{_bindir}/amarokcollectionscanner
-%attr(755,root,root) %{_bindir}/amarokmp3tunesharmonydaemon
 %attr(755,root,root) %{_bindir}/amarok_afttagger
-%attr(755,root,root) %{_bindir}/amzdownloader
-%attr(755,root,root) %ghost %{_libdir}/libamarok-sqlcollection.so.?
-%attr(755,root,root) %{_libdir}/libamarok-sqlcollection.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libamarokocsclient.so.?
-%attr(755,root,root) %{_libdir}/libamarokocsclient.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libamaroklib.so.?
-%attr(755,root,root) %{_libdir}/libamaroklib.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libamarokpud.so.?
-%attr(755,root,root) %{_libdir}/libamarokpud.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libamarokcore.so.?
-%attr(755,root,root) %{_libdir}/libamarokcore.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libamarokshared.so.?
-%attr(755,root,root) %{_libdir}/libamarokshared.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libamarok-transcoding.so.?
-%attr(755,root,root) %{_libdir}/libamarok-transcoding.so.*.*.*
-#%%attr(755,root,root) %ghost %{_libdir}/libamarokqtjson.so.?
-#%%attr(755,root,root) %{_libdir}/libamarokqtjson.so.*.*.*
+%attr(755,root,root) %{_bindir}/amarokcollectionscanner
+%{_libdir}/libamarok-sqlcollection.so
+%ghost %{_libdir}/libamarok-sqlcollection.so.1
+%attr(755,root,root) %{_libdir}/libamarok-sqlcollection.so.*.*
+%{_libdir}/libamarok-transcoding.so
+%ghost %{_libdir}/libamarok-transcoding.so.1
+%attr(755,root,root) %{_libdir}/libamarok-transcoding.so.*.*
+%{_libdir}/libamarokcore.so
+%ghost %{_libdir}/libamarokcore.so.1
+%attr(755,root,root) %{_libdir}/libamarokcore.so.*.*
+%{_libdir}/libamaroklib.so
+%ghost %{_libdir}/libamaroklib.so.1
+%attr(755,root,root) %{_libdir}/libamaroklib.so.*.*
+%{_libdir}/libamarokpud.so
+%{_libdir}/libamarokshared.so
+%ghost %{_libdir}/libamarokshared.so.1
+%attr(755,root,root) %{_libdir}/libamarokshared.so.*.*
 %attr(755,root,root) %{_libdir}/libampache_account_login.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-audiocdcollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-daapcollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-ipodcollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-mtpcollection.so
-#%%attr(755,root,root) %{_libdir}/kde4/amarok_collection-mysqlecollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-mysqlservercollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-umscollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_containment_vertical.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_analyzer.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_albums.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_currenttrack.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_info.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_labels.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_lyrics.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_photos.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_wikipedia.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_current.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_info.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_labels.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_lyrics.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_photos.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_wikipedia.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_service_ampache.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_service_jamendo.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_service_magnatunestore.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_service_mp3tunes.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_service_opmldirectory.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_service_amazonstore.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_ampache.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_magnatunestore.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_mp3tunes.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_amarok_service_amazonstore.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-nepomukcollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-playdarcollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_collection-upnpcollection.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_context_applet_tabs.so
-%attr(755,root,root) %{_libdir}/kde4/amarok_data_engine_tabs.so
-%dir %{_datadir}/apps/amarok
-%dir %{_datadir}/apps/amarok/scripts
-%{_datadir}/apps/amarok/data
-%{_datadir}/apps/amarok/icons
-%{_datadir}/apps/amarok/images
-%{_datadir}/apps/amarok/amarok.notifyrc
-%{_datadir}/apps/desktoptheme
-%{_datadir}/apps/solid/actions/amarok-play-audiocd.desktop
-%{_datadir}/config.kcfg/amarokconfig.kcfg
-%{_datadir}/config/amarok.knsrc
-%{_datadir}/config/amarokapplets.knsrc
-%{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.player.xml
-%{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.root.xml
-%{_datadir}/dbus-1/interfaces/org.freedesktop.MediaPlayer.tracklist.xml
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.Collection.xml
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.App.xml
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.Mpris1Extensions.Player.xml
-%{_datadir}/dbus-1/interfaces/org.kde.amarok.Mpris2Extensions.Player.xml
-%{_desktopdir}/kde4/amarok_containers.desktop
-%{_desktopdir}/kde4/amzdownloader.desktop
-%{_datadir}/kde4/services/amarok.protocol
-%{_datadir}/kde4/services/amarokitpc.protocol
-%{_datadir}/kde4/services/ServiceMenus/amarok_append.desktop
-%{_datadir}/kde4/services/amarok_collection-audiocdcollection.desktop
-%{_datadir}/kde4/services/amarok_collection-daapcollection.desktop
-%{_datadir}/kde4/services/amarok_collection-ipodcollection.desktop
-%{_datadir}/kde4/services/amarok_collection-mtpcollection.desktop
-#%%{_datadir}/kde4/services/amarok_collection-mysqlecollection.desktop
-%{_datadir}/kde4/services/amarok_collection-mysqlservercollection.desktop
-%{_datadir}/kde4/services/amarok_collection-nepomukcollection.desktop
-%{_datadir}/kde4/services/amarok_collection-umscollection.desktop
-%{_datadir}/kde4/services/amarok-containment-vertical.desktop
-%{_datadir}/kde4/services/amarok-context-applet-analyzer.desktop
-%{_datadir}/kde4/services/amarok-context-applet-albums.desktop
-%{_datadir}/kde4/services/amarok-context-applet-currenttrack.desktop
-%{_datadir}/kde4/services/amarok-context-applet-info.desktop
-%{_datadir}/kde4/services/amarok-context-applet-labels.desktop
-%{_datadir}/kde4/services/amarok-context-applet-lyrics.desktop
-%{_datadir}/kde4/services/amarok-context-applet-photos.desktop
-%{_datadir}/kde4/services/amarok-context-applet-wikipedia.desktop
-%{_datadir}/kde4/services/amarok-data-engine-current.desktop
-%{_datadir}/kde4/services/amarok-data-engine-info.desktop
-%{_datadir}/kde4/services/amarok-data-engine-labels.desktop
-%{_datadir}/kde4/services/amarok-data-engine-lyrics.desktop
-%{_datadir}/kde4/services/amarok-data-engine-photos.desktop
-%{_datadir}/kde4/services/amarok-data-engine-wikipedia.desktop
-%{_datadir}/kde4/services/amarok_service_amazonstore.desktop
-%{_datadir}/kde4/services/amarok_service_amazonstore_config.desktop
-%{_datadir}/kde4/services/amarok_service_ampache.desktop
-%{_datadir}/kde4/services/amarok_service_ampache_config.desktop
-%{_datadir}/kde4/services/amarok_service_jamendo.desktop
-%{_datadir}/kde4/services/amarok_service_magnatunestore.desktop
-%{_datadir}/kde4/services/amarok_service_magnatunestore_config.desktop
-%{_datadir}/kde4/services/amarok_service_mp3tunes.desktop
-%{_datadir}/kde4/services/amarok_service_mp3tunes_config.desktop
-%{_datadir}/kde4/services/amarok_service_opmldirectory.desktop
-%{_datadir}/kde4/services/amarok-context-applet-tabs.desktop
-%{_datadir}/kde4/services/amarok-data-engine-tabs.desktop
-%{_datadir}/kde4/services/amarok_collection-playdarcollection.desktop
-%{_datadir}/kde4/services/amarok_collection-upnpcollection.desktop
-%{_datadir}/kde4/servicetypes/amarok_codecinstall.desktop
-%{_datadir}/kde4/servicetypes/amarok_context_applet.desktop
-%{_datadir}/kde4/servicetypes/amarok_data_engine.desktop
-%{_datadir}/kde4/servicetypes/amarok_plugin.desktop
-%{_desktopdir}/kde4/amarok.desktop
-%{_iconsdir}/*/*/apps/amarok.*
-%{_datadir}/config/amarok_homerc
-%attr(755,root,root) %{_datadir}/apps/kconf_update/*.pl
-%{_datadir}/apps/kconf_update/amarok.upd
-%{_datadir}/mime/packages/amzdownloader.xml
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_collection-audiocdcollection.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_collection-daapcollection.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_collection-mtpcollection.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_collection-mysqlcollection.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_collection-playdarcollection.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_collection-umscollection.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_importer-amarok.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_importer-banshee.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_importer-clementine.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_importer-fastforward.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_importer-itunes.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_importer-rhythmbox.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_service_ampache.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_service_magnatunestore.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_service_opmldirectory.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_storage-mysqlserverstorage.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/kcm_amarok_service_ampache.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/kcm_amarok_service_magnatunestore.so
+%dir %{_libdir}/qt6/qml/org/kde/amarok
+%dir %{_libdir}/qt6/qml/org/kde/amarok/albums
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/albums/libamarok_context_applet_albums.so
+%{_libdir}/qt6/qml/org/kde/amarok/albums/qmldir
+%dir %{_libdir}/qt6/qml/org/kde/amarok/analyzer
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/analyzer/libamarok_context_applet_analyzer.so
+%{_libdir}/qt6/qml/org/kde/amarok/analyzer/qmldir
+%dir %{_libdir}/qt6/qml/org/kde/amarok/currenttrack
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/currenttrack/libamarok_context_applet_currenttrack.so
+%{_libdir}/qt6/qml/org/kde/amarok/currenttrack/qmldir
+%dir %{_libdir}/qt6/qml/org/kde/amarok/lyrics
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/lyrics/libamarok_context_applet_lyrics.so
+%{_libdir}/qt6/qml/org/kde/amarok/lyrics/qmldir
+%dir %{_libdir}/qt6/qml/org/kde/amarok/photos
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/photos/libamarok_context_applet_photos.so
+%{_libdir}/qt6/qml/org/kde/amarok/photos/qmldir
+%dir %{_libdir}/qt6/qml/org/kde/amarok/qml
+%{_libdir}/qt6/qml/org/kde/amarok/qml/Applet.qml
+%{_libdir}/qt6/qml/org/kde/amarok/qml/AppletHeader.qml
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/qml/libqml_plugin.so
+%{_libdir}/qt6/qml/org/kde/amarok/qml/qmldir
+%dir %{_libdir}/qt6/qml/org/kde/amarok/wikipedia
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/wikipedia/libamarok_context_applet_wikipedia.so
+%{_libdir}/qt6/qml/org/kde/amarok/wikipedia/qmldir
 
-%files scripts
+%files data
 %defattr(644,root,root,755)
-%dir %{_datadir}/apps/amarok/scripts/radio_station_service
-%{_datadir}/apps/amarok/scripts/radio_station_service/main.js
-%{_datadir}/apps/amarok/scripts/radio_station_service/script.spec
-%dir %{_datadir}/apps/amarok/scripts/script_console
-%{_datadir}/apps/amarok/scripts/script_console/main.js
-%{_datadir}/apps/amarok/scripts/script_console/script.spec
-%dir %{_datadir}/apps/amarok/scripts/lyrics_lyricwiki
-%{_datadir}/apps/amarok/scripts/lyrics_lyricwiki/main.js
-%{_datadir}/apps/amarok/scripts/lyrics_lyricwiki/script.spec
-%dir %{_datadir}/apps/amarok/scripts/librivox_service
-%{_datadir}/apps/amarok/scripts/librivox_service/main.js
-%{_datadir}/apps/amarok/scripts/librivox_service/LibrivoxLogo.png
-%{_datadir}/apps/amarok/scripts/librivox_service/LibrivoxScalableEmblem.svgz
-%{_datadir}/apps/amarok/scripts/librivox_service/LibrivoxService.html
-%{_datadir}/apps/amarok/scripts/librivox_service/script.spec
-%{_datadir}/apps/amarok/scripts/librivox_service/LibrivoxEmblem.png
-%{_datadir}/apps/amarok/scripts/librivox_service/LibrivoxIcon.png
-%{_datadir}/apps/amarok/scripts/librivox_service/audio_book128.png
-%dir %{_datadir}/apps/amarok/scripts/free_music_charts_service
-%{_datadir}/apps/amarok/scripts/free_music_charts_service/FMCEmblem.png
-%{_datadir}/apps/amarok/scripts/free_music_charts_service/FMCIcon.png
-%{_datadir}/apps/amarok/scripts/free_music_charts_service/FMCShow.png
-%{_datadir}/apps/amarok/scripts/free_music_charts_service/main.js
-%{_datadir}/apps/amarok/scripts/free_music_charts_service/script.spec
+%{_datadir}/amarok
+%{_desktopdir}/org.kde.amarok.desktop
+%{_desktopdir}/org.kde.amarok_containers.desktop
+%{_datadir}/config.kcfg/amarokconfig.kcfg
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.App.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.Collection.xml
+%{_datadir}/dbus-1/interfaces/org.kde.amarok.Mpris2Extensions.Player.xml
+%{_datadir}/dbus-1/services/org.kde.amarok.service
+%{_iconsdir}/hicolor/*x*/apps/amarok.png
+%{_datadir}/kio/servicemenus/amarok_append.desktop
+%{_datadir}/knotifications6/amarok.notifyrc
+%{_datadir}/kpackage/amarok
+%dir %{_datadir}/kpackage/genericqml/org.kde.amarok.context
+%dir %{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents
+%dir %{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents/ui
+%dir %{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents/ui/toolbar
+%{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents/ui/main.qml
+%{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents/ui/toolbar/AppletToolbar.qml
+%{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents/ui/toolbar/AppletToolbarAddItem.qml
+%{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents/ui/toolbar/AppletToolbarAppletItem.qml
+%{_datadir}/kpackage/genericqml/org.kde.amarok.context/metadata.json
+%{_datadir}/metainfo/org.kde.amarok.albums.appdata.xml
+%{_datadir}/metainfo/org.kde.amarok.analyzer.appdata.xml
+%{_datadir}/metainfo/org.kde.amarok.appdata.xml
+%{_datadir}/metainfo/org.kde.amarok.context.appdata.xml
+%{_datadir}/metainfo/org.kde.amarok.currenttrack.appdata.xml
+%{_datadir}/metainfo/org.kde.amarok.lyrics.appdata.xml
+%{_datadir}/metainfo/org.kde.amarok.photos.appdata.xml
+%{_datadir}/metainfo/org.kde.amarok.wikipedia.appdata.xml
+%{_datadir}/solid/actions/amarok-play-audiocd.desktop
