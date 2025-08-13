@@ -51,7 +51,9 @@ BuildRequires:	kf6-kwindowsystem-devel >= 6.0.0
 BuildRequires:	kf6-solid-devel >= 6.0.0
 BuildRequires:	kf6-threadweaver-devel >= 6.0.0
 BuildRequires:	libmtp-devel >= 1.0.0
-BuildRequires:	mysql8.4-devel
+#BuildRequires:	mysql8.4-devel
+# switching back to mysql 8.0 as it's available on 32bit architectures
+BuildRequires:	mysql8.0-devel
 BuildRequires:	pkgconfig
 BuildRequires:	taglib-devel
 Requires(post,postun):	/sbin/ldconfig
