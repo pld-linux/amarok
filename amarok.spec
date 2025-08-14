@@ -26,6 +26,9 @@ BuildRequires:	Qt6DBus-devel >= %{qtver}
 BuildRequires:	Qt6Gui-devel >= %{qtver}
 BuildRequires:	Qt6Qt5Compat-devel >= %{qtver}
 BuildRequires:	Qt6Svg-devel >= %{qtver}
+%ifarch %{x8664}
+BuildRequires:	Qt6WebEngine-devel >= %{qtver}
+%endif
 BuildRequires:	fftw3-devel
 BuildRequires:	gettext-tools
 BuildRequires:	kf6-extra-cmake-modules >= 6.0.0
@@ -193,9 +196,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/amarok/qml/AppletHeader.qml
 %attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/qml/libqml_plugin.so
 %{_libdir}/qt6/qml/org/kde/amarok/qml/qmldir
+
+%ifarch %{x8664}
 %dir %{_libdir}/qt6/qml/org/kde/amarok/wikipedia
 %attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/wikipedia/libamarok_context_applet_wikipedia.so
 %{_libdir}/qt6/qml/org/kde/amarok/wikipedia/qmldir
+%endif
 
 %files data
 %defattr(644,root,root,755)
@@ -227,5 +233,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/metainfo/org.kde.amarok.currenttrack.appdata.xml
 %{_datadir}/metainfo/org.kde.amarok.lyrics.appdata.xml
 %{_datadir}/metainfo/org.kde.amarok.photos.appdata.xml
-%{_datadir}/metainfo/org.kde.amarok.wikipedia.appdata.xml
 %{_datadir}/solid/actions/amarok-play-audiocd.desktop
+
+%ifarch %{x8664}
+%{_datadir}/metainfo/org.kde.amarok.wikipedia.appdata.xml
+%endif
