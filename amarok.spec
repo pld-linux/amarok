@@ -45,6 +45,7 @@ BuildRequires:	kf6-kguiaddons-devel >= 6.16.0
 BuildRequires:	kf6-ki18n-devel >= 6.16.0
 BuildRequires:	kf6-kiconthemes-devel >= 6.0.0
 BuildRequires:	kf6-kio-devel >= 6.16.0
+BuildRequires:	kf6-kirigami-devel >= 6.0.0
 BuildRequires:	kf6-knotifications-devel >= 6.0.0
 BuildRequires:	kf6-kpackage-devel >= 6.0.0
 BuildRequires:	kf6-kstatusnotifieritem-devel >= 6.0.0
