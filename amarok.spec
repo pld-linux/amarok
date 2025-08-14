@@ -15,7 +15,7 @@ Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
 Version:	3.3.1
-Release:	2
+Release:	3
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	https://download.kde.org/%{state}/amarok/%{version}/%{name}-%{version}.tar.xz
@@ -82,7 +82,6 @@ Summary(pl.UTF-8):	Dane dla amarok
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Obsoletes:	amarok-scripts < 3.3.0
-BuildArch:	noarch
 
 %description data
 Data files for amarok.
