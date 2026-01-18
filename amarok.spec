@@ -14,12 +14,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	3.3.1
-Release:	3
+Version:	3.3.2
+Release:	1
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	https://download.kde.org/%{state}/amarok/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	4df9c10823a96b58631c4ff9b15d12ed
+# Source0-md5:	ebf9a6b27c25d633726bd6f57547f6c3
 URL:		http://amarok.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	Qt6DBus-devel >= %{qtver}
@@ -217,19 +217,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kio/servicemenus/amarok_append.desktop
 %{_datadir}/knotifications6/amarok.notifyrc
 %{_datadir}/kpackage/amarok
-%dir %{_datadir}/kpackage/genericqml/org.kde.amarok.context
-%dir %{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents
-%dir %{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents/ui
-%dir %{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents/ui/toolbar
-%{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents/ui/main.qml
-%{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents/ui/toolbar/AppletToolbar.qml
-%{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents/ui/toolbar/AppletToolbarAddItem.qml
-%{_datadir}/kpackage/genericqml/org.kde.amarok.context/contents/ui/toolbar/AppletToolbarAppletItem.qml
-%{_datadir}/kpackage/genericqml/org.kde.amarok.context/metadata.json
 %{_datadir}/metainfo/org.kde.amarok.albums.appdata.xml
 %{_datadir}/metainfo/org.kde.amarok.analyzer.appdata.xml
 %{_datadir}/metainfo/org.kde.amarok.appdata.xml
-%{_datadir}/metainfo/org.kde.amarok.context.appdata.xml
 %{_datadir}/metainfo/org.kde.amarok.currenttrack.appdata.xml
 %{_datadir}/metainfo/org.kde.amarok.lyrics.appdata.xml
 %{_datadir}/metainfo/org.kde.amarok.photos.appdata.xml
