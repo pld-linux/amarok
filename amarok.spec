@@ -142,64 +142,65 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/amarokcollectionscanner
 %{_libdir}/libamarok-sqlcollection.so
 %ghost %{_libdir}/libamarok-sqlcollection.so.1
-%attr(755,root,root) %{_libdir}/libamarok-sqlcollection.so.*.*
+%{_libdir}/libamarok-sqlcollection.so.*.*
 %{_libdir}/libamarok-transcoding.so
 %ghost %{_libdir}/libamarok-transcoding.so.1
-%attr(755,root,root) %{_libdir}/libamarok-transcoding.so.*.*
+%{_libdir}/libamarok-transcoding.so.*.*
 %{_libdir}/libamarokcore.so
 %ghost %{_libdir}/libamarokcore.so.1
-%attr(755,root,root) %{_libdir}/libamarokcore.so.*.*
+%{_libdir}/libamarokcore.so.*.*
 %{_libdir}/libamaroklib.so
 %ghost %{_libdir}/libamaroklib.so.1
-%attr(755,root,root) %{_libdir}/libamaroklib.so.*.*
+%{_libdir}/libamaroklib.so.*.*
 %{_libdir}/libamarokpud.so
 %{_libdir}/libamarokshared.so
 %ghost %{_libdir}/libamarokshared.so.1
-%attr(755,root,root) %{_libdir}/libamarokshared.so.*.*
-%attr(755,root,root) %{_libdir}/libampache_account_login.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_collection-audiocdcollection.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_collection-daapcollection.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_collection-mtpcollection.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_collection-mysqlcollection.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_collection-playdarcollection.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_collection-umscollection.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_importer-amarok.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_importer-banshee.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_importer-clementine.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_importer-fastforward.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_importer-itunes.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_importer-rhythmbox.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_service_ampache.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_service_magnatunestore.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_service_opmldirectory.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/amarok_storage-mysqlserverstorage.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kcm_amarok_service_ampache.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kcm_amarok_service_magnatunestore.so
+%{_libdir}/libamarokshared.so.*.*
+%{_libdir}/libampache_account_login.so
+%{_libdir}/qt6/plugins/amarok_collection-audiocdcollection.so
+%{_libdir}/qt6/plugins/amarok_collection-daapcollection.so
+%{_libdir}/qt6/plugins/amarok_collection-ipodcollection.so
+%{_libdir}/qt6/plugins/amarok_collection-mtpcollection.so
+%{_libdir}/qt6/plugins/amarok_collection-mysqlcollection.so
+%{_libdir}/qt6/plugins/amarok_collection-playdarcollection.so
+%{_libdir}/qt6/plugins/amarok_collection-umscollection.so
+%{_libdir}/qt6/plugins/amarok_importer-amarok.so
+%{_libdir}/qt6/plugins/amarok_importer-banshee.so
+%{_libdir}/qt6/plugins/amarok_importer-clementine.so
+%{_libdir}/qt6/plugins/amarok_importer-fastforward.so
+%{_libdir}/qt6/plugins/amarok_importer-itunes.so
+%{_libdir}/qt6/plugins/amarok_importer-rhythmbox.so
+%{_libdir}/qt6/plugins/amarok_service_ampache.so
+%{_libdir}/qt6/plugins/amarok_service_magnatunestore.so
+%{_libdir}/qt6/plugins/amarok_service_opmldirectory.so
+%{_libdir}/qt6/plugins/amarok_storage-mysqlserverstorage.so
+%{_libdir}/qt6/plugins/kcm_amarok_service_ampache.so
+%{_libdir}/qt6/plugins/kcm_amarok_service_magnatunestore.so
 %dir %{_libdir}/qt6/qml/org/kde/amarok
 %dir %{_libdir}/qt6/qml/org/kde/amarok/albums
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/albums/libamarok_context_applet_albums.so
+%{_libdir}/qt6/qml/org/kde/amarok/albums/libamarok_context_applet_albums.so
 %{_libdir}/qt6/qml/org/kde/amarok/albums/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/amarok/analyzer
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/analyzer/libamarok_context_applet_analyzer.so
+%{_libdir}/qt6/qml/org/kde/amarok/analyzer/libamarok_context_applet_analyzer.so
 %{_libdir}/qt6/qml/org/kde/amarok/analyzer/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/amarok/currenttrack
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/currenttrack/libamarok_context_applet_currenttrack.so
+%{_libdir}/qt6/qml/org/kde/amarok/currenttrack/libamarok_context_applet_currenttrack.so
 %{_libdir}/qt6/qml/org/kde/amarok/currenttrack/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/amarok/lyrics
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/lyrics/libamarok_context_applet_lyrics.so
+%{_libdir}/qt6/qml/org/kde/amarok/lyrics/libamarok_context_applet_lyrics.so
 %{_libdir}/qt6/qml/org/kde/amarok/lyrics/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/amarok/photos
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/photos/libamarok_context_applet_photos.so
+%{_libdir}/qt6/qml/org/kde/amarok/photos/libamarok_context_applet_photos.so
 %{_libdir}/qt6/qml/org/kde/amarok/photos/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/amarok/qml
 %{_libdir}/qt6/qml/org/kde/amarok/qml/Applet.qml
 %{_libdir}/qt6/qml/org/kde/amarok/qml/AppletHeader.qml
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/qml/libqml_plugin.so
+%{_libdir}/qt6/qml/org/kde/amarok/qml/libqml_plugin.so
 %{_libdir}/qt6/qml/org/kde/amarok/qml/qmldir
 
 %ifarch %{x8664}
 %dir %{_libdir}/qt6/qml/org/kde/amarok/wikipedia
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/amarok/wikipedia/libamarok_context_applet_wikipedia.so
+%{_libdir}/qt6/qml/org/kde/amarok/wikipedia/libamarok_context_applet_wikipedia.so
 %{_libdir}/qt6/qml/org/kde/amarok/wikipedia/qmldir
 %endif
 
