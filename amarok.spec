@@ -14,12 +14,12 @@
 Summary:	A KDE audio player
 Summary(pl.UTF-8):	Odtwarzacz audio dla KDE
 Name:		amarok
-Version:	3.3.2
+Version:	3.3.3
 Release:	1
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications/Multimedia
 Source0:	https://download.kde.org/%{state}/amarok/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	ebf9a6b27c25d633726bd6f57547f6c3
+# Source0-md5:	f123ccade7b5a7578ae0710b3d7b2275
 URL:		http://amarok.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	Qt6DBus-devel >= %{qtver}
@@ -54,6 +54,7 @@ BuildRequires:	kf6-ktextwidgets-devel >= 6.0.0
 BuildRequires:	kf6-kwindowsystem-devel >= 6.0.0
 BuildRequires:	kf6-solid-devel >= 6.0.0
 BuildRequires:	kf6-threadweaver-devel >= 6.0.0
+BuildRequires:	libgpod-devel
 BuildRequires:	libmtp-devel >= 1.0.0
 #BuildRequires:	mysql8.4-devel
 # switching back to mysql 8.0 as it's available on 32bit architectures
